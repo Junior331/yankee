@@ -1,0 +1,27 @@
+import React from "react";
+import { SvgXml } from "react-native-svg";
+
+const Filter = () => {
+  return (
+    <SvgXml
+      xml={`
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.24969 1.61C2.56969 4.59 5.99969 9 5.99969 9V14C5.99969 15.1 6.89969 16 7.99969 16C9.09969 16 9.99969 15.1 9.99969 14V9C9.99969 9 13.4297 4.59 15.7497 1.61C16.2597 0.95 15.7897 0 14.9497 0H1.03969C0.20969 0 -0.26031 0.95 0.24969 1.61Z"
+            fill="white"
+          />
+        </svg>
+      `}
+    />
+  );
+};
+
+export default Filter;
+
+
