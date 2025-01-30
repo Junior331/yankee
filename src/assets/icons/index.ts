@@ -21,6 +21,7 @@ import Location from "./Location";
 import Ellipse4 from "./Ellipse4";
 import Ellipse5 from "./Ellipse5";
 import Ellipse6 from "./Ellipse6";
+import LeftArrow from "./LeftArrow";
 import Community from "./Community";
 import Navigation from "./Navigation";
 import Visibility from "./Visibility";
@@ -55,6 +56,7 @@ export {
   Ellipse4,
   Ellipse5,
   Ellipse6,
+  LeftArrow,
   Community,
   Navigation,
   Visibility,

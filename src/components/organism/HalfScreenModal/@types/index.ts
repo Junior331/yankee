@@ -1,0 +1,7 @@
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+
+export interface IModal {
+  children: ReactNode;  
+  modalVisible: boolean;  
+  setModalVisible: Dispatch<SetStateAction<boolean>>;
+}

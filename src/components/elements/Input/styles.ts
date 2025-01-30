@@ -1,0 +1,35 @@
+import styled from "styled-components";
+import { TextInput, TouchableOpacity, View } from "react-native";
+
+import Colors from "@/constants/Colors";
+
+export const Container = styled(View)`
+  width: 350px;
+  height: 50px;
+  border-radius: 20px;
+  flex-direction: row;
+  align-items: center;
+  background-color: transparent;
+  border: 1.5px solid ${Colors.dark.borderColor};
+`;
+
+// here we use `.attrs()` to add the prop placeholderTextColor
+export const InputContent = styled(TextInput).attrs((props) => ({
+  placeholderTextColor: Colors.dark.placeholder,
+}))`
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 15px;
+  color: ${Colors.dark.text};
+`;
+export const InputIcon = styled(View)`
+  padding-left: 22px;
+`;
+export const ToggleVisibilityButton = styled(TouchableOpacity)`
+  position: absolute;
+  right: 10px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+`;

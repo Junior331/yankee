@@ -21,6 +21,23 @@ export interface messageConfig {
   title: string;
   status: string;
   icon: ReactNode;
-  visible: boolean,
+  visible: boolean;
   message: string[];
 }
+
+export type StyledProps = {
+  top?: string;
+  left?: string;
+  color?: string;
+  right?: string;
+  width?: string;
+  tabs?: boolean;
+  bottom?: string;
+  fontSize?: string;
+  bg_color?: string;
+  isActive?: boolean;
+  transform?: string;
+  isSecondary?: boolean;
+  height?: number | string;
+  fontWeight?: string | number;
+};

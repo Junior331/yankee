@@ -2,7 +2,7 @@ import React from "react";
 import { SvgXml } from "react-native-svg";
 
 import { IIcons } from "./@types";
-import Colors from "@/src/constants/Colors";
+import Colors from "@/constants/Colors";
 
 const Home = ({ color = Colors.dark.background }: IIcons) => {
   return (
