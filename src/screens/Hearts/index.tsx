@@ -1,4 +1,4 @@
-import { Image, View } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 
 import * as S from "./styles";
@@ -8,13 +8,26 @@ import { Layout } from "@/components/organism";
 export const Hearts = () => {
   const [tabActive, setTabActive] = useState("Main");
   const [text, setText] = useState("");
-  const users = [
-    { id: 1, name: "Mia Taylor", exibirBadge: true },
-    { id: 2, name: "John Doe", exibirBadge: true },
-    { id: 3, name: "Emily Clark", exibirBadge: true },
-    { id: 4, name: "Lucas Smith", exibirBadge: false },
-    { id: 5, name: "Sophia Brown", exibirBadge: false },
+
+  const messages = [
+    {
+      id: 1,
+      active: true, 
+      name: "Ryan Brooks",
+      photo: "https://exemplo.com/ryan.jpg",
+      messages: ["Tell me we weren’t just talking about this??"], 
+      unread: 1, 
+    },
+    {
+      id: 2,
+      active: false,
+      name: "Logan Harris",
+      photo: "https://exemplo.com/logan.jpg",
+      messages: ["Sent you a post"], 
+      unread: 0, 
+    },
   ];
+
   return (
     <Layout>
       <S.ContainerTabs>
@@ -35,44 +48,49 @@ export const Hearts = () => {
       </S.ContainerInput>
 
       <S.ContainerList>
-        {users.map((user) => (
-          <View key={user.id} style={{ width: "100%", marginVertical: 15, height: "auto" }}>
-            <S.Container>
-              <S.ContainerUser>
-                <S.ContainerAvatar>
-                  <Image
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: 100,
-                    }}
-                    resizeMode="cover"
-                    source={{
-                      uri: "",
-                    }}
-                  />
-                  <S.ContainerBadge>
-                    <S.Badge />
-                  </S.ContainerBadge>
-                </S.ContainerAvatar>
+        {messages.map((message) => {
+          const lastMessage = message.messages[message.messages.length - 1];
+          const hasUnread = message.unread > 0; 
 
-                <S.ContainerText>
-                  <S.Title numberOfLines={1}>{user.name}</S.Title>
-                  <S.Text numberOfLines={2} color="#f2f2f2">
-                    Yo, bestieee, when are we hanging out?? We...
-                  </S.Text>
-                </S.ContainerText>
+          return (
+            <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }}>
+              <S.Container>
+                <S.ContainerUser>
+                  <S.ContainerAvatar>
+                    <Image
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: 100,
+                      }}
+                      resizeMode="cover"
+                      source={{ uri: message.photo }}
+                    />
+                    {message.active && (
+                      <S.ContainerBadge>
+                        <S.Badge />
+                      </S.ContainerBadge>
+                    )}
+                  </S.ContainerAvatar>
 
-                {user.exibirBadge && (
-                  <>
-                    <S.Text color="#f2f2f2">+4</S.Text>
-                    <S.BadgeBlue />
-                  </>
-                )}
-              </S.ContainerUser>
-            </S.Container>
-          </View>
-        ))}
+                  <S.ContainerText>
+                    <S.Title numberOfLines={1}>{message.name}</S.Title>
+                    <S.Text numberOfLines={2} color="#f2f2f2">
+                      {lastMessage}
+                    </S.Text>
+                  </S.ContainerText>
+
+                  {hasUnread && (
+                    <>
+                      <S.Text color="#f2f2f2">+{message.unread}</S.Text>
+                      <S.BadgeBlue />
+                    </>
+                  )}
+                </S.ContainerUser>
+              </S.Container>
+            </TouchableOpacity>
+          );
+        })}
       </S.ContainerList>
     </Layout>
   );
