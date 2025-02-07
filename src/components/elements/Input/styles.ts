@@ -6,6 +6,7 @@ import Colors from "@/constants/Colors";
 export const Container = styled(View)`
   width: 350px;
   height: 50px;
+  overflow: hidden;
   border-radius: 20px;
   flex-direction: row;
   align-items: center;
@@ -13,12 +14,11 @@ export const Container = styled(View)`
   border: 1.5px solid ${Colors.dark.borderColor};
 `;
 
-// here we use `.attrs()` to add the prop placeholderTextColor
-export const InputContent = styled(TextInput).attrs((props) => ({
+export const InputContent = styled(TextInput).attrs(() => ({
   placeholderTextColor: Colors.dark.placeholder,
 }))`
-  height: 100%;
   width: 100%;
+  height: 100%;
   padding-left: 10px;
   padding-right: 15px;
   color: ${Colors.dark.text};
