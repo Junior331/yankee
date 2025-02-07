@@ -46,6 +46,7 @@ export const ButtonIcon = styled(TouchableOpacity)`
 export const ContainerBanner = styled(ViewGeneric)`
   width: 100%;
   height: 96px;
+  overflow: hidden;
   position: absolute;
   background-color: #c4c4c4;
 `;

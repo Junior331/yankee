@@ -34,6 +34,7 @@ export const ContainerUser = styled(View)`
 export const ContainerAvatar = styled(View)`
   width: 30px;
   height: 30px;
+  overflow: hidden;
   border-radius: 60px;
   background-color: #c4c4c4;
 `;
