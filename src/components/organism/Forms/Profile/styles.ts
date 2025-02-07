@@ -11,6 +11,7 @@ import {
 
 export const MessageError = styled(TextComponent)`
   width: 100%;
+  margin-left: 40px;
   text-align: start;
   color: ${Colors.dark.error};
 `;
