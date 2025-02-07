@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   Image,
-  Modal,
   FlatList,
   Dimensions,
   TouchableOpacity,
@@ -17,7 +16,7 @@ import { Loading } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
 
 export const Profile = () => {
   const { goBack } = useNavigationHandler();
