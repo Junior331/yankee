@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { TabBar } from "./TabBar";
 import { Layout } from "./Layout";
 import { Comment } from "./Comment";
+import { Messages } from "./Messages";
 import { CardPost } from "./CardPost";
 import { FindCity } from "./FindCity";
 import { ModalGeneric } from "./Modal";
@@ -24,6 +25,7 @@ export {
   Comment,
   CardPost,
   FindCity,
+  Messages,
   HeaderPages,
   ModalGeneric,
   YourLocation,
