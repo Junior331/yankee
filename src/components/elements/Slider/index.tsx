@@ -18,7 +18,7 @@ export const Slider = () => {
   return (
     <S.Container>
       <S.Title>Miles</S.Title>
-      <S.SliderContainer minimumValue={0} maximumValue={1}>
+      <S.SliderContainer>
         <S.ContainerOptions>
           {options.map((option, index) => (
             <TouchableOpacity onPress={() => setValue(index)}>

@@ -35,9 +35,13 @@ export type StyledProps = {
   bottom?: string;
   fontSize?: string;
   bg_color?: string;
+  isLarge?: boolean;
+  isSingle?: boolean;
   isActive?: boolean;
   transform?: string;
   isSecondary?: boolean;
   height?: number | string;
+  smallImageHeight?: string;
+  largeImageHeight?: string;
   fontWeight?: string | number;
 };

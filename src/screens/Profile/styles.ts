@@ -60,16 +60,6 @@ export const ContainerAvatar = styled(ViewGeneric)`
   background-color: #c4c4c4;
 `;
 
-export const LoadingContainer = styled(ViewGeneric)`
-  z-index: 20;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.8);
-`;
-
 export const Text = styled(TextComponent)<StyledProps>`
   margin: 0 auto;
   color: ${({ color }) => color || "#ffffff"};

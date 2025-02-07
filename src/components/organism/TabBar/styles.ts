@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { StyledProps } from "@/utils/types";
-import { View,TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 
-export const Container = styled(View)`
+export const Container = styled(View)<{ $Visible?: boolean }>`
+  left: 5%;
+  right: 5%;
+  z-index: 2;
   width: 90%;
   bottom: 30px;
   height: 50px;
-  left: 5%; 
-  right: 5%;
   margin: 0 auto;
   padding: 0 10px;
   position: absolute;
@@ -16,6 +17,7 @@ export const Container = styled(View)`
   align-items: center;
   background-color: #fff;
   justify-content: space-between;
+  display: ${({$Visible}) => $Visible ? "flex" : "none"};
 `;
 
 export const ContainerIcon = styled(TouchableOpacity)<StyledProps>`

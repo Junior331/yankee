@@ -5,13 +5,13 @@ import { StyledProps } from "@/utils/types";
 import { Text as TextComponent } from "@/components/elements";
 
 export const Container = styled(View)<StyledProps>`
-  left: 10px;
   top: 30px;
   z-index: 2;
+  left: 10px;
   width: 100%;
   height: auto;
-  flex-direction: row;
   position: absolute;
+  flex-direction: row;
   justify-content: space-between;
   ${({ isSecondary }) =>
     isSecondary &&

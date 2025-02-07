@@ -1,5 +1,5 @@
-// import { Menu } from "./Menu";
+import { DynamicGrid } from "./DynamicGrid";
 
 export {
-  // Menu
+  DynamicGrid
 };

@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import {
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
-  Image,
   View,
+  Image,
+  Modal,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import { useRoute } from "@react-navigation/native";
 
 import * as S from "./styles";
 import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
 import { LeftArrow } from "@/assets/icons";
-import { Forms, TabBar } from "@/components/organism";
+import { Forms } from "@/components/organism";
+import { Loading } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
 
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 export const Profile = () => {
-  const route = useRoute();
   const { goBack } = useNavigationHandler();
-  const [tabActive, setTabActive] = useState("photos");
   const [isEdit, setIsEdit] = useState(false);
+  const [tabActive, setTabActive] = useState("photos");
   const [imageLoading, setImageLoading] = useState(true);
   const [bannerLoading, setBannerLoading] = useState(true);
   const [avatarLoading, setAvatarLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const renderGridItem = ({
     item,
@@ -43,17 +44,17 @@ export const Profile = () => {
       }}
     >
       {imageLoading && (
-        <S.LoadingContainer>
-          <ActivityIndicator />
-        </S.LoadingContainer>
+        <Loading />
       )}
-      <Image
-        resizeMode="cover"
-        alt={`Image ${item.name}`}
-        source={{ uri: item.image }}
-        onLoadEnd={() => setImageLoading(false)}
-        style={{ width: "100%", height: "100%" }}
-      />
+      <TouchableOpacity onPress={() => setSelectedImage(item.image)}>
+        <Image
+          resizeMode="cover"
+          alt={`Image ${item.name}`}
+          source={{ uri: item.image }}
+          onLoadEnd={() => setImageLoading(false)}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </TouchableOpacity>
     </View>
   );
 
@@ -63,16 +64,14 @@ export const Profile = () => {
         <S.Header>
           <S.ContainerBanner>
             {bannerLoading && (
-              <S.LoadingContainer>
-                <ActivityIndicator />
-              </S.LoadingContainer>
+              <Loading />
             )}
             <Image
               resizeMode="cover"
               style={{ width: "100%", height: "100%" }}
               onLoadEnd={() => setBannerLoading(false)}
               source={{
-                uri: "https://s3-alpha-sig.figma.com/img/2f1a/78bf/bbd451a2ca31047c7259800a489ce608?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=DjwSGe~k4IGi9K9OTFvJctkelwsNGq3IPhFa7~2HUvUkzIOCOMQd84cxYKZbDmamontf0QGkLxbJDqGYDWj~R1RUzH6YdC1Etd470Sj6vLq0AUdM71I2ihplQElNDbQu6SwsmLCmzIn6rwRXkIWzRcbkg6p42jS7MVccXEjGcRfDYk7vDbmWCj1glLXHMWbYgV-Ub~NYV36jTD2~JQi8t0XAzbGAhlN9EAXPQia3lEz6tKvLdszO-qaA8oSTWrnWHWIxvSeTjPKsLurr1TSvOZmfWrXY2sQvAq~vLbiEq-stlyrAUh~GBKhi1LIjTAQYp8qhR2r-rtB6BIfxBCtFig__",
+                uri: "https://s3-alpha-sig.figma.com/img/2f1a/78bf/bbd451a2ca31047c7259800a489ce608?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=N8actY5BmXZRM1i985TLshx7pW2BIvynnukaz1j85nIiCGgwBWUgKAMM0kXgfiusQyR4t5HfLJKqxpHss0tamS30kbBFZ~XzbDMxgzATan9tPTVUOFt8I-2IjoqZSCsPJOgdte~PraJI41g50EwPHOVTTBZw14-98-c4UEXQGaEUQduqUryk6TAGpVdM~NPskM4dSYnS8zosmds~PcifM~AJ9dLgldgv0vPQsUeIijSULdFfqqKOVu448T5e5CPfe~issc5TSAut9W~7aOh9yQ9aLPRDAq3CFVaFJhqYAAGIF4e-r74W0huTUgBYny8~xgO5ht8GrQnbN~6ckggscw__",
               }}
             />
           </S.ContainerBanner>
@@ -96,16 +95,14 @@ export const Profile = () => {
 
         <S.ContainerAvatar>
           {avatarLoading && (
-            <S.LoadingContainer>
-              <ActivityIndicator />
-            </S.LoadingContainer>
+            <Loading />
           )}
           <Image
             resizeMode="cover"
             onLoadEnd={() => setAvatarLoading(false)}
             style={{ width: "100%", height: "100%" }}
             source={{
-              uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1738540800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Tv3TJ-o3R2dB8UDpP4NR9gFUS7Pp2BQHMPtJv4x6Z8jGTWBJbQSygPmT1lSUkQQUQ-cQsQbRNjCzJXOSSC6vn8tIxMDuuIWH1LONMZSy0NyP2~K13152zqvTXgrM3Tbxk2vDP~bmzSODJE3fQxGZfHXsrfDJlvdO0oeQDhI8U0CZ40c0quMXby-uMNuwZIHQrkQdSkSF48vYA8yE4opHTScAeWylDi9XpAIpk95GovDJ6ym1mC1wcLG3zBGDKzeGuNq5HZiC9FM1-1-vesDE-VYm6E~GdYsASX5C4PNMtWzlU2nM1u2gIZZn0eegZ64MU8VWkow4MXw8AG2KMo9-gw__",
+              uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
             }}
           />
         </S.ContainerAvatar>
@@ -151,7 +148,7 @@ export const Profile = () => {
                   </S.Title>
                 </S.Button>
                 <S.Button>
-                  <S.Title fontSize="11px" color="#171717" st>
+                  <S.Title fontSize="11px" color="#171717">
                     Chat
                   </S.Title>
                 </S.Button>
@@ -179,6 +176,29 @@ export const Profile = () => {
               </S.Tabs>
             </S.ContainerTabs>
 
+            <Modal visible={!!selectedImage} transparent={true}>
+              <TouchableOpacity onPress={() => setSelectedImage(null)}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "rgba(0, 0, 0, 0.9)",
+                  }}
+                >
+                  <Image
+                    resizeMode="cover"
+                    source={{ uri: selectedImage || "" }}
+                    style={{
+                      width: width * 0.7,
+                      height: height * 0.8,
+                      borderRadius: 20,
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Modal>
+
             <FlatList
               numColumns={3}
               renderItem={renderGridItem}
@@ -189,7 +209,6 @@ export const Profile = () => {
           </>
         )}
       </S.Content>
-      <TabBar currentRoute={route.name} />
     </S.Container>
   );
 };

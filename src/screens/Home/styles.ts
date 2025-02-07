@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { LinearGradient } from "expo-linear-gradient";
+import { BottomSheetScrollView, BottomSheetView } from "@gorhom/bottom-sheet";
 import {
   View,
   Image,
-  SafeAreaView,
   TouchableOpacity,
   ImageBackground as ImageBackgroundReact,
 } from "react-native";
@@ -21,13 +21,13 @@ export const ViewGeneric = styled(View)`
   justify-content: start;
 `;
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(ViewGeneric)`
   width: 100%;
   height: 100%;
   display: flex;
-  padding: 20px;
+  padding: 0px 15px;
   align-items: start;
-  justify-content: start;
+  justify-content: center;
 `;
 
 export const Content = styled(ViewGeneric)`
@@ -35,6 +35,7 @@ export const Content = styled(ViewGeneric)`
   flex: 1 0 auto;
   overflow: hidden;
   position: relative;
+  flex-direction: column;
 `;
 
 export const Header = styled(ViewGeneric)`
@@ -141,12 +142,26 @@ export const Avatar = styled(Image)`
   width: 25px;
   height: 25px;
   border-radius: 20px;
+  background-color: #c4c4c4;
 `;
 
-export const ListComments = styled(ViewGeneric)`
-  overflow-y: auto;
+export const ContainerModal = styled(BottomSheetView)`
+  flex: 1;
+  padding: 5px 20px 0px;
+`;
+
+export const ContainerInput = styled(View)`
+  gap: 10px;
+  width: 100%;
+  padding: 15px 20px;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+`;
+
+export const ListComments = styled(BottomSheetScrollView)`
+  flex: 1;
+  flex-grow: 1;
+  padding: 5px 20px 0px;
 `;
 
 export const Line = styled(View)`
@@ -170,6 +185,7 @@ export const ContainerFilter = styled(ViewGeneric)<StyledProps>`
   width: ${({ width }) => width || "110px"};
   height: ${({ height }) => height || "auto"};
 `;
+
 export const OptionFilter = styled(TouchableOpacity)`
   gap: 20px;
   width: 100%;

@@ -4,6 +4,7 @@ import { Image, TouchableOpacity } from "react-native";
 import * as S from "./styles";
 import { Heart } from "@/assets/icons";
 import { IGenericCommet } from "./@types";
+import { Loading } from "@/components/elements";
 
 export const GenericCommet = ({
   likes,
@@ -13,15 +14,19 @@ export const GenericCommet = ({
   description,
 }: IGenericCommet) => {
   const [liked, setLiked] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   return (
     <S.Container>
       <S.ContainerUser>
         <S.ContainerAvatar>
+          {imageLoading && <Loading />}
+
           <Image
             source={{
               uri: avatar,
             }}
+            onLoadEnd={() => setImageLoading(false)}
             resizeMode="cover"
             style={{
               width: "100%",
@@ -42,7 +47,7 @@ export const GenericCommet = ({
       </S.ContainerUser>
       <S.ContainerLike>
         <TouchableOpacity onPress={() => setLiked((prev) => !prev)}>
-          <Heart color={liked ? "#F2F2F2" : "transparent"} />
+          <Heart color={liked ? "#d63838" : ""} />
         </TouchableOpacity>
         <S.Text>{liked ? likes + 1 : likes}</S.Text>
       </S.ContainerLike>

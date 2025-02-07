@@ -12,7 +12,9 @@ import { YourLocation } from "./YourLocation";
 import { GenericCommet } from "./GenericCommet";
 import { ProfilePicture } from "./ProfilePicture";
 import { LayoutAbstract } from "./LayoutAbstract";
+import { GenericBottomSheet } from "./BottomSheet";
 import { HalfScreenModal } from "./HalfScreenModal";
+
 export {
   Cards,
   Header,
@@ -29,4 +31,5 @@ export {
   ProfilePicture,
   LayoutAbstract,
   HalfScreenModal,
+  GenericBottomSheet,
 };

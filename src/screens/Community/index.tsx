@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import { Image, TouchableOpacity, View } from "react-native";
 import MapView, { Marker, Circle } from "react-native-maps";
+import { Image, TouchableOpacity, View } from "react-native";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { Chat, Heart, Menu } from "@/assets/icons";
 import { CardPost, Layout } from "@/components/organism";
+import { DynamicGrid } from "@/components/modules";
 
 export const Community = () => {
   const [tabActive, setTabActive] = useState("community");
@@ -82,7 +83,6 @@ export const Community = () => {
                 longitudeDelta: 0.05,
               }}
             >
-              {/* Marcadores */}
               <Marker
                 coordinate={{ latitude: 42.3601, longitude: -71.0589 }}
                 title="Boston Center"
@@ -94,7 +94,6 @@ export const Community = () => {
                 pinColor="blue"
               />
 
-              {/* Círculo de destaque (zona azul) */}
               <Circle
                 center={{ latitude: 42.3601, longitude: -71.0589 }}
                 radius={2000} // raio em metros
@@ -119,16 +118,24 @@ export const Community = () => {
             </S.Tabs>
           </S.ContainerTabs>
 
-          <View style={{marginBottom: 20}}>
+          <S.ContainerNotions>
             {posts[tabActive as keyof typeof posts]?.map((item) => {
               return (
                 <CardPost
-                  style={{ marginBottom: 20, gap: 10 }}
                   key={item.id}
                   name={item.user.name}
+                  style={{ marginBottom: 20, gap: 16 }}
                   buttonHeader={
                     <S.ButtonFollow>
-                      <S.Text tabs style={{ fontSize: 8 }}>
+                      <S.Text
+                        color="#171717"
+                        tabs
+                        style={{
+                          fontSize: 8,
+                          fontWeight: 500,
+                          fontFamily: "Poppins-Medium",
+                        }}
+                      >
                         Follow
                       </S.Text>
                       <S.IconAdd>
@@ -141,15 +148,9 @@ export const Community = () => {
                   avatar={item.user.avatar}
                   timestamp={item.timestamp}
                 >
-                  <S.Text>{item.description}</S.Text>
+                  <S.Text color={"#FFFFFF"}>{item.description}</S.Text>
 
-                  <Image
-                    resizeMode="cover"
-                    style={{ width: "100%", height: 160, borderRadius: 10 }}
-                    source={{
-                      uri: item.image,
-                    }}
-                  />
+                  <DynamicGrid items={item.image} />
 
                   <S.FooterCardPost>
                     <S.ContainerInteractions>
@@ -157,7 +158,7 @@ export const Community = () => {
                         <Heart
                           width={15}
                           height={13}
-                          color={item.liked ? "#F2F2F2" : "transparent"}
+                          color={item.liked ? "#d63838" : ""}
                         />
                         <S.Text color={"#FFFFFF"}>{item.likes}</S.Text>
                       </S.ContainerIcon>
@@ -177,7 +178,7 @@ export const Community = () => {
                 </CardPost>
               );
             })}
-          </View>
+          </S.ContainerNotions>
         </S.Content>
       </S.Container>
     </Layout>

@@ -5,7 +5,7 @@ export const genericCommets = [
     time: "24 hours",
     name: "Ethan Hernandez",
     avatar:
-      "https://s3-alpha-sig.figma.com/img/bd02/0e1f/67e612217f00e60f25df1515e9291cff?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FjE4yfCmRXGvhHQHLeHZ5s8wj3ijQCwY1HCDhHtiNTcUMdqQXonlKad3uEu1vvnfJQ9yzjm5KKEJRxC1~S~wb5mSMxhqGfrEx0ufdleEFCdewK5LmAac-HhOMD4uYzKcUl9JKKraH4LV516M9rKcU1iKerOM0Vtl~VWOcy1d04WqhKxQFphDremn3k5oid9GJgfOPbKuRpBHHeCi2v1m1ffv9j-H6uHVXSVVjqvn3b59IbyEqEeJVlDUiTna2FyAv6Wm9~zeJfpH6v5RqTDVTetLlc5a38rxGHKA1gYOFLlIjZ3jJ3upYlFl-SgMzMXvtDI53H3Eh25TbEfumhIe4Q__",
+      "https://s3-alpha-sig.figma.com/img/bd02/0e1f/67e612217f00e60f25df1515e9291cff?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=IQcOrWDXjR6PwZZS6y3ooYqI3dJmITduU5cKFuLhKqgZ2v0R88gwcR2w8r24OGOWVHCWFTJxOPmElasouwZHUooq3mQb7vDmAmoXdzCDXucRNuysDUHErYCVESZGK7wCuyrN81qPVQzOulvfkdsVSucpTDQ5BjJB1mgwNiZ26sAnB41kDN-bHTZL2ZOeVcesYecg~hwosQ5gca1BlU6XI-f2~hBQND-llIM~ccHbmz5zWpJzfZluNg-TZ-PjJzyyYBXuZd1m-HhC4Nk4Awpe97uZFd7rJk-exNewM93I46~aNlMay6Iu~8eu~CqCGhhbK9wPkkxr4in0ImP9TI~DOA__",
     description:
       "The mesmerizing beauty of this landscape is truly captivating.",
     answers: [],
@@ -16,7 +16,7 @@ export const genericCommets = [
     time: "24 hours",
     name: "David Wilson",
     avatar:
-      "https://s3-alpha-sig.figma.com/img/7c3d/35a5/81808088d4d9c1b426eb96932a522a92?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bAJi4oOR6XlvRb-WKK2tbLq1am4aovRAd7qCTCCrEnxsGx6inneczlqXpOqmrYX70X35UoPJG0OUAs5eCGS8RIdR2784~7kvI8c2E4pTb-MsN25DOaS8baseqV1gRyYNXHillMZSYJh1F89lmkntwsMIyxYmHVl3V7QTooHETrIKb67QGb2l3N75j0fuzTRtfSwbyHesE6EQnKm69ObomhX~C3JXzpfDclV-ed2nwxHtXBf~ONDFk6ElV--qbEHNkqALI5irP8SRRejafcJwPxnSNvYd6m8U8ks7-DmY41bGzj-PAWN5dgxX9RMCKlSdPg6GuqD1voBLKnGHhw4pdQ__",
+      "https://s3-alpha-sig.figma.com/img/7c3d/35a5/81808088d4d9c1b426eb96932a522a92?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=rWmNwM4051fC0~ErsFXu9nH7bgJzo-akBqAWy0dBlhvmgyjqkLTEZN5WSSpw~Ty0xg6sZofyQneqIxfRFSAJBmraqodPbdsuk3-FklcDt8GLG~Y8yMhT70MxZVFZDyqXkZZj5HUW9sAZZkeezn2BrjTBlsGzxEvGoBskT6SiNlGZkFUcBa1zXPqPzhpBiopzUCAZ7YvGkSfNiwL0dbecfevSVNz04qFcg~yxXL9QS5d-PMW7mL927oUi9ChlqJYDOqsu4jxYBehBxkWuUNmNX2duFG18bQBMKkxvf1yYkhpZR0kLyy7OE672JDtXD9jVRGakDb4ClVl4axcFOeAjKQ__",
     description: "The remarkable view in this photo is truly captivating.",
     answers: [],
   },
@@ -26,7 +26,7 @@ export const genericCommets = [
     time: "24 hours",
     name: "Emily Johnson",
     avatar:
-      "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GsMDqDxfHMwv98egqquaxy9D-Cx7h8HKwTvN4bLYoO2EUy3-aTAQX~3RYxRwVKdKNymARPl5pcW4A8LhjLXSt82S9GyMWeaipAF7hnwJSsBJ8tCJsGw8l0Xt3lir05OM3-BGUXs-986QiTyXyj~GlVdb8nrv8mNnZQ2x85HQ6QLuSY07O-WnA7Ag8A5j5924ELYf3mg0QSzQ8NexsJYHuRjnPyZykbdKbyO5ZmH9-WyWy3uPkglIMbDjlH9-SBbeJeX9e3LLJEUpHkjf8V9qnlRpe93qdWxdQ7-SgiQ6Ddi6cs5X2ZmFDEAYR7GHH3wbLntNmv5a9pS7QW7OqCe02w__",
+      "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bHfIvxYIp5dXv0rEhb6ZaD6VnnA3zbVy2BaVyEfEBcK74LC8lo9CFsTko-LV43TxQD28JLB3ncM-fpoxDuxbu6t0~i2g~1VQQBl6UmEUSgh1NGgwvfDcHezxUBvnXEA3als3H1GrOFdN~kd2WJTJpWFuwiiltmnuYPWzmjZ7C7GZqAy-LQu5skpCkndG4kF7wSWrevPv1oteNTWk~i7rDb~Q9d80bh0szLMu7o8jxWWk~hDa~OvBY-I2VaHFETllXW~GW0VFDcKGWMPwMWZi-24LeUwGLVE~LHyLuqgBHr8lJD5B4k5j7gGBxxbNJziRJDq7Fhi1xHEdxje1oGkzEQ__",
     answers: [],
     description:
       "This captivating photo displays a mesmerizing panorama that is truly remarkable.",
@@ -37,7 +37,7 @@ export const genericCommets = [
     time: "24 hours",
     name: "Michael Brown",
     avatar:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=IvYBAk59Yx6pvGwoACrlyIrg98OipqgBDWF09B~-T4QdXDo0kZS2ntrnXy5UM~VALsiIOcUvMUoq2rk19xhkY2UbE4mmfyFEfUi4oYsBZONKKFs8wLcnJzygqY0NywjfLhUc~rjb81H-wbNssIfSh2z2O5MC-AmyetU4Zf4aYwOjBBz5HN3~bn6Q-EaNIj1TIbfKyk84CA-7u3rnRZB8ax87ubHnk6EtjtFXd~41eFzCYr-oeMuX2-exQ~Pci4k6V41ydzjgufgto2IIMkHLlxhcHxXhSU~tF5VscTbjibpZ6mRFxuS9z4jSMgoQKoT2TOv5vOteW7bg4pgLlFSQPg__",
+      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ixiamN2Gq4EgpKf21Hl4QJSFAK1ZUI~j7ljPbB8FEaDbItDdUFSasJfu2uSH~D-i-njoVOVJsWVWgUQFeKAs31CiA9dgjzD~c4GId0g8J9XzzqaL4i6PltO6UPJCd5PqrIgrP8185MVCDsB1bgqXaeQGM1Am3TJyIlLcOIQZkGq7gRzRbLWrC67bkHYYRxHxe0AXIIqMGymQXwFXtemRlAw5ZCHBdIm5RjRh-mbWM4FrTODeRUOnKjsK~hvuiJPSSeqC1YnJfztgsic~o8nHEq3tsSzMdVuTy7ozOd9sjLYwiKHQb42pzWpUoOxlTYEGHbqmoMILVRyx4lfxXekB0w__",
     answers: [],
     description:
       "The inspiring beauty captured in this photo is truly mesmerizing.",
@@ -48,7 +48,7 @@ export const genericCommets = [
     time: "24 hours",
     name: "Jessica Martinez",
     avatar:
-      "https://s3-alpha-sig.figma.com/img/16f4/9c57/3ce451b3c2dadfef8bae48070158de0c?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=clcCvVgvuiYMTP60cGPjC54Qpv9ZXAnz21tDgjif4ToqweH3mG9zt4~S2alY-7Z50KqhvHEKXk1QDPtBcecwdQ3JPWEPit1AOb233WHhl0RcojJ4rr4Ypa6SCQXJygBkeOoMODT7UV69auQP0HwqcpB-qK2CdG7hWSBx90VkGG9aKZgpjxmxLUEftlgvl2iKsqwv9wU4pL6l~Jaagwr0sVCOjNyl5rmfvTSh4ADoaPKRE-~H~0N9JLwo0Gq7FyMiARxTt7h3J4obBBxFjoKrwgjqKFfJ96tEAKabWS0yjU0GLUteMKbeNMIqY1-tIqhPL39jgXorWe0oaUKb42sw1Q__",
+      "https://s3-alpha-sig.figma.com/img/16f4/9c57/3ce451b3c2dadfef8bae48070158de0c?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=RfHFQhk75ym7X60-M13u~Wl2kffe1loDwxgcKfilrt9t~97jB3F90kMD73wVfHDWO1YPuTqltSKedVTNgLuyVwT2uA-KAWaUaaFcJ3xyf3P7M-DRefDSTnQ9dbUE4KX31mTyt-aQxie1BrqZyc1rGHtNOucGJWY-izqaC-UUT0wh4kbbsH5tjit~05cBXBg1M0wA2~6sQInWSvi7dFB5paC~-cdmncPVWpjWYB~tiRv5srWlYNKSX6dpBzJJckPrO6Tw0Y52HKqfZSYe2o92ziBERcpu9qU~kYkG6eMhUS1M2iNcGGrySAqsPV6o~DYgHtxmlZBzJej~ZMkscxS1lA__",
     answers: [],
     description:
       "This captivating photo features a stunning panorama that is truly mesmerizing.",
@@ -59,7 +59,7 @@ export const genericCommets = [
     name: "Savannah Montgomery",
     likes: 1,
     avatar:
-      "https://s3-alpha-sig.figma.com/img/e598/91de/fda096791f79004a074192968e064836?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QxXA0jdQ8F84hBlvmKGnSIaPdNEKPQ0gzTyoIZUYswV-HrFYGVghM1fAD5YO-MByJboViXfyg2skCdvjBgmX-iRIYTQXPmYBBWHOKEaCOVGfeO0of-AEuHkMSDsPd0JZ76oF30hj8mH93IzZpQA6lkj1ktFlDJ4b4edgP~MKyghsGK5r8aiqdvbgvMZHxVpncRRuv~MOJ6i3nM1ksdGdghv9L1xRh5~vz6u6zsLaV~S4VaM0ytdZmEqMvuxyKG9sFqrV1FjvsM9BF4XXjnCggRL6F6y91KK2NX6eqvS1XQSbzKJBeYQQyhWijGGKJsZyrDsNJvSOUKOnxNPsQgeSfQ__",
+      "https://s3-alpha-sig.figma.com/img/e598/91de/fda096791f79004a074192968e064836?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=TMT6fivF-YzMqgcKbF7IZ9x4siTw8LGdRLQbA385Ufp7I1NzP8ABQ~sgPeU8L1Agckn8GyMWfoDkn0cqwIyMEk4FyU9nAzCoN8izRF5s-MbkjcQZBu5SZ4lJOpfedfTvtmED8BYvel11DXRxciDQ9u2r2~wQzcalUN5kDvtgjozMxX4mT1ldSl0a1QZ9CHEWSLvdQXsCNekbvY1Q6Xqp~38WpABz0IY9BitEoXuu27MGlFw3UyF1HzL5Ev2SCk5X3ICTiaQ1U~mW5myw~ffEU44ktoNfr1DjyQ5fW7YtJhQO6nvSk711VH12irZQ8dnvKNixJx250FvybPdEK2XrZg__",
     answers: [],
     description: "Viewing this photo, I'm captivated by the stunning panorama.",
   },

@@ -1,6 +1,9 @@
+import { useContext } from "react";
+
 import * as S from "./styles";
 import { TabBarProps } from "./@types";
 import Colors from "@/constants/Colors";
+import { TabVisibilityContext } from "@/contexts/tabVisibility";
 import { Community, Home, Hearts, Navigation, Fire } from "@/assets/icons";
 
 const routeIcons = {
@@ -12,14 +15,19 @@ const routeIcons = {
 };
 
 const routeOrder = ["community", "search", "index", "fire", "hearts"];
+const hiddenRoutes = ["profile"]
 
 export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
-  const orderedRoutes = [...state.routes].sort((a: any, b: any) => {
+  const { isVisibility } = useContext(TabVisibilityContext);
+  const orderedRoutes = [...state.routes]
+  .filter((route) => !hiddenRoutes.includes(route.name))
+  .sort((a: any, b: any) => {
     return routeOrder.indexOf(a.name) - routeOrder.indexOf(b.name);
   });
 
+
   return (
-    <S.Container>
+    <S.Container $Visible={isVisibility}>
       {orderedRoutes.map(
         (route: { key: string | number; name: any; params: any }) => {
           const { options } = descriptors[route.key];

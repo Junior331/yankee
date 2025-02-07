@@ -6,7 +6,6 @@ import { ENDPOINTS } from "@/utils/endpoints";
 export const signUp = async ({ data, request, setLoading }: SignUpProps) => {
   setLoading(true);
   const url = `${ENDPOINTS.USER.SIGN.UP}`;
-  console.log('data ::', data)
 
   const requestConfig: httpRequest = {
     url,

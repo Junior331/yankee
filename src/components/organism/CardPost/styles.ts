@@ -11,6 +11,7 @@ export const Container = styled(View)`
   gap: 20px;
   width: 100%;
   height: auto;
+  position: relative;
   align-items: start;
   justify-content: start;
 `;

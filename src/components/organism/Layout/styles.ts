@@ -1,7 +1,8 @@
-import { SafeAreaView, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components";
 
 import Colors from "@/constants/Colors";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -10,18 +11,15 @@ export const ViewGeneric = styled(View)`
 `;
 
 export const Container = styled(SafeAreaView)`
-  width: 100%;
-  height: 100%;
+  flex: 1;
   display: flex;
-  padding: 24px;
   align-items: center;
   justify-content: center;
   background-color: ${Colors.dark.background};
 `;
 
 export const Content = styled(ViewGeneric)`
-  width: 100%;
-  height: 100%;
+  flex: 1;
   position: relative;
   flex-direction: column;
   padding: 35px 15px 30px;

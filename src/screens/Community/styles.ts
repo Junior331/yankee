@@ -80,6 +80,10 @@ export const ContainerTabs = styled(View)`
   margin: 20px 0;
   align-items: center;
 `;
+export const ContainerNotions = styled(View)`
+  padding: 0 10px;
+  margin-bottom: 110px;
+`;
 
 export const Tabs = styled(View)`
   gap: 20px;
@@ -103,7 +107,6 @@ export const ButtonFollow = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-
 `;
 
 export const IconAdd = styled(View)`

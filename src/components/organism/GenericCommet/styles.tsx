@@ -47,7 +47,7 @@ export const ContainerText = styled(View)`
 
 export const Text = styled(TextComponent)`
   font-size: 10px;
-  color: #848383;
+  color: #FFFFFF;
 `;
 
 export const Title = styled(TitleComponent)`
