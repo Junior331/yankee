@@ -12,24 +12,24 @@ export const Messages = () => {
   const messages = [
     {
       id: 1,
-      active: true, 
+      active: true,
       name: "Ryan Brooks",
       photo: "https://exemplo.com/ryan.jpg",
-      messages: ["Tell me we weren’t just talking about this??"], 
-      unread: 1, 
+      messages: ["Tell me we weren’t just talking about this??"],
+      unread: 1,
     },
     {
       id: 2,
       active: false,
       name: "Logan Harris",
       photo: "https://exemplo.com/logan.jpg",
-      messages: ["Sent you a post"], 
-      unread: 0, 
+      messages: ["Sent you a post"],
+      unread: 0,
     },
   ];
 
   return (
-    <Layout>
+    <>
       <S.ContainerTabs>
         <S.Tabs>
           {mocks.tabs.Main.map((tab) => (
@@ -44,16 +44,23 @@ export const Messages = () => {
 
       <S.ContainerInput>
         <S.SearchIcon name="search" size={20} color="#777" />
-        <S.StyledInput placeholder="Type here..." value={text} onChangeText={setText} />
+        <S.StyledInput
+          placeholder="Type here..."
+          value={text}
+          onChangeText={setText}
+        />
       </S.ContainerInput>
 
       <S.ContainerList>
         {messages.map((message) => {
           const lastMessage = message.messages[message.messages.length - 1];
-          const hasUnread = message.unread > 0; 
+          const hasUnread = message.unread > 0;
 
           return (
-            <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }}>
+            <TouchableOpacity
+              key={message.id}
+              style={{ width: "100%", marginVertical: 15, height: "auto" }}
+            >
               <S.Container>
                 <S.ContainerUser>
                   <S.ContainerAvatar>
@@ -92,6 +99,6 @@ export const Messages = () => {
           );
         })}
       </S.ContainerList>
-    </Layout>
+    </>
   );
 };

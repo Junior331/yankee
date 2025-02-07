@@ -26,7 +26,6 @@ export const Profile = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [bannerLoading, setBannerLoading] = useState(true);
   const [avatarLoading, setAvatarLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const renderGridItem = ({
     item,
@@ -44,7 +43,7 @@ export const Profile = () => {
       }}
     >
       {imageLoading && <Loading />}
-      <TouchableOpacity onPress={() => setSelectedImage(item.image)}>
+      <TouchableOpacity>
         <Image
           resizeMode="cover"
           alt={`Image ${item.name}`}
@@ -177,29 +176,6 @@ export const Profile = () => {
                 ))}
               </S.Tabs>
             </S.ContainerTabs>
-
-            <Modal visible={!!selectedImage} transparent={true}>
-              <TouchableOpacity onPress={() => setSelectedImage(null)}>
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "rgba(0, 0, 0, 0.9)",
-                  }}
-                >
-                  <Image
-                    resizeMode="cover"
-                    source={{ uri: selectedImage || "" }}
-                    style={{
-                      width: width * 0.7,
-                      height: height * 0.8,
-                      borderRadius: 20,
-                    }}
-                  />
-                </View>
-              </TouchableOpacity>
-            </Modal>
 
             <FlatList
               numColumns={3}

@@ -1,10 +1,11 @@
 import React from "react";
-import {  Messages } from "@/components/organism";
+import { Text } from "react-native";
+import { Layout } from "@/components/organism";
 
 export const Hearts = () => {
   return (
-    <>
-      <Messages />
-    </>
+    <Layout>
+      <Text>Hearts</Text>
+    </Layout>
   );
-}
+};

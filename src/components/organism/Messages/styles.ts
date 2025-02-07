@@ -11,9 +11,9 @@ import {
 export const ContainerList = styled(ScrollView).attrs({
   showsVerticalScrollIndicator: false, // Esconde a barra de rolagem
 })`
-  flex: 1;
   width: 100%;
   margin-top: 20px;
+  background-color: red;
 `;
 
 export const ViewGeneric = styled(View)`
