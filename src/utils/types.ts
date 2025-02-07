@@ -27,6 +27,7 @@ export interface messageConfig {
 
 export type StyledProps = {
   top?: string;
+  size?: string;
   left?: string;
   color?: string;
   right?: string;
