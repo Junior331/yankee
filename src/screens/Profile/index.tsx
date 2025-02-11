@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Image,
-  FlatList,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image, FlatList, Dimensions, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
 import Colors from "@/constants/Colors";
@@ -15,10 +9,12 @@ import { Forms } from "@/components/organism";
 import { Loading } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
 export const Profile = () => {
+  const router = useRouter();
   const { goBack } = useNavigationHandler();
   const [isEdit, setIsEdit] = useState(false);
   const [tabActive, setTabActive] = useState("photos");
@@ -26,11 +22,7 @@ export const Profile = () => {
   const [bannerLoading, setBannerLoading] = useState(true);
   const [avatarLoading, setAvatarLoading] = useState(true);
 
-  const renderGridItem = ({
-    item,
-  }: {
-    item: { id: number; name: string; image: string };
-  }) => (
+  const renderGridItem = ({ item }: { item: { id: number; name: string; image: string } }) => (
     <View
       style={{
         margin: 2,
@@ -72,12 +64,8 @@ export const Profile = () => {
               }}
             />
           </S.ContainerBanner>
-          <S.ButtonIcon
-            onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}
-          >
-            <LeftArrow
-              color={isEdit ? Colors.dark.text : Colors.dark.background}
-            />
+          <S.ButtonIcon onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}>
+            <LeftArrow color={isEdit ? Colors.dark.text : Colors.dark.background} />
           </S.ButtonIcon>
           <S.ButtonIcon onPress={goBack}>
             {isEdit ? (
@@ -147,7 +135,7 @@ export const Profile = () => {
                     Edit Profile
                   </S.Title>
                 </S.Button>
-                <S.Button>
+                <S.Button onPress={() => router.push("/(tabs)/messages")}>
                   <S.Title fontSize="11px" color="#171717">
                     Chat
                   </S.Title>
@@ -163,11 +151,7 @@ export const Profile = () => {
                     onPress={() => setTabActive(tab.value)}
                     fontWeight={tabActive === tab.value ? 600 : 300}
                   >
-                    <S.TitleTab
-                      tabs
-                      fontSize="12px"
-                      fontWeight={tabActive === tab.value ? 600 : 300}
-                    >
+                    <S.TitleTab tabs fontSize="12px" fontWeight={tabActive === tab.value ? 600 : 300}>
                       {tab.label}
                     </S.TitleTab>
                     <S.Line isActive={tabActive === tab.value} />

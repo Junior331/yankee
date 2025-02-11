@@ -6,6 +6,7 @@ import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import { Profile } from "./Profile";
 import { Welcome } from "./Welcome";
+import { Messages } from "./Messages";
 import { Community } from "./Community";
 
 export {
@@ -17,5 +18,6 @@ export {
   SignUp,
   Welcome,
   Profile,
+  Messages,
   Community,
 };

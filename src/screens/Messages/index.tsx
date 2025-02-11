@@ -1,40 +1,25 @@
-import { Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
+import { Image, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
+import { mockMessages } from "./utils";
 import { mocks } from "@/services/mocks";
-import { Layout } from "@/components/organism";
+import { SubHeader } from "@/components/organism";
 
 export const Messages = () => {
-  const [tabActive, setTabActive] = useState("Main");
+  const router = useRouter();
   const [text, setText] = useState("");
-
-  const messages = [
-    {
-      id: 1,
-      active: true,
-      name: "Ryan Brooks",
-      photo: "https://exemplo.com/ryan.jpg",
-      messages: ["Tell me we weren’t just talking about this??"],
-      unread: 1,
-    },
-    {
-      id: 2,
-      active: false,
-      name: "Logan Harris",
-      photo: "https://exemplo.com/logan.jpg",
-      messages: ["Sent you a post"],
-      unread: 0,
-    },
-  ];
+  const [tabActive, setTabActive] = useState(1);
 
   return (
-    <>
+    <S.Container>
+      <SubHeader title={"Message"} handleOnPress={() => router.push("/(tabs)/profile")} />
       <S.ContainerTabs>
         <S.Tabs>
-          {mocks.tabs.Main.map((tab) => (
-            <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-              <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
+          {mocks.tabs.messages.map((tab) => (
+            <S.Tab key={tab.id} onPress={() => setTabActive(tab.id)}>
+              <S.Text tabs color={tabActive === tab.id ? "#fff" : "#999494"}>
                 {tab.label}
               </S.Text>
             </S.Tab>
@@ -44,24 +29,17 @@ export const Messages = () => {
 
       <S.ContainerInput>
         <S.SearchIcon name="search" size={20} color="#777" />
-        <S.StyledInput
-          placeholder="Type here..."
-          value={text}
-          onChangeText={setText}
-        />
+        <S.StyledInput placeholder="Type here..." value={text} onChangeText={setText} />
       </S.ContainerInput>
 
       <S.ContainerList>
-        {messages.map((message) => {
+        {mockMessages.map((message) => {
           const lastMessage = message.messages[message.messages.length - 1];
           const hasUnread = message.unread > 0;
 
           return (
-            <TouchableOpacity
-              key={message.id}
-              style={{ width: "100%", marginVertical: 15, height: "auto" }}
-            >
-              <S.Container>
+            <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }}>
+              <S.ContainerMessage>
                 <S.ContainerUser>
                   <S.ContainerAvatar>
                     <Image
@@ -94,11 +72,11 @@ export const Messages = () => {
                     </>
                   )}
                 </S.ContainerUser>
-              </S.Container>
+              </S.ContainerMessage>
             </TouchableOpacity>
           );
         })}
       </S.ContainerList>
-    </>
+    </S.Container>
   );
 };
