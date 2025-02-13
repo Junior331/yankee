@@ -1,35 +1,17 @@
-import styled, { css } from "styled-components";
-import {  ScrollView, TextInput, TouchableOpacity, View } from "react-native";
-import { Text as TextComponent } from "@/components/elements";
-import { StyledProps } from "@/utils/types";
 import { Ionicons } from "@expo/vector-icons";
+import styled, { css } from "styled-components";
+import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
 
-import {
-  Title as TitleComponent,
-} from "@/components/elements";
-
-export const ContainerList = styled(ScrollView).attrs({
-  showsVerticalScrollIndicator: false, // Esconde a barra de rolagem
-})`
-  width: 100%;
-  margin-top: 20px;
-  background-color: red;
-`;
-
-export const ViewGeneric = styled(View)`
-  display: flex;
-  align-items: start;
-  justify-content: start;
-`;
+import Colors from "@/constants/Colors";
+import { StyledProps } from "@/utils/types";
+import { Text as TextComponent } from "@/components/elements";
+import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   width: 100%;
-  min-height: 50px;
-  overflow: hidden;
-  border-radius: 23px;
-  align-items: center;
-  justify-content: space-between;
-  overflow: scroll;
+  height: 100%;
+  padding: 20px;
+  background-color: ${Colors.dark.background};
 `;
 
 export const ContainerTabs = styled(View)`
@@ -38,6 +20,7 @@ export const ContainerTabs = styled(View)`
   margin: 20px 0;
   align-items: center;
 `;
+
 export const Tabs = styled(View)`
   gap: 20px;
   width: 100%;
@@ -51,7 +34,7 @@ export const Tab = styled(TouchableOpacity)``;
 
 export const Text = styled(TextComponent)<StyledProps>`
   font-size: 10px;
-  color: ${({ color }) => color || "#4d4c4c"};
+  color: ${({ color }) => color || "#FFFFFF"};
 
   ${({ tabs }) =>
     tabs &&
@@ -63,46 +46,46 @@ export const Text = styled(TextComponent)<StyledProps>`
 `;
 
 export const ContainerInput = styled(View)`
-  flex-direction: row;
-  align-items: center; 
+  width: 100%;
+  height: 36px;
   overflow: hidden;
-  background-color: #f5f5f5;
+  margin-top: 10px;
+  flex-direction: row;
+  align-items: center;
   border-radius: 25px;
   padding: 0 0 0 15px;
-  width: 100%; 
-  height: 36px;
-  margin-top: 10px;
+  background-color: #f5f5f5;
 `;
+
+export const StyledInput = styled(TextInput).attrs({
+  placeholderTextColor: "#2D2D2D",
+})`
+  color: #333;
+  height: 100%;
+  flex: 1 0 auto;
+  font-size: 14px;
+`;
+
 export const SearchIcon = styled(Ionicons)`
   margin-right: 10px;
 `;
 
-export const StyledInput = styled(TextInput).attrs({
-  placeholderTextColor: "#999",
-})`
-  flex: 1 0 auto;
-  font-size: 14px;
-  color: #333;
-  height: 100%;
+export const ContainerList = styled(ScrollView)`
+  width: 100%;
+  margin-top: 20px;
 `;
 
-export const ButtonFollow = styled(View)`
-  gap: 3px;
-  width: 58px;
-  height: 18px;
-  background: #fff;
-  padding: 2px 6px;
-  margin-right: 5px;
-  border-radius: 5px;
-  flex-direction: row;
+export const ContainerMessage = styled(View)`
+  width: 100%;
+  min-height: 50px;
+  border-radius: 23px;
   align-items: center;
-  justify-content: center;
-
+  justify-content: space-between;
 `;
 
 export const ContainerUser = styled(View)`
-  gap: 5px;
   flex: 1;
+  gap: 5px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -114,6 +97,7 @@ export const ContainerAvatar = styled(View)`
   border-radius: 60px;
   background-color: #c4c4c4;
 `;
+
 export const ContainerBadge = styled(View)`
   position: relative;
   align-items: center;
@@ -132,25 +116,27 @@ export const Badge = styled(View)`
   justify-content: center;
   background-color: #16e30b;
 `;
-export const BadgeBlue = styled(View)`
-  width: 12px;
-  height: 12px;
-  margin: 0 10px 0 10px;
-  border-radius: 15px;
-  padding-bottom: 2px;
-  align-items: center;
-  justify-content: center;
-  background-color: #1976d2;
-`;
+
 export const ContainerText = styled(View)`
   flex: 1;
 `;
+
 export const Title = styled(TitleComponent)`
-  margin: 0 0 4px 0;
-  color: #f2f2f2;
   font-size: 12px;
   font-weight: 500;
-  font-family: "Poppins-Medium";
+  color: #f2f2f2;
+  margin: 0 0 4px 0;
   text-overflow: ellipsis;
-  
+  font-family: "Poppins-Medium";
+`;
+
+export const BadgeBlue = styled(View)`
+  width: 12px;
+  height: 12px;
+  border-radius: 15px;
+  padding-bottom: 2px;
+  align-items: center;
+  margin: 0 10px 0 10px;
+  justify-content: center;
+  background-color: #1976d2;
 `;
