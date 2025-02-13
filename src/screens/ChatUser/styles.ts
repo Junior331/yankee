@@ -1,0 +1,183 @@
+import styled, { css } from "styled-components";
+import { TouchableOpacity, View, TextInput } from "react-native";
+
+import Colors from "@/constants/Colors";
+import { Text as TextComponent } from "@/components/elements";
+import { Title as TitleComponent } from "@/components/elements";
+import { StyledProps } from "@/utils/types";
+
+export const Container = styled(View)`
+  flex: 1;
+  background-color: ${Colors.dark.background};
+`;
+
+export const ContainerHeader = styled(View)`
+  gap: 20px;
+  width: 100%;
+  padding: 15px 15px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ButtonIcon = styled(TouchableOpacity)`
+  height: 20px;
+`;
+
+export const ContainerUser = styled(View)`
+  flex: 1;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const ContainerAvatar = styled(View)`
+  width: 40px;
+  height: 40px;
+  border-radius: 60px;
+  background-color: #c4c4c4;
+`;
+
+export const ContainerBadge = styled(View)`
+  position: relative;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Badge = styled(View)`
+  left: 25px;
+  width: 10px;
+  height: 10px;
+  bottom: -2px;
+  position: absolute;
+  border-radius: 15px;
+  padding-bottom: 2px;
+  align-items: center;
+  justify-content: center;
+  background-color: #16e30b;
+`;
+
+export const ContainerText = styled(View)`
+  flex: 1;
+`;
+
+export const Title = styled(TitleComponent)`
+  font-size: 12px;
+  font-weight: 500;
+  color: #f2f2f2;
+  margin: 0 0 4px 0;
+  text-overflow: ellipsis;
+  font-family: "Poppins-Medium";
+`;
+
+export const Text = styled(TextComponent)<StyledProps>`
+  font-size: 10px;
+  color: ${({ color }) => color || "#FFFFFF"};
+
+  ${({ tabs }) =>
+    tabs &&
+    css`
+      font-size: 13px;
+      font-weight: 500;
+      font-family: "Poppins-Medium";
+    `};
+`;
+
+export const ContainerIcons = styled(View)`
+  gap: 15px;
+  margin-right: 10px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ChatContainer = styled(View)`
+  height: 73%;
+  padding: 10px 15px;
+`;
+
+export const MessageContainer = styled(View)<StyledProps>`
+  margin-bottom: 10px;
+  flex-direction: column;
+  align-items: ${({ isSender }) => (isSender ? "flex-end" : "flex-start")};
+`;
+
+export const MessageBubbleWrapper = styled(View)<StyledProps>`
+  max-width: 80%;
+  position: relative;
+  margin: ${({ isSender }) => (isSender ? "0 0 0 10px" : "0 10px 0 0")};
+`;
+
+export const MessageBubble = styled(View)<StyledProps>`
+  padding: 12px 16px;
+  position: relative;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  background-color: ${({ isSender }) => (isSender ? "#0084FF" : "#ffffff")};
+  border-top-left-radius: ${({ isSender }) => (isSender ? "18px" : "0px")};
+  border-top-right-radius: ${({ isSender }) => (isSender ? "3px" : "18px")};
+`;
+
+export const MessageText = styled(TextComponent)<StyledProps>`
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: ${({ isSender }) => (isSender ? "#ffffff" : "#000000")};
+`;
+
+export const MessagePointer = styled(View)<StyledProps>`
+  top: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  ${({ isSender }) =>
+    isSender
+      ? css`
+          right: -10px;
+          transform: rotate(45deg);
+          background-color: #0084ff;
+        `
+      : css`
+          left: -10px;
+          transform: rotate(-45deg);
+          background-color: #ffffff;
+        `}
+`;
+
+export const TimeText = styled(TextComponent)<StyledProps>`
+  font-size: 11px;
+  margin-top: 4px;
+  color: #ffffff;
+  align-self: ${({ isSender }) => (isSender ? "flex-end" : "flex-start")};
+`;
+
+export const InputContainer = styled(View)`
+  width: 85%;
+  margin-left: 30px;
+  padding: 3px 15px;
+  align-items: center;
+  border-radius: 15px;
+  flex-direction: row;
+  border: 1.5px solid #ffffff;
+  background-color: transparent;
+`;
+
+export const AttachmentButton = styled(View)`
+  gap: 5px;
+  flex-direction: row;
+`;
+
+export const Input = styled(TextInput)`
+  flex: 1;
+  height: 40px;
+  margin: 0 10px;
+  padding: 0 10px;
+  color: #ffffff;
+  background-color: transparent;
+`;
+
+export const VoiceButton = styled(TouchableOpacity)`
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+`;

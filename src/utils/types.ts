@@ -37,6 +37,7 @@ export type StyledProps = {
   fontSize?: string;
   bg_color?: string;
   isLarge?: boolean;
+  isSender?: boolean;
   isSingle?: boolean;
   isActive?: boolean;
   transform?: string;

@@ -13,8 +13,10 @@ import Miles from "./Miles";
 import Error from "./Error";
 import Arrow from "./Arrow";
 import Photo from "./Photo";
+import Phone from "./Phone";
 import Search from "./Search";
 import Hearts from "./Hearts";
+import Camera from "./Camera";
 import Filter from "./Filter";
 import Ellipse3 from "./Ellipse3";
 import Location from "./Location";
@@ -23,6 +25,9 @@ import Ellipse5 from "./Ellipse5";
 import Ellipse6 from "./Ellipse6";
 import LeftArrow from "./LeftArrow";
 import Community from "./Community";
+import PaperClip from "./PaperClip";
+import MoodSmile from "./MoodSmile";
+import Microphone from "./Microphone";
 import Navigation from "./Navigation";
 import Visibility from "./Visibility";
 import SetLocation from "./SetLocation";
@@ -46,18 +51,23 @@ export {
   Error,
   Arrow,
   Photo,
+  Phone,
   Heart,
   Miles,
   Filter,
   Hearts,
+  Camera,
   Search,
   Location,
   Ellipse3,
   Ellipse4,
   Ellipse5,
   Ellipse6,
+  MoodSmile,
   LeftArrow,
+  PaperClip,
   Community,
+  Microphone,
   Navigation,
   Visibility,
   SetLocation,

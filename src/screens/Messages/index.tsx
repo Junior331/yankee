@@ -38,7 +38,9 @@ export const Messages = () => {
           const hasUnread = message.unread > 0;
 
           return (
-            <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }}>
+            <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }} 
+            onPress={() => router.push( "/(tabs)/chatuser" ) }
+            >
               <S.ContainerMessage>
                 <S.ContainerUser>
                   <S.ContainerAvatar>
