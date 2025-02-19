@@ -4,13 +4,13 @@ import { SvgXml } from "react-native-svg";
 import { IIcons } from "./@types";
 import Colors from "@/constants/Colors";
 
-const Hearts = ({ color = Colors.dark.background }: IIcons) => {
+const Hearts = ({width = 21, height = 19, color = Colors.dark.background }: IIcons) => {
   return (
     <SvgXml
       xml={`
         <svg
-          width="21"
-          height="19"
+          width="${width}"
+          height="${height}"
           viewBox="0 0 21 19"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

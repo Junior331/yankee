@@ -34,6 +34,7 @@ import SetLocation from "./SetLocation";
 import Notification from "./Notification";
 import ArrowOfLineTop from "./ArrowOfLineTop";
 import ArrowOfLineDown from "./ArrowOfLineDown";
+import CircleArrowUpRight from "./CircleArrowUpRight";
 import ProfilePictureContainer from "./ProfilePictureContainer";
 
 
@@ -74,5 +75,6 @@ export {
   Notification,
   ArrowOfLineTop,
   ArrowOfLineDown,
+  CircleArrowUpRight,
   ProfilePictureContainer,
 };

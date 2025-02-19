@@ -8,8 +8,10 @@ import { mocks } from "@/services/mocks";
 import { Chat, Heart, Menu } from "@/assets/icons";
 import { CardPost, Layout } from "@/components/organism";
 import { DynamicGrid } from "@/components/modules";
+import { useRouter } from "expo-router";
 
 export const Community = () => {
+  const router = useRouter();
   const [tabActive, setTabActive] = useState("community");
   const [posts, setPosts] = useState(mocks.postsCommunity);
 
@@ -53,9 +55,9 @@ export const Community = () => {
                 }
 
                 return (
-                  <S.ContainerStory>
-                    <S.Story>
-                      <Image
+                  <S.ContainerStory onPress={() => router.push( "/(tabs)/stories" ) }>
+                    <S.Story >
+                      <Image 
                         resizeMode="cover"
                         style={{ width: "100%", height: "100%" }}
                         source={{
