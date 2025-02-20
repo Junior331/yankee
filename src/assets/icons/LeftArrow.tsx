@@ -2,9 +2,9 @@ import React from "react";
 import Svg, { Path } from "react-native-svg";
 import { IIcons } from "@/assets/icons/@types";
 
-const LeftArrow = ({ color = "white" }: IIcons) => {
+const LeftArrow = ({ width = 26, height = 26, color = "white" }: IIcons) => {
   return (
-    <Svg width="26" height="26" viewBox="0 0 27 27" fill="none">
+    <Svg width={height} height={width} viewBox="0 0 27 27" fill="none">
       <Path
         d="M15 6L9 12L15 18"
         stroke={`${color}`}

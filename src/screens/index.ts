@@ -6,6 +6,7 @@ import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 import { Profile } from "./Profile";
 import { Welcome } from "./Welcome";
+import { Stories } from "./Stories";
 import { Messages } from "./Messages";
 import { ChatUser } from "./ChatUser";
 import { Community } from "./Community";
@@ -17,6 +18,7 @@ export {
   Search,
   SignIn,
   SignUp,
+  Stories,
   Welcome,
   Profile,
   ChatUser,
