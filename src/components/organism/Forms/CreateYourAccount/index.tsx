@@ -19,6 +19,7 @@ export const CreateYourAccount = ({
   values,
   errors,
   touched,
+  handleGoBack,
   handleSubmit,
   handleChange,
 }: Props) => {
@@ -60,7 +61,11 @@ export const CreateYourAccount = ({
   };
 
   return (
-    <LayoutAbstract title="yankee" subTitle="Let’s create your account">
+    <LayoutAbstract
+    title="yankee"
+    handleOnPressHeader={handleGoBack}
+    subTitle="Let’s create your account"
+    >
       <S.ContainerInput>
         <Input
           icon={<User />}
@@ -89,8 +94,8 @@ export const CreateYourAccount = ({
           <S.MessageError>{errors.email}</S.MessageError>
         )}
       </S.ContainerInput>
-      <S.ContainerSelects>
-        <S.ContainerSelect>
+      <S.ContainerSelect>
+        <S.SelectItem>
           <DropDown
             options={genders}
             selectedOption={selectedOption}
@@ -99,14 +104,15 @@ export const CreateYourAccount = ({
           {touched.gender && errors.gender && (
             <S.MessageError>{errors.gender}</S.MessageError>
           )}
-        </S.ContainerSelect>
-        <S.ContainerSelect>
+        </S.SelectItem>
+
+        <S.SelectItem>
           <Datetimepicker />
           {touched.dayOfBirth && errors.dayOfBirth && (
             <S.MessageError>{errors.dayOfBirth}</S.MessageError>
           )}
-        </S.ContainerSelect>
-      </S.ContainerSelects>
+        </S.SelectItem>
+      </S.ContainerSelect>
 
       <S.ContainerInput>
         <Input

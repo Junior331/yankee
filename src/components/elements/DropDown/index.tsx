@@ -6,7 +6,7 @@ import { Text } from "../Text";
 import { ISelect } from "./@types";
 import { Arrow } from "@/assets/icons";
 import Colors from "@/constants/Colors";
-import { HalfScreenModal } from "../../organism/HalfScreenModal";
+import { ModalGeneric } from "../../organism/ModalGeneric";
 
 export const DropDown = ({
   options,
@@ -24,7 +24,7 @@ export const DropDown = ({
         <Arrow />
       </S.Dropdown>
 
-      <HalfScreenModal
+      <ModalGeneric
         modalVisible={isModalVisible}
         setModalVisible={setModalVisible}
       >
@@ -43,7 +43,7 @@ export const DropDown = ({
             </S.Option>
           )}
         />
-      </HalfScreenModal>
+      </ModalGeneric>
     </S.Container>
   );
 };

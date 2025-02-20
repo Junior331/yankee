@@ -6,15 +6,14 @@ import { Layout } from "./Layout";
 import { Comment } from "./Comment";
 import { CardPost } from "./CardPost";
 import { FindCity } from "./FindCity";
-import { ModalGeneric } from "./Modal";
 import { SubHeader } from "./SubHeader";
 import { HeaderPages } from "./HeaderPages";
 import { YourLocation } from "./YourLocation";
+import { ModalGeneric } from "./ModalGeneric";
 import { GenericCommet } from "./GenericCommet";
 import { ProfilePicture } from "./ProfilePicture";
 import { LayoutAbstract } from "./LayoutAbstract";
 import { GenericBottomSheet } from "./BottomSheet";
-import { HalfScreenModal } from "./HalfScreenModal";
 
 export {
   Cards,
@@ -32,6 +31,5 @@ export {
   GenericCommet,
   ProfilePicture,
   LayoutAbstract,
-  HalfScreenModal,
   GenericBottomSheet,
 };

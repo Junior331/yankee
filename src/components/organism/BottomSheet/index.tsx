@@ -1,10 +1,5 @@
 import BottomSheet from "@gorhom/bottom-sheet";
-import React, {
-  useMemo,
-  forwardRef,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useMemo, forwardRef, useContext, useCallback } from "react";
 
 import * as S from "./styles";
 import { IBottomSheet } from "./@types";

@@ -11,7 +11,7 @@ import { emptyDataMessage } from "@/utils/emptys";
 import { Button, Input } from "@/components/elements";
 import { Mail, Lock, Ellipse3 } from "@/assets/icons";
 // import { useAxiosRequest } from "@/hooks/axiosAdapter";
-import { LayoutAbstract, HalfScreenModal } from "@/components/organism";
+import { LayoutAbstract, ModalGeneric } from "@/components/organism";
 
 export const SignIn = () => {
   const router = useRouter();
@@ -25,7 +25,7 @@ export const SignIn = () => {
       email: "",
       password: "",
     },
-    validationSchema: signInSchema,
+    // validationSchema: signInSchema,
     onSubmit: async (values) => {
       console.log("values ::", values);
       // const data = {
@@ -102,7 +102,7 @@ export const SignIn = () => {
           Sign up now
         </S.Text>
       </S.Text>
-      <HalfScreenModal
+      <ModalGeneric
         modalVisible={dataMessage.visible}
         setModalVisible={() =>
           setDataMessage((prev) => ({
@@ -137,7 +137,7 @@ export const SignIn = () => {
             }))
           }
         />
-      </HalfScreenModal>
+      </ModalGeneric>
     </LayoutAbstract>
   );
 };

@@ -6,6 +6,7 @@ export interface IBottomSheet {
   size: number;
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
+  snapPoints?: number[] | string [];
 }
 
 export type BottomSheetRef = RefObject<BottomSheetMethods>;
