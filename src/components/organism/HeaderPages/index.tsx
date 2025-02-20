@@ -16,8 +16,8 @@ export const HeaderPages = ({ icon, title }: IHeaderPages) => {
 
       {title && <S.Title>{title}</S.Title>}
       <S.ContainerUser>
-        <S.ContainerBadge>
-          <Notification />
+        <S.ContainerBadge onPress={() => router.push("/(tabs)/notifications")}>
+          <Notification  />
 
           <S.Badge>
             <S.Text>3</S.Text>
