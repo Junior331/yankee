@@ -10,6 +10,7 @@ import { Stories } from "./Stories";
 import { Messages } from "./Messages";
 import { ChatUser } from "./ChatUser";
 import { Community } from "./Community";
+import { Notifications } from "./Notifications";
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   ChatUser,
   Messages,
   Community,
+  Notifications,
 };
