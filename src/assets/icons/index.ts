@@ -1,3 +1,4 @@
+import X from "./X";
 import SOS from "./SOS";
 import AID from "./AID";
 import City from "./City";
@@ -15,6 +16,7 @@ import Miles from "./Miles";
 import Error from "./Error";
 import Arrow from "./Arrow";
 import Photo from "./Photo";
+import Clock from "./Clock";
 import Phone from "./Phone";
 import Search from "./Search";
 import Hearts from "./Hearts";
@@ -44,6 +46,7 @@ import CircleArrowUpRight from "./CircleArrowUpRight";
 import ProfilePictureContainer from "./ProfilePictureContainer";
 
 export {
+  X,
   SOS,
   AID,
   Lock,
@@ -59,6 +62,7 @@ export {
   Error,
   Arrow,
   Photo,
+  Clock,
   Phone,
   Heart,
   Miles,
