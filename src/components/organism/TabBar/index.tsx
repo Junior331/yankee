@@ -15,7 +15,7 @@ const routeIcons = {
 };
 
 const routeOrder = ["community", "search", "index", "fire", "hearts"];
-const hiddenRoutes = ["profile", "messages", "chatuser", "stories", "notifications", "searchprofile" ];
+const hiddenRoutes = ["profile", "messages", "chatuser", "stories", "notifications"];
 
 export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
   const { isVisibility } = useContext(TabVisibilityContext);

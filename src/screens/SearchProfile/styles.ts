@@ -1,63 +1,29 @@
 import styled, { css } from "styled-components";
-import { TextInput, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import Colors from "@/constants/Colors";
+import { StyledProps } from "@/utils/types";
 import { Title as TitleComponent } from "@/components/elements";
 import { Text as TextComponent } from "@/components/elements";
-
-import { Ionicons } from "@expo/vector-icons";
-import { StyledProps } from "@/utils/types";
 
 export const Container = styled(View)`
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 15px 0 0 0;
   background-color: ${Colors.dark.background};
-`;
-export const ButtonIcon = styled(TouchableOpacity)`
-  height: 20px;
-`;
-export const ContainerInput = styled(View)`
-  width: 90%;
-  height: 36px;
-  align-items: center;
-  flex-direction: row;
-  border-radius: 25px;
-  padding: 0 0 0 10px;
-  background-color: #f5f5f5;
-`;
-export const ContainerHeader = styled(View)`
-  width: 100%;
-  height: auto;
-  gap: 15px;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-`;
-export const SearchIcon = styled(Ionicons)`
-  margin-right: 10px;
-`;
-export const StyledInput = styled(TextInput).attrs({
-  placeholderTextColor: "#171717",
-})`
-  color: #171717;
-  height: 100%;
-  flex: 1 0 auto;
-  font-size: 14px;
-  margin-top: 3px;
 `;
 
 export const ContainerUser = styled(View)`
-  padding: 10px;
   width: 100%;
+  padding: 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 `;
-export const containerProfiles = styled(View)`
+
+export const ContainerProfiles = styled(View)`
   width: 100%;
-  padding: 40px 0 0 0;
-    `;
+`;
 
 export const ContainerAvatar = styled(View)`
   width: 40px;
@@ -65,6 +31,7 @@ export const ContainerAvatar = styled(View)`
   border-radius: 60px;
   background-color: #c4c4c4;
 `;
+
 export const ContainerText = styled(View)`
   flex: 1;
 `;
@@ -91,18 +58,6 @@ export const Text = styled(TextComponent)<StyledProps>`
     `};
 `;
 
-export const Badge = styled(View)`
-  left: 25px;
-  width: 10px;
-  height: 10px;
-  bottom: -2px;
-  position: absolute;
-  border-radius: 15px;
-  padding-bottom: 2px;
-  align-items: center;
-  justify-content: center;
-  background-color: #16e30b;
-`;
 export const ButtonFollow = styled(View)`
   gap: 3px;
   width: 60px;
@@ -114,6 +69,7 @@ export const ButtonFollow = styled(View)`
   align-items: center;
   justify-content: center;
 `;
+
 export const IconAdd = styled(View)`
   width: 10px;
   height: 10px;
@@ -122,6 +78,7 @@ export const IconAdd = styled(View)`
   justify-content: center;
   border: 1px solid #171717;
 `;
+
 export const UserContent = styled(View)`
   gap: 5px;
   width: 55%;
@@ -132,28 +89,26 @@ export const UserContent = styled(View)`
 
 export const RecentSearchesContainer = styled(View)`
   width: 100%;
-  margin-top: 20px;
-
+  margin-bottom: 10px;
 `;
 
 export const RecentSearchesHeader = styled(View)`
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  
+  justify-content: space-between;
 `;
-export const containerRecents = styled(View)`
-  background-color:rgb(255, 255, 255);
+
+export const ContainerRecents = styled(View)`
   border-radius: 10px;
   padding: 0 0 0 10px;
+  background-color: rgb(255, 255, 255);
 `;
 
 export const RecentSearchesTitle = styled(TextComponent)`
   font-size: 14px;
   font-weight: 500;
   color: #f2f2f2;
-  
 `;
 
 export const DeleteAllButton = styled(TouchableOpacity)`
@@ -162,24 +117,25 @@ export const DeleteAllButton = styled(TouchableOpacity)`
 
 export const DeleteAllText = styled(TextComponent)`
   font-size: 12px;
-  color:rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 `;
 
 export const RecentSearchItem = styled(View)`
-  flex-direction: row;
-  align-items: center;
   width: 99%;
-`;
-export const SearchRecent = styled(View)`
   flex-direction: row;
   align-items: center;
-  width: 93%;
+`;
+
+export const SearchRecent = styled(View)`
   gap: 10px;
+  width: 93%;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const RecentSearchText = styled(TextComponent)`
   font-size: 12px;
-  color: #4D4C4C;
+  color: #4d4c4c;
 `;
 
 export const DeleteButton = styled(TouchableOpacity)`

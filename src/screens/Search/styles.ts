@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components";
 import { TextInput } from "react-native";
 
@@ -6,10 +6,10 @@ import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export const ContainerInput = styled(View)`
-  width: 100%;
+  flex: 1; 
+  flex-grow: 1;
   height: 36px;
   overflow: hidden;
-  margin-bottom: 15px;
   align-items: center;
   flex-direction: row;
   border-radius: 25px;
@@ -45,4 +45,22 @@ export const MasonryItem = styled(View)`
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
+`;
+
+export const ContainerHeader = styled(View)`
+  gap: 5px;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const ButtonIcon = styled(TouchableOpacity)`
+  padding: 0;
+  height: 100%;
+  margin: auto 0;
+  margin-left: -5px;
+  align-items: center;
+  flex-direction: row;
 `;

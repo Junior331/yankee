@@ -3,16 +3,16 @@ import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import {
   Modal,
-  TouchableOpacity,
-  StyleSheet,
   Animated,
+  StyleSheet,
   PanResponder,
+  TouchableOpacity,
 } from "react-native";
 import {
-  CircleArrowUpRight,
   Hearts,
   LeftArrow,
   MoodSmile,
+  CircleArrowUpRight,
 } from "@/assets/icons";
 
 import * as S from "./styles";
