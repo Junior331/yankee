@@ -26,19 +26,15 @@ export const ContainerInput = styled(View)`
   justify-content: center;
 `;
 
-export const ContainerSelects = styled(ContainerInput)`
-  gap: 10px;
+export const ContainerSelect = styled(ContainerInput)`
   flex-direction: row;
   justify-content: space-between;
 `;
 
-export const ContainerSelect = styled(View)`
-  flex: 1;
-  display: flex;
-  align-items: start;
-  flex-direction: column;
-  justify-content: start;
+export const SelectItem = styled(View)`
+  width: 48%;
 `;
+
 export const TextModal = styled(Text)<StyledProps>`
   text-align: center;
   margin-bottom: 10px;
@@ -53,7 +49,11 @@ export const Button = styled(ButtonComponent)`
   min-width: 100vw;
 `;
 
-export const Page = styled(View)`
-  align-items: center;
-  justify-content: center;
+export const Content = styled(View)`
+  gap: 16px;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  flex-wrap: wrap;
+  flex-direction: column;
 `;

@@ -4,7 +4,7 @@ import { TextInput, TouchableOpacity, View } from "react-native";
 import Colors from "@/constants/Colors";
 
 export const Container = styled(View)`
-  width: 350px;
+  width: 100%;
   height: 50px;
   overflow: hidden;
   border-radius: 20px;

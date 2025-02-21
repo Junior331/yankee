@@ -1,10 +1,9 @@
 import React from "react";
-import { TouchableWithoutFeedback } from "react-native";
 
 import * as S from "./styles";
 import { LayoutAbstractProps } from "./@types";
-import { dismissKeyboard } from "@/utils/utils";
 import { HeaderPages } from "@/components/organism";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export const Layout = ({
   style,
@@ -12,15 +11,14 @@ export const Layout = ({
   iconHeader,
   titleHeader,
 }: LayoutAbstractProps) => {
-
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    <BottomSheetModalProvider>
       <S.Container>
         <S.Content style={style}>
           <HeaderPages title={titleHeader} icon={iconHeader} />
           {children}
         </S.Content>
       </S.Container>
-    </TouchableWithoutFeedback>
+    </BottomSheetModalProvider>
   );
 };

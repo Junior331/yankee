@@ -12,6 +12,7 @@ import {
   Text as TextComponent,
   Title as TitleComponent,
 } from "@/components/elements";
+import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 
 export const ViewGeneric = styled(View)`
@@ -179,11 +180,11 @@ export const ContainerFilter = styled(ViewGeneric)<StyledProps>`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  background-color: #171717;
   transition: width 3s ease;
   border: 1px solid #dcdada;
   width: ${({ width }) => width || "110px"};
   height: ${({ height }) => height || "auto"};
+  background-color: ${Colors.dark.background};
 `;
 
 export const OptionFilter = styled(TouchableOpacity)`

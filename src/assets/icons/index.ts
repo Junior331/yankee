@@ -1,4 +1,6 @@
 import X from "./X";
+import SOS from "./SOS";
+import AID from "./AID";
 import City from "./City";
 import Edit from "./Edit";
 import Star from "./Star";
@@ -20,11 +22,15 @@ import Search from "./Search";
 import Hearts from "./Hearts";
 import Camera from "./Camera";
 import Filter from "./Filter";
+import Events from "./Events";
+import Moment from "./Moment";
+import Chillin from "./Chillin";
 import Ellipse3 from "./Ellipse3";
 import Location from "./Location";
 import Ellipse4 from "./Ellipse4";
 import Ellipse5 from "./Ellipse5";
 import Ellipse6 from "./Ellipse6";
+import PhotoPlus from "./PhotoPlus";
 import LeftArrow from "./LeftArrow";
 import Community from "./Community";
 import PaperClip from "./PaperClip";
@@ -39,9 +45,10 @@ import ArrowOfLineDown from "./ArrowOfLineDown";
 import CircleArrowUpRight from "./CircleArrowUpRight";
 import ProfilePictureContainer from "./ProfilePictureContainer";
 
-
 export {
   X,
+  SOS,
+  AID,
   Lock,
   Star,
   Mail,
@@ -63,12 +70,16 @@ export {
   Hearts,
   Camera,
   Search,
+  Events,
+  Moment,
+  Chillin,
   Location,
   Ellipse3,
   Ellipse4,
   Ellipse5,
   Ellipse6,
   MoodSmile,
+  PhotoPlus,
   LeftArrow,
   PaperClip,
   Community,

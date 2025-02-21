@@ -8,6 +8,8 @@ import {
 } from "react-native";
 
 import * as S from "./styles";
+import { images } from "./utils";
+import Colors from "@/constants/Colors";
 import { Layout } from "@/components/organism";
 import { Loading } from "@/components/elements";
 import { images } from "./utils";
@@ -63,4 +65,4 @@ export const Search = () => {
        />
      </Layout>
    );
-}
+};

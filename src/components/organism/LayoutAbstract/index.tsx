@@ -19,19 +19,21 @@ export const LayoutAbstract = ({
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
       <S.Container>
-        <S.Content>
-          <Header
-            label={labelHeader}
-            isSecondary={isSecondary}
-            handleOnPress={handleOnPressHeader}
-          />
-          {title && <S.Title fontSize="32px">{title}</S.Title>}
-          <S.ContainerText>
-            {subTitle && <S.Title fontSize="24px">{subTitle}</S.Title>}
-            {text && <Text>{text}</Text>}
-          </S.ContainerText>
-          {children}
-        </S.Content>
+        <Header
+          label={labelHeader}
+          isSecondary={isSecondary}
+          handleOnPress={handleOnPressHeader}
+        />
+        <S.ContainerScrollView>
+          <S.Content>
+            {title && <S.Title fontSize="32px">{title}</S.Title>}
+            <S.ContainerText>
+              {subTitle && <S.Title fontSize="24px">{subTitle}</S.Title>}
+              {text && <Text>{text}</Text>}
+            </S.ContainerText>
+            {children}
+          </S.Content>
+        </S.ContainerScrollView>
       </S.Container>
     </TouchableWithoutFeedback>
   );

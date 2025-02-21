@@ -3,6 +3,7 @@ import { FormValues } from "@/screens/SignUp/@types";
 
 export type Props = {
   values: FormValues;
+  handleGoBack?: () => void;
   errors: FormikErrors<FormValues>;
   touched: FormikTouched<FormValues>;
   handleChange: (field: string) => (value: string) => void;

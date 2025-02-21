@@ -1,12 +1,8 @@
 import BottomSheet from "@gorhom/bottom-sheet";
-import React, {
-  useMemo,
-  forwardRef,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useMemo, forwardRef, useContext, useCallback } from "react";
 
 import * as S from "./styles";
+import Colors from "@/constants/Colors";
 import { IBottomSheet } from "./@types";
 import { TabVisibilityContext } from "@/contexts/tabVisibility";
 
@@ -28,7 +24,7 @@ export const GenericBottomSheet = forwardRef<BottomSheet, IBottomSheet>(
           snapPoints={snapPoints}
           enablePanDownToClose={true}
           onChange={handleSheetChanges}
-          backgroundStyle={{ backgroundColor: "#171717" }}
+          backgroundStyle={{ backgroundColor: Colors.dark.background }}
           handleIndicatorStyle={{ backgroundColor: "#838485" }}
         >
           {children}

@@ -23,3 +23,11 @@ export type SignUpProps = {
   request: (data: httpRequest) => Promise<httpClientResponse<DataProps>>;
 };
 
+export enum PAGES {
+  ONE = 0,
+  TWO = 1,
+  THREE = 2,
+  FOUR = 3,
+  FIVE = 4,
+  SIX = 5,
+}

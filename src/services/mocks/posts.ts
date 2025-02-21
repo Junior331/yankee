@@ -11,7 +11,7 @@ export const posts = [
     },
     likes: 5,
     comments: genericCommets,
-    last_comments: {
+    last_comment: {
       name: "Zain Torff",
       avatar:
         "https://s3-alpha-sig.figma.com/img/a485/4f2e/33e04a9df4ff362347aca2b1acc09fa9?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=FChb1lVOfyET5NeljadPqE3NIivgP2t1FBipZfMIdpctGxAynAwxFsowQlJv0zY6glqS50FngMQyvcU5nPspitXHlve8KeXwkr5FNRX87HTquh997Uy-E9ldeiw-Chi0oxpvodie7-6IBZ8eXQQsnrHMM6MiGyNcbAGSjptH~WinPRxManuzk-V1EsNdunO9fNe8gia0vGimTuBjLPIrfToCfg6x5Tlnot8LX5ZU~Dp8sh0KYxjvghheiaTVTHu9QwOFyjxn9UyLHt~81ySAhSgGMbnaWg9ARvezjCztHi5V~MWxMstAFdQfWWuK4Ic1srkqOtOcOTfjraAPt-whFA__",
@@ -66,7 +66,7 @@ export const posts = [
     },
     likes: 5,
     comments: genericCommets,
-    last_comments: {
+    last_comment: {
       name: "Emily Johnson",
       avatar:
         "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GsMDqDxfHMwv98egqquaxy9D-Cx7h8HKwTvN4bLYoO2EUy3-aTAQX~3RYxRwVKdKNymARPl5pcW4A8LhjLXSt82S9GyMWeaipAF7hnwJSsBJ8tCJsGw8l0Xt3lir05OM3-BGUXs-986QiTyXyj~GlVdb8nrv8mNnZQ2x85HQ6QLuSY07O-WnA7Ag8A5j5924ELYf3mg0QSzQ8NexsJYHuRjnPyZykbdKbyO5ZmH9-WyWy3uPkglIMbDjlH9-SBbeJeX9e3LLJEUpHkjf8V9qnlRpe93qdWxdQ7-SgiQ6Ddi6cs5X2ZmFDEAYR7GHH3wbLntNmv5a9pS7QW7OqCe02w__",
@@ -105,6 +105,7 @@ export const postsCommunity = {
       user: {
         id: 1,
         name: "Jackson Lee",
+        userTag: "@jackson4change",
         avatar:
           "https://s3-alpha-sig.figma.com/img/9163/a5e9/81c82013e55cd2482140dec79732781f?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bt6U9Xnd5odefNlICpdUPNajY3W4HaTMY7snSnsGZxzYtCUL2pg2Teh5NkpAA7ZZfVl-4~Z~9nfMsRYudy1oKBrg24jFLUYxZMsSHzn1DXLsRkvZEB42JZtXwuKIGI8LrW8qznT54GfvJm7pA~7c8nA8~fQEXEsxMh0ykNzG5a4yClkhjgBboX1Y-GAs-Y~6xNtOdKtp13CRtso5-gXTRdXFAbm3ac0uXKOaYJe7FBqz3p~z7aoz1lD51FhET9Eo1kBmYnF35d8bXzVUyLlHyCU70V65mDOiTMGVULGMipgWpfonOy7rP7jbMFG2xGG~w9PDkC5cfsQnUHrVV97BCA__",
       },
@@ -113,7 +114,6 @@ export const postsCommunity = {
       isFollow: true,
       comments: genericCommets,
       location: "Massachusetts I Boston",
-      timestamp: "@jackson4change",
       description:
         "Spent the day volunteering at the shelter and I’m ngl, it was lowkey exhausting BUT seeing those little doggos wag their tails made it 1000% worth it 🐶😭. BRB, adopting like... all of them.",
       image: [
@@ -129,6 +129,7 @@ export const postsCommunity = {
       user: {
         id: 2,
         name: "Liam Johnson",
+        userTag: "@liam_in_action",
         avatar:
           "https://s3-alpha-sig.figma.com/img/d0ed/52f3/082e64502d0ff05db75e9ed6c53f4465?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=NZp~GtAkEC6MzKZwKdB217fIuGb~UxfihkAjcoc43nOmhbOl91I-ggzbBE6Kf7W9GMqY9rUQZlhs3hYNJPAnTHb3TnE43v5~7TJZyl11NNynRzNlS5F-Bh3~FFwEl7IB56TwYRGNwMDau7G89ii9z94RgY831PQr~Juy0yYOMmisWw9aNY9-GJvijUknkiv44bSLtXB9XKEIWwEqbBRgQuavrTo~5PviUgxr-pqYE7Odj3TsUIsq5wY7rXAJUCORtZ7zn-~qsT9Z94qBUZ~vpJTOlu54cGWbEJsnRigZ5u~7eAGNd1VF-d0td7Fp13nf0HkguDTl9k5AaA1Ay4Qieg__",
       },
@@ -137,7 +138,6 @@ export const postsCommunity = {
       isFollow: true,
       comments: genericCommets,
       location: "Massachusetts I Boston",
-      timestamp: "@liam_in_action",
       description:
         "Shoveled snow for my neighbor after the storm. Instant hot cocoa reward for me!",
       image: [
@@ -149,6 +149,7 @@ export const postsCommunity = {
       user: {
         id: 3,
         name: "Sophia Carter",
+        userTag: "@sophiakindvibes",
         avatar:
           "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
       },
@@ -156,7 +157,7 @@ export const postsCommunity = {
       liked: false,
       isFollow: true,
       comments: genericCommets,
-      last_comments: {
+      last_comment: {
         name: "Emily Johnson",
         avatar:
           "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GsMDqDxfHMwv98egqquaxy9D-Cx7h8HKwTvN4bLYoO2EUy3-aTAQX~3RYxRwVKdKNymARPl5pcW4A8LhjLXSt82S9GyMWeaipAF7hnwJSsBJ8tCJsGw8l0Xt3lir05OM3-BGUXs-986QiTyXyj~GlVdb8nrv8mNnZQ2x85HQ6QLuSY07O-WnA7Ag8A5j5924ELYf3mg0QSzQ8NexsJYHuRjnPyZykbdKbyO5ZmH9-WyWy3uPkglIMbDjlH9-SBbeJeX9e3LLJEUpHkjf8V9qnlRpe93qdWxdQ7-SgiQ6Ddi6cs5X2ZmFDEAYR7GHH3wbLntNmv5a9pS7QW7OqCe02w__",
@@ -181,7 +182,6 @@ export const postsCommunity = {
         },
       ],
       location: "Massachusetts I Boston",
-      timestamp: "@sophiakindvibes",
       description:
         "Tell me why I went out for snacks and ended up carrying groceries for this sweet old lady? She called me her ‘little angel,’ and y’all, I almost CRIED 😭",
       image: [
@@ -192,66 +192,43 @@ export const postsCommunity = {
   trending: [
     {
       id: 1,
-      user: {
-        id: 1,
-        name: "Bruno Lipe",
-        avatar:
-          "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
-      },
-      likes: 130,
-      liked: false,
-      isFollow: true,
-      comments: genericCommets,
-      location: "Massachusetts I Boston",
-      timestamp: "Posted 14 minutes ago.",
-      description: "I never tire of admiring this view before going to work.",
-      image: [
-        "https://s3-alpha-sig.figma.com/img/3825/320c/d571dd98e7e2957c85d517dec8ff8a00?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Ajq3x79NXAVZ-YmC5XyvtwI5IOZxck5byp-5SyRLok~VFE3oXDBsMj7-Sq1JOwKNWuDtamHFInY5zCea2GHNKj3DAWtdptVdWSnLnvyJaeLmgMRtfRlHS7TugHwIdHth2c-odxmoOMHK102FPZVPggjyeM8MnbVcXr2EGeVBmBw9bJZ1522casVPN7tigy54fBNOAXEnKKIbwUjNz77PgAB7q4ek2qmyNDdKCmtZDBEf63xDIx2o2iKBVJYhot5sMuGALxSnHHfCbtWXiTsbGQlfwsxxAjE1KhYnPJc1tZSwOS7Hgnn22--O7wzEY1psaPHt4C0tY80s4DsZDuCHrw__",
-        "https://s3-alpha-sig.figma.com/img/2629/4e15/d3a60c326d651d9fa44521ac507b4a47?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Z4JjK0GCHQhThbzkzvxJ88pvWeU~xEeeBPbxTTo5muv5hTfpRTfEp1XSMGQJny-gbj1z5hYmC~M-sibsWRqnNKcj3TIR482AV1DsmFEZ-UOPAjRG0ayyINtnRbtFYvWDKjSRjiM28gJxuHlre12lJi4q9XhRN2706lwYo2nobB7kg82XFJUrY5-ZN9XEcQEDXhMXhdeiaerJXRj-HqAZl6Z0w24vB7Zlk-B-n0qasM3Ewec7LAvudHTQLG07rOs~f3pbB3t1Q7gg4RQixMmMXG8YWC2DZvDYEDlW6uJ7tpC8VFZ~3PEuBZWTY5NVbkSeidGaFNgyDLnutuWIR0Gc0w__",
-      ],
+      posts: 702000,
+      title: "#RideShareAngel",
     },
     {
       id: 2,
-      user: {
-        id: 2,
-        name: "Samantha Montgomery",
-        avatar:
-          "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
-      },
-      likes: 78,
-      liked: false,
-      isFollow: true,
-      comments: genericCommets,
-      last_comments: {
-        name: "Emily Johnson",
-        avatar:
-          "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GsMDqDxfHMwv98egqquaxy9D-Cx7h8HKwTvN4bLYoO2EUy3-aTAQX~3RYxRwVKdKNymARPl5pcW4A8LhjLXSt82S9GyMWeaipAF7hnwJSsBJ8tCJsGw8l0Xt3lir05OM3-BGUXs-986QiTyXyj~GlVdb8nrv8mNnZQ2x85HQ6QLuSY07O-WnA7Ag8A5j5924ELYf3mg0QSzQ8NexsJYHuRjnPyZykbdKbyO5ZmH9-WyWy3uPkglIMbDjlH9-SBbeJeX9e3LLJEUpHkjf8V9qnlRpe93qdWxdQ7-SgiQ6Ddi6cs5X2ZmFDEAYR7GHH3wbLntNmv5a9pS7QW7OqCe02w__",
-        description:
-          "This captivating photo displays a mesmerizing panorama that is truly remarkable.",
-      },
-      listAvatarStack: [
-        {
-          name: "Anastacia Mesquita",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/0e99/b9e5/5399b54f6cdaefcee088195e1200bc20?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gX6EQEYBvptTBd6WcYKdj1C7LCQ0TdThg5egwLHHNfGwhxvLoSTBZZoAp0aFko6ZWMcd2Gf3L-hLyQQ8WqmRikGTWKZY1RrPTMhQt-9vsllPK1mptnSwcgzCHDMvr9pbUOkyjIHI-T4Rt2coJYC1W~nUVADzE-ojc0A0x-3M6ZgY3-hLmPsA-jQ0f82fMqEpOIzpurc-tH95sbdDSDroXOvl36nHSvNATdM2gDRonzCeGXr2mtjI1q5LCMcxHthHLdLj706g7J5N3UbmUpMiLaIomqGzGSOu8~dDuLf72reMH1orFWPpzlFkkRqKADd8qX0EzbU1b4Sh0MggJctx5Q__",
-        },
-        {
-          name: "Angelo Silva",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/3b01/e647/c947dcc7c3814be035fc810d18483ca2?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=na69DsAXjULPjupKew8CKNzBjO33CGLqeHQob7iqahViXcbzC~ARsuaLDkz~omAF4XgAf~1QlLQciYwPKJfupP1XVfiBAetPhlP2Ligx9484Gk1NsaaJQvLh38a4purHPAFNvCxhV5yCx~UUNocUCyNJ8WuieSzoy6chCVuP-Z8dbeRHOJMjgjhFF5ImuIEXz43xXYVwtBKQ7PV1wEugGdOYsNeCyyeBBXCtWu07utVbABokHPI7e2Dgr58L0njavSkW3jb0Gx~OpWrOx93JjntJpeZ~GaY943AXFCctB7PDf4LsYkrtZ5UCJGp4oNtd9QSykN3~z9~elHOxGDyC4g__",
-        },
-        {
-          name: "Camila Rodrigues",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/bf28/3f8f/9a6f7d9ab2bb44cb9a6e8eccd4fda7b0?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FiOBiyKcqhJOm4Y56crfWccWvzzrVeRF~pw-wOBBMGy~xUc~THocAIAegA~bZtYF~UMMvNum71w3wIxyFYONjhxDEKyslOLxzySyE4gMu59m2npIGP6~x-~e01zGLO9IU6LyrDyE7MqGF4uq-rXDhPYq3QbcmruYY1elMYQdV4VOpgMimj4H5JYrO5dVUFlIt76VZpK4~25~x8dLrAF~QdGjQ3kOi-a6TXpVkS-5aZRPyEWG2aueQ1CtGGN2pD-R5GcrSBaSg-UTVscX--OBXidGz~JTaJR2ByxcsTBifwCDJWxBfwv8D4kyWH6nMobVY1FSWeH~QuqFUD9aoD2ZPA__",
-        },
-      ],
-      location: "Massachusetts I Boston",
-      timestamp: "Posted 52 minutes ago.",
-      description: "I never tire of admiring this view before going to work.",
-      image: [
-        "https://s3-alpha-sig.figma.com/img/7a9d/c1d3/6c5b3f4cf05cfbb9b86a578fa3c78047?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A6VarRPrrAFdDDm2HfVekdOYRMc5ywsElDJjnfCC52o3p4fr2fh6h1K3CWDQiC5~39WwfIgzVuNP9F1cxwn7hkFDEy7xletJ3ez2c0GxpzLaP~4~36swcfJF86hmy~oE49YAKJFEQMV~hRo~SeFYJYCOYvcnScr6PSjj9hKQuOUyiY-23om8gJtRE2r8r3lR3vdrOJ050YsdEV0gyrm82QifihN98jGWM9EIuz2lSNGV3CxTboDla7BF-ZhBTCA9eW-V9KhR8hd-AcQMYGZkny7E4DF3JUpWTRAjLZaAUJzaJv2n-OlDRmiCYuj-jC8FBTYIylQ~Z1WH07cEu34uyQ__",
-      ],
+      posts: 673000,
+      title: "#PayItForward",
+    },
+    {
+      id: 3,
+      posts: 600000,
+      title: "#FoodForAll",
+    },
+    {
+      id: 4,
+      posts: 598000,
+      title: "#StreetHelper",
+    },
+    {
+      id: 5,
+      posts: 589000,
+      title: "#GoodDeedsInAction",
+    },
+    {
+      id: 6,
+      posts: 402000,
+      title: "#BrightenedADay",
+    },
+    {
+      id: 7,
+      posts: 301000,
+      title: "#HelpedOutToday",
+    },
+    {
+      id: 8,
+      posts: 109000,
+      title: "#OneSmallAct",
     },
   ],
   yourfriends: [
@@ -259,43 +236,40 @@ export const postsCommunity = {
       id: 1,
       user: {
         id: 1,
-        name: "Samantha Montgomery",
+        name: "Zach Miller",
+        userTag: "@zach_is_great",
         avatar:
-          "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+          "https://s3-alpha-sig.figma.com/img/9163/a5e9/81c82013e55cd2482140dec79732781f?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bt6U9Xnd5odefNlICpdUPNajY3W4HaTMY7snSnsGZxzYtCUL2pg2Teh5NkpAA7ZZfVl-4~Z~9nfMsRYudy1oKBrg24jFLUYxZMsSHzn1DXLsRkvZEB42JZtXwuKIGI8LrW8qznT54GfvJm7pA~7c8nA8~fQEXEsxMh0ykNzG5a4yClkhjgBboX1Y-GAs-Y~6xNtOdKtp13CRtso5-gXTRdXFAbm3ac0uXKOaYJe7FBqz3p~z7aoz1lD51FhET9Eo1kBmYnF35d8bXzVUyLlHyCU70V65mDOiTMGVULGMipgWpfonOy7rP7jbMFG2xGG~w9PDkC5cfsQnUHrVV97BCA__",
       },
-      likes: 26,
+      likes: 1000,
       liked: false,
-      isFollow: true,
+      isFollow: false,
       comments: genericCommets,
-      last_comments: {
-        name: "Emily Johnson",
-        avatar:
-          "https://s3-alpha-sig.figma.com/img/5117/3680/3f08515e050bbda6e271200628f3579a?Expires=1737936000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=GsMDqDxfHMwv98egqquaxy9D-Cx7h8HKwTvN4bLYoO2EUy3-aTAQX~3RYxRwVKdKNymARPl5pcW4A8LhjLXSt82S9GyMWeaipAF7hnwJSsBJ8tCJsGw8l0Xt3lir05OM3-BGUXs-986QiTyXyj~GlVdb8nrv8mNnZQ2x85HQ6QLuSY07O-WnA7Ag8A5j5924ELYf3mg0QSzQ8NexsJYHuRjnPyZykbdKbyO5ZmH9-WyWy3uPkglIMbDjlH9-SBbeJeX9e3LLJEUpHkjf8V9qnlRpe93qdWxdQ7-SgiQ6Ddi6cs5X2ZmFDEAYR7GHH3wbLntNmv5a9pS7QW7OqCe02w__",
-        description:
-          "This captivating photo displays a mesmerizing panorama that is truly remarkable.",
-      },
-      listAvatarStack: [
-        {
-          name: "Anastacia Mesquita",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/0e99/b9e5/5399b54f6cdaefcee088195e1200bc20?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=gX6EQEYBvptTBd6WcYKdj1C7LCQ0TdThg5egwLHHNfGwhxvLoSTBZZoAp0aFko6ZWMcd2Gf3L-hLyQQ8WqmRikGTWKZY1RrPTMhQt-9vsllPK1mptnSwcgzCHDMvr9pbUOkyjIHI-T4Rt2coJYC1W~nUVADzE-ojc0A0x-3M6ZgY3-hLmPsA-jQ0f82fMqEpOIzpurc-tH95sbdDSDroXOvl36nHSvNATdM2gDRonzCeGXr2mtjI1q5LCMcxHthHLdLj706g7J5N3UbmUpMiLaIomqGzGSOu8~dDuLf72reMH1orFWPpzlFkkRqKADd8qX0EzbU1b4Sh0MggJctx5Q__",
-        },
-        {
-          name: "Angelo Silva",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/3b01/e647/c947dcc7c3814be035fc810d18483ca2?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=na69DsAXjULPjupKew8CKNzBjO33CGLqeHQob7iqahViXcbzC~ARsuaLDkz~omAF4XgAf~1QlLQciYwPKJfupP1XVfiBAetPhlP2Ligx9484Gk1NsaaJQvLh38a4purHPAFNvCxhV5yCx~UUNocUCyNJ8WuieSzoy6chCVuP-Z8dbeRHOJMjgjhFF5ImuIEXz43xXYVwtBKQ7PV1wEugGdOYsNeCyyeBBXCtWu07utVbABokHPI7e2Dgr58L0njavSkW3jb0Gx~OpWrOx93JjntJpeZ~GaY943AXFCctB7PDf4LsYkrtZ5UCJGp4oNtd9QSykN3~z9~elHOxGDyC4g__",
-        },
-        {
-          name: "Camila Rodrigues",
-          avatar:
-            "https://s3-alpha-sig.figma.com/img/bf28/3f8f/9a6f7d9ab2bb44cb9a6e8eccd4fda7b0?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=FiOBiyKcqhJOm4Y56crfWccWvzzrVeRF~pw-wOBBMGy~xUc~THocAIAegA~bZtYF~UMMvNum71w3wIxyFYONjhxDEKyslOLxzySyE4gMu59m2npIGP6~x-~e01zGLO9IU6LyrDyE7MqGF4uq-rXDhPYq3QbcmruYY1elMYQdV4VOpgMimj4H5JYrO5dVUFlIt76VZpK4~25~x8dLrAF~QdGjQ3kOi-a6TXpVkS-5aZRPyEWG2aueQ1CtGGN2pD-R5GcrSBaSg-UTVscX--OBXidGz~JTaJR2ByxcsTBifwCDJWxBfwv8D4kyWH6nMobVY1FSWeH~QuqFUD9aoD2ZPA__",
-        },
-      ],
       location: "Massachusetts I Boston",
-      timestamp: "Posted 52 minutes ago.",
-      description: "I never tire of admiring this view before going to work.",
+      description:
+        "So a kid at the bus stop dropped their snack and looked sooo sad, so I gave them my granola bar. Now I’m starving but it’s fine 😭. The way they smiled at me though, like 1000/10 worth it.",
+      image: [],
+    },
+    {
+      id: 2,
+      user: {
+        id: 2,
+        name: "Mia Wilson",
+        userTag: "@mia_loves2help",
+        avatar:
+          "https://s3-alpha-sig.figma.com/img/e00d/e85b/2de83df46cc379e1aa0e4f12a681ca57?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4xIjSUjVcQb~DL1XZbiuwSA3oU1LF6dTcCeL~Z1q0iThsZQGAe5YtgUhCH6t0Y7Z9shacNFGnA~uAgqjAuzl46eJ3vWLRF2DSwiWCywqq5tVB7L3ippNdDcHXpIqt8AqYrMpX0mW7tZVPWiyvFb0pddo6fTwWZf8Y4Q2LReN3gCv~hPw0eho2cEJcarXzd7mOZzH3jrzgtGlpF4u2-JHw2TRA4ONOu8ykrlR0ImT8w9X5WlqyV1JR3cTSX3wLyDKfEND3ZJ0-pQrdvoSDasHC9LNm1pMJC4h~yYKwMKDrJgThonUDnNpuYkz6S47QUhzdFIJrhKZW~hr7OSZEMwvQ__",
+      },
+      likes: 1000,
+      liked: false,
+      isFollow: false,
+      comments: genericCommets,
+      location: "Massachusetts I Boston",
+      description:
+        "I went thrifting yesterday and found a ton of cute sweaters that don’t fit me, so I dropped them off at the shelter today. The lady there was so sweet and said they’ll keep people warm this winter 🥹. Now I feel like Santa Claus or something.",
       image: [
-        "https://s3-alpha-sig.figma.com/img/4f8f/2a94/c9a68f51b5321c396d11e56b9b21ef6b?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=AOieZMgJSRCTRgXhYcNrtjJB9qiN6UAC-tE3TzdDMiB4bonWO5BrpPpxKjCpwSPM0eE-5mLcRja8z3GjrNPo5g-dfcgr5e8aOv~UOtUs4nFTC6PzdcKtLniVthj2A~mqPXues4JVOWeDSjQIfHL9N1NKmexlhl~iseyhGXIUFdz1YREzOSARN5duEW~IxNi1lTUGM6~jw99pZRULUj~bJKqyW7Ck6KwiEVcz6qhAZAdhPny0fhUi5i76oWg97P7ng8E5GhuSQC0DvYRnAsGMd19QGbuGXd5rA3ick184Sszzj1yfWd9wKZbeBlWQKgnjFIHaGE8ZLaEvj1lCUr4BhQ__",
+        "https://s3-alpha-sig.figma.com/img/3825/320c/d571dd98e7e2957c85d517dec8ff8a00?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=o9-E8FiPZClURlxhdN2h4UCkdYn1w2CTPrC9FxwJBc8q3tmVJAxkcRFfh~aKWwASaL9uNG9P4cbmpw4WLUi7kzJc3E8nCYqKeW7DX0VqXHEwdZr1TRWamJbm7Oyipam55EDuMqan-ZJ5ly~IDOqpAU1GQ058J3cZFQFQMxJu-~xc6YsArqnF078KpoOjPzsBOP6kEU8n9zTakuvrfaK4jLho~qZ0yzJrs~NxIKcKnr73zvajMAbWp1aabhYaNNnj4Vqndd~6g3l0uAHYiY~SCydndQ7UjnFZpuTDyL~BkGmOUXBZhF5nAJsbbbyOuVb8uilbpuRn7~wVOIvo58HVyQ__",
+
+        "https://s3-alpha-sig.figma.com/img/2629/4e15/d3a60c326d651d9fa44521ac507b4a47?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=KSr9QQTRxZWySw476pgp~gfzwijD4YaBwqCZYiWJKszyBk1Qp89TwOlu1C3m9tJPUnbpeF8Or1rq~Ml~oD4QIi8OboEAEdh3k1Su7MG~ZTG3xGkjUIdQYSIpHT8UnXdoIu~qQ8XQXiXccO~px5fMJ4eC9kMEvowugzsNnaKeuD5PZkiPbv93ugzkBp-eQgHLXZpe6YMGw6lqT6kcIj2bR3on9TLOQyd2ugoa8S-7AuB6UD88c-rC8uvKZZIUaAbJ99vmKLXnKL8t0jDCO9h~cPZZWmDzklqo0nsEcQejLSV~WkFSCfyj9Tbo4pQeJfQU1p3FPzCnqppVXbvSIAiGWA__",
       ],
     },
   ],

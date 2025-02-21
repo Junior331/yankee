@@ -1,27 +1,26 @@
 import { useFormik } from "formik";
 import { AxiosError } from "axios";
-import PagerView from "react-native-pager-view";
-import React, { useState, useRef } from "react";
+import { View } from "react-native";
+import { useRouter } from "expo-router";
+import React, { useState, useEffect, useCallback } from "react";
 
 import { signUp } from "./services";
-import { DataProps } from "./@types";
+import { DataProps, PAGES } from "./@types";
 import { Error } from "@/assets/icons";
 import { stepSchemas } from "./SignUpSchema";
 import { messageConfig } from "@/utils/types";
 import { emptyDataMessage } from "@/utils/emptys";
 import { useAxiosRequest } from "@/hooks/axiosAdapter";
-import { useNavigationHandler } from "@/hooks/navigation";
 import { Forms, YourLocation, ProfilePicture } from "@/components/organism";
 
 export const SignUp = () => {
-  const { navigate } = useNavigationHandler();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [veryfiForm, setVeryfiForm] = useState("phone");
+  const [verifyForm, setVerifyForm] = useState("phone");
   const { response, request } = useAxiosRequest<DataProps>();
   const [dataMessage, setDataMessage] =
     useState<messageConfig>(emptyDataMessage);
-  const [currentPage, setCurrentPage] = useState(0);
-  const pagerViewRef = useRef<PagerView>(null);
+  const [currentPage, setCurrentPage] = useState(2);
 
   const formik = useFormik({
     initialValues: {
@@ -34,7 +33,7 @@ export const SignUp = () => {
       phoneNumber: "",
       confirmPassword: "",
     },
-    // validationSchema: currentPage <= 5 ? stepSchemas[currentPage] : null,
+    validationSchema: currentPage <= 5 ? stepSchemas[currentPage] : null,
     onSubmit: async (values) => {
       const data = {
         email: values.email,
@@ -69,31 +68,32 @@ export const SignUp = () => {
   const { values, handleChange, handleSubmit, errors, touched, validateForm } =
     formik;
 
-  const adaptHandleChange = (field: string) => (value: string) =>
-    handleChange(field)(value);
+  const adaptHandleChange = useCallback(
+    (field: string) => (value: string) => {
+      handleChange(field)(value);
+    },
+    [handleChange]
+  );
 
-  const goToNextPage = async () => {
+  const goToNextPage = useCallback(async () => {
     const validationErrors = await validateForm();
     const currentKeys = Object.keys(validationErrors);
 
     if (currentKeys.length === 0) {
       setCurrentPage((prev) => {
         const nextPage = prev + 1;
-        pagerViewRef.current?.setPage(nextPage);
         return nextPage;
       });
     }
-  };
+  }, [validateForm]);
 
-  return (
-    <PagerView
-      ref={pagerViewRef}
-      style={{ flex: 1 }}
-      initialPage={0}
-      scrollEnabled={false}
-    >
+  useEffect(() => {
+    setCurrentPage(PAGES.ONE);
+  }, []);
+
+  const pages = {
+    [PAGES.ONE]: (
       <Forms.CreateUserName
-        key="1"
         values={values}
         errors={errors}
         touched={touched}
@@ -103,20 +103,22 @@ export const SignUp = () => {
           goToNextPage();
         }}
       />
+    ),
+    [PAGES.TWO]: (
       <Forms.CreateYourAccount
-        key="2"
         values={values}
         errors={errors}
         touched={touched}
+        handleGoBack={() => setCurrentPage((prev) => prev - 1)}
         handleChange={adaptHandleChange}
         handleSubmit={() => {
           handleSubmit();
           goToNextPage();
         }}
       />
-
+    ),
+    [PAGES.THREE]: (
       <Forms.PhoneNumber
-        key="3"
         values={values}
         errors={errors}
         touched={touched}
@@ -126,11 +128,11 @@ export const SignUp = () => {
           goToNextPage();
         }}
       />
-
-      {veryfiForm === "phone" ? (
+    ),
+    [PAGES.FOUR]:
+      verifyForm === "phone" ? (
         <Forms.VerifyPhoneNumber
-          key="4"
-          handleChange={(value) => setVeryfiForm(value)}
+          handleChange={(value) => setVerifyForm(value)}
           handleSubmit={() => {
             handleSubmit();
             goToNextPage();
@@ -138,25 +140,23 @@ export const SignUp = () => {
         />
       ) : (
         <Forms.VerifyEmail
-          key="4"
-          handleChange={(value) => setVeryfiForm(value)}
+          handleChange={(value) => setVerifyForm(value)}
           handleSubmit={() => {
             handleSubmit();
             goToNextPage();
           }}
         />
-      )}
-
-      <YourLocation
-        key="5"
-        handleSkip={goToNextPage}
-        handleConfirm={goToNextPage}
-      />
+      ),
+    [PAGES.FIVE]: (
+      <YourLocation handleSkip={goToNextPage} handleConfirm={goToNextPage} />
+    ),
+    [PAGES.SIX]: (
       <ProfilePicture
-        key="6"
         handleSkip={goToNextPage}
-        handleConfirm={() => navigate("Home")}
+        handleConfirm={() => router.push("/(public)/signin")}
       />
-    </PagerView>
-  );
+    ),
+  };
+
+  return <View style={{ flex: 1 }}>{pages[currentPage as PAGES]}</View>;
 };

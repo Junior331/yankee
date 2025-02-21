@@ -5,13 +5,10 @@ import { StyledProps } from "@/utils/types";
 import { Text as TextComponent } from "@/components/elements";
 
 export const Container = styled(View)<StyledProps>`
-  top: 30px;
-  z-index: 2;
-  left: 10px;
   width: 100%;
   height: auto;
-  position: absolute;
   flex-direction: row;
+  margin: 45px 15px 0 0;
   justify-content: space-between;
   ${({ isSecondary }) =>
     isSecondary &&
@@ -21,7 +18,6 @@ export const Container = styled(View)<StyledProps>`
 `;
 export const Button = styled(TouchableOpacity)<StyledProps>`
   width: 80px;
-  align-items: center;
   flex-direction: row;
 
   ${({ isSecondary }) =>
@@ -33,5 +29,5 @@ export const Button = styled(TouchableOpacity)<StyledProps>`
 `;
 export const Text = styled(TextComponent)`
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 `;

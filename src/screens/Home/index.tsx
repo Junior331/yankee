@@ -1,12 +1,13 @@
-import BottomSheet from "@gorhom/bottom-sheet";
+import { Feather } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { FlatList } from "react-native-gesture-handler";
-import React, { useCallback, useContext, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import {
-  TouchableOpacity,
-  StyleSheet,
   View,
-  Dimensions,
   TextInput,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
 } from "react-native";
 
 import {
@@ -22,18 +23,15 @@ import Heart from "@/assets/icons/Heart";
 import { mocks } from "@/services/mocks";
 import { Slider } from "@/components/elements";
 import { Filter, Location, Menu } from "@/assets/icons";
-import { TabVisibilityContext } from "@/contexts/tabVisibility";
-import { Feather } from "@expo/vector-icons";
 
 const { width } = Dimensions.get("screen");
 
 export const Home = () => {
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState("");
-  const bottomSheetRef = useRef<BottomSheet>(null);
   const [showFilter, setShowFilter] = useState(false);
   const [filterActive, setFilterActive] = useState("");
-  const { setIsVisibility } = useContext(TabVisibilityContext);
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
   const [comments, setComments] = useState(mocks.posts[0].comments);
 
   const handleSetFilter = (value: string, state?: boolean) => {
@@ -42,7 +40,6 @@ export const Home = () => {
   };
 
   const handleSnapPress = useCallback(() => {
-    setIsVisibility(false);
     bottomSheetRef.current?.expand();
   }, []);
 
@@ -135,10 +132,10 @@ export const Home = () => {
 
                           <TouchableOpacity onPress={() => handleSnapPress()}>
                             <Comment
-                              name={item.last_comments?.name || ""}
-                              avatar={item.last_comments?.avatar || ""}
+                              name={item.last_comment?.name || ""}
+                              avatar={item.last_comment?.avatar || ""}
                               description={
-                                item.last_comments?.description || ""
+                                item.last_comment?.description || ""
                               }
                             />
                           </TouchableOpacity>
