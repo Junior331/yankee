@@ -1,13 +1,11 @@
 import styled, { css } from "styled-components";
-import {  ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import Colors from "@/constants/Colors";
-import { Title as TitleComponent } from "@/components/elements";
-import { Text as TextComponent } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
-
-
-
+import { removeScrollUi } from "@/utils/utils";
+import { Text as TextComponent } from "@/components/elements";
+import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   width: 100%;
@@ -23,6 +21,7 @@ export const ContainerMessage = styled(View)`
   align-items: center;
   justify-content: space-between;
 `;
+
 export const ContainerUser = styled(View)`
   flex: 1;
   gap: 5px;
@@ -31,16 +30,18 @@ export const ContainerUser = styled(View)`
   justify-content: space-between;
 `;
 
-export const ContainerList = styled(ScrollView)`
+export const ContainerList = styled(ScrollView).attrs(removeScrollUi)`
   width: 100%;
-  margin-top: 20px;
+  margin: 20px 0 70px;
 `;
+
 export const ContainerAvatar = styled(View)`
   width: 40px;
   height: 40px;
   border-radius: 60px;
   background-color: #c4c4c4;
 `;
+
 export const ContainerText = styled(View)`
   flex: 1;
 `;
@@ -53,6 +54,7 @@ export const Title = styled(TitleComponent)`
   text-overflow: ellipsis;
   font-family: "Poppins-Medium";
 `;
+
 export const Text = styled(TextComponent)<StyledProps>`
   font-size: 10px;
   color: ${({ color }) => color || "#FFFFFF"};
@@ -66,8 +68,6 @@ export const Text = styled(TextComponent)<StyledProps>`
     `};
 `;
 
-
-
 export const ButtonFollow = styled(View)`
   gap: 3px;
   width: 60px;
@@ -79,6 +79,7 @@ export const ButtonFollow = styled(View)`
   align-items: center;
   justify-content: center;
 `;
+
 export const IconAdd = styled(View)`
   width: 10px;
   height: 10px;

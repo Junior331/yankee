@@ -10,6 +10,9 @@
     },
     "preview": {
       "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
       "env": {
         "APP_NAME": "yankee",
         "APP_ICON": "./src/assets/images/icon.png"

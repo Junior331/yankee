@@ -239,7 +239,7 @@ export const postsCommunity = {
         name: "Zach Miller",
         userTag: "@zach_is_great",
         avatar:
-          "https://s3-alpha-sig.figma.com/img/9163/a5e9/81c82013e55cd2482140dec79732781f?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bt6U9Xnd5odefNlICpdUPNajY3W4HaTMY7snSnsGZxzYtCUL2pg2Teh5NkpAA7ZZfVl-4~Z~9nfMsRYudy1oKBrg24jFLUYxZMsSHzn1DXLsRkvZEB42JZtXwuKIGI8LrW8qznT54GfvJm7pA~7c8nA8~fQEXEsxMh0ykNzG5a4yClkhjgBboX1Y-GAs-Y~6xNtOdKtp13CRtso5-gXTRdXFAbm3ac0uXKOaYJe7FBqz3p~z7aoz1lD51FhET9Eo1kBmYnF35d8bXzVUyLlHyCU70V65mDOiTMGVULGMipgWpfonOy7rP7jbMFG2xGG~w9PDkC5cfsQnUHrVV97BCA__",
+          "https://s3-alpha-sig.figma.com/img/e00d/e85b/2de83df46cc379e1aa0e4f12a681ca57?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4xIjSUjVcQb~DL1XZbiuwSA3oU1LF6dTcCeL~Z1q0iThsZQGAe5YtgUhCH6t0Y7Z9shacNFGnA~uAgqjAuzl46eJ3vWLRF2DSwiWCywqq5tVB7L3ippNdDcHXpIqt8AqYrMpX0mW7tZVPWiyvFb0pddo6fTwWZf8Y4Q2LReN3gCv~hPw0eho2cEJcarXzd7mOZzH3jrzgtGlpF4u2-JHw2TRA4ONOu8ykrlR0ImT8w9X5WlqyV1JR3cTSX3wLyDKfEND3ZJ0-pQrdvoSDasHC9LNm1pMJC4h~yYKwMKDrJgThonUDnNpuYkz6S47QUhzdFIJrhKZW~hr7OSZEMwvQ__",
       },
       likes: 1000,
       liked: false,
@@ -257,7 +257,7 @@ export const postsCommunity = {
         name: "Mia Wilson",
         userTag: "@mia_loves2help",
         avatar:
-          "https://s3-alpha-sig.figma.com/img/e00d/e85b/2de83df46cc379e1aa0e4f12a681ca57?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=l4xIjSUjVcQb~DL1XZbiuwSA3oU1LF6dTcCeL~Z1q0iThsZQGAe5YtgUhCH6t0Y7Z9shacNFGnA~uAgqjAuzl46eJ3vWLRF2DSwiWCywqq5tVB7L3ippNdDcHXpIqt8AqYrMpX0mW7tZVPWiyvFb0pddo6fTwWZf8Y4Q2LReN3gCv~hPw0eho2cEJcarXzd7mOZzH3jrzgtGlpF4u2-JHw2TRA4ONOu8ykrlR0ImT8w9X5WlqyV1JR3cTSX3wLyDKfEND3ZJ0-pQrdvoSDasHC9LNm1pMJC4h~yYKwMKDrJgThonUDnNpuYkz6S47QUhzdFIJrhKZW~hr7OSZEMwvQ__",
+          "https://s3-alpha-sig.figma.com/img/90b6/03c6/266d76f43330d196d81046e83ac9ad54?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=la~~igV~EwD7X5FhGqkeVTEWCqPR9T5pTt134b5cV~byvaOSzUc29YTxLl6KgD3Up4dPDA8mOHq-Ou-Jl-IfP8PHHFgWzLIDA3yjHr48UenB-O~dth~MSD~zDO8BOVZGOw4qyS1cmrr8Aiqm~9pkL1nwrtKhY1QWPn8mgobqVxPemDszah~tjga4wG13Tt5tagyXZKV9nV7ExDVexMhmLZGJCmbSqDwNtkXeB825cbt1BqA5SAdzQmyiGJzAzjZDUYeEtDVYWuQqE1oh-t2qQYEviiyUuVyFwkLTMcH~GQFMHg9u5rsoMrbuGgb1dMl~VyfNGZ4Em~VobMvKuf7b1g__",
       },
       likes: 1000,
       liked: false,

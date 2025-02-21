@@ -8,10 +8,10 @@ import { Image, TouchableOpacity, View, Alert } from "react-native";
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { filters, iconMapping } from "./utils";
-import { LeftArrow, PhotoPlus } from "@/assets/icons";
-import { Layout, ModalGeneric, Tabs } from "@/components/organism";
-import { post, trend } from "@/components/organism/Tabs/@types";
 import { Loading } from "@/components/elements";
+import { LeftArrow, PhotoPlus } from "@/assets/icons";
+import { post, trend } from "@/components/organism/Tabs/@types";
+import { Layout, ModalGeneric, Tabs } from "@/components/organism";
 
 export const Community = () => {
   const router = useRouter();
@@ -81,9 +81,9 @@ export const Community = () => {
     }
 
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
       quality: 1,
+      allowsEditing: true,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
     });
 
     if (!pickerResult.canceled) {
@@ -152,6 +152,7 @@ export const Community = () => {
 
                 return (
                   <S.FilterItem
+                    key={item}
                     activeOpacity={0.7}
                     style={{
                       boxShadow: "0px 2px 4px 0px rgba(35, 171, 255, 0.4)",

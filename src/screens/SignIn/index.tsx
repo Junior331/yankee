@@ -25,7 +25,7 @@ export const SignIn = () => {
       email: "",
       password: "",
     },
-    // validationSchema: signInSchema,
+    validationSchema: signInSchema,
     onSubmit: async (values) => {
       console.log("values ::", values);
       // const data = {
