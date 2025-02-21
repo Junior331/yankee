@@ -10,12 +10,15 @@ export const Layout = ({
   children,
   iconHeader,
   titleHeader,
+  isShowHeader = true,
 }: LayoutAbstractProps) => {
   return (
     <BottomSheetModalProvider>
       <S.Container>
         <S.Content style={style}>
-          <HeaderPages title={titleHeader} icon={iconHeader} />
+          {isShowHeader && (
+            <HeaderPages title={titleHeader} icon={iconHeader} />
+          )}
           {children}
         </S.Content>
       </S.Container>

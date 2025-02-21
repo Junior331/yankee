@@ -47,12 +47,12 @@ export const Search = () => {
   const handleBack = () => {
     dismissKeyboard();
     setIsSearch(false);
-    setSearchValue('')
+    setSearchValue("");
   };
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
-      <Layout titleHeader="yankee">
+      <Layout titleHeader="yankee" isShowHeader={!isSearch}>
         <S.ContainerHeader>
           {isSearch && (
             <S.ButtonIcon onPress={handleBack}>
@@ -94,8 +94,8 @@ export const Search = () => {
                   backgroundColor: "#ccc",
                 }}
               >
-                {imageLoading && <Loading />}
                 <TouchableOpacity>
+                  {imageLoading && <Loading />}
                   <Image
                     alt="Image"
                     resizeMode="cover"

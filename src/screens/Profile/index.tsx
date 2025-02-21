@@ -60,7 +60,7 @@ export const Profile = () => {
               }}
               onLoadEnd={() => setBannerLoading(false)}
               source={{
-                uri: "https://s3-alpha-sig.figma.com/img/2f1a/78bf/bbd451a2ca31047c7259800a489ce608?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=N8actY5BmXZRM1i985TLshx7pW2BIvynnukaz1j85nIiCGgwBWUgKAMM0kXgfiusQyR4t5HfLJKqxpHss0tamS30kbBFZ~XzbDMxgzATan9tPTVUOFt8I-2IjoqZSCsPJOgdte~PraJI41g50EwPHOVTTBZw14-98-c4UEXQGaEUQduqUryk6TAGpVdM~NPskM4dSYnS8zosmds~PcifM~AJ9dLgldgv0vPQsUeIijSULdFfqqKOVu448T5e5CPfe~issc5TSAut9W~7aOh9yQ9aLPRDAq3CFVaFJhqYAAGIF4e-r74W0huTUgBYny8~xgO5ht8GrQnbN~6ckggscw__",
+                uri: "https://s3-alpha-sig.figma.com/img/2f1a/78bf/bbd451a2ca31047c7259800a489ce608?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A62EMOQLYqFLTq~OWWQk74k54NQ3FEq4Hsn7r-kMHzaIbFJlP-EspBvTvvJbR3ZdRNtncLLoZ8lufqffC03rgbdOJJyE1X7F~qSHOx1jMOR8GaNwOeCHlNzqy9EPT4PuC6vf-Digxn~lyz-vPqMA~yOQlL0Ub~zwPvsfCavo0jsDBvtkvi~LsfosI9YqlL~dPnpSb6Al4Z0uwINar4pz-Cob80Vn8lFXXoYJnOKzHVSt1MXjGYqJbRBEtJiokBznXVrZ68KY4WSXMVwd1MUkUgeFy6KNbJ~ImHDvJiYF7zlMrZQyjgaggbAy05X-XeWh3UizFWLLrkbkk7Qb-TO3Kg__",
               }}
             />
           </S.ContainerBanner>
@@ -90,7 +90,7 @@ export const Profile = () => {
               zIndex: 99999,
             }}
             source={{
-              uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+              uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bgEV7gxiUUIr1gxjDqcMcgQdsEpmEkZYfoij8dJOFaTABECzytvUN6NCjOPozBU86gwQPKx7u2vVBo0Gcj5BuoYJAXdlDp1Q4TI0SiqcnqnPerzoFq-dFtlzUkaN-onqrluYuVerhedYGrX2uLYtF-690IZu4ejexMUpLgQBycycAgRJ2nbd0M4YlUK0nceqid~jAmCjFt1lCgWyfyVjuyOIkzJLn4OfSd4g7UhRE8vRq7Cf5znUoF-pSDhd7CqyDe8J0TLf6H2RW6unrtLYFGCq0MKguSiawXN8dCQlrggIiFdJJctP~49F9oBuiZC1Zb49yJsFHBPMIqQC6tixkw__",
             }}
           />
         </S.ContainerAvatar>

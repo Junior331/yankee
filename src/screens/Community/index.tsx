@@ -11,9 +11,11 @@ import { filters, iconMapping } from "./utils";
 import { LeftArrow, PhotoPlus } from "@/assets/icons";
 import { Layout, ModalGeneric, Tabs } from "@/components/organism";
 import { post, trend } from "@/components/organism/Tabs/@types";
+import { Loading } from "@/components/elements";
 
 export const Community = () => {
   const router = useRouter();
+  const [imageLoading, setImageLoading] = useState(true);
   const [tabActive, setTabActive] = useState("community");
   const [posts, setPosts] = useState(mocks.postsCommunity);
   const [isModalAddEvent, setModalAddEvent] = useState(false);
@@ -104,7 +106,7 @@ export const Community = () => {
               renderItem={({ item }) => {
                 if (item.id === "add_story") {
                   return (
-                    <S.ContainerStory key={item.id}>
+                    <S.ContainerStory>
                       <S.AddStory>
                         <S.Text style={{ fontSize: 32 }}>+</S.Text>
                       </S.AddStory>
@@ -118,8 +120,10 @@ export const Community = () => {
                     onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}
                   >
                     <S.Story>
+                      {imageLoading && <Loading />}
                       <Image
                         resizeMode="cover"
+                        onLoadEnd={() => setImageLoading(false)}
                         style={{ width: "100%", height: "100%" }}
                         source={{
                           uri: item.avatar,

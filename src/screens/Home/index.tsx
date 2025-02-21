@@ -80,8 +80,8 @@ export const Home = () => {
                     key={item.id}
                     name={item.user.name}
                     buttonHeader={<Menu />}
+                    userTag={item.timestamp}
                     avatar={item.user.avatar}
-                    timestamp={item.timestamp}
                   >
                     <S.ImageBackground
                       resizeMode="cover"

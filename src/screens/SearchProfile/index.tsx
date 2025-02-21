@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dimensions, Image } from "react-native";
 
 import * as S from "./styles";
 import { Clock, X } from "@/assets/icons";
 import { ISearchProfile } from "./@types";
+import { Loading } from "@/components/elements";
 
 const { width } = Dimensions.get("screen");
 
@@ -13,6 +14,8 @@ export const SearchProfile = ({
   handleDeleteAll,
   handleDeleteSearch,
 }: ISearchProfile) => {
+  const [imageLoading, setImageLoading] = useState(true);
+
   return (
     <S.Container style={{ minWidth: width * 0.94 }}>
       {searchHistory?.length > 0 && (
@@ -45,6 +48,7 @@ export const SearchProfile = ({
           <S.ContainerUser key={message.id}>
             <S.UserContent>
               <S.ContainerAvatar>
+                {imageLoading && <Loading />}
                 <Image
                   style={{
                     width: "100%",
@@ -53,6 +57,7 @@ export const SearchProfile = ({
                   }}
                   resizeMode="cover"
                   source={{ uri: message.photo }}
+                  onLoadEnd={() => setImageLoading(false)}
                 />
               </S.ContainerAvatar>
 

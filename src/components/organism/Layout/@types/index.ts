@@ -5,5 +5,6 @@ export type LayoutAbstractProps = {
   children: ReactNode;
   titleHeader?: string;
   iconHeader?: ReactNode;
+  isShowHeader?: boolean;
   style?: StyleProp<ViewStyle>;
 };
