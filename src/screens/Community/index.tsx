@@ -22,8 +22,6 @@ export const Community = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
 
   const toggleLike = (postId: number) => {
-    console.log(postId);
-
     setPosts((prevPosts) => {
       if (tabActive === "community" || tabActive === "yourfriends") {
         return {

@@ -22,6 +22,7 @@ export const InputContent = styled(TextInput).attrs(() => ({
   padding-left: 10px;
   padding-right: 15px;
   color: ${Colors.dark.text};
+  background-color: transparent;
 `;
 export const InputIcon = styled(View)`
   padding-left: 22px;

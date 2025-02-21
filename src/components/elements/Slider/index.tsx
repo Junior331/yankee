@@ -9,7 +9,6 @@ export const Slider = () => {
 
   const handleSetValue = (index: number) => {
     const currentValue = getLabel(index);
-    console.log("currentValue ::", currentValue);
     setValue(value);
   };
 

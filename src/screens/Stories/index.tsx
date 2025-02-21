@@ -39,9 +39,9 @@ const StoryHeader = ({ onBack, user }: { onBack: any; user: any }) => (
     <S.ContainerUser>
       <S.ContainerAvatar>
         <Image
+          resizeMode="cover"
           source={{ uri: user.avatar }}
           style={{ width: "100%", height: "100%", borderRadius: 100 }}
-          resizeMode="cover"
         />
         <S.ContainerBadge>
           <S.Badge />
@@ -106,29 +106,6 @@ const TransparentMiddleArea = ({ panHandlers }: { panHandlers: any }) => (
   <TouchableOpacity style={styles.middleArea} {...panHandlers} />
 );
 
-const styles = StyleSheet.create({
-  transparentArea: {
-    position: "absolute",
-    top: 100,
-    bottom: 100,
-    width: "20%",
-  },
-  leftArea: {
-    left: 0,
-  },
-  rightArea: {
-    right: 0,
-  },
-  middleArea: {
-    position: "absolute",
-    top: 100,
-    bottom: 100,
-    left: "40%",
-    width: "20%",
-    zIndex: 1,
-  },
-});
-
 export const Stories = () => {
   const router = useRouter();
   const { id } = useLocalSearchParams();
@@ -182,15 +159,31 @@ export const Stories = () => {
 
   const handlePreviousStory = useCallback(() => {
     setProgress(0);
+
     if (currentStory > 0) {
       setCurrentStory((prev) => prev - 1);
     } else {
-      if (currentUserId > 0) {
-        setCurrentUserId((prev) => prev - 1);
-        const prevUserStories = mocks.storys[currentUserId - 1].stories;
-        setCurrentStory(prevUserStories ? prevUserStories.length - 1 : 0);
+      const currentUserIndex = mocks.storys.findIndex(
+        (user) => user.id === currentUserId
+      );
+
+      if (currentUserIndex > 0) {
+        let prevUserIndex = currentUserIndex - 1;
+        while (
+          prevUserIndex >= 0 &&
+          mocks.storys[prevUserIndex].id === "add_story"
+        ) {
+          prevUserIndex--;
+        }
+
+        if (prevUserIndex >= 0) {
+          const prevUser = mocks.storys[prevUserIndex];
+          setCurrentUserId(prevUser.id as number);
+          setCurrentStory(prevUser.stories ? prevUser.stories.length - 1 : 0);
+        }
       }
     }
+
     startTimeRef.current = performance.now();
   }, [currentStory, currentUserId]);
 
@@ -291,3 +284,26 @@ export const Stories = () => {
     </Modal>
   );
 };
+
+const styles = StyleSheet.create({
+  transparentArea: {
+    top: 100,
+    bottom: 100,
+    width: "20%",
+    position: "absolute",
+  },
+  leftArea: {
+    left: 0,
+  },
+  rightArea: {
+    right: 0,
+  },
+  middleArea: {
+    top: 100,
+    zIndex: 1,
+    bottom: 100,
+    left: "40%",
+    width: "20%",
+    position: "absolute",
+  },
+});

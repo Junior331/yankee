@@ -6,7 +6,6 @@ import { TouchableOpacity } from "react-native";
 import { formatNumber } from "@/utils/utils";
 
 export const TabTrending = ({ trendings }: ITrending) => {
-  console.log(trendings);
   return (
     <S.ContainerNotions>
       {trendings.map((trend) => (

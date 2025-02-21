@@ -68,6 +68,11 @@ export const SignIn = () => {
           nativeID="email"
           value={values.email}
           autoComplete="email"
+          onFocus={(e) => {
+            e.currentTarget.setNativeProps({
+              style: { backgroundColor: '#171717' }
+            });
+          }}
           onChangeText={handleChange("email")}
           placeholder={"Your username or email"}
         />
