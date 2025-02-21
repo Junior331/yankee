@@ -11,6 +11,7 @@ import { Messages } from "./Messages";
 import { ChatUser } from "./ChatUser";
 import { Community } from "./Community";
 import { Notifications } from "./Notifications";
+import { SearchProfile } from "./SearchProfile";
 
 export {
   Home,
@@ -25,5 +26,6 @@ export {
   ChatUser,
   Messages,
   Community,
+  SearchProfile,
   Notifications,
 };

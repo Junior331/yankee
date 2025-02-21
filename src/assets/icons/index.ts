@@ -1,3 +1,4 @@
+import X from "./X";
 import City from "./City";
 import Edit from "./Edit";
 import Star from "./Star";
@@ -13,6 +14,7 @@ import Miles from "./Miles";
 import Error from "./Error";
 import Arrow from "./Arrow";
 import Photo from "./Photo";
+import Clock from "./Clock";
 import Phone from "./Phone";
 import Search from "./Search";
 import Hearts from "./Hearts";
@@ -39,6 +41,7 @@ import ProfilePictureContainer from "./ProfilePictureContainer";
 
 
 export {
+  X,
   Lock,
   Star,
   Mail,
@@ -52,6 +55,7 @@ export {
   Error,
   Arrow,
   Photo,
+  Clock,
   Phone,
   Heart,
   Miles,
