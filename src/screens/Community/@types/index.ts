@@ -3,4 +3,3 @@ export interface StyledProps {
   color?: string;
   fontSize?: string;
 }
-

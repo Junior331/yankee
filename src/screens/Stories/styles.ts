@@ -2,9 +2,9 @@ import styled, { css } from "styled-components";
 import { TouchableOpacity, View, TextInput,  ImageBackground as ImageBackgroundReact, } from "react-native";
 
 import Colors from "@/constants/Colors";
+import { StyledProps } from "@/utils/types";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
-import { StyledProps } from "@/utils/types";
 
 
 
@@ -84,12 +84,14 @@ export const Text = styled(TextComponent)<StyledProps>`
     `};
 `;
 
-export const Containerbotton = styled(View)`
-  gap: 25px;
+export const Footer = styled(View)`
+  gap: 20px;
   width: 100%;
+  align-items: center;
   flex-direction: row;
   background-color: transparent;
 `;
+
 export const InputContainer = styled(View)`
 flex: 1;
   padding: 0px 15px;
@@ -114,11 +116,6 @@ export const Input = styled(TextInput)`
   background-color: transparent;
 `;
 
-export const VoiceButton = styled(TouchableOpacity)`
-  gap: 20px;
-  align-items: center;
-  flex-direction: row;
-`;
 export const ButtonFollow = styled(View)`
   gap: 3px;
   width: 70px;

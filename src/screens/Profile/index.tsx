@@ -131,12 +131,12 @@ export const Profile = () => {
               </S.ContainerBigNumbers>
               <S.ContainerButton>
                 <S.Button onPress={() => setIsEdit((prev) => !prev)}>
-                  <S.Title fontSize="11px" color="#171717">
+                  <S.Title fontSize="11px" color={Colors.dark.background}>
                     Edit Profile
                   </S.Title>
                 </S.Button>
                 <S.Button onPress={() => router.push("/(tabs)/messages")}>
-                  <S.Title fontSize="11px" color="#171717">
+                  <S.Title fontSize="11px" color={Colors.dark.background}>
                     Chat
                   </S.Title>
                 </S.Button>

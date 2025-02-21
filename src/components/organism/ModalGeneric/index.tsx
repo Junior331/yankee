@@ -6,6 +6,7 @@ import { IModal } from "./@types";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
 export const ModalGeneric = ({
+  style,
   children,
   setModalVisible,
   modalVisible = false,
@@ -21,7 +22,7 @@ export const ModalGeneric = ({
       onRequestClose={toggleModal}
     >
       <AnimatedContainer entering={FadeIn} exiting={FadeOut}>
-        <S.Content>{children}</S.Content>
+        <S.Content style={style}>{children}</S.Content>
       </AnimatedContainer>
     </Modal>
   );

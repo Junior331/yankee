@@ -1,5 +1,6 @@
 import { Cards } from "./Cards";
 import * as Forms from "./Forms";
+import * as Tabs from "./Tabs";
 import { Header } from "./Header";
 import { TabBar } from "./TabBar";
 import { Layout } from "./Layout";
@@ -16,6 +17,7 @@ import { LayoutAbstract } from "./LayoutAbstract";
 import { GenericBottomSheet } from "./BottomSheet";
 
 export {
+  Tabs,
   Cards,
   Header,
   Forms,

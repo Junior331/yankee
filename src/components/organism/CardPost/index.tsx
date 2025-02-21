@@ -9,8 +9,8 @@ export const CardPost = ({
   name,
   avatar,
   style,
+  userTag,
   children,
-  timestamp,
   buttonHeader,
 }: ICardPost) => {
   const [imageLoading, setImageLoading] = useState(true);
@@ -32,7 +32,7 @@ export const CardPost = ({
           </S.ContainerAvatar>
           <S.ContainerText>
             <S.Title>{name}</S.Title>
-            <S.Text>{timestamp}</S.Text>
+            <S.Text>{userTag}</S.Text>
           </S.ContainerText>
         </S.ContainerUser>
         <S.TouchableOpacity>{buttonHeader}</S.TouchableOpacity>

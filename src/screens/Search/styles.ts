@@ -1,8 +1,9 @@
 import { View } from "react-native";
 import styled from "styled-components";
-
-import { Ionicons } from "@expo/vector-icons";
 import { TextInput } from "react-native";
+
+import Colors from "@/constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 
 export const ContainerInput = styled(View)`
   width: 100%;
@@ -21,13 +22,13 @@ export const SearchIcon = styled(Ionicons)`
 `;
 
 export const StyledInput = styled(TextInput).attrs({
-  placeholderTextColor: "#171717",
+  placeholderTextColor: Colors.dark.background,
 })`
-  color: #171717;
   height: 100%;
   flex: 1 0 auto;
   font-size: 14px;
   margin-top: 3px;
+  color: ${Colors.dark.background};
 `;
 
 export const MasonryContainer = styled(View)`

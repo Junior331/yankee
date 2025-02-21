@@ -132,10 +132,10 @@ export const Home = () => {
 
                           <TouchableOpacity onPress={() => handleSnapPress()}>
                             <Comment
-                              name={item.last_comments?.name || ""}
-                              avatar={item.last_comments?.avatar || ""}
+                              name={item.last_comment?.name || ""}
+                              avatar={item.last_comment?.avatar || ""}
                               description={
-                                item.last_comments?.description || ""
+                                item.last_comment?.description || ""
                               }
                             />
                           </TouchableOpacity>

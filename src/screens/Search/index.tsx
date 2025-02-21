@@ -9,6 +9,7 @@ import {
 
 import * as S from "./styles";
 import { images } from "./utils";
+import Colors from "@/constants/Colors";
 import { Layout } from "@/components/organism";
 import { Loading } from "@/components/elements";
 
@@ -21,7 +22,7 @@ export const Search = () => {
   return (
     <Layout titleHeader="yankee">
       <S.ContainerInput>
-        <S.SearchIcon name="search" size={20} color="#171717" />
+        <S.SearchIcon name="search" size={20} color={Colors.dark.background} />
         <S.StyledInput
           value={searchValue}
           placeholder="Search"

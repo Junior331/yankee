@@ -14,3 +14,10 @@ export const removeScrollUi = {
   showsHorizontalScrollIndicator: false,
 };
 
+
+export const formatNumber = (num: number): string => {
+  if (num >= 1e9) return `${Math.floor(num / 1e9)}bi`;
+  if (num >= 1e6) return `${Math.floor(num / 1e6)}mi`;
+  if (num >= 1e3) return `${Math.floor(num / 1e3)}k`;
+  return num.toString();
+};

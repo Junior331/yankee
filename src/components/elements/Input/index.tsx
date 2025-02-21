@@ -24,7 +24,7 @@ export const Input = ({
       <InputContent
         {...rest}
         placeholder={placeholder}
-        secureTextEntry={!isPasswordVisible && secureTextEntry} // manages visibility
+        secureTextEntry={!isPasswordVisible && secureTextEntry}
       />
 
       {secureTextEntry && (
