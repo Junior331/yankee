@@ -103,7 +103,7 @@ export const Notifications = () => {
 
   return (
     <S.Container>
-      <SubHeader title={"Notifications"} handleOnPress={() => router.back} />
+      <SubHeader title={"Notifications"} handleOnPress={() => router.back()} />
 
       <S.ContainerList>
         {mockMessages.map((message) => {

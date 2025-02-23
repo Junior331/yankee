@@ -9,3 +9,14 @@ export const iconMapping = {
   AID: AID,
   Events: Events,
 };
+
+export const mapStyle = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+];

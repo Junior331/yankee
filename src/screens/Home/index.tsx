@@ -1,6 +1,5 @@
 import { Feather } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { FlatList } from "react-native-gesture-handler";
 import React, { useCallback, useRef, useState } from "react";
 import {
   View,
@@ -9,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-
+import GestureRecognizer from "react-native-swipe-gestures";
 import {
   Layout,
   Comment,
@@ -23,6 +22,7 @@ import Heart from "@/assets/icons/Heart";
 import { mocks } from "@/services/mocks";
 import { Slider } from "@/components/elements";
 import { Filter, Location, Menu } from "@/assets/icons";
+import { formatNumber } from "@/utils/utils";
 
 const { width } = Dimensions.get("screen");
 
@@ -33,6 +33,7 @@ export const Home = () => {
   const [filterActive, setFilterActive] = useState("");
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const [comments, setComments] = useState(mocks.posts[0].comments);
+  const [currentPostIndex, setCurrentPostIndex] = useState(0);
 
   const handleSetFilter = (value: string, state?: boolean) => {
     setFilterActive(value);
@@ -58,6 +59,19 @@ export const Home = () => {
     setComments([newComment, ...comments]);
   };
 
+  // Detectar gestos de swipe para mudar o post
+  const handleSwipeLeft = () => {
+    if (currentPostIndex < mocks.posts.length - 1) {
+      setCurrentPostIndex(currentPostIndex + 1);
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (currentPostIndex > 0) {
+      setCurrentPostIndex(currentPostIndex - 1);
+    }
+  };
+
   return (
     <>
       <Layout
@@ -69,85 +83,95 @@ export const Home = () => {
           </TouchableOpacity>
         }
       >
-        <S.Container style={{ minWidth: width }}>
-          <S.Content>
-            <FlatList
-              data={mocks.posts.slice(0, 1)}
-              keyExtractor={(item) => String(item.id)}
-              renderItem={({ item }) => {
-                return (
-                  <CardPost
-                    key={item.id}
-                    name={item.user.name}
-                    buttonHeader={<Menu />}
-                    userTag={item.timestamp}
-                    avatar={item.user.avatar}
-                  >
-                    <S.ImageBackground
-                      resizeMode="cover"
-                      source={{
-                        uri: item.image,
-                      }}
-                    >
-                      <S.GradientOverlay
-                        colors={["transparent", "rgba(0, 0, 0, 0.65)"]}
-                        start={[0, 0]}
-                        end={[0, 0.6]}
-                      />
-                      <S.ContentCard>
-                        <S.Header>
-                          <S.Text fontSize={"12px"}>{item.location}</S.Text>
-                          <S.Icon>
-                            <Location />
-                          </S.Icon>
-                        </S.Header>
+        <GestureRecognizer
+          style={{ flex: 1 }}
+          onSwipeLeft={handleSwipeLeft}
+          onSwipeRight={handleSwipeRight}
+        >
+          <S.Container style={{ minWidth: width }}>
+            <S.Content>
+              <CardPost
+                key={mocks.posts[currentPostIndex].id}
+                name={mocks.posts[currentPostIndex].user.name}
+                buttonHeader={<Menu />}
+                userTag={mocks.posts[currentPostIndex].timestamp}
+                avatar={mocks.posts[currentPostIndex].user.avatar}
+              >
+                <S.ImageBackground
+                  resizeMode="cover"
+                  source={{
+                    uri: mocks.posts[currentPostIndex].image,
+                  }}
+                >
+                  <S.GradientOverlay
+                    colors={["transparent", "rgba(0, 0, 0, 0.65)"]}
+                    start={[0, 0]}
+                    end={[0, 0.6]}
+                  />
+                  <S.ContentCard>
+                    <S.Header>
+                      <S.Text fontSize={"12px"}>
+                        {mocks.posts[currentPostIndex].location}
+                      </S.Text>
+                      <S.Icon>
+                        <Location />
+                      </S.Icon>
+                    </S.Header>
 
-                        <S.ContainerInfo>
-                          <S.ContainerChips>
-                            <S.AvatarChips>
-                              {item.listAvatarStack?.map((item, index) => (
-                                <S.Avatar
-                                  key={index}
-                                  resizeMode="cover"
-                                  source={{ uri: item.avatar }}
-                                  style={[
-                                    {
-                                      marginTop: index === 0 ? 0 : -5,
-                                    },
-                                  ]}
-                                />
-                              ))}
-                            </S.AvatarChips>
+                    <S.ContainerInfo>
+                      <S.ContainerChips>
+                        <S.AvatarChips>
+                          {mocks.posts[currentPostIndex].listAvatarStack?.map(
+                            (item, index) => (
+                              <S.Avatar
+                                key={index}
+                                resizeMode="cover"
+                                source={{ uri: item.avatar }}
+                                style={[
+                                  {
+                                    marginTop: index === 0 ? 0 : -5,
+                                  },
+                                ]}
+                              />
+                            )
+                          )}
+                        </S.AvatarChips>
+                        <S.Text color={"#A5A4A4"} style={styles.likesCount}>
+                          {formatNumber(mocks.posts[currentPostIndex].likes)}
+                        </S.Text>
+                      </S.ContainerChips>
+                      <TouchableOpacity
+                        onPress={() => setLiked((prev) => !prev)}
+                      >
+                        <Heart color={liked ? "#F2F2F2" : ""} />
+                      </TouchableOpacity>
+                      <S.Text fontSize={"12px"}>
+                        {mocks.posts[currentPostIndex].description}
+                      </S.Text>
 
-                            <S.Text color={"#A5A4A4"} style={styles.likesCount}>
-                              {item.likes}k
-                            </S.Text>
-                          </S.ContainerChips>
-                          <TouchableOpacity
-                            onPress={() => setLiked((prev) => !prev)}
-                          >
-                            <Heart color={liked ? "#F2F2F2" : ""} />
-                          </TouchableOpacity>
-                          <S.Text fontSize={"12px"}>{item.description}</S.Text>
-
-                          <TouchableOpacity onPress={() => handleSnapPress()}>
-                            <Comment
-                              name={item.last_comment?.name || ""}
-                              avatar={item.last_comment?.avatar || ""}
-                              description={
-                                item.last_comment?.description || ""
-                              }
-                            />
-                          </TouchableOpacity>
-                        </S.ContainerInfo>
-                      </S.ContentCard>
-                    </S.ImageBackground>
-                  </CardPost>
-                );
-              }}
-            />
-          </S.Content>
-        </S.Container>
+                      <TouchableOpacity onPress={handleSnapPress}>
+                        <Comment
+                          name={
+                            mocks.posts[currentPostIndex].last_comment?.name ||
+                            ""
+                          }
+                          avatar={
+                            mocks.posts[currentPostIndex].last_comment
+                              ?.avatar || ""
+                          }
+                          description={
+                            mocks.posts[currentPostIndex].last_comment
+                              ?.description || ""
+                          }
+                        />
+                      </TouchableOpacity>
+                    </S.ContainerInfo>
+                  </S.ContentCard>
+                </S.ImageBackground>
+              </CardPost>
+            </S.Content>
+          </S.Container>
+        </GestureRecognizer>
 
         {showFilter && filterActive !== "Miles" && filterActive !== "City" && (
           <S.ContainerFilter>

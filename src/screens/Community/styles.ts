@@ -53,6 +53,7 @@ export const AddStory = styled(View)`
 `;
 
 export const Story = styled(AddStory)`
+  padding: 0;
   border: 2px solid #1976d2;
 `;
 

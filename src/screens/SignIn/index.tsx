@@ -26,31 +26,20 @@ export const SignIn = () => {
       password: "",
     },
     validationSchema: signInSchema,
-    onSubmit: async (values) => {
-      console.log("values ::", values);
-      // const data = {
-      //   email: values.email,
-      //   password: values.password,
-      // };
-      router.push('/(tabs)');
-      // try {
-      //   await signIn({
-      //     data,
-      //     request,
-      //     setLoading,
-      //   });
-      // } catch (error) {
-      //   const _error = error as AxiosError<{ message: string }>;
-
-      //   setDataMessage((prev) => ({
-      //     ...prev,
-      //     icon: <Error />,
-      //     status: "Error",
-      //     title: "Error !!",
-      //     visible: !prev.visible,
-      //     message: [_error?.response?.data?.message || _error?.message],
-      //   }));
-      // }
+    onSubmit: async () => {
+      setLoading(true);
+      try {
+        await new Promise<void>((resolve) => {
+          setTimeout(() => {
+            resolve();
+            router.push("/(tabs)");
+          }, 5000);
+        });
+      } catch (error) {
+        console.log("error ::", error);
+      } finally {
+        setLoading(false);
+      }
     },
   });
 
@@ -70,7 +59,7 @@ export const SignIn = () => {
           autoComplete="email"
           onFocus={(e) => {
             e.currentTarget.setNativeProps({
-              style: { backgroundColor: '#171717' }
+              style: { backgroundColor: "#171717" },
             });
           }}
           onChangeText={handleChange("email")}
