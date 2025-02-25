@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { FlatList } from "react-native-gesture-handler";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import { Image, TouchableOpacity, View, Alert } from "react-native";
+import {
+  View,
+  Image,
+  Alert,
+  Platform,
+  ActionSheetIOS,
+  TouchableOpacity,
+} from "react-native";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
@@ -89,6 +96,66 @@ export const Community = () => {
     }
   };
 
+  const handleTakePhoto = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      Alert.alert(
+        "Permissão Necessária",
+        "É necessário permitir o acesso à câmera para tirar uma foto."
+      );
+      return;
+    }
+
+    const pickerResult = await ImagePicker.launchCameraAsync({
+      quality: 1,
+      allowsEditing: true,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    });
+
+    if (!pickerResult.canceled) {
+      setProfileImage(pickerResult.assets[0].uri);
+    }
+  };
+
+  const handleAddStory = () => {
+    if (Platform.OS === "ios") {
+      ActionSheetIOS.showActionSheetWithOptions(
+        {
+          options: ["Cancelar", "Tirar Foto", "Escolher da Galeria"],
+          cancelButtonIndex: 0,
+        },
+        (buttonIndex) => {
+          if (buttonIndex === 1) {
+            handleTakePhoto();
+          } else if (buttonIndex === 2) {
+            handlePickImage();
+          }
+        }
+      );
+    } else {
+      Alert.alert(
+        "Adicionar Story",
+        "Escolha uma opção",
+        [
+          {
+            text: "Cancelar",
+            style: "cancel",
+          },
+          {
+            text: "Tirar Foto",
+            onPress: handleTakePhoto,
+          },
+          {
+            text: "Escolher da Galeria",
+            onPress: handlePickImage,
+          },
+        ],
+        { cancelable: true }
+      );
+    }
+  };
+
   return (
     <Layout titleHeader="yankee">
       <S.Container>
@@ -104,7 +171,7 @@ export const Community = () => {
               renderItem={({ item }) => {
                 if (item.id === "add_story") {
                   return (
-                    <S.ContainerStory>
+                    <S.ContainerStory onPress={handleAddStory}>
                       <S.AddStory>
                         <S.Text style={{ fontSize: 32 }}>+</S.Text>
                       </S.AddStory>
