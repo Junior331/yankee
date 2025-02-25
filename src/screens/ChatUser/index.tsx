@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
 import { useRouter } from "expo-router";
-import { Image, ScrollView, TouchableOpacity } from "react-native";
+import { Image, ScrollView, TouchableOpacity, Text } from "react-native";
 
 import * as S from "./styles";
 import Video from "@/assets/icons/Video";
-import { LeftArrow, Menu, Microphone, MoodSmile, Phone } from "@/assets/icons";
+import {
+  Galery,
+  HeadPhones,
+  LeftArrow,
+  Library,
+  MapPin,
+  Menu,
+  Microphone,
+  MoodSmile,
+  Phone,
+  Sparkles,
+} from "@/assets/icons";
 import PaperClip from "@/assets/icons/PaperClip";
 import Camera from "@/assets/icons/Camera";
+import BottomSheet from "@gorhom/bottom-sheet";
+import { GenericBottomSheet } from "@/components/organism";
 
 interface Message {
   id: number;
@@ -21,6 +34,7 @@ interface Message {
 export const ChatUser = () => {
   const router = useRouter();
   const [message, setMessage] = React.useState("");
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
   const messages: Message[] = [
     {
@@ -116,85 +130,131 @@ export const ChatUser = () => {
     },
   ];
 
+  const handleSnapPress = useCallback(() => {
+    handleChangeSize(0);
+  }, []);
+
+  const handleChangeSize = useCallback((index: number) => {
+    bottomSheetRef.current?.snapToIndex(index);
+  }, []);
+
   return (
-    <S.Container>
-      <S.ContainerHeader>
-        <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
-          <LeftArrow color="#ffffff" />
-        </S.ButtonIcon>
+    <>
+      <S.Container>
+        <S.ContainerHeader>
+          <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
+            <LeftArrow color="#ffffff" />
+          </S.ButtonIcon>
 
-        <S.ContainerUser>
-          <S.ContainerAvatar>
-            <Image
-              source={{
-                uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
-              }}
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: 100,
-              }}
-              resizeMode="cover"
-            />
-            <S.ContainerBadge>
-              <S.Badge />
-            </S.ContainerBadge>
-          </S.ContainerAvatar>
+          <S.ContainerUser>
+            <S.ContainerAvatar>
+              <Image
+                source={{
+                  uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+                }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                }}
+                resizeMode="cover"
+              />
+              <S.ContainerBadge>
+                <S.Badge />
+              </S.ContainerBadge>
+            </S.ContainerAvatar>
 
-          <S.ContainerText>
-            <S.Title numberOfLines={1}>Ryan Brooks</S.Title>
-            <S.Text numberOfLines={2} color="#f2f2f2">
-              @Ryan_brooks
-            </S.Text>
-          </S.ContainerText>
-          <S.ContainerIcons>
-            <TouchableOpacity>
-              <Phone />
+            <S.ContainerText>
+              <S.Title numberOfLines={1}>Ryan Brooks</S.Title>
+              <S.Text numberOfLines={2} color="#f2f2f2">
+                @Ryan_brooks
+              </S.Text>
+            </S.ContainerText>
+            <S.ContainerIcons>
+              <TouchableOpacity>
+                <Phone />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Video />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Menu />
+              </TouchableOpacity>
+            </S.ContainerIcons>
+          </S.ContainerUser>
+        </S.ContainerHeader>
+
+        <S.ChatContainer>
+          <ScrollView>
+            {messages.map((msg) => (
+              <S.MessageContainer key={msg.id} isSender={msg.isSender}>
+                <S.MessageBubbleWrapper isSender={msg.isSender}>
+                  <S.MessageBubble isSender={msg.isSender}>
+                    <S.MessageText isSender={msg.isSender}>{msg.text}</S.MessageText>
+                  </S.MessageBubble>
+                  <S.MessagePointer isSender={msg.isSender} />
+                </S.MessageBubbleWrapper>
+                <S.TimeText isSender={msg.isSender}>{msg.timestamp}</S.TimeText>
+              </S.MessageContainer>
+            ))}
+          </ScrollView>
+        </S.ChatContainer>
+
+        <S.InputContainer>
+          <S.AttachmentButton>
+            <TouchableOpacity onPress={() => handleSnapPress()}>
+              <PaperClip />
             </TouchableOpacity>
             <TouchableOpacity>
-              <Video />
+              <Camera />
             </TouchableOpacity>
             <TouchableOpacity>
-              <Menu />
+              <MoodSmile />
             </TouchableOpacity>
-          </S.ContainerIcons>
-        </S.ContainerUser>
-      </S.ContainerHeader>
+          </S.AttachmentButton>
 
-      <S.ChatContainer>
-        <ScrollView>
-        {messages.map((msg) => (
-  <S.MessageContainer key={msg.id} isSender={msg.isSender}>
-    <S.MessageBubbleWrapper isSender={msg.isSender}>
-      <S.MessageBubble isSender={msg.isSender}>
-        <S.MessageText isSender={msg.isSender}>{msg.text}</S.MessageText>
-      </S.MessageBubble>
-      <S.MessagePointer isSender={msg.isSender} />
-    </S.MessageBubbleWrapper>
-    <S.TimeText isSender={msg.isSender}>{msg.timestamp}</S.TimeText>
-  </S.MessageContainer>
-))}
-        </ScrollView>
-      </S.ChatContainer>
-
-      <S.InputContainer>
-        <S.AttachmentButton>
-          <TouchableOpacity>
-            <PaperClip />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Camera />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <MoodSmile />
-          </TouchableOpacity>
-        </S.AttachmentButton>
-
-        <S.Input placeholder="Text Here" placeholderTextColor="#ffff" value={message} onChangeText={setMessage} />
-        <S.VoiceButton>
-          <Microphone />
-        </S.VoiceButton>
-      </S.InputContainer>
-    </S.Container>
+          <S.Input placeholder="Text Here" placeholderTextColor="#ffff" value={message} onChangeText={setMessage} />
+          <S.VoiceButton>
+            <Microphone />
+          </S.VoiceButton>
+        </S.InputContainer>
+      </S.Container>
+      <GenericBottomSheet ref={bottomSheetRef} size={-1}>
+        <S.ContentModal>
+          <S.ContainerPaperClip>
+            <S.ContainerFunctionality>
+              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
+                <Sparkles />
+                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>GIF</Text>
+              </TouchableOpacity>
+            </S.ContainerFunctionality>
+            <S.ContainerFunctionality>
+              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
+                <Galery />
+                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Galery</Text>
+              </TouchableOpacity>
+            </S.ContainerFunctionality>
+            <S.ContainerFunctionality>
+              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
+                <HeadPhones />
+                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Audio</Text>
+              </TouchableOpacity>
+            </S.ContainerFunctionality>
+            <S.ContainerFunctionality>
+              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
+                <Library />
+                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Document</Text>
+              </TouchableOpacity>
+            </S.ContainerFunctionality>
+            <S.ContainerFunctionality>
+              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
+                <MapPin />
+                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Location</Text>
+              </TouchableOpacity>
+            </S.ContainerFunctionality>
+          </S.ContainerPaperClip>
+        </S.ContentModal>
+      </GenericBottomSheet>
+    </>
   );
 };

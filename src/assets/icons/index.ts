@@ -23,8 +23,12 @@ import Hearts from "./Hearts";
 import Camera from "./Camera";
 import Filter from "./Filter";
 import Events from "./Events";
+import Galery from "./Galery";
 import Moment from "./Moment";
+import MapPin from "./MapPin";
+import Library from "./Library";
 import Chillin from "./Chillin";
+import Sparkles from "./Sparkles";
 import Ellipse3 from "./Ellipse3";
 import Location from "./Location";
 import Ellipse4 from "./Ellipse4";
@@ -35,6 +39,7 @@ import LeftArrow from "./LeftArrow";
 import Community from "./Community";
 import PaperClip from "./PaperClip";
 import MoodSmile from "./MoodSmile";
+import HeadPhones from "./HeadPhones";
 import Microphone from "./Microphone";
 import Navigation from "./Navigation";
 import Visibility from "./Visibility";
@@ -66,13 +71,17 @@ export {
   Phone,
   Heart,
   Miles,
+  MapPin,
   Filter,
   Hearts,
   Camera,
+  Library,
   Search,
+  Galery,
   Events,
   Moment,
   Chillin,
+  Sparkles,
   Location,
   Ellipse3,
   Ellipse4,
@@ -83,6 +92,7 @@ export {
   LeftArrow,
   PaperClip,
   Community,
+  HeadPhones,
   Microphone,
   Navigation,
   Visibility,

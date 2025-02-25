@@ -5,6 +5,7 @@ import Colors from "@/constants/Colors";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
+import { BottomSheetView } from "@gorhom/bottom-sheet";
 
 export const Container = styled(View)`
   flex: 1;
@@ -180,4 +181,21 @@ export const VoiceButton = styled(TouchableOpacity)`
   height: 40px;
   align-items: center;
   justify-content: center;
+`;
+
+export const ContentModal = styled(BottomSheetView)`
+  flex: 1 ;
+  padding: 20px 20px 0px;
+`;
+export const ContainerPaperClip = styled(View)`
+  gap: 40px;
+  width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+`;
+export const ContainerFunctionality = styled(View)`
+  gap: 20px;
+  width: 20%;
+  align-items: center;
 `;
