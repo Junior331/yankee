@@ -44,6 +44,7 @@ import Microphone from "./Microphone";
 import Navigation from "./Navigation";
 import Visibility from "./Visibility";
 import SetLocation from "./SetLocation";
+import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
 import ArrowOfLineTop from "./ArrowOfLineTop";
 import ArrowOfLineDown from "./ArrowOfLineDown";
@@ -97,6 +98,7 @@ export {
   Navigation,
   Visibility,
   SetLocation,
+  LibraryPhoto,
   Notification,
   ArrowOfLineTop,
   ArrowOfLineDown,

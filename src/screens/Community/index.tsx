@@ -3,20 +3,13 @@ import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { FlatList } from "react-native-gesture-handler";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-import {
-  View,
-  Image,
-  Alert,
-  Platform,
-  ActionSheetIOS,
-  TouchableOpacity,
-} from "react-native";
+import { View, Image, Alert, Platform, ActionSheetIOS, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { filters, iconMapping } from "./utils";
 import { Loading } from "@/components/elements";
-import { LeftArrow, PhotoPlus } from "@/assets/icons";
+import { Filter, LeftArrow, LibraryPhoto, PhotoPlus } from "@/assets/icons";
 import { post, trend } from "@/components/organism/Tabs/@types";
 import { Layout, ModalGeneric, Tabs } from "@/components/organism";
 
@@ -33,15 +26,14 @@ export const Community = () => {
       if (tabActive === "community" || tabActive === "yourfriends") {
         return {
           ...prevPosts,
-          [tabActive]: prevPosts[tabActive as keyof typeof prevPosts].map(
-            (post: any) =>
-              post.id === postId
-                ? {
-                    ...post,
-                    likes: post.likes + (post.liked ? -1 : 1),
-                    liked: !post.liked,
-                  }
-                : post
+          [tabActive]: prevPosts[tabActive as keyof typeof prevPosts].map((post: any) =>
+            post.id === postId
+              ? {
+                  ...post,
+                  likes: post.likes + (post.liked ? -1 : 1),
+                  liked: !post.liked,
+                }
+              : post
           ),
         };
       }
@@ -53,35 +45,21 @@ export const Community = () => {
   const renderTabContent = () => {
     switch (tabActive) {
       case "community":
-        return (
-          <Tabs.TabCommunity
-            posts={posts.community as post[]}
-            toggleLike={toggleLike}
-          />
-        );
+        return <Tabs.TabCommunity posts={posts.community as post[]} toggleLike={toggleLike} />;
       case "trending":
         return <Tabs.TabTrending trendings={posts.trending as trend[]} />;
       case "yourfriends":
-        return (
-          <Tabs.TabYourFriends
-            posts={posts.yourfriends as post[]}
-            toggleLike={toggleLike}
-          />
-        );
+        return <Tabs.TabYourFriends posts={posts.yourfriends as post[]} toggleLike={toggleLike} />;
       default:
         return null;
     }
   };
 
   const handlePickImage = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permissionResult.granted) {
-      Alert.alert(
-        "Permissão Necessária",
-        "É necessário permitir o acesso às fotos para selecionar uma imagem."
-      );
+      Alert.alert("Permissão Necessária", "É necessário permitir o acesso às fotos para selecionar uma imagem.");
       return;
     }
 
@@ -100,10 +78,7 @@ export const Community = () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (!permissionResult.granted) {
-      Alert.alert(
-        "Permissão Necessária",
-        "É necessário permitir o acesso à câmera para tirar uma foto."
-      );
+      Alert.alert("Permissão Necessária", "É necessário permitir o acesso à câmera para tirar uma foto.");
       return;
     }
 
@@ -181,9 +156,7 @@ export const Community = () => {
                 }
 
                 return (
-                  <S.ContainerStory
-                    onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}
-                  >
+                  <S.ContainerStory onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}>
                     <S.Story>
                       {imageLoading && <Loading />}
                       <Image
@@ -221,8 +194,7 @@ export const Community = () => {
 
             <S.FilterContainer>
               {filters.map((item) => {
-                const IconComponent =
-                  iconMapping[item as keyof typeof iconMapping];
+                const IconComponent = iconMapping[item as keyof typeof iconMapping];
 
                 return (
                   <S.FilterItem
@@ -239,10 +211,7 @@ export const Community = () => {
               })}
             </S.FilterContainer>
 
-            <S.Addevent
-              activeOpacity={0.5}
-              onPress={() => setModalAddEvent(true)}
-            >
+            <S.Addevent activeOpacity={0.5} onPress={() => setModalAddEvent(true)}>
               <S.Text fontWeight={700} fontSize="15px">
                 +
               </S.Text>
@@ -253,15 +222,58 @@ export const Community = () => {
             <S.Tabs>
               {mocks.tabs.community.map((tab) => (
                 <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-                  <S.Text
-                    tabs
-                    color={tabActive === tab.value ? "#fff" : "#4d4c4c"}
-                  >
+                  <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
                     {tab.label}
                   </S.Text>
                 </S.Tab>
               ))}
             </S.Tabs>
+            <S.ContentPost>
+              <S.InputContainer>
+                <S.ContentInputUser>
+                  <TouchableOpacity>
+                    <Image
+                      source={{
+                        uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+                      }}
+                      style={{
+                        width: 35,
+                        height: 35,
+                        borderRadius: 100,
+                        marginTop: 10,
+                      }}
+                      resizeMode="cover"
+                    />
+                  </TouchableOpacity>
+                  <S.InputPost placeholder="What’s new?" placeholderTextColor="#4D4C4C" />
+                </S.ContentInputUser>
+                <S.ContentIconButton>
+                <TouchableOpacity>
+                  <LibraryPhoto />
+                </TouchableOpacity>
+                  <TouchableOpacity>
+                    <S.ButtonPost>
+                      <S.Text
+                        color="#171717"
+                        tabs
+                        style={{
+                          fontSize: 9,
+                          fontWeight: 500,
+                          fontFamily: "Poppins-Medium",
+                        }}
+                      >
+                        Post
+                      </S.Text>
+                    </S.ButtonPost>
+                  </TouchableOpacity>
+                </S.ContentIconButton>
+              </S.InputContainer>
+              <S.IconFilter>
+                <TouchableOpacity>
+                  <Filter />
+                </TouchableOpacity>
+              </S.IconFilter>
+            </S.ContentPost>
           </S.ContainerTabs>
 
           {renderTabContent()}
@@ -274,10 +286,7 @@ export const Community = () => {
         >
           <S.CardAddEvent>
             <S.Header>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => setModalAddEvent(false)}
-              >
+              <TouchableOpacity activeOpacity={0.5} onPress={() => setModalAddEvent(false)}>
                 <LeftArrow />
               </TouchableOpacity>
               <S.Title>Add Event</S.Title>

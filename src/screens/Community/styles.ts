@@ -4,10 +4,7 @@ import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 import { removeScrollUi } from "@/utils/utils";
-import {
-  Text as TextComponent,
-  Title as TitleComponent,
-} from "@/components/elements";
+import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -187,9 +184,33 @@ export const CardUploadImage = styled(View)`
 `;
 
 export const ContainerInput = styled(View)`
-  gap: 5px;
   width: 100%;
   flex-direction: column;
+`;
+export const InputContainer = styled(View)`
+  width: 100%;
+  padding: 3px 10px;
+  align-items: center;
+  border-radius: 15px;
+  flex-direction: column;
+
+  border: 1px solid #383838;
+  background-color: transparent;
+`;
+export const ContentPost = styled(View)`
+  width: 100%;
+  margin: 30px 0 0;
+  justify-content: flex-end;
+
+`;
+export const IconFilter = styled(View)`
+  width: 100%;
+  align-items: flex-end;
+  padding: 20px 15px 0;
+`;
+export const ContentInputUser = styled(View)`
+  width: 100%;
+  flex-direction: row;
 `;
 
 export const Input = styled(TextInput).attrs(() => ({
@@ -201,6 +222,33 @@ export const Input = styled(TextInput).attrs(() => ({
   border-radius: 10px;
   border: 1px solid #dcdada;
   background-color: transparent;
+`;
+export const InputPost = styled(TextInput)`
+  flex: 1;
+  height: 40px;
+  margin: 0 10px;
+  padding: 0 10px;
+  color: #ffffff;
+  background-color: transparent;
+`;
+export const ContentIconButton = styled(View)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 72%;
+  gap: 265px;
+  padding: 0 0 5px ;
+`;
+export const ButtonPost = styled(View)`
+  gap: 3px;
+  width: 60px;
+  height: 20px;
+  background: #fff;
+  padding: 2px 6px;
+  border-radius: 5px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const DatePickerContainer = styled(View)`
