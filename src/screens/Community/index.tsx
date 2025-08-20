@@ -2,7 +2,6 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { FlatList } from "react-native-gesture-handler";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { View, Image, Alert, Platform, ActionSheetIOS, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
@@ -176,21 +175,7 @@ export const Community = () => {
           </S.ListStorys>
 
           <S.ContainerMaps>
-            <MapView
-              style={{
-                width: "100%",
-                height: "100%",
-              }}
-              provider={PROVIDER_GOOGLE}
-              initialRegion={{
-                latitude: 42.3601,
-                longitude: -71.0589,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-            >
-              {/* Marcadores aqui */}
-            </MapView>
+
 
             <S.FilterContainer>
               {filters.map((item) => {
