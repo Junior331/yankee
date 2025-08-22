@@ -1,23 +1,53 @@
 import React, { useState } from "react";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 
+import { FindCity } from "@/components/organism";
 import * as S from "./styles";
 import { IHeaderPages } from "./@types";
-import { Notification } from "@/assets/icons";
-import { Loading } from "@/components/elements";
-export const HeaderPages = ({ icon, title }: IHeaderPages) => {
+import { DollarSign, Filter, LocationTarget, Notification } from "@/assets/icons";
+import { Loading, Slider } from "@/components/elements";
+import { mocks } from "@/services/mocks";
+export const HeaderPages = ({  title }: IHeaderPages) => {
   const router = useRouter();
   const [imageLoading, setImageLoading] = useState(true);
+  const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
+
+  const [filterActive, setFilterActive] = useState("");
+  const [showFilter, setShowFilter] = useState(false);
+
+  const handleSetFilter = (value: string, state?: boolean) => {
+    setFilterActive(value);
+    setShowFilter(state || false);
+  };
+
+  const handlePress = (iconName: string) => {
+    if (selectedIcon === iconName) {
+      setSelectedIcon(null);
+    } else {
+      setSelectedIcon(iconName);
+    }
+  };
 
   return (
     <S.Container>
-      <S.IconContainer>{icon}</S.IconContainer>
+      <S.IconContainer>
+        <TouchableOpacity onPress={() => handleSetFilter("", !showFilter)}>
+          <Filter />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handlePress("location")}>
+          <LocationTarget color={selectedIcon === "location" ? "red" : "#fff"} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handlePress("dollar")}>
+          <DollarSign color={selectedIcon === "dollar" ? "red" : "#fff"} />
+        </TouchableOpacity>
+      </S.IconContainer>
 
       {title && <S.Title>{title}</S.Title>}
       <S.ContainerUser>
         <S.ContainerBadge onPress={() => router.push("/(tabs)/notifications")}>
-          <Notification  />
+          <Notification />
 
           <S.Badge>
             <S.Text>3</S.Text>
@@ -32,7 +62,7 @@ export const HeaderPages = ({ icon, title }: IHeaderPages) => {
               onLoadEnd={() => setImageLoading(false)}
               style={{ width: "100%", height: "100%" }}
               source={{
-                uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bgEV7gxiUUIr1gxjDqcMcgQdsEpmEkZYfoij8dJOFaTABECzytvUN6NCjOPozBU86gwQPKx7u2vVBo0Gcj5BuoYJAXdlDp1Q4TI0SiqcnqnPerzoFq-dFtlzUkaN-onqrluYuVerhedYGrX2uLYtF-690IZu4ejexMUpLgQBycycAgRJ2nbd0M4YlUK0nceqid~jAmCjFt1lCgWyfyVjuyOIkzJLn4OfSd4g7UhRE8vRq7Cf5znUoF-pSDhd7CqyDe8J0TLf6H2RW6unrtLYFGCq0MKguSiawXN8dCQlrggIiFdJJctP~49F9oBuiZC1Zb49yJsFHBPMIqQC6tixkw__",
+                uri: "https://picsum.photos/200/300",
               }}
             />
           </S.ContainerAvatar>
@@ -41,6 +71,31 @@ export const HeaderPages = ({ icon, title }: IHeaderPages) => {
           </S.Badge>
         </S.ContainerBadge>
       </S.ContainerUser>
+      {showFilter && filterActive !== "Miles" && filterActive !== "City" && (
+        <S.ContainerFilter>
+          {mocks.optionsFilter.map((item) => (
+            <>
+              <S.OptionFilter key={item.id} onPress={() => handleSetFilter(item.value, true)}>
+                {item.icon}
+                <S.Text>{item.label}</S.Text>
+              </S.OptionFilter>
+              <S.Line />
+            </>
+          ))}
+        </S.ContainerFilter>
+      )}
+
+      {showFilter && filterActive === "Miles" && (
+        <S.ContainerFilter width="220px">
+          <Slider />
+        </S.ContainerFilter>
+      )}
+
+      {showFilter && filterActive === "City" && (
+        <S.ContainerFilter width="220px">
+          <FindCity />
+        </S.ContainerFilter>
+      )}
     </S.Container>
   );
 };

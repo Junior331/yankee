@@ -39,6 +39,7 @@ import LeftArrow from "./LeftArrow";
 import Community from "./Community";
 import PaperClip from "./PaperClip";
 import MoodSmile from "./MoodSmile";
+import DollarSign from "./DollarSign";
 import HeadPhones from "./HeadPhones";
 import Microphone from "./Microphone";
 import Navigation from "./Navigation";
@@ -46,7 +47,9 @@ import Visibility from "./Visibility";
 import SetLocation from "./SetLocation";
 import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
+import LocationTarget from "./LocationTarget";
 import ArrowOfLineTop from "./ArrowOfLineTop";
+import CommentSendIcon from "./CommentSendIcon";
 import ArrowOfLineDown from "./ArrowOfLineDown";
 import CircleArrowUpRight from "./CircleArrowUpRight";
 import ProfilePictureContainer from "./ProfilePictureContainer";
@@ -93,6 +96,7 @@ export {
   LeftArrow,
   PaperClip,
   Community,
+  DollarSign,
   HeadPhones,
   Microphone,
   Navigation,
@@ -101,6 +105,8 @@ export {
   LibraryPhoto,
   Notification,
   ArrowOfLineTop,
+  CommentSendIcon,
+  LocationTarget,
   ArrowOfLineDown,
   CircleArrowUpRight,
   ProfilePictureContainer,

@@ -5,18 +5,26 @@ import {
   Text as TextComponent,
   Title as Titleomponent,
 } from "@/components/elements";
+import { StyledProps } from "@/utils/types";
+import Colors from "@/constants/Colors";
 
+export const ViewGeneric = styled(View)`
+  display: flex;
+  align-items: start;
+  flex-direction: row;
+  justify-content: start;
+`;
 export const Container = styled(View)`
   width: 100%;
   height: auto;
   margin-bottom: 20px;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
 `;
 
 export const ContainerUser = styled(View)`
-  gap: 20px;
+  gap: 38px;
   width: auto;
   flex-direction: row;
   align-items: center;
@@ -31,8 +39,8 @@ export const ContainerBadge = styled(TouchableOpacity)`
 
 export const Badge = styled(View)`
   left: -3px;
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   bottom: -5px;
   position: absolute;
   border-radius: 15px;
@@ -43,8 +51,8 @@ export const Badge = styled(View)`
 `;
 
 export const ContainerAvatar = styled(View)`
-  width: 31px;
-  height: 31px;
+  width: 40px;
+  height: 40px;
   overflow: hidden;
   border-radius: 60px;
   background-color: #c4c4c4;
@@ -62,9 +70,41 @@ export const Title = styled(Titleomponent)`
 export const IconContainer = styled(View)`
   width: auto;
   height: auto;
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 18px;
+  min-height: 18px;
   position: relative;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
+  gap: 38px;
+`;
+
+export const ContainerFilter = styled(ViewGeneric)<StyledProps>`
+  top: 30px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 20px;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  transition: width 3s ease;
+  border: 1px solid #dcdada;
+  width: ${({ width }) => width || "110px"};
+  height: ${({ height }) => height || "auto"};
+  background-color: ${Colors.dark.background};
+    z-index: 1;
+`;
+export const OptionFilter = styled(TouchableOpacity)`
+  gap: 20px;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+`;
+export const Line = styled(View)`
+  height: 1px;
+  width: 100%;
+  background-color: #dadada;
 `;

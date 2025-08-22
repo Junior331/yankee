@@ -5,19 +5,12 @@ const Filter = () => {
   return (
     <SvgXml
       xml={`
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M0.24969 1.61C2.56969 4.59 5.99969 9 5.99969 9V14C5.99969 15.1 6.89969 16 7.99969 16C9.09969 16 9.99969 15.1 9.99969 14V9C9.99969 9 13.4297 4.59 15.7497 1.61C16.2597 0.95 15.7897 0 14.9497 0H1.03969C0.20969 0 -0.26031 0.95 0.24969 1.61Z"
-            fill="white"
-          />
-        </svg>
+       <svg width="16" height="16" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1.5H17V3.672C16.9999 4.20239 16.7891 4.71101 16.414 5.086L12 9.5V16.5L6 18.5V10L1.52 5.072C1.18545 4.70393 1.00005 4.2244 1 3.727V1.5Z" stroke="white" stroke-width="1.32" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
       `}
+      
     />
   );
 };

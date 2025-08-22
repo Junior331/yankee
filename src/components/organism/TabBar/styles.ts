@@ -15,7 +15,7 @@ export const Container = styled(View)<{ $Visible?: boolean }>`
   flex-direction: row;
   border-radius: 23px;
   align-items: center;
-  background-color: #fff;
+  background-color: #121212;
   justify-content: space-between;
   display: ${({$Visible}) => $Visible ? "flex" : "none"};
 `;

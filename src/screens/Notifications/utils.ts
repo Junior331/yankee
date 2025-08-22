@@ -5,20 +5,20 @@ export const mockMessages = [
     name: "Ryan Brooks",
     type: "Follow",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/42/200/300",
     messages: ["just hit the follow button on you"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/43/200/300",
   },
   {
     id: 2,
     active: false,
     name: "Sophia Carter",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/44/200/300",
     messages: ["gave your pic a double-tap"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/45/200/300",
   },
   {
     id: 3,
@@ -26,70 +26,70 @@ export const mockMessages = [
     name: "Liam Johnson",
     type: "Poke back ",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/46/200/300",
     messages: ["just dropped a thought on your post"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/47/200/300",
   },
   {
     id: 4,
     active: true,
     name: "Ethan Davis",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/48/200/300",
     messages: ["sent you a friendly jab 👉"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/49/200/300",
   },
   {
     id: 5,
     active: false,
     name: "Jackson Lee",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/50/200/300",
     messages: ["hit the like on your notion"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/51/200/300",
   },
   {
     id: 6,
     active: true,
     name: "Sophia Carter",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/52/200/300",
     messages: ["couldn’t keep quiet, so here’s a comment"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/53/200/300",
   },
   {
     id: 7,
     active: true,
     name: "Liam Johnson",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/54/200/300",
     messages: ["is vibing with your story"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/55/200/300",
   },
   {
     id: 8,
     active: false,
     name: "Ryan Brooks",
     photo:
-    "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+    "https://picsum.photos/seed/56/200/300",
     messages: ["gave your profile a lil sprinkle of attention"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/57/200/300",
   },
   {
     id: 9,
     active: true,
     name: "Jackson Lee",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/58/200/300",
     messages: ["couldn’t resist, had to comment "],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/59/200/300",
   },
   {
     id: 10,
@@ -97,20 +97,20 @@ export const mockMessages = [
     name: "Ryan Brooks",
     type: "Follow",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/60/200/300",
     messages: ["just hit the follow button on you"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/50/200/300",
   },
   {
     id: 11,
     active: false,
     name: "Sophia Carter",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/61/200/300",
     messages: ["gave your pic a double-tap"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/62/200/300",
   },
   {
     id: 12,
@@ -118,29 +118,29 @@ export const mockMessages = [
     name: "Liam Johnson",
     type: "Poke back ",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/63/200/300",
     messages: ["just dropped a thought on your post"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/64/200/300",
   },
   {
     id: 13,
     active: true,
     name: "Ethan Davis",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/65/200/300",
     messages: ["sent you a friendly jab 👉"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/66/200/300",
   },
   {
     id: 14,
     active: false,
     name: "Jackson Lee",
     photo:
-      "https://s3-alpha-sig.figma.com/img/26c7/bf97/089b9f4a7685988003e942d749022ffb?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=biKjR-KQG8JoIfe-sI3wGqClgHMxo201iXRKUYLXhLMTzAdHixn7hngsJsAflnOsVfz4POnDMiU8eICd8izJR5xM5Z-IVGTEn4QUFO-IVEnH47FaqcPDlhNc4I-y38mmkkkZqyFVqkwzrUo9vStgKNo4p4SDipKjq3uK7-H-5QlOepauQPpoisKDD5O-bCdo7wdlOTMOLeezYvwBJ9SndOzZ91bv5XyoMYPhQ4ATaTrLdheHHZpJv4BnmpjPFfccVLMEBjfWGIN0o1LSEhmt0~47R56yqnjfSCqK4VMRhIoZPaVcLm-ghACWYj0X3rpt96405BBK3Y3OVKeKt--gyw__",
+      "https://picsum.photos/seed/67/200/300",
     messages: ["hit the like on your notion"],
     previewPhotoPosted :
-    "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+    "https://picsum.photos/seed/68/200/300",
   },
 ];

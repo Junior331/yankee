@@ -1,3 +1,4 @@
+// components/organism/GenericCommet/index.tsx
 import React, { useState } from "react";
 import { Image, TouchableOpacity } from "react-native";
 
@@ -12,7 +13,8 @@ export const GenericCommet = ({
   time,
   avatar,
   description,
-}: IGenericCommet) => {
+  onReply,
+}: IGenericCommet & { onReply?: () => void }) => {
   const [liked, setLiked] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -40,7 +42,7 @@ export const GenericCommet = ({
             {name} <S.Text>{time}</S.Text>
           </S.Text>
           <S.Title>{description}</S.Title>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onReply}>
             <S.Text>Reply</S.Text>
           </TouchableOpacity>
         </S.ContainerText>

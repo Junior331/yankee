@@ -1,10 +1,11 @@
-import { ReactNode } from "react";
 
 export interface IGenericCommet {
+  id: number;
+  likes: number;
   time: string;
   name: string;
-  likes: number;
   avatar: string;
   description: string;
-  answers: IGenericCommet[];
+  answers?: IGenericCommet[];
+  onReply?: () => void;
 }

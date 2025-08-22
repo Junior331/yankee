@@ -73,9 +73,9 @@ export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
               className="flex-1 items-center"
               accessibilityLabel={options.tabBarAccessibilityLabel}
               accessibilityState={isFocused ? { selected: true } : {}}
-              bg_color={isFocused ? Colors.dark.background : "transparent"}
+              bg_color={isFocused ? Colors.light.background : "transparent"}
             >
-              <IconComponent color={isFocused ? "#fff" : "#000"} />
+              <IconComponent color={isFocused ? "#000" : "#fff"} />
             </S.ContainerIcon>
           );
         }

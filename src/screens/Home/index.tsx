@@ -1,4 +1,3 @@
-import { Feather } from "@expo/vector-icons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import React, { useCallback, useRef, useState } from "react";
 import {
@@ -13,45 +12,48 @@ import {
   Layout,
   Comment,
   CardPost,
-  FindCity,
   GenericCommet,
   GenericBottomSheet,
 } from "@/components/organism";
 import * as S from "./styles";
 import Heart from "@/assets/icons/Heart";
 import { mocks } from "@/services/mocks";
-import { Slider } from "@/components/elements";
-import { Filter, Location, Menu } from "@/assets/icons";
+import { CommentSendIcon, Location, Menu } from "@/assets/icons";
 import { formatNumber } from "@/utils/utils";
 
 const { width } = Dimensions.get("screen");
 
+// Interface para o tipo de comentário
+interface CommentType {
+  id: number;
+  likes: number;
+  time: string;
+  name: string;
+  avatar: string;
+  description: string;
+  answers: CommentType[];
+}
+
 export const Home = () => {
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState("");
-  const [showFilter, setShowFilter] = useState(false);
-  const [filterActive, setFilterActive] = useState("");
+  const [replyingTo, setReplyingTo] = useState<number | null>(null);
+  const [replyText, setReplyText] = useState("");
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const [comments, setComments] = useState(mocks.posts[0].comments);
+  const [comments, setComments] = useState<CommentType[]>(mocks.posts[0].comments as CommentType[]);
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
-
-  const handleSetFilter = (value: string, state?: boolean) => {
-    setFilterActive(value);
-    setShowFilter(state || false);
-  };
 
   const handleSnapPress = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
 
   const handleSubmitComment = (text: string) => {
-    const newComment = {
+    const newComment: CommentType = {
       id: comments.length + 1,
       likes: 0,
       time: "Just now",
       name: "Sophia Carter",
-      avatar:
-        "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+      avatar: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
       description: text,
       answers: [],
     };
@@ -59,7 +61,40 @@ export const Home = () => {
     setComments([newComment, ...comments]);
   };
 
-  // Detectar gestos de swipe para mudar o post
+  const handleReply = (commentId: number, userName: string) => {
+    setReplyingTo(commentId);
+    setReplyText(`@${userName} `);
+    bottomSheetRef.current?.expand();
+  };
+
+  const handleSubmitReply = () => {
+    if (!replyingTo || !replyText.trim()) return;
+
+    const newReply: CommentType = {
+      id: Date.now(),
+      likes: 0,
+      time: "Just now",
+      name: "Sophia Carter",
+      avatar: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+      description: replyText,
+      answers: [],
+    };
+
+    const updatedComments = comments.map(comment => {
+      if (comment.id === replyingTo) {
+        return {
+          ...comment,
+          answers: [...(comment.answers || []), newReply]
+        };
+      }
+      return comment;
+    });
+
+    setComments(updatedComments);
+    setReplyText("");
+    setReplyingTo(null);
+  };
+
   const handleSwipeLeft = () => {
     if (currentPostIndex < mocks.posts.length - 1) {
       setCurrentPostIndex(currentPostIndex + 1);
@@ -77,11 +112,6 @@ export const Home = () => {
       <Layout
         style={{ position: "relative" }}
         titleHeader="yankee"
-        iconHeader={
-          <TouchableOpacity onPress={() => handleSetFilter("", !showFilter)}>
-            <Filter />
-          </TouchableOpacity>
-        }
       >
         <GestureRecognizer
           style={{ flex: 1 }}
@@ -172,62 +202,60 @@ export const Home = () => {
             </S.Content>
           </S.Container>
         </GestureRecognizer>
-
-        {showFilter && filterActive !== "Miles" && filterActive !== "City" && (
-          <S.ContainerFilter>
-            {mocks.optionsFilter.map((item) => (
-              <>
-                <S.OptionFilter
-                  key={item.id}
-                  onPress={() => handleSetFilter(item.value, true)}
-                >
-                  {item.icon}
-                  <S.Text fontSize={"12px"}>{item.label}</S.Text>
-                </S.OptionFilter>
-                <S.Line />
-              </>
-            ))}
-          </S.ContainerFilter>
-        )}
-
-        {showFilter && filterActive === "Miles" && (
-          <S.ContainerFilter width="220px">
-            <Slider />
-          </S.ContainerFilter>
-        )}
-
-        {showFilter && filterActive === "City" && (
-          <S.ContainerFilter width="220px">
-            <FindCity />
-          </S.ContainerFilter>
-        )}
       </Layout>
 
       <GenericBottomSheet ref={bottomSheetRef} size={-1}>
         <S.ListComments contentContainerStyle={{ flexGrow: 1 }}>
-          {comments.map((item, index) => (
-            <View key={index}>
-              <GenericCommet {...item} />
+          {comments.map((item) => (
+            <View key={item.id}>
+              <GenericCommet 
+                {...item} 
+                onReply={() => handleReply(item.id, item.name)}
+              />
+              {item.answers && item.answers.length > 0 && (
+                <View style={{ marginLeft: 20 }}>
+                  {item.answers.map((answer) => (
+                    <GenericCommet 
+                      key={answer.id} 
+                      {...answer} 
+                      onReply={() => handleReply(item.id, answer.name)}
+                    />
+                  ))}
+                </View>
+              )}
               <S.Line />
             </View>
           ))}
         </S.ListComments>
+        
         <S.ContainerInput>
           <S.Avatar
             resizeMode="cover"
             source={{
-              uri: "https://s3-alpha-sig.figma.com/img/a6aa/9d30/dbcf7e2bf12699387be3b928f19d99ef?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=Bq8LWtLHJ0eZG7KC9CDCGPoAe~~jxECquROVJsCnt-jTb-2TLe0cI2i1qBHKEeeXozl0DEJJ7-m37kmq0em8MP3wN3-YEKv1EHuVHMS9C8Vtxud3Fb5UzY0R~iC4W-YqV~QfD3L6b2MCy7enu3cK1PObYZ7kiSrHWrULC8KFcSpiZXhEYwmQx5oxRnm~Ouriia8zQIm7j~diwYe0uvq2UaPN6ea5LQBk~5inkyujZLL5sxm2lL~NF0XZ2oyOSzSDyGAe9CR3GgnLzcXtlqhFM1MtLczVvqrM0fZ9MKL1Hi-AW4sa8zji9-EE8jJneCyCJcoHm6XCk0O9VPTROouHVA__",
+              uri: "https://picsum.photos/seed/35/200/300",
             }}
           />
           <TextInput
-            value={comment}
+            value={replyingTo ? replyText : comment}
             style={styles.textInput}
-            placeholder="Add a comment"
+            placeholder={replyingTo ? "Write a reply..." : "Add a comment"}
             placeholderTextColor="#2D2D2D"
-            onChangeText={(value: string) => setComment(value)}
+            onChangeText={(value: string) => {
+              if (replyingTo) {
+                setReplyText(value);
+              } else {
+                setComment(value);
+              }
+            }}
           />
-          <TouchableOpacity onPress={() => handleSubmitComment(comment)}>
-            <Feather name="send" size={20} color="white" />
+          <TouchableOpacity onPress={() => {
+            if (replyingTo) {
+              handleSubmitReply();
+            } else {
+              handleSubmitComment(comment);
+            }
+          }}>
+            <CommentSendIcon color="white" />
           </TouchableOpacity>
         </S.ContainerInput>
       </GenericBottomSheet>
