@@ -219,20 +219,24 @@ export const Community = () => {
                   <TouchableOpacity>
                     <Image
                       source={{
-                        uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+                        uri: "https://picsum.photos/seed/1/200/300",
                       }}
                       style={{
                         width: 35,
                         height: 35,
                         borderRadius: 100,
-                        marginTop: 10,
+                        marginTop: 10 ,
+                        marginLeft: 10 ,
                       }}
                       resizeMode="cover"
                     />
                   </TouchableOpacity>
-                  <S.InputPost placeholder="What’s new?" placeholderTextColor="#4D4C4C" />
+                  <S.InputPost placeholder="What’s new?" placeholderTextColor="#FFFFFF" />
                 </S.ContentInputUser>
                 <S.ContentIconButton>
+                  <TouchableOpacity>
+                  <Filter />
+                </TouchableOpacity>
                 <TouchableOpacity>
                   <LibraryPhoto />
                 </TouchableOpacity>
@@ -253,11 +257,7 @@ export const Community = () => {
                   </TouchableOpacity>
                 </S.ContentIconButton>
               </S.InputContainer>
-              <S.IconFilter>
-                <TouchableOpacity>
-                  <Filter />
-                </TouchableOpacity>
-              </S.IconFilter>
+              
             </S.ContentPost>
           </S.ContainerTabs>
 

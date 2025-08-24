@@ -189,13 +189,12 @@ export const ContainerInput = styled(View)`
 `;
 export const InputContainer = styled(View)`
   width: 100%;
-  padding: 3px 10px;
   align-items: center;
+  justify-content: space-between;
   border-radius: 15px;
   flex-direction: column;
-
-  border: 1px solid #383838;
-  background-color: transparent;
+  margin: 10px 0 30px 0;
+  background-color: #232323;
 `;
 export const ContentPost = styled(View)`
   width: 100%;
@@ -203,11 +202,7 @@ export const ContentPost = styled(View)`
   justify-content: flex-end;
 
 `;
-export const IconFilter = styled(View)`
-  width: 100%;
-  align-items: flex-end;
-  padding: 20px 15px 0;
-`;
+
 export const ContentInputUser = styled(View)`
   width: 100%;
   flex-direction: row;
@@ -227,17 +222,18 @@ export const InputPost = styled(TextInput)`
   flex: 1;
   height: 40px;
   margin: 0 10px;
-  padding: 0 10px;
+  padding: 0 5px;
   color: #ffffff;
   background-color: transparent;
 `;
 export const ContentIconButton = styled(View)`
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  width: 72%;
-  gap: 265px;
-  padding: 0 0 5px ;
+  justify-content: flex-end;
+  width: 100%;
+   align-items: flex-end;
+  padding: 0 10px 10px  ;
+  gap: 10px;
 `;
 export const ButtonPost = styled(View)`
   gap: 3px;
