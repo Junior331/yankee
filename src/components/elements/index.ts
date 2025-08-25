@@ -11,6 +11,7 @@ import { GridItem } from "./GridItem";
 import { Checkbox } from "./Checkbox";
 import { TitleSoous } from "./TitleSoous";
 import { Datetimepicker } from "./Datetimepicker";
+import { SafeScreen } from "./SafeScreen";
 
 export {
   Text,
@@ -26,4 +27,5 @@ export {
   GridItem,
   TitleSoous,
   Datetimepicker,
+  SafeScreen,
 };

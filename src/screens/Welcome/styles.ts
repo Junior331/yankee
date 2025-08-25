@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { SafeAreaView, View } from "react-native";
+import { View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { Ellipse3 } from "@/assets/icons";
@@ -12,7 +12,7 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(View)`
   width: 100%;
   height: 100%;
   display: flex;

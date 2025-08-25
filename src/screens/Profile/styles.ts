@@ -1,4 +1,4 @@
-import { SafeAreaView, View, ScrollView, TouchableOpacity } from "react-native";
+import { View, ScrollView, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
 import {
@@ -15,7 +15,7 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(View)`
   width: 100%;
   height: 100%;
   display: flex;

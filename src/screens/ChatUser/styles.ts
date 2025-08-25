@@ -92,7 +92,7 @@ export const ContainerIcons = styled(View)`
 `;
 
 export const ChatContainer = styled(View)`
-  height: 73%;
+  flex: 1;
   padding: 10px 15px;
 `;
 
@@ -152,14 +152,15 @@ export const TimeText = styled(TextComponent)<StyledProps>`
 `;
 
 export const InputContainer = styled(View)`
-  width: 85%;
-  margin-left: 30px;
-  padding: 3px 15px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 8px 15px;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 25px;
   flex-direction: row;
   border: 1.5px solid #ffffff;
   background-color: transparent;
+  min-height: 50px;
 `;
 
 export const AttachmentButton = styled(View)`
@@ -169,11 +170,14 @@ export const AttachmentButton = styled(View)`
 
 export const Input = styled(TextInput)`
   flex: 1;
-  height: 40px;
+  min-height: 40px;
+  max-height: 100px;
   margin: 0 10px;
-  padding: 0 10px;
+  padding: 10px;
   color: #ffffff;
+  font-size: 14px;
   background-color: transparent;
+  text-align-vertical: center;
 `;
 
 export const VoiceButton = styled(TouchableOpacity)`

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { View, Text as TextReact, SafeAreaView } from "react-native";
+import { View, Text as TextReact } from "react-native";
 
 import Colors from "@/constants/Colors";
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(View)`
   display: flex;
   height: 100%;
   width: 100%;

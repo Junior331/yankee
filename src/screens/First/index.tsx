@@ -13,14 +13,15 @@ import Ellipse5 from "@/assets/icons/Ellipse5";
 import Ellipse4 from "@/assets/icons/Ellipse4";
 import Ellipse6 from "@/assets/icons/Ellipse6";
 import { Header, Cards } from "@/components/organism";
-import { TitleSoous, Button } from "@/components/elements";
+import { TitleSoous, Button, SafeScreen } from "@/components/elements";
 import { useNavigationHandler } from "@/hooks/navigation";
 
 export default function First() {
   const { navigate } = useNavigationHandler();
 
   return (
-    <Container>
+    <SafeScreen>
+      <Container>
       <Header />
       <ContainerText>
         <DropTopContainer>
@@ -40,6 +41,7 @@ export default function First() {
       <DropBottom3Container>
         <Ellipse6 />
       </DropBottom3Container>
-    </Container>
+      </Container>
+    </SafeScreen>
   );
 }

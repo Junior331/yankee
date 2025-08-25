@@ -2,13 +2,14 @@ import * as React from "react";
 import { useRouter } from "expo-router";
 
 import * as S from "./styles";
-import { Button, Title } from "@/components/elements";
+import { Button, Title, SafeScreen } from "@/components/elements";
 
 export const Welcome = () => {
   const router = useRouter();
 
   return (
-    <S.Container>
+    <SafeScreen>
+      <S.Container>
       <S.Header>
         <Title>yankee</Title>
       </S.Header>
@@ -39,6 +40,7 @@ export const Welcome = () => {
           transform={"rotateZ(180deg)"}
         />
       </S.Content>
-    </S.Container>
+      </S.Container>
+    </SafeScreen>
   );
 };

@@ -6,7 +6,7 @@ import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
 import { LeftArrow } from "@/assets/icons";
 import { Forms } from "@/components/organism";
-import { Loading } from "@/components/elements";
+import { Loading, SafeScreen } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
 import { useRouter } from "expo-router";
@@ -47,8 +47,9 @@ export const Profile = () => {
   );
 
   return (
-    <S.Container>
-      <S.Content>
+    <SafeScreen edges={['top']}>
+      <S.Container>
+        <S.Content>
         <S.Header>
           <S.ContainerBanner>
             {bannerLoading && <Loading />}
@@ -169,7 +170,8 @@ export const Profile = () => {
             />
           </>
         )}
-      </S.Content>
-    </S.Container>
+        </S.Content>
+      </S.Container>
+    </SafeScreen>
   );
 };

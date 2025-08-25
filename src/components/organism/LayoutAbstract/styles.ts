@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { View, SafeAreaView, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
@@ -12,7 +12,7 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(View)`
   flex: 1;
   flex-direction: column;
   background-color: ${Colors.dark.background};

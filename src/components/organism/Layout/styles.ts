@@ -2,7 +2,6 @@ import { View } from "react-native";
 import styled from "styled-components";
 
 import Colors from "@/constants/Colors";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -10,7 +9,7 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled(View)`
   flex: 1;
   display: flex;
   align-items: center;
