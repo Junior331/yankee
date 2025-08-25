@@ -5,7 +5,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import * as S from "./styles";
 import { Props } from "../@types";
 import { Mail, User, Lock } from "@/assets/icons";
-import { LayoutAbstract } from "@/components/organism";
+import { LayoutAbstract } from "@/components/organism/LayoutAbstract";
 import {
   Input,
   Switch,

@@ -4,7 +4,7 @@ import * as S from "./styles";
 import { Props } from "../@types";
 import { Arrow } from "@/assets/icons";
 import { Button, Input } from "@/components/elements";
-import { LayoutAbstract } from "@/components/organism";
+import { LayoutAbstract } from "@/components/organism/LayoutAbstract";
 
 export const PhoneNumber = ({
   values,

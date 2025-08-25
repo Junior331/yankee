@@ -134,134 +134,140 @@ export const Community = () => {
     <Layout titleHeader="yankee">
       <S.Container>
         <S.Content>
-          <S.ListStorys>
-            <FlatList
-              horizontal
-              data={mocks.storys}
-              style={{ width: "100%" }}
-              showsHorizontalScrollIndicator={false}
-              keyExtractor={(item) => String(item.id)}
-              ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
-              renderItem={({ item }) => {
-                if (item.id === "add_story") {
-                  return (
-                    <S.ContainerStory onPress={handleAddStory}>
-                      <S.AddStory>
-                        <S.Text style={{ fontSize: 32 }}>+</S.Text>
-                      </S.AddStory>
-                      <S.Text>Add</S.Text>
-                    </S.ContainerStory>
-                  );
-                }
+          <FlatList
+            data={["content"]}
+            keyExtractor={(item) => item}
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={() => (
+              <View>
+                <S.ListStorys>
+                  <FlatList
+                    horizontal
+                    data={mocks.storys}
+                    style={{ width: "100%" }}
+                    showsHorizontalScrollIndicator={false}
+                    keyExtractor={(item) => String(item.id)}
+                    ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+                    renderItem={({ item }) => {
+                      if (item.id === "add_story") {
+                        return (
+                          <S.ContainerStory onPress={handleAddStory}>
+                            <S.AddStory>
+                              <S.Text style={{ fontSize: 32 }}>+</S.Text>
+                            </S.AddStory>
+                            <S.Text>Add</S.Text>
+                          </S.ContainerStory>
+                        );
+                      }
 
-                return (
-                  <S.ContainerStory onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}>
-                    <S.Story>
-                      {imageLoading && <Loading />}
-                      <Image
-                        resizeMode="cover"
-                        onLoadEnd={() => setImageLoading(false)}
-                        style={{ width: "100%", height: "100%" }}
-                        source={{
-                          uri: item.avatar,
-                        }}
-                      />
-                    </S.Story>
-                    <S.Text>{item.name}</S.Text>
-                  </S.ContainerStory>
-                );
-              }}
-            />
-          </S.ListStorys>
-
-          <S.ContainerMaps>
-
-
-            <S.FilterContainer>
-              {filters.map((item) => {
-                const IconComponent = iconMapping[item as keyof typeof iconMapping];
-
-                return (
-                  <S.FilterItem
-                    key={item}
-                    activeOpacity={0.7}
-                    style={{
-                      boxShadow: "0px 2px 4px 0px rgba(35, 171, 255, 0.4)",
+                      return (
+                        <S.ContainerStory onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}>
+                          <S.Story>
+                            {imageLoading && <Loading />}
+                            <Image
+                              resizeMode="cover"
+                              onLoadEnd={() => setImageLoading(false)}
+                              style={{ width: "100%", height: "100%" }}
+                              source={{
+                                uri: item.avatar,
+                              }}
+                            />
+                          </S.Story>
+                          <S.Text>{item.name}</S.Text>
+                        </S.ContainerStory>
+                      );
                     }}
-                  >
-                    <S.FilterText>{item}</S.FilterText>
-                    <IconComponent />
-                  </S.FilterItem>
-                );
-              })}
-            </S.FilterContainer>
+                  />
+                </S.ListStorys>
 
-            <S.Addevent activeOpacity={0.5} onPress={() => setModalAddEvent(true)}>
-              <S.Text fontWeight={700} fontSize="15px">
-                +
-              </S.Text>
-            </S.Addevent>
-          </S.ContainerMaps>
+                <S.ContainerMaps>
+                  <S.FilterContainer>
+                    {filters.map((item) => {
+                      const IconComponent = iconMapping[item as keyof typeof iconMapping];
 
-          <S.ContainerTabs>
-            <S.Tabs>
-              {mocks.tabs.community.map((tab) => (
-                <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-                  <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
-                    {tab.label}
-                  </S.Text>
-                </S.Tab>
-              ))}
-            </S.Tabs>
-            <S.ContentPost>
-              <S.InputContainer>
-                <S.ContentInputUser>
-                  <TouchableOpacity>
-                    <Image
-                      source={{
-                        uri: "https://picsum.photos/seed/1/200/300",
-                      }}
-                      style={{
-                        width: 35,
-                        height: 35,
-                        borderRadius: 100,
-                        marginTop: 10 ,
-                        marginLeft: 10 ,
-                      }}
-                      resizeMode="cover"
-                    />
-                  </TouchableOpacity>
-                  <S.InputPost placeholder="What’s new?" placeholderTextColor="#FFFFFF" />
-                </S.ContentInputUser>
-                <S.ContentIconButton>
-                  <TouchableOpacity>
-                  <Filter />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <LibraryPhoto />
-                </TouchableOpacity>
-                  <TouchableOpacity>
-                    <S.ButtonPost>
-                      <S.Text
-                        color="#171717"
-                        tabs
-                        style={{
-                          fontSize: 9,
-                          fontWeight: 500,
-                          fontFamily: "Poppins-Medium",
-                        }}
-                      >
-                        Post
-                      </S.Text>
-                    </S.ButtonPost>
-                  </TouchableOpacity>
-                </S.ContentIconButton>
-              </S.InputContainer>
-              
-            </S.ContentPost>
-          </S.ContainerTabs>
+                      return (
+                        <S.FilterItem
+                          key={item}
+                          activeOpacity={0.7}
+                          style={{
+                            boxShadow: "0px 2px 4px 0px rgba(35, 171, 255, 0.4)",
+                          }}
+                        >
+                          <S.FilterText>{item}</S.FilterText>
+                          <IconComponent />
+                        </S.FilterItem>
+                      );
+                    })}
+                  </S.FilterContainer>
 
-          {renderTabContent()}
+                  <S.Addevent activeOpacity={0.5} onPress={() => setModalAddEvent(true)}>
+                    <S.Text fontWeight={700} fontSize="15px">
+                      +
+                    </S.Text>
+                  </S.Addevent>
+                </S.ContainerMaps>
+
+                <S.ContainerTabs>
+                  <S.Tabs>
+                    {mocks.tabs.community.map((tab) => (
+                      <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
+                        <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
+                          {tab.label}
+                        </S.Text>
+                      </S.Tab>
+                    ))}
+                  </S.Tabs>
+                  <S.ContentPost>
+                    <S.InputContainer>
+                      <S.ContentInputUser>
+                        <TouchableOpacity>
+                          <Image
+                            source={{
+                              uri: "https://picsum.photos/seed/1/200/300",
+                            }}
+                            style={{
+                              width: 35,
+                              height: 35,
+                              borderRadius: 100,
+                              marginTop: 10 ,
+                              marginLeft: 10 ,
+                            }}
+                            resizeMode="cover"
+                          />
+                        </TouchableOpacity>
+                        <S.InputPost placeholder="What's new?" placeholderTextColor="#FFFFFF" />
+                      </S.ContentInputUser>
+                      <S.ContentIconButton>
+                        <TouchableOpacity>
+                        <Filter />
+                      </TouchableOpacity>
+                      <TouchableOpacity>
+                        <LibraryPhoto />
+                      </TouchableOpacity>
+                        <TouchableOpacity>
+                          <S.ButtonPost>
+                            <S.Text
+                              color="#171717"
+                              tabs
+                              style={{
+                                fontSize: 9,
+                                fontWeight: 500,
+                                fontFamily: "Poppins-Medium",
+                              }}
+                            >
+                              Post
+                            </S.Text>
+                          </S.ButtonPost>
+                        </TouchableOpacity>
+                      </S.ContentIconButton>
+                    </S.InputContainer>
+                    
+                  </S.ContentPost>
+                </S.ContainerTabs>
+              </View>
+            )}
+            renderItem={() => renderTabContent()}
+          />
         </S.Content>
 
         <ModalGeneric

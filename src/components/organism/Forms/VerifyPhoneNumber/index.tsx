@@ -3,7 +3,7 @@ import React from "react";
 import * as S from "./styles";
 import { Props } from "./@types";
 import Colors from "@/constants/Colors";
-import { LayoutAbstract } from "@/components/organism";
+import { LayoutAbstract } from "@/components/organism/LayoutAbstract";
 import { Button, InputOTP } from "@/components/elements";
 
 export const VerifyPhoneNumber = ({ handleSubmit, handleChange }: Props) => {

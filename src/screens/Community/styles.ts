@@ -1,9 +1,8 @@
 import styled, { css } from "styled-components";
-import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
+import { TextInput, TouchableOpacity, View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
-import { removeScrollUi } from "@/utils/utils";
 import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
 export const ViewGeneric = styled(View)`
@@ -21,9 +20,9 @@ export const Container = styled(View)`
   justify-content: start;
 `;
 
-export const Content = styled(ScrollView).attrs(removeScrollUi)`
+export const Content = styled(View)`
   width: 100%;
-  flex: 1 0 auto;
+  flex: 1;
   position: relative;
 `;
 

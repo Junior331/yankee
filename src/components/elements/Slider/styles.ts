@@ -1,11 +1,6 @@
-import { View } from "react-native";
+import { View, Text as ReactText } from "react-native";
 import styled from "styled-components";
 import Slider from "@react-native-community/slider";
-
-import {
-  Text as TextComponent,
-  Title as TitleComponent,
-} from "@/components/elements";
 
 export const Container = styled(View)`
   width: 100%;
@@ -24,11 +19,11 @@ export const ContainerOptions = styled(View)`
   justify-content: space-between;
 `;
 
-export const Text = styled(TextComponent)`
+export const Text = styled(ReactText)`
   color: #ffffff;
   font-size: 10px;
 `;
-export const Title = styled(TitleComponent)`
+export const Title = styled(ReactText)`
   color: #ffffff;
   font-size: 10px;
   font-weight: 400;

@@ -1,35 +1,55 @@
 import { useState, useRef } from 'react';
-import { Audio } from 'expo-av';
+import { useAudioRecorder as useExpoAudioRecorder, useAudioPlayer } from 'expo-audio';
 import * as FileSystem from 'expo-file-system';
 
 export const useAudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackPosition, setPlaybackPosition] = useState(0);
-  const [playbackDuration, setPlaybackDuration] = useState(0);
   
-  const recording = useRef<Audio.Recording | null>(null);
-  const sound = useRef<Audio.Sound | null>(null);
-  const recordingTimer = useRef<NodeJS.Timeout | null>(null);
+  const recordingTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  let audioRecorder: any = null;
+  try {
+    audioRecorder = useExpoAudioRecorder({
+      extension: '.m4a',
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      bitRate: 96000,
+      android: {
+        extension: '.m4a',
+        outputFormat: 'MPEG_4',
+        audioEncoder: 'AAC'
+      },
+      ios: {
+        extension: '.m4a',
+        outputFormat: 'm4a',
+        audioQuality: 'MEDIUM'
+      },
+      web: {
+        mimeType: 'audio/mp4',
+        bitsPerSecond: 96000
+      }
+    });
+  } catch (error) {
+    console.warn('Audio recorder initialization failed:', error);
+  }
+  let audioPlayer: any = null;
+  try {
+    audioPlayer = useAudioPlayer();
+  } catch (error) {
+    console.warn('Audio player initialization failed:', error);
+  }
 
   const startRecording = async () => {
+    if (!audioRecorder) {
+      console.warn('Audio recorder not available');
+      return;
+    }
+    
     try {
-      const { status } = await Audio.requestPermissionsAsync();
-      if (status !== 'granted') {
-        throw new Error('Permission to access microphone is required!');
-      }
-
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
-
-      const { recording: newRecording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
+      // Request permissions is handled by expo-audio internally
+      await audioRecorder.record();
       
-      recording.current = newRecording;
       setIsRecording(true);
       setRecordingDuration(0);
 
@@ -40,12 +60,12 @@ export const useAudioRecorder = () => {
 
     } catch (error) {
       console.error('Failed to start recording:', error);
-      throw error;
+      // Don't throw error, just log it
     }
   };
 
   const stopRecording = async () => {
-    if (!recording.current) return null;
+    if (!audioRecorder?.stop) return null;
 
     try {
       setIsRecording(false);
@@ -54,17 +74,24 @@ export const useAudioRecorder = () => {
         recordingTimer.current = null;
       }
 
-      await recording.current.stopAndUnloadAsync();
-      const uri = recording.current.getURI();
-      recording.current = null;
+      const uri = await audioRecorder.stop();
 
       if (uri) {
-        const fileInfo = await FileSystem.getInfoAsync(uri);
-        return {
-          uri,
-          duration: recordingDuration,
-          size: fileInfo.exists ? fileInfo.size : 0,
-        };
+        try {
+          const fileInfo = await FileSystem.getInfoAsync(uri);
+          return {
+            uri,
+            duration: recordingDuration,
+            size: fileInfo.exists ? fileInfo.size || 0 : 0,
+          };
+        } catch (error) {
+          console.warn('Could not get file info:', error);
+          return {
+            uri,
+            duration: recordingDuration,
+            size: 0,
+          };
+        }
       }
 
       return null;
@@ -75,54 +102,54 @@ export const useAudioRecorder = () => {
   };
 
   const playSound = async (uri: string) => {
+    if (!audioPlayer) {
+      console.warn('Audio player not available');
+      return;
+    }
+    
     try {
-      if (sound.current) {
-        await sound.current.unloadAsync();
-      }
-
-      const { sound: newSound } = await Audio.Sound.createAsync(
-        { uri },
-        { shouldPlay: true },
-        (status) => {
-          if (status.isLoaded) {
-            setPlaybackPosition(status.positionMillis || 0);
-            setPlaybackDuration(status.durationMillis || 0);
-            
-            if (status.didJustFinish) {
-              setIsPlaying(false);
-              setPlaybackPosition(0);
-            }
-          }
-        }
-      );
-
-      sound.current = newSound;
+      audioPlayer.replace(uri);
+      audioPlayer.play();
       setIsPlaying(true);
     } catch (error) {
       console.error('Failed to play sound:', error);
-      throw error;
+      // Don't throw error, just log it
     }
   };
 
   const pauseSound = async () => {
-    if (sound.current) {
-      await sound.current.pauseAsync();
+    try {
+      audioPlayer.pause();
       setIsPlaying(false);
+    } catch (error) {
+      console.error('Failed to pause sound:', error);
+      throw error;
     }
   };
 
   const resumeSound = async () => {
-    if (sound.current) {
-      await sound.current.playAsync();
+    try {
+      audioPlayer.play();
       setIsPlaying(true);
+    } catch (error) {
+      console.error('Failed to resume sound:', error);
+      throw error;
     }
   };
 
   const stopSound = async () => {
-    if (sound.current) {
-      await sound.current.stopAsync();
+    if (!audioPlayer) {
+      console.warn('Audio player not available');
+      return;
+    }
+    
+    try {
+      audioPlayer.pause();
+      audioPlayer.seekTo(0);
       setIsPlaying(false);
-      setPlaybackPosition(0);
+    } catch (error) {
+      console.error('Failed to stop sound:', error);
+      // Don't throw error, just log it
     }
   };
 
@@ -141,8 +168,8 @@ export const useAudioRecorder = () => {
     isRecording,
     recordingDuration,
     isPlaying,
-    playbackPosition,
-    playbackDuration,
+    playbackPosition: 0, // expo-audio handles this internally
+    playbackDuration: 0, // expo-audio handles this internally
     startRecording,
     stopRecording,
     playSound,

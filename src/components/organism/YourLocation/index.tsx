@@ -10,7 +10,7 @@ import { LayoutAbstract } from "@/components/organism";
 import { Button, Text, Title } from "@/components/elements";
 
 export const YourLocation = ({ handleSkip, handleConfirm }: skipProps) => {
-  const [location, setLocation] = useState<location>({
+  const [, setLocation] = useState<location>({
     latitude: 0,
     longitude: 0,
   });

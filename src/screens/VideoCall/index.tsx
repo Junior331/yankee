@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Image, Vibration, StatusBar, Alert } from "react-native";
+import { Image, Vibration, StatusBar } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 
@@ -44,7 +44,7 @@ export const VideoCall = () => {
   }, [isIncoming]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
 
     if (isConnected) {
       interval = setInterval(() => {

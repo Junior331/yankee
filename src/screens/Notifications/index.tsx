@@ -5,65 +5,6 @@ import { useRouter } from "expo-router";
 import { mockMessages } from "./utils";
 import { Image, TouchableOpacity } from "react-native";
 
-const ButtonFollow = () => {
-  return (
-    <S.ButtonFollow>
-      <S.Text
-        color="#171717"
-        tabs
-        style={{
-          fontSize: 9,
-          fontWeight: 500,
-          fontFamily: "Poppins-Medium",
-        }}
-      >
-        Follow
-      </S.Text>
-      <S.IconAdd>
-        <S.Text tabs style={{ fontSize: 8, marginTop: -1.4 }}>
-          +
-        </S.Text>
-      </S.IconAdd>
-    </S.ButtonFollow>
-  );
-};
-
-const ButtonPokeBack = () => {
-  return (
-    <S.ButtonFollow>
-      <S.Text
-        color="#171717"
-        tabs
-        style={{
-          fontSize: 9,
-          fontWeight: 500,
-          fontFamily: "Poppins-Medium",
-        }}
-      >
-        Poke back
-      </S.Text>
-    </S.ButtonFollow>
-  );
-};
-
-const ButtonSeeIt = () => {
-  return (
-    <S.ButtonFollow>
-      <S.Text
-        color="#171717"
-        tabs
-        style={{
-          fontSize: 9,
-          fontWeight: 500,
-          fontFamily: "Poppins-Medium",
-        }}
-      >
-        See it!
-      </S.Text>
-    </S.ButtonFollow>
-  );
-};
-
 const ButtonReply = () => {
   return (
     <S.ButtonFollow>

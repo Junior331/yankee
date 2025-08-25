@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { TouchableOpacity, View, TextInput } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { Text as TextComponent } from "@/components/elements";

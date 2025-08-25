@@ -6,20 +6,15 @@ import React, { useState, useEffect, useCallback } from "react";
 
 import { signUp } from "./services";
 import { DataProps, PAGES } from "./@types";
-import { Error } from "@/assets/icons";
 import { stepSchemas } from "./SignUpSchema";
-import { messageConfig } from "@/utils/types";
-import { emptyDataMessage } from "@/utils/emptys";
 import { useAxiosRequest } from "@/hooks/axiosAdapter";
 import { Forms, YourLocation, ProfilePicture } from "@/components/organism";
 
 export const SignUp = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [verifyForm, setVerifyForm] = useState("phone");
-  const { response, request } = useAxiosRequest<DataProps>();
-  const [dataMessage, setDataMessage] =
-    useState<messageConfig>(emptyDataMessage);
+  const { request } = useAxiosRequest<DataProps>();
   const [currentPage, setCurrentPage] = useState(2);
 
   const formik = useFormik({
@@ -53,14 +48,7 @@ export const SignUp = () => {
         });
       } catch (error) {
         const _error = error as AxiosError<{ message: string }>;
-        setDataMessage((prev) => ({
-          ...prev,
-          icon: <Error />,
-          status: "Error",
-          title: "Error !!",
-          visible: !prev.visible,
-          message: [_error?.response?.data?.message || _error?.message],
-        }));
+        console.error('SignUp Error:', _error?.response?.data?.message || _error?.message);
       }
     },
   });

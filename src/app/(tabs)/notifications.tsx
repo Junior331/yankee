@@ -1,3 +1,4 @@
+import React from 'react';
 import { Notifications as NotificationsPages} from "@/screens/";
 
 const notifications = () => <NotificationsPages />;

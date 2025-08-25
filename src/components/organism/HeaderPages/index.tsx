@@ -8,7 +8,7 @@ import { IHeaderPages } from "./@types";
 import { DollarSign, Filter, LocationTarget, Notification } from "@/assets/icons";
 import { Loading, Slider } from "@/components/elements";
 import { mocks } from "@/services/mocks";
-export const HeaderPages = ({  title }: IHeaderPages) => {
+export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
   const router = useRouter();
   const [imageLoading, setImageLoading] = useState(true);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);

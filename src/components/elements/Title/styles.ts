@@ -1,9 +1,9 @@
 import styled from "styled-components";
+import { Text as ReactText } from "react-native";
 
-import { Text } from "@/components/elements";
-
-export const Title = styled(Text)`
+export const Title = styled(ReactText)`
   font-size: 20px;
   font-weight: 700;
   font-family: "Poppins-Bold";
+  color: #ffffff;
 `;

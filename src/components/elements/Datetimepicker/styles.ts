@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
-import { Text as TextComponent } from "@/components/elements";
+import { Text as TextComponent } from "@/components/elements/Text";
 
 export const Dropdown = styled(TouchableOpacity)`
   padding: 12px;

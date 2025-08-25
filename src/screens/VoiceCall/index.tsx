@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Image, Vibration } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import * as S from "./styles";
 import { Phone } from "@/assets/icons";
@@ -10,7 +9,6 @@ import { SafeScreen } from "@/components/elements";
 
 export const VoiceCall = () => {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams();
   
   const [callDuration, setCallDuration] = useState(0);
@@ -35,7 +33,7 @@ export const VoiceCall = () => {
   }, [isIncoming]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     
     if (isConnected) {
       interval = setInterval(() => {

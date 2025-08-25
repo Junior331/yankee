@@ -5,7 +5,6 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 // Base dimensions (iPhone 14 Pro)
 const baseWidth = 393;
-const baseHeight = 852;
 
 export const wp = (percentage: number): number => {
   const value = (percentage * screenWidth) / 100;

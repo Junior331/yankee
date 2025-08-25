@@ -10,7 +10,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   isSender,
   timestamp,
   type,
-  audioUri,
+  audioUri: _audioUri,
   audioStatus,
   audioDuration,
   imageUri,

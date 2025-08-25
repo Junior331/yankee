@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Alert, Haptics } from "expo-haptics";
+import { Alert } from "react-native";
+import * as Haptics from "expo-haptics";
 import * as ImagePicker from "expo-image-picker";
 import * as S from "./styles";
 import { ChatInputProps } from "./@types";
 import { PaperClip, Camera, Microphone, MoodSmile } from "@/assets/icons";
 import { CommentSendIcon } from "@/assets/icons";
-import { useAudioRecorder } from "@/hooks/useAudioRecorder";
+import { useAudioRecorder } from "@/hooks/useAudioRecorderSimple";
 
 export const ChatInput: React.FC<ChatInputProps> = ({
   value,

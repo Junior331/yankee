@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useMemo, useState } from "react";
+import React, { ReactNode, createContext, useMemo, useState } from "react";
 
 interface ITabVisibility {
   isVisibility: boolean;

@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
-import { Text as TextComponent } from "@/components/elements";
+import { Text as TextComponent } from "@/components/elements/Text";
 import {
   Container,
   InputContent,

@@ -2,10 +2,8 @@ import React, { useCallback, useRef, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { 
   Image, 
-  ScrollView, 
-  TouchableOpacity, 
-  KeyboardAvoidingView, 
-  Platform 
+  FlatList, 
+  TouchableOpacity 
 } from "react-native";
 
 import * as S from "./styles";
@@ -15,19 +13,19 @@ import {
   Menu,
   Phone,
 } from "@/assets/icons";
-import { GenericBottomSheet, MessageBubble, ChatInput } from "@/components/organism";
+import { MessageBubble, ChatInput } from "@/components/organism";
 import { SafeScreen } from "@/components/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import { useMessages } from "@/hooks/useMessages";
-import { useAudioRecorder } from "@/hooks/useAudioRecorder";
+import { useAudioRecorder } from "@/hooks/useAudioRecorderSimple";
 
 export const ChatUser = () => {
   const router = useRouter();
   const [message, setMessage] = React.useState("");
-  const scrollViewRef = useRef<ScrollView>(null);
+  const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
-  const { keyboardHeight, isKeyboardVisible } = useKeyboardHeight();
+  const { isKeyboardVisible } = useKeyboardHeight();
   
   // Chat functionality
   const { 
@@ -46,9 +44,14 @@ export const ChatUser = () => {
 
   const scrollToBottom = useCallback(() => {
     setTimeout(() => {
-      scrollViewRef.current?.scrollToEnd({ animated: true });
+      if (messages.length > 0) {
+        flatListRef.current?.scrollToIndex({ 
+          index: messages.length - 1, 
+          animated: true 
+        });
+      }
     }, 100);
-  }, []);
+  }, [messages.length]);
 
   useEffect(() => {
     if (isKeyboardVisible || messages.length) {
@@ -131,86 +134,87 @@ export const ChatUser = () => {
 
   return (
     <SafeScreen edges={['top']}>
-      <KeyboardAvoidingView 
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
-      >
-        <S.Container>
-          {/* Header */}
-          <S.ContainerHeader style={{ paddingTop: insets.top + 10 }}>
-            <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
-              <LeftArrow color="#ffffff" />
-            </S.ButtonIcon>
+      <S.Container>
+        {/* Header */}
+        <S.ContainerHeader style={{ paddingTop: insets.top + 10 }}>
+          <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
+            <LeftArrow color="#ffffff" />
+          </S.ButtonIcon>
 
-            <S.ContainerUser>
-              <S.ContainerAvatar>
-                <Image
-                  source={{
-                    uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
-                  }}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: 100,
-                  }}
-                  resizeMode="cover"
-                />
-                <S.ContainerBadge>
-                  <S.Badge />
-                </S.ContainerBadge>
-              </S.ContainerAvatar>
+          <S.ContainerUser>
+            <S.ContainerAvatar>
+              <Image
+                source={{
+                  uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+                }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                }}
+                resizeMode="cover"
+              />
+              <S.ContainerBadge>
+                <S.Badge />
+              </S.ContainerBadge>
+            </S.ContainerAvatar>
 
-              <S.ContainerText>
-                <S.Title numberOfLines={1}>Ryan Brooks</S.Title>
-                <S.Text numberOfLines={2} color="#f2f2f2">
-                  @Ryan_brooks
-                </S.Text>
-              </S.ContainerText>
-              
-              <S.ContainerIcons>
-                <TouchableOpacity onPress={handleVoiceCall}>
-                  <Phone />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handleVideoCall}>
-                  <Video />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Menu />
-                </TouchableOpacity>
-              </S.ContainerIcons>
-            </S.ContainerUser>
-          </S.ContainerHeader>
+            <S.ContainerText>
+              <S.Title numberOfLines={1}>Ryan Brooks</S.Title>
+              <S.Text numberOfLines={2} color="#f2f2f2">
+                @Ryan_brooks
+              </S.Text>
+            </S.ContainerText>
+            
+            <S.ContainerIcons>
+              <TouchableOpacity onPress={handleVoiceCall}>
+                <Phone />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleVideoCall}>
+                <Video />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Menu />
+              </TouchableOpacity>
+            </S.ContainerIcons>
+          </S.ContainerUser>
+        </S.ContainerHeader>
 
-          {/* Messages */}
-          <S.ChatContainer>
-            <ScrollView
-              ref={scrollViewRef}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ 
-                flexGrow: 1, 
-                paddingBottom: 20,
-                justifyContent: messages.length === 0 ? 'center' : 'flex-start'
-              }}
-              keyboardShouldPersistTaps="handled"
-            >
-              {isLoading ? (
-                <S.Text style={{ textAlign: 'center', marginTop: 50 }}>
-                  Loading messages...
-                </S.Text>
-              ) : (
-                messages.map((msg) => (
-                  <MessageBubble
-                    key={msg.id}
-                    {...msg}
-                    onAudioPlay={handleAudioPlay}
-                    onAudioPause={handleAudioPause}
-                  />
-                ))
-              )}
-            </ScrollView>
-          </S.ChatContainer>
-        </S.Container>
+        {/* Messages */}
+        {isLoading ? (
+          <S.Text style={{ textAlign: 'center', marginTop: 50, flex: 1 }}>
+            Loading messages...
+          </S.Text>
+        ) : (
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            keyExtractor={(item) => item.id}
+            style={{ flex: 1 }}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ 
+              paddingHorizontal: 15,
+              paddingBottom: 20,
+              flexGrow: 1,
+              justifyContent: messages.length === 0 ? 'center' : 'flex-start'
+            }}
+            keyboardShouldPersistTaps="handled"
+            renderItem={({ item: msg }) => (
+              <MessageBubble
+                key={msg.id}
+                {...msg}
+                onAudioPlay={handleAudioPlay}
+                onAudioPause={handleAudioPause}
+              />
+            )}
+            onScrollToIndexFailed={(info) => {
+              const wait = new Promise(resolve => setTimeout(resolve, 500));
+              wait.then(() => {
+                flatListRef.current?.scrollToIndex({ index: info.index, animated: true });
+              });
+            }}
+          />
+        )}
 
         {/* Input fixo na parte inferior */}
         <ChatInput
@@ -221,7 +225,7 @@ export const ChatUser = () => {
           onSendAudio={handleSendAudio}
           disabled={isLoading}
         />
-      </KeyboardAvoidingView>
+      </S.Container>
     </SafeScreen>
   );
 };

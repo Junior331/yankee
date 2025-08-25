@@ -9,7 +9,8 @@ export const Slider = () => {
 
   const handleSetValue = (index: number) => {
     const currentValue = getLabel(index);
-    setValue(value);
+    console.log('Setting value:', currentValue);
+    setValue(index);
   };
 
   const options = ["0-25", "25-50", "50-100", "+100"];

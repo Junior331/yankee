@@ -1,3 +1,4 @@
+import React from 'react';
 import { Fire as FirePage} from "@/screens/";
 
 const fire = () => <FirePage />;
