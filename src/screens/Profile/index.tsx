@@ -60,7 +60,7 @@ export const Profile = () => {
               }}
               onLoadEnd={() => setBannerLoading(false)}
               source={{
-                uri: "https://s3-alpha-sig.figma.com/img/2f1a/78bf/bbd451a2ca31047c7259800a489ce608?Expires=1740960000&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=A62EMOQLYqFLTq~OWWQk74k54NQ3FEq4Hsn7r-kMHzaIbFJlP-EspBvTvvJbR3ZdRNtncLLoZ8lufqffC03rgbdOJJyE1X7F~qSHOx1jMOR8GaNwOeCHlNzqy9EPT4PuC6vf-Digxn~lyz-vPqMA~yOQlL0Ub~zwPvsfCavo0jsDBvtkvi~LsfosI9YqlL~dPnpSb6Al4Z0uwINar4pz-Cob80Vn8lFXXoYJnOKzHVSt1MXjGYqJbRBEtJiokBznXVrZ68KY4WSXMVwd1MUkUgeFy6KNbJ~ImHDvJiYF7zlMrZQyjgaggbAy05X-XeWh3UizFWLLrkbkk7Qb-TO3Kg__",
+                uri: "https://picsum.photos/seed/109/200/300",
               }}
             />
           </S.ContainerBanner>
