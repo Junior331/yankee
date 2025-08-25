@@ -151,41 +151,6 @@ export const TimeText = styled(TextComponent)<StyledProps>`
   align-self: ${({ isSender }) => (isSender ? "flex-end" : "flex-start")};
 `;
 
-export const InputContainer = styled(View)`
-  width: 90%;
-  margin: 0 auto;
-  padding: 8px 15px;
-  align-items: center;
-  border-radius: 25px;
-  flex-direction: row;
-  border: 1.5px solid #ffffff;
-  background-color: transparent;
-  min-height: 50px;
-`;
-
-export const AttachmentButton = styled(View)`
-  gap: 5px;
-  flex-direction: row;
-`;
-
-export const Input = styled(TextInput)`
-  flex: 1;
-  min-height: 40px;
-  max-height: 100px;
-  margin: 0 10px;
-  padding: 10px;
-  color: #ffffff;
-  font-size: 14px;
-  background-color: transparent;
-  text-align-vertical: center;
-`;
-
-export const VoiceButton = styled(TouchableOpacity)`
-  width: 40px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-`;
 
 export const ContentModal = styled(BottomSheetView)`
   flex: 1 ;

@@ -15,6 +15,8 @@ import { GenericCommet } from "./GenericCommet";
 import { ProfilePicture } from "./ProfilePicture";
 import { LayoutAbstract } from "./LayoutAbstract";
 import { GenericBottomSheet } from "./BottomSheet";
+import { MessageBubble } from "./MessageBubble";
+import { ChatInput } from "./ChatInput";
 
 export {
   Tabs,
@@ -34,4 +36,6 @@ export {
   ProfilePicture,
   LayoutAbstract,
   GenericBottomSheet,
+  MessageBubble,
+  ChatInput,
 };

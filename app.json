@@ -19,7 +19,8 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "This app uses the camera for video calls.",
-        "NSMicrophoneUsageDescription": "This app uses the microphone for voice and video calls."
+        "NSMicrophoneUsageDescription": "This app uses the microphone for voice and video calls.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to photo library to send images."
       }
     },
     "android": {
@@ -38,7 +39,9 @@
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
         "CAMERA",
-        "RECORD_AUDIO"
+        "RECORD_AUDIO",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
@@ -64,6 +67,12 @@
           "cameraPermission": "Allow yankee to access your camera for video calls.",
           "microphonePermission": "Allow yankee to access your microphone for voice and video calls.",
           "recordAudioAndroid": true
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow yankee to access your microphone to record audio messages."
         }
       ]
     ],

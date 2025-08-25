@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(move index.tsx index_old.tsx)",
+      "Bash(move index_new.tsx index.tsx)"
     ],
     "deny": [],
     "ask": []

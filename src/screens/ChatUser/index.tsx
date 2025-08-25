@@ -1,10 +1,9 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 import { useRouter } from "expo-router";
 import { 
   Image, 
   ScrollView, 
   TouchableOpacity, 
-  Text, 
   KeyboardAvoidingView, 
   Platform 
 } from "react-native";
@@ -12,144 +11,38 @@ import {
 import * as S from "./styles";
 import Video from "@/assets/icons/Video";
 import {
-  Galery,
-  HeadPhones,
   LeftArrow,
-  Library,
-  MapPin,
   Menu,
-  Microphone,
-  MoodSmile,
   Phone,
-  Sparkles,
 } from "@/assets/icons";
-import PaperClip from "@/assets/icons/PaperClip";
-import Camera from "@/assets/icons/Camera";
-import BottomSheet from "@gorhom/bottom-sheet";
-import { GenericBottomSheet } from "@/components/organism";
+import { GenericBottomSheet, MessageBubble, ChatInput } from "@/components/organism";
 import { SafeScreen } from "@/components/elements";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
-
-interface Message {
-  id: number;
-  text: string;
-  isSender: boolean;
-  timestamp: string;
-  type: "text" | "audio" | "image";
-  audioUrl?: string;
-  imageUrl?: string;
-}
+import { useMessages } from "@/hooks/useMessages";
+import { useAudioRecorder } from "@/hooks/useAudioRecorder";
 
 export const ChatUser = () => {
   const router = useRouter();
   const [message, setMessage] = React.useState("");
-  const bottomSheetRef = useRef<BottomSheet>(null);
   const scrollViewRef = useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
   const { keyboardHeight, isKeyboardVisible } = useKeyboardHeight();
+  
+  // Chat functionality
+  const { 
+    messages, 
+    isLoading, 
+    loadMessages, 
+    sendMessage, 
+    updateMessage 
+  } = useMessages("ryan_brooks_chat");
+  
+  const { playSound, stopSound } = useAudioRecorder();
 
-  const messages: Message[] = [
-    {
-      id: 1,
-      text: "Dude, guess what just happened",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 2,
-      text: "Spill ",
-      isSender: true,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 3,
-      text: "I was walking to class and totally tripped over my own shoelace… in front of everyone.",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 4,
-      text: "LMAO noooo are u ok tho??",
-      isSender: true,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 5,
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 6,
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-      isSender: true,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 7,
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-      isSender: true,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 8,
-      text: "NO WAY hahah",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 9,
-      text: "Good morning bestiee <3",
-      isSender: true,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 10,
-      text: "Good Morning <33",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 11,
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry",
-      isSender: false,
-      timestamp: "10:20 AM",
-      type: "text",
-    },
-    {
-      id: 12,
-      text: "See this ",
-      isSender: false,
-      timestamp: "10:23 AM",
-      type: "text",
-    },
-    {
-      id: 12,
-      text: "Tell me we weren’t just talking about this??",
-      isSender: false,
-      timestamp: "09:20 AM",
-      type: "text",
-    },
-  ];
-
-  const handleSnapPress = useCallback(() => {
-    handleChangeSize(0);
-  }, []);
-
-  const handleChangeSize = useCallback((index: number) => {
-    bottomSheetRef.current?.snapToIndex(index);
-  }, []);
+  useEffect(() => {
+    loadMessages();
+  }, [loadMessages]);
 
   const scrollToBottom = useCallback(() => {
     setTimeout(() => {
@@ -157,20 +50,60 @@ export const ChatUser = () => {
     }, 100);
   }, []);
 
-  React.useEffect(() => {
-    if (isKeyboardVisible) {
+  useEffect(() => {
+    if (isKeyboardVisible || messages.length) {
       scrollToBottom();
     }
-  }, [isKeyboardVisible, scrollToBottom]);
+  }, [isKeyboardVisible, messages.length, scrollToBottom]);
 
-  const handleSendMessage = useCallback(() => {
+  const handleSendText = useCallback(async () => {
     if (message.trim()) {
-      // Aqui você pode adicionar lógica para enviar mensagem
-      console.log('Sending message:', message);
+      await sendMessage({ text: message.trim(), type: 'text' });
       setMessage('');
       scrollToBottom();
     }
-  }, [message, scrollToBottom]);
+  }, [message, sendMessage, scrollToBottom]);
+
+  const handleSendImage = useCallback(async (imageUri: string) => {
+    await sendMessage({ 
+      text: '',
+      type: 'image',
+      imageUri,
+    });
+    scrollToBottom();
+  }, [sendMessage, scrollToBottom]);
+
+  const handleSendAudio = useCallback(async (audioUri: string, duration: number) => {
+    await sendMessage({ 
+      text: '',
+      type: 'audio',
+      audioUri,
+      audioDuration: duration,
+    });
+    scrollToBottom();
+  }, [sendMessage, scrollToBottom]);
+
+  const handleAudioPlay = useCallback(async (messageId: string) => {
+    const msg = messages.find(m => m.id === messageId);
+    if (msg?.audioUri) {
+      try {
+        await updateMessage(messageId, { audioStatus: 'loading' });
+        await playSound(msg.audioUri);
+        await updateMessage(messageId, { audioStatus: 'playing' });
+      } catch (error) {
+        await updateMessage(messageId, { audioStatus: 'idle' });
+      }
+    }
+  }, [messages, playSound, updateMessage]);
+
+  const handleAudioPause = useCallback(async (messageId: string) => {
+    try {
+      await stopSound();
+      await updateMessage(messageId, { audioStatus: 'paused' });
+    } catch (error) {
+      await updateMessage(messageId, { audioStatus: 'idle' });
+    }
+  }, [stopSound, updateMessage]);
 
   const handleVoiceCall = useCallback(() => {
     router.push({
@@ -204,6 +137,7 @@ export const ChatUser = () => {
         keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
       >
         <S.Container>
+          {/* Header */}
           <S.ContainerHeader style={{ paddingTop: insets.top + 10 }}>
             <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
               <LeftArrow color="#ffffff" />
@@ -233,6 +167,7 @@ export const ChatUser = () => {
                   @Ryan_brooks
                 </S.Text>
               </S.ContainerText>
+              
               <S.ContainerIcons>
                 <TouchableOpacity onPress={handleVoiceCall}>
                   <Phone />
@@ -247,92 +182,45 @@ export const ChatUser = () => {
             </S.ContainerUser>
           </S.ContainerHeader>
 
+          {/* Messages */}
           <S.ChatContainer>
             <ScrollView
               ref={scrollViewRef}
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ flexGrow: 1, justifyContent: 'flex-end' }}
+              contentContainerStyle={{ 
+                flexGrow: 1, 
+                paddingBottom: 20,
+                justifyContent: messages.length === 0 ? 'center' : 'flex-start'
+              }}
               keyboardShouldPersistTaps="handled"
             >
-              {messages.map((msg) => (
-                <S.MessageContainer key={msg.id} isSender={msg.isSender}>
-                  <S.MessageBubbleWrapper isSender={msg.isSender}>
-                    <S.MessageBubble isSender={msg.isSender}>
-                      <S.MessageText isSender={msg.isSender}>{msg.text}</S.MessageText>
-                    </S.MessageBubble>
-                    <S.MessagePointer isSender={msg.isSender} />
-                  </S.MessageBubbleWrapper>
-                  <S.TimeText isSender={msg.isSender}>{msg.timestamp}</S.TimeText>
-                </S.MessageContainer>
-              ))}
+              {isLoading ? (
+                <S.Text style={{ textAlign: 'center', marginTop: 50 }}>
+                  Loading messages...
+                </S.Text>
+              ) : (
+                messages.map((msg) => (
+                  <MessageBubble
+                    key={msg.id}
+                    {...msg}
+                    onAudioPlay={handleAudioPlay}
+                    onAudioPause={handleAudioPause}
+                  />
+                ))
+              )}
             </ScrollView>
           </S.ChatContainer>
-
-          <S.InputContainer style={{ marginBottom: insets.bottom + 10 }}>
-            <S.AttachmentButton>
-              <TouchableOpacity onPress={() => handleSnapPress()}>
-                <PaperClip />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Camera />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <MoodSmile />
-              </TouchableOpacity>
-            </S.AttachmentButton>
-
-            <S.Input 
-              placeholder="Text Here" 
-              placeholderTextColor="#ffff" 
-              value={message} 
-              onChangeText={setMessage}
-              multiline
-              returnKeyType="send"
-              onSubmitEditing={handleSendMessage}
-              blurOnSubmit={false}
-            />
-            <S.VoiceButton onPress={handleSendMessage}>
-              <Microphone />
-            </S.VoiceButton>
-          </S.InputContainer>
         </S.Container>
-        
-        <GenericBottomSheet ref={bottomSheetRef} size={-1}>
-        <S.ContentModal>
-          <S.ContainerPaperClip>
-            <S.ContainerFunctionality>
-              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
-                <Sparkles />
-                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>GIF</Text>
-              </TouchableOpacity>
-            </S.ContainerFunctionality>
-            <S.ContainerFunctionality>
-              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
-                <Galery />
-                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Galery</Text>
-              </TouchableOpacity>
-            </S.ContainerFunctionality>
-            <S.ContainerFunctionality>
-              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
-                <HeadPhones />
-                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Audio</Text>
-              </TouchableOpacity>
-            </S.ContainerFunctionality>
-            <S.ContainerFunctionality>
-              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
-                <Library />
-                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Document</Text>
-              </TouchableOpacity>
-            </S.ContainerFunctionality>
-            <S.ContainerFunctionality>
-              <TouchableOpacity style={{ gap: 15, alignItems: "center" }}>
-                <MapPin />
-                <Text style={{ fontSize: 13, color: "#ffffff", fontWeight: "400" }}>Location</Text>
-              </TouchableOpacity>
-            </S.ContainerFunctionality>
-          </S.ContainerPaperClip>
-        </S.ContentModal>
-        </GenericBottomSheet>
+
+        {/* Input fixo na parte inferior */}
+        <ChatInput
+          value={message}
+          onChangeText={setMessage}
+          onSendText={handleSendText}
+          onSendImage={handleSendImage}
+          onSendAudio={handleSendAudio}
+          disabled={isLoading}
+        />
       </KeyboardAvoidingView>
     </SafeScreen>
   );
