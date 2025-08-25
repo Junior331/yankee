@@ -137,7 +137,7 @@ export const ChatUser = () => {
       <S.Container>
         {/* Header */}
         <S.ContainerHeader style={{ paddingTop: insets.top + 10 }}>
-          <S.ButtonIcon onPress={() => router.push("/(tabs)/messages")}>
+          <S.ButtonIcon onPress={() => router.back()}>
             <LeftArrow color="#ffffff" />
           </S.ButtonIcon>
 

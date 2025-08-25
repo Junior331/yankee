@@ -39,7 +39,7 @@ export const Messages = () => {
 
           return (
             <TouchableOpacity key={message.id} style={{ width: "100%", marginVertical: 15, height: "auto" }} 
-            onPress={() => router.push( "/(tabs)/chatuser" ) }
+            onPress={() => router.push( "/chatuser" ) }
             >
               <S.ContainerMessage>
                 <S.ContainerUser>

@@ -52,6 +52,9 @@ function RootLayoutNav() {
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="(public)" options={{ headerShown: false }} />
               <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+              <Stack.Screen name="chatuser" options={{ headerShown: false }} />
+              <Stack.Screen name="voice-call" options={{ headerShown: false }} />
+              <Stack.Screen name="video-call" options={{ headerShown: false }} />
             </Stack>
           </ThemeProvider>
         </Provider>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatUser as ChatUserPages} from "@/screens/";
 
-const chatuser = () => <ChatUserPages />;
+const ChatUserScreen = () => <ChatUserPages />;
 
-export default chatuser;
+export default ChatUserScreen;
