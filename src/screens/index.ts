@@ -10,6 +10,8 @@ import { Stories } from "./Stories";
 import { Messages } from "./Messages";
 import { ChatUser } from "./ChatUser";
 import { Community } from "./Community";
+import { VoiceCall } from "./VoiceCall";
+import { VideoCall } from "./VideoCall";
 import { Notifications } from "./Notifications";
 import { SearchProfile } from "./SearchProfile";
 
@@ -26,6 +28,8 @@ export {
   ChatUser,
   Messages,
   Community,
+  VoiceCall,
+  VideoCall,
   SearchProfile,
   Notifications,
 };

@@ -172,6 +172,30 @@ export const ChatUser = () => {
     }
   }, [message, scrollToBottom]);
 
+  const handleVoiceCall = useCallback(() => {
+    router.push({
+      pathname: "/voice-call",
+      params: {
+        contactName: "Ryan Brooks",
+        contactAvatar: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+        contactUsername: "@Ryan_brooks",
+        isIncoming: "false"
+      }
+    });
+  }, [router]);
+
+  const handleVideoCall = useCallback(() => {
+    router.push({
+      pathname: "/video-call",
+      params: {
+        contactName: "Ryan Brooks",
+        contactAvatar: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+        contactUsername: "@Ryan_brooks",
+        isIncoming: "false"
+      }
+    });
+  }, [router]);
+
   return (
     <SafeScreen edges={['top']}>
       <KeyboardAvoidingView 
@@ -210,10 +234,10 @@ export const ChatUser = () => {
                 </S.Text>
               </S.ContainerText>
               <S.ContainerIcons>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleVoiceCall}>
                   <Phone />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={handleVideoCall}>
                   <Video />
                 </TouchableOpacity>
                 <TouchableOpacity>
