@@ -79,7 +79,7 @@ export const VoiceCall = () => {
   };
 
   return (
-    <SafeScreen>
+    <SafeScreen edges={[]}>
       <S.Container>
         <S.BackgroundGradient
           colors={['rgba(52, 199, 89, 0.3)', 'rgba(0, 0, 0, 0.8)']}

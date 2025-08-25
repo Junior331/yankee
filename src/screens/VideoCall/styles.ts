@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { View, TouchableOpacity, ImageBackground } from "react-native";
-import Colors from "@/constants/Colors";
 import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
@@ -157,14 +156,14 @@ export const IncomingCallActions = styled(View)`
   width: 200px;
 `;
 
-export const MinimizeButton = styled(TouchableOpacity)`
-  position: absolute;
-  top: 60px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-`;
+// export const MinimizeButton = styled(TouchableOpacity)`
+//   position: absolute;
+//   top: 60px;
+//   left: 20px;
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 20px;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   justify-content: center;
+//   align-items: center;
+// `;
