@@ -187,20 +187,8 @@ export const Messages = () => {
         <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <SubHeader title={"Messages"} handleOnPress={() => router.push("/(tabs)/profile")} />
-            <TouchableOpacity 
-              onPress={testNotification}
-              style={{ 
-                backgroundColor: '#1976d2', 
-                paddingHorizontal: 12, 
-                paddingVertical: 6, 
-                borderRadius: 15 
-              }}
-            >
-              <S.Text style={{ fontSize: 12, color: '#fff' }}>🔔 Test</S.Text>
-            </TouchableOpacity>
           </View>
         
-        {/* Tabs */}
         <S.ContainerTabs>
           <S.Tabs>
             {[
