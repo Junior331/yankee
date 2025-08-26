@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(move index.tsx index_old.tsx)",
-      "Bash(move index_new.tsx index.tsx)"
+      "Bash(move index_new.tsx index.tsx)",
+      "Bash(npm start)",
+      "Bash(npx expo start:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

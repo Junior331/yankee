@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useEffect } from "react";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { 
   Image, 
   FlatList, 
@@ -24,10 +24,19 @@ import { useAudioRecorder } from "@/hooks/useAudioRecorderSimple";
 
 export const ChatUser = () => {
   const router = useRouter();
+  const params = useLocalSearchParams();
   const [message, setMessage] = React.useState("");
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
   const { isKeyboardVisible } = useKeyboardHeight();
+  
+  // Extract user data from navigation params
+  const userId = params.userId as string;
+  const userName = params.userName as string || "User";
+  const userAvatar = params.userAvatar as string || "https://i.pravatar.cc/400?img=1";
+  const userUsername = params.userUsername as string || "@user";
+  const isOnline = params.isOnline === 'true';
+  const conversationId = params.conversationId as string;
   
   // Chat functionality
   const { 
@@ -36,7 +45,7 @@ export const ChatUser = () => {
     loadMessages, 
     sendMessage, 
     updateMessage 
-  } = useMessages("ryan_brooks_chat");
+  } = useMessages(conversationId || userId || "default_chat");
   
   const { playSound, stopSound } = useAudioRecorder();
 
@@ -126,25 +135,25 @@ export const ChatUser = () => {
     router.push({
       pathname: "/voice-call",
       params: {
-        contactName: "Ryan Brooks",
-        contactAvatar: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
-        contactUsername: "@Ryan_brooks",
+        contactName: userName,
+        contactAvatar: userAvatar,
+        contactUsername: userUsername,
         isIncoming: "false"
       }
     });
-  }, [router]);
+  }, [router, userName, userAvatar, userUsername]);
 
   const handleVideoCall = useCallback(() => {
     router.push({
       pathname: "/video-call",
       params: {
-        contactName: "Ryan Brooks",
-        contactAvatar: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
-        contactUsername: "@Ryan_brooks",
+        contactName: userName,
+        contactAvatar: userAvatar,
+        contactUsername: userUsername,
         isIncoming: "false"
       }
     });
-  }, [router]);
+  }, [router, userName, userAvatar, userUsername]);
 
   return (
     <SafeScreen edges={['top']}>
@@ -163,7 +172,7 @@ export const ChatUser = () => {
               <S.ContainerAvatar>
                 <Image
                   source={{
-                    uri: "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__",
+                    uri: userAvatar,
                   }}
                   style={{
                     width: "100%",
@@ -172,15 +181,17 @@ export const ChatUser = () => {
                   }}
                   resizeMode="cover"
                 />
-                <S.ContainerBadge>
-                  <S.Badge />
-                </S.ContainerBadge>
+                {isOnline && (
+                  <S.ContainerBadge>
+                    <S.Badge />
+                  </S.ContainerBadge>
+                )}
               </S.ContainerAvatar>
 
               <S.ContainerText>
-                <S.Title numberOfLines={1}>Ryan Brooks</S.Title>
+                <S.Title numberOfLines={1}>{userName}</S.Title>
                 <S.Text numberOfLines={2} color="#f2f2f2">
-                  @Ryan_brooks
+                  {userUsername}
                 </S.Text>
               </S.ContainerText>
               

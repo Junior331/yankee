@@ -8,6 +8,14 @@ import { optionsFilter } from "./filter";
 import { genericCommets } from "./comments";
 import { routesTabBar } from "./routesTabBar";
 import { posts, postsCommunity } from "./posts";
+import { 
+  users, 
+  mainConversations, 
+  chatRequests, 
+  getUserById, 
+  getConversationById,
+  formatLastSeen 
+} from "./users";
 
 export const mocks = {
   tabs,
@@ -21,4 +29,10 @@ export const mocks = {
   optionsFilter,
   genericCommets,
   postsCommunity,
+  users,
+  mainConversations,
+  chatRequests,
+  getUserById,
+  getConversationById,
+  formatLastSeen,
 };

@@ -9,8 +9,7 @@ import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   width: 100%;
-  height: 100%;
-  padding: 20px;
+  flex: 1;
   background-color: ${Colors.dark.background};
 `;
 
@@ -139,4 +138,16 @@ export const BadgeBlue = styled(View)`
   margin: 0 10px 0 10px;
   justify-content: center;
   background-color: #1976d2;
+`;
+
+export const TimeContainer = styled(View)`
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 40px;
+`;
+
+export const EmptyStateContainer = styled(View)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
 `;

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
+import { mocks } from '@/services/mocks';
 
 export interface Message {
   id: string;
@@ -27,39 +28,43 @@ export const useMessages = (chatId: string) => {
       if (storedMessages) {
         setMessages(JSON.parse(storedMessages));
       } else {
-        // Mensagens iniciais mockadas
-        const initialMessages: Message[] = [
-          {
-            id: uuid.v4() as string,
-            text: "Dude, guess what just happened",
-            isSender: false,
-            timestamp: "10:20 AM",
-            type: "text",
-          },
-          {
-            id: uuid.v4() as string,
-            text: "Spill ",
-            isSender: true,
-            timestamp: "10:20 AM",
-            type: "text",
-          },
-          {
-            id: uuid.v4() as string,
-            text: "I was walking to class and totally tripped over my own shoelace… in front of everyone.",
-            isSender: false,
-            timestamp: "10:20 AM",
-            type: "text",
-          },
-          {
-            id: uuid.v4() as string,
-            text: "LMAO noooo are u ok tho??",
-            isSender: true,
-            timestamp: "10:20 AM",
-            type: "text",
-          },
-        ];
-        setMessages(initialMessages);
-        await AsyncStorage.setItem(`chat_${chatId}`, JSON.stringify(initialMessages));
+        // Try to find conversation in mock data
+        const conversation = mocks.getConversationById(chatId);
+        if (conversation && conversation.messages.length > 0) {
+          // Convert mock messages to our Message format
+          const initialMessages: Message[] = conversation.messages.map(msg => ({
+            id: msg.id,
+            text: msg.text,
+            isSender: msg.isSender,
+            timestamp: msg.timestamp,
+            type: msg.type,
+            audioUri: msg.audioUri,
+            audioStatus: 'idle',
+            audioDuration: msg.audioDuration,
+          }));
+          setMessages(initialMessages);
+          await AsyncStorage.setItem(`chat_${chatId}`, JSON.stringify(initialMessages));
+        } else {
+          // Fallback to default messages if no conversation found
+          const initialMessages: Message[] = [
+            {
+              id: uuid.v4() as string,
+              text: "Hey! How are you doing?",
+              isSender: false,
+              timestamp: "10:20 AM",
+              type: "text",
+            },
+            {
+              id: uuid.v4() as string,
+              text: "I'm doing great! How about you?",
+              isSender: true,
+              timestamp: "10:25 AM",
+              type: "text",
+            },
+          ];
+          setMessages(initialMessages);
+          await AsyncStorage.setItem(`chat_${chatId}`, JSON.stringify(initialMessages));
+        }
       }
     } catch (error) {
       console.error('Error loading messages:', error);
@@ -98,23 +103,25 @@ export const useMessages = (chatId: string) => {
     setMessages(updatedMessages);
     await saveMessages(updatedMessages);
 
-    // Simular resposta automática após 1-3 segundos
-    setTimeout(() => {
-      const autoReply: Message = {
-        id: uuid.v4() as string,
-        text: getRandomReply(),
-        isSender: false,
-        timestamp: new Date().toLocaleTimeString('en-US', { 
-          hour: 'numeric', 
-          minute: '2-digit' 
-        }),
-        type: 'text',
-      };
-      
-      const withReply = [...updatedMessages, autoReply];
-      setMessages(withReply);
-      saveMessages(withReply);
-    }, Math.random() * 2000 + 1000);
+    // Simular resposta automática após 1-3 segundos (apenas para mensagens de texto)
+    if (messageData.type === 'text') {
+      setTimeout(() => {
+        const autoReply: Message = {
+          id: uuid.v4() as string,
+          text: getRandomReply(),
+          isSender: false,
+          timestamp: new Date().toLocaleTimeString('en-US', { 
+            hour: 'numeric', 
+            minute: '2-digit' 
+          }),
+          type: 'text',
+        };
+        
+        const withReply = [...updatedMessages, autoReply];
+        setMessages(withReply);
+        saveMessages(withReply);
+      }, Math.random() * 2000 + 1000);
+    }
 
     return newMessage;
   }, [messages, saveMessages]);
