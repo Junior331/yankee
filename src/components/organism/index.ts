@@ -17,6 +17,7 @@ import { LayoutAbstract } from "./LayoutAbstract";
 import { GenericBottomSheet } from "./BottomSheet";
 import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
+import { AudioRecordBar } from "./AudioRecordBar";
 
 export {
   Tabs,
@@ -38,4 +39,5 @@ export {
   GenericBottomSheet,
   MessageBubble,
   ChatInput,
+  AudioRecordBar,
 };

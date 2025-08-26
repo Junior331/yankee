@@ -6,7 +6,7 @@ import * as S from "./styles";
 import { ChatInputProps } from "./@types";
 import { PaperClip, Camera, Microphone, MoodSmile } from "@/assets/icons";
 import { CommentSendIcon } from "@/assets/icons";
-import { useAudioRecorder } from "@/hooks/useAudioRecorderSimple";
+import { AudioRecordBar } from "../AudioRecordBar";
 
 export const ChatInput: React.FC<ChatInputProps> = ({
   value,
@@ -16,19 +16,11 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   onSendAudio,
   disabled = false,
 }) => {
-  const [showAttachments, setShowAttachments] = useState(false);
-  const {
-    isRecording,
-    recordingDuration,
-    startRecording,
-    stopRecording,
-    formatDuration,
-  } = useAudioRecorder();
+  const [isRecordingBarVisible, setIsRecordingBarVisible] = useState(false);
 
   const handleSendText = () => {
     if (value.trim()) {
       onSendText();
-      setShowAttachments(false);
     }
   };
 
@@ -48,7 +40,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
     if (!result.canceled && result.assets[0]) {
       onSendImage(result.assets[0].uri);
-      setShowAttachments(false);
     }
   };
 
@@ -67,67 +58,47 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
     if (!result.canceled && result.assets[0]) {
       onSendImage(result.assets[0].uri);
-      setShowAttachments(false);
     }
   };
 
-  const handleStartRecording = async () => {
-    try {
-      await startRecording();
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    } catch (error) {
-      Alert.alert('Error', 'Could not start recording');
-    }
+  const handleStartRecording = () => {
+    setIsRecordingBarVisible(true);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
   };
 
-  const handleStopRecording = async () => {
-    try {
-      const recordingResult = await stopRecording();
-      if (recordingResult) {
-        onSendAudio(recordingResult.uri, recordingResult.duration);
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      }
-    } catch (error) {
-      Alert.alert('Error', 'Could not stop recording');
-    }
+  const handleSendAudio = (uri: string, durationMs: number) => {
+    setIsRecordingBarVisible(false);
+    onSendAudio(uri, Math.floor(durationMs / 1000)); // Convert to seconds
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
-  if (isRecording) {
+  const handleCancelRecording = () => {
+    setIsRecordingBarVisible(false);
+  };
+
+  // Se o AudioRecordBar estiver visível, mostrar apenas ele
+  if (isRecordingBarVisible) {
     return (
       <S.Container>
-        <S.RecordingContainer>
-          <S.RecordingDot />
-          <S.RecordingText>Recording...</S.RecordingText>
-          <S.RecordingDuration>
-            {formatDuration(recordingDuration)}
-          </S.RecordingDuration>
-          <S.StopRecordingButton onPress={handleStopRecording}>
-            <CommentSendIcon color="#ffffff" />
-          </S.StopRecordingButton>
-        </S.RecordingContainer>
+        <AudioRecordBar
+          onSendAudio={handleSendAudio}
+          onCancel={handleCancelRecording}
+        />
       </S.Container>
     );
   }
 
   return (
     <S.Container>
-      {showAttachments && (
-        <S.InputContainer style={{ marginBottom: 10 }}>
-          <S.AttachmentButton onPress={handleImagePicker}>
-            <PaperClip color="#ffffff" />
-          </S.AttachmentButton>
-          <S.AttachmentButton onPress={handleCameraCapture}>
-            <Camera color="#ffffff" />
-          </S.AttachmentButton>
-          <S.AttachmentButton onPress={() => setShowAttachments(false)}>
-            <MoodSmile color="#ffffff" />
-          </S.AttachmentButton>
-        </S.InputContainer>
-      )}
-      
       <S.InputContainer>
-        <S.AttachmentButton onPress={() => setShowAttachments(!showAttachments)}>
+        <S.AttachmentButton onPress={handleImagePicker}>
           <PaperClip color="#ffffff" />
+        </S.AttachmentButton>
+        <S.AttachmentButton onPress={handleCameraCapture}>
+          <Camera color="#ffffff" />
+        </S.AttachmentButton>
+        <S.AttachmentButton >
+          <MoodSmile color="#ffffff" />
         </S.AttachmentButton>
 
         <S.Input

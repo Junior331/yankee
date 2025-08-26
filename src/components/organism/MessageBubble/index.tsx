@@ -75,13 +75,23 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     }
   };
 
+  const isImageOnly = type === 'image' && !text;
+
   return (
     <S.MessageContainer isSender={isSender}>
       <S.MessageBubbleWrapper isSender={isSender}>
-        <S.MessageBubble isSender={isSender}>
-          {renderContent()}
-        </S.MessageBubble>
-        <S.MessagePointer isSender={isSender} />
+        {isImageOnly ? (
+          // Image-only messages: no bubble background, just the image
+          renderContent()
+        ) : (
+          // Text or mixed messages: normal bubble styling
+          <>
+            <S.MessageBubble isSender={isSender}>
+              {renderContent()}
+            </S.MessageBubble>
+            <S.MessagePointer isSender={isSender} />
+          </>
+        )}
       </S.MessageBubbleWrapper>
       <S.TimeText isSender={isSender}>{timestamp}</S.TimeText>
     </S.MessageContainer>

@@ -4,10 +4,8 @@ import { Text as TextComponent } from "@/components/elements";
 import Colors from "@/constants/Colors";
 
 export const Container = styled(View)`
-  padding: 15px 20px;
+  padding: 15px 5px;
   background-color: ${Colors.dark.background};
-  border-top-width: 1px;
-  border-top-color: rgba(255, 255, 255, 0.1);
 `;
 
 export const InputContainer = styled(View)`
