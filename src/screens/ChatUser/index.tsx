@@ -92,19 +92,31 @@ export const ChatUser = () => {
     const msg = messages.find(m => m.id === messageId);
     if (msg?.audioUri) {
       try {
+        // Parar todos os outros audios primeiro
+        messages.forEach(m => {
+          if (m.id !== messageId && m.audioStatus === 'playing') {
+            updateMessage(m.id, { audioStatus: 'idle' });
+          }
+        });
+
+        // Parar qualquer som tocando
+        await stopSound();
+        
+        // Iniciar novo audio
         await updateMessage(messageId, { audioStatus: 'loading' });
         await playSound(msg.audioUri);
         await updateMessage(messageId, { audioStatus: 'playing' });
       } catch (error) {
+        console.error('Error playing audio:', error);
         await updateMessage(messageId, { audioStatus: 'idle' });
       }
     }
-  }, [messages, playSound, updateMessage]);
+  }, [messages, playSound, stopSound, updateMessage]);
 
   const handleAudioPause = useCallback(async (messageId: string) => {
     try {
       await stopSound();
-      await updateMessage(messageId, { audioStatus: 'paused' });
+      await updateMessage(messageId, { audioStatus: 'idle' });
     } catch (error) {
       await updateMessage(messageId, { audioStatus: 'idle' });
     }

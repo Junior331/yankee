@@ -94,7 +94,6 @@ export const AudioWaveform = styled(View)`
 export const AudioBar = styled(View)<{ height: number }>`
   width: 3px;
   height: ${({ height }) => height}px;
-  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 2px;
 `;
 

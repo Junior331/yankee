@@ -26,12 +26,28 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   };
 
   const renderAudioWaveform = () => {
-    const bars = Array.from({ length: 20 }, (_, i) => (
-      <S.AudioBar 
-        key={i} 
-        height={Math.random() * 20 + 5} 
-      />
-    ));
+    // Usar o ID da mensagem como seed para gerar waveform consistente
+    const seed = parseInt(id.replace(/\D/g, '')) || 1;
+    const seededRandom = (index: number) => {
+      // Gerador pseudo-random baseado no ID + índice
+      const x = Math.sin(seed + index) * 10000;
+      return x - Math.floor(x);
+    };
+
+    const bars = Array.from({ length: 20 }, (_, i) => {
+      const height = seededRandom(i) * 15 + 5; // Entre 5 e 20
+      const isActive = audioStatus === 'playing';
+      
+      return (
+        <S.AudioBar 
+          key={i} 
+          height={height}
+          style={{
+            backgroundColor: isActive ? (isSender ? 'rgba(255,255,255,0.8)' : '#0084FF') : 'rgba(128,128,128,0.3)',
+          }}
+        />
+      );
+    });
     return bars;
   };
 

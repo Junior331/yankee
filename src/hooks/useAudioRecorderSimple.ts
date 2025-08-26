@@ -1,38 +1,86 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Audio } from 'expo-av';
 
 export const useAudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordingDuration, setRecordingDuration] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const soundRef = useRef<Audio.Sound | null>(null);
 
   const startRecording = async () => {
-    console.log('Audio recording not implemented');
+    console.log('Audio recording not implemented in this hook');
     return Promise.resolve();
   };
 
   const stopRecording = async () => {
-    console.log('Audio recording not implemented');
+    console.log('Audio recording not implemented in this hook');
     return null;
   };
 
   const playSound = async (uri: string) => {
-    console.log('Audio playback not implemented:', uri);
-    return Promise.resolve();
+    try {
+      console.log('🔊 Playing audio:', uri);
+      
+      // Parar qualquer som anterior
+      if (soundRef.current) {
+        await soundRef.current.unloadAsync();
+      }
+
+      // Carregar e tocar novo som
+      const { sound } = await Audio.Sound.createAsync({ uri });
+      soundRef.current = sound;
+      setIsPlaying(true);
+
+      // Configurar callback para quando terminar
+      sound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded && status.didJustFinish) {
+          setIsPlaying(false);
+        }
+      });
+
+      await sound.playAsync();
+      console.log('✅ Audio playing started');
+      
+    } catch (error) {
+      console.error('❌ Error playing sound:', error);
+      setIsPlaying(false);
+      throw error;
+    }
   };
 
   const pauseSound = async () => {
-    console.log('Audio pause not implemented');
-    return Promise.resolve();
+    try {
+      if (soundRef.current) {
+        await soundRef.current.pauseAsync();
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('Error pausing sound:', error);
+    }
   };
 
   const resumeSound = async () => {
-    console.log('Audio resume not implemented');
-    return Promise.resolve();
+    try {
+      if (soundRef.current) {
+        await soundRef.current.playAsync();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error('Error resuming sound:', error);
+    }
   };
 
   const stopSound = async () => {
-    console.log('Audio stop not implemented');
-    return Promise.resolve();
+    try {
+      if (soundRef.current) {
+        await soundRef.current.stopAsync();
+        await soundRef.current.unloadAsync();
+        soundRef.current = null;
+        setIsPlaying(false);
+      }
+    } catch (error) {
+      console.error('Error stopping sound:', error);
+    }
   };
 
   const formatDuration = (seconds: number) => {
