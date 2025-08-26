@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as S from "./styles";
 import { SubHeader } from "@/components/organism";
 import { useRouter } from "expo-router";
-import { mockMessages } from "./utils";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, Alert } from "react-native";
+import { useNotificationsContext } from "@/contexts/NotificationsContext";
+import { SafeScreen } from "@/components/elements";
 
 const ButtonReply = () => {
   return (
@@ -41,18 +42,94 @@ const ButtonImagem = () => {
 
 export const Notifications = () => {
   const router = useRouter();
+  
+  // Social notifications system
+  const { 
+    notifications,
+    unreadCount,
+    addNotification,
+    markAsRead,
+    clearAllNotifications
+  } = useNotificationsContext();
+  
+  // Start auto-generating demo notifications
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const types = ['like', 'follow', 'comment', 'poke', 'story'];
+      const randomType = types[Math.floor(Math.random() * types.length)];
+      
+      // 20% chance every 45 seconds
+      if (Math.random() < 0.2) {
+        addNotification(randomType, undefined, true);
+      }
+    }, 45000); // Every 45 seconds
+
+    return () => clearInterval(interval);
+  }, [addNotification]);
+  
+  // Test notification function
+  const testNotification = () => {
+    Alert.alert(
+      "Test Notification",
+      "Choose notification type:",
+      [
+        {
+          text: "❤️ Like",
+          onPress: () => addNotification('like', 'Sarah Chen')
+        },
+        {
+          text: "👤 Follow", 
+          onPress: () => addNotification('follow', 'Alex Johnson')
+        },
+        {
+          text: "💬 Comment",
+          onPress: () => addNotification('comment', 'Elena Rodriguez')
+        },
+        {
+          text: "👉 Poke",
+          onPress: () => addNotification('poke', 'Ryan Brooks')
+        },
+        {
+          text: "👁️ Story View",
+          onPress: () => addNotification('story', 'Sophie Martin')
+        },
+        { text: "Cancel", style: "cancel" }
+      ]
+    );
+  };
 
   return (
-    <S.Container>
-      <SubHeader title={"Notifications"} handleOnPress={() => router.back()} />
+    <SafeScreen edges={['top', 'left', 'right']}>
+      <S.Container>
+        <S.HeaderContainer>
+          <S.TitleContainer>
+            <SubHeader title={"Notifications"} handleOnPress={() => router.back()} />
+            {unreadCount > 0 && (
+              <S.UnreadBadge>
+                <S.Text style={{ fontSize: 10, color: '#fff', fontWeight: 'bold' }}>
+                  {unreadCount}
+                </S.Text>
+              </S.UnreadBadge>
+            )}
+          </S.TitleContainer>
+        </S.HeaderContainer>
 
       <S.ContainerList>
-        {mockMessages.map((message) => {
+        {notifications.map((message) => {
           const lastMessage = message.messages[message.messages.length - 1];
           return (
             <TouchableOpacity
               key={message.id}
-              style={{ width: "100%", marginVertical: 15, height: "auto" }}
+              style={{ 
+                padding: 10,
+                width: "100%", 
+                height: "auto",
+                borderRadius: 10,
+                marginVertical: 5, 
+                opacity: message.read ? 0.6 : 1,
+                backgroundColor: message.read ? 'transparent' : 'rgba(255, 255, 255, 0.02)'
+              }}
+              onPress={() => markAsRead(message.id)}
             >
               <S.ContainerMessage>
                 <S.ContainerUser>
@@ -81,7 +158,38 @@ export const Notifications = () => {
             </TouchableOpacity>
           );
         })}
+        
+        <S.TestButtonsContainer>
+          <TouchableOpacity 
+            onPress={testNotification}
+            style={{ 
+              backgroundColor: '#ff6b35', 
+              paddingHorizontal: 16, 
+              paddingVertical: 12, 
+              borderRadius: 20,
+              marginBottom: 10,
+              alignItems: 'center',
+              width: '100%'
+            }}
+          >
+            <S.Text style={{ fontSize: 14, color: '#fff', fontWeight: '600' }}>🔔 Test Notification</S.Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            onPress={clearAllNotifications}
+            style={{ 
+              backgroundColor: '#666', 
+              paddingHorizontal: 16, 
+              paddingVertical: 10, 
+              borderRadius: 20,
+              alignItems: 'center',
+              width: '100%'
+            }}
+          >
+            <S.Text style={{ fontSize: 12, color: '#fff' }}>Clear All Notifications</S.Text>
+          </TouchableOpacity>
+        </S.TestButtonsContainer>
       </S.ContainerList>
-    </S.Container>
+      </S.Container>
+    </SafeScreen>
   );
 };

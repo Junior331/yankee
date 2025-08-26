@@ -8,10 +8,14 @@ import { IHeaderPages } from "./@types";
 import { DollarSign, Filter, LocationTarget, Notification } from "@/assets/icons";
 import { Loading, Slider } from "@/components/elements";
 import { mocks } from "@/services/mocks";
+import { useNotificationsContext } from "@/contexts/NotificationsContext";
 export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
   const router = useRouter();
   const [imageLoading, setImageLoading] = useState(true);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
+  
+  // Get real notification count
+  const { unreadCount } = useNotificationsContext();
 
   const [filterActive, setFilterActive] = useState("");
   const [showFilter, setShowFilter] = useState(false);
@@ -49,9 +53,11 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
         <S.ContainerBadge onPress={() => router.push("/(tabs)/notifications")}>
           <Notification />
 
-          <S.Badge>
-            <S.Text>3</S.Text>
-          </S.Badge>
+          {unreadCount > 0 && (
+            <S.Badge>
+              <S.Text>{unreadCount}</S.Text>
+            </S.Badge>
+          )}
         </S.ContainerBadge>
 
         <S.ContainerBadge onPress={() => router.push("/(tabs)/profile")}>

@@ -18,6 +18,7 @@ import { GenericBottomSheet } from "./BottomSheet";
 import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
 import { AudioRecordBar } from "./AudioRecordBar";
+// import { NotificationStatus } from "./NotificationStatus";
 
 export {
   Tabs,
@@ -40,4 +41,5 @@ export {
   MessageBubble,
   ChatInput,
   AudioRecordBar,
+  // NotificationStatus,
 };

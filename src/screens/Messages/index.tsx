@@ -1,16 +1,51 @@
 import { useRouter } from "expo-router";
-import React, { useState, useMemo } from "react";
-import { Image, TouchableOpacity, FlatList, View } from "react-native";
+import React, { useState, useMemo, useEffect } from "react";
+import { Image, TouchableOpacity, FlatList, View, Alert } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { SubHeader } from "@/components/organism";
 import { ChatConversation } from "@/services/mocks/users";
+import { useUnreadMessages } from "@/hooks/useUnreadMessages";
+import { SafeScreen } from "@/components/elements";
 
 export const Messages = () => {
   const router = useRouter();
+  const insets = useSafeAreaInsets();
   const [text, setText] = useState("");
   const [tabActive, setTabActive] = useState(1); // 1 = Principal, 2 = Chat Requests
+  
+  // Unread messages management
+  const { 
+    unreadCounts, 
+    markConversationAsRead, 
+    simulateNewMessage,
+    simulateNewChatRequest 
+  } = useUnreadMessages();
+
+  // Demo notifications (remove in production)
+  useEffect(() => {
+    // Simulate random notifications for demo purposes
+    const interval = setInterval(() => {
+      const randomUser = mocks.users[Math.floor(Math.random() * mocks.users.length)];
+      const messages = [
+        "Hey! How are you doing?",
+        "Check out this cool thing I found!",
+        "Are you free for a call later?",
+        "Thanks for the help earlier!",
+        "Did you see the latest update?"
+      ];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      
+      // 30% chance of new message notification
+      if (Math.random() < 0.3) {
+        simulateNewMessage(randomUser.name, randomMessage, `conv_${randomUser.id}`);
+      }
+    }, 30000); // Every 30 seconds
+
+    return () => clearInterval(interval);
+  }, [simulateNewMessage]);
 
   // Filtrar conversas baseado na aba ativa
   const conversations = useMemo(() => {
@@ -26,7 +61,12 @@ export const Messages = () => {
     );
   }, [tabActive, text]);
 
-  const handleConversationPress = (conversation: ChatConversation) => {
+  const handleConversationPress = async (conversation: ChatConversation) => {
+    // Mark conversation as read when opening
+    if (conversation.unreadCount > 0) {
+      await markConversationAsRead(conversation.id);
+    }
+    
     // Navegar para o chat passando os dados do usuário
     router.push({
       pathname: "/chatuser",
@@ -39,6 +79,25 @@ export const Messages = () => {
         conversationId: conversation.id,
       }
     });
+  };
+
+  // Test notification function (for demo purposes)
+  const testNotification = () => {
+    Alert.alert(
+      "Test Notification",
+      "Choose notification type:",
+      [
+        {
+          text: "New Message",
+          onPress: () => simulateNewMessage("Sarah Chen", "Hey! This is a test message 😊", "conv_test")
+        },
+        {
+          text: "Chat Request", 
+          onPress: () => simulateNewChatRequest("Alex Johnson")
+        },
+        { text: "Cancel", style: "cancel" }
+      ]
+    );
   };
 
   const formatLastMessage = (conversation: ChatConversation) => {
@@ -108,10 +167,11 @@ export const Messages = () => {
               </S.Text>
               {hasUnread && (
                 <>
-                  <S.Text color="#f2f2f2" style={{ marginTop: 4 }}>
-                    {conversation.unreadCount}
-                  </S.Text>
-                  <S.BadgeBlue />
+                  <S.BadgeBlue>
+                    <S.Text color="#fff" style={{ fontSize: 10, fontWeight: 'bold' }}>
+                      {conversation.unreadCount}
+                    </S.Text>
+                  </S.BadgeBlue>
                 </>
               )}
             </S.TimeContainer>
@@ -122,9 +182,23 @@ export const Messages = () => {
   };
 
   return (
-    <S.Container>
-      <View style={{ paddingHorizontal: 20, paddingTop: 20 }}>
-        <SubHeader title={"Messages"} handleOnPress={() => router.push("/(tabs)/profile")} />
+    <SafeScreen edges={['top', 'left', 'right']}>
+      <S.Container>
+        <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <SubHeader title={"Messages"} handleOnPress={() => router.push("/(tabs)/profile")} />
+            <TouchableOpacity 
+              onPress={testNotification}
+              style={{ 
+                backgroundColor: '#1976d2', 
+                paddingHorizontal: 12, 
+                paddingVertical: 6, 
+                borderRadius: 15 
+              }}
+            >
+              <S.Text style={{ fontSize: 12, color: '#fff' }}>🔔 Test</S.Text>
+            </TouchableOpacity>
+          </View>
         
         {/* Tabs */}
         <S.ContainerTabs>
@@ -137,15 +211,15 @@ export const Messages = () => {
                 <S.Text tabs color={tabActive === tab.id ? "#fff" : "#999494"}>
                   {tab.label}
                   {/* Badge com contador */}
-                  {tab.id === 1 && mocks.mainConversations.reduce((acc, conv) => acc + conv.unreadCount, 0) > 0 && (
-                    <S.Text style={{ fontSize: 10, marginLeft: 4 }}>
-                      ({mocks.mainConversations.reduce((acc, conv) => acc + conv.unreadCount, 0)})
-                    </S.Text>
+                  {tab.id === 1 && unreadCounts.mainConversations > 0 && (
+                    <S.UnreadBadge>
+                      <S.UnreadText>{unreadCounts.mainConversations}</S.UnreadText>
+                    </S.UnreadBadge>
                   )}
-                  {tab.id === 2 && mocks.chatRequests.length > 0 && (
-                    <S.Text style={{ fontSize: 10, marginLeft: 4 }}>
-                      ({mocks.chatRequests.length})
-                    </S.Text>
+                  {tab.id === 2 && unreadCounts.chatRequests > 0 && (
+                    <S.UnreadBadge>
+                      <S.UnreadText>{unreadCounts.chatRequests}</S.UnreadText>
+                    </S.UnreadBadge>
                   )}
                 </S.Text>
               </S.Tab>
@@ -189,6 +263,7 @@ export const Messages = () => {
           </S.EmptyStateContainer>
         }
       />
-    </S.Container>
+      </S.Container>
+    </SafeScreen>
   );
 };

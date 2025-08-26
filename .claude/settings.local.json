@@ -6,7 +6,8 @@
       "Bash(move index_new.tsx index.tsx)",
       "Bash(npm start)",
       "Bash(npx expo start:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npx expo r:*)"
     ],
     "deny": [],
     "ask": []

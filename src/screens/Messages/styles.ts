@@ -130,14 +130,18 @@ export const Title = styled(TitleComponent)`
 `;
 
 export const BadgeBlue = styled(View)`
-  width: 12px;
-  height: 12px;
-  border-radius: 15px;
-  padding-bottom: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
   align-items: center;
-  margin: 0 10px 0 10px;
+  margin: 4px 10px 0 10px;
   justify-content: center;
   background-color: #1976d2;
+  shadow-color: #1976d2;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.3;
+  shadow-radius: 4px;
+  elevation: 3;
 `;
 
 export const TimeContainer = styled(View)`
@@ -150,4 +154,22 @@ export const EmptyStateContainer = styled(View)`
   flex: 1;
   align-items: center;
   justify-content: center;
+`;
+
+export const UnreadBadge = styled(View)`
+  background-color: #ff4444;
+  border-radius: 10px;
+  min-width: 20px;
+  height: 16px;
+  padding: 0 6px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+`;
+
+export const UnreadText = styled(Text)`
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  font-family: "Poppins-SemiBold";
 `;

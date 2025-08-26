@@ -9,9 +9,42 @@ import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   width: 100%;
-  height: 100%;
-  padding: 20px;
+  flex: 1;
   background-color: ${Colors.dark.background};
+`;
+
+export const HeaderContainer = styled(View)`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 10px 20px;
+`;
+
+export const TestButtonContainer = styled(View)`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const TitleContainer = styled(View)`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const UnreadBadge = styled(View)`
+  background-color: #ff4444;
+  border-radius: 10px;
+  min-width: 20px;
+  height: 16px;
+  padding: 0 6px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+`;
+
+export const TestButtonsContainer = styled(View)`
+  padding: 20px;
+  margin-top: 20px;
+  align-items: center;
 `;
 
 export const ContainerMessage = styled(View)`
@@ -32,7 +65,8 @@ export const ContainerUser = styled(View)`
 
 export const ContainerList = styled(ScrollView).attrs(removeScrollUi)`
   width: 100%;
-  margin: 20px 0 70px;
+  flex: 1;
+  padding: 0 20px;
 `;
 
 export const ContainerAvatar = styled(View)`

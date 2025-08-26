@@ -8,6 +8,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
 import Provider from "@/state/provider";
+import { NotificationsProvider } from "@/contexts/NotificationsContext";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -46,18 +47,20 @@ function RootLayoutNav() {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1, backgroundColor: "grey" }}>
-        <Provider>
-          <ThemeProvider value={DefaultTheme}>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="(public)" options={{ headerShown: false }} />
-              <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-              <Stack.Screen name="chatuser" options={{ headerShown: false }} />
-              <Stack.Screen name="voice-call" options={{ headerShown: false }} />
-              <Stack.Screen name="video-call" options={{ headerShown: false }} />
-            </Stack>
-          </ThemeProvider>
-        </Provider>
+        <NotificationsProvider>
+          <Provider>
+            <ThemeProvider value={DefaultTheme}>
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="(public)" options={{ headerShown: false }} />
+                <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+                <Stack.Screen name="chatuser" options={{ headerShown: false }} />
+                <Stack.Screen name="voice-call" options={{ headerShown: false }} />
+                <Stack.Screen name="video-call" options={{ headerShown: false }} />
+              </Stack>
+            </ThemeProvider>
+          </Provider>
+        </NotificationsProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );
