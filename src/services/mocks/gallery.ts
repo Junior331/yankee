@@ -44,13 +44,13 @@ const videos = [
     id: 1,
     name: "Video 01",
     image: "https://picsum.photos/seed/114/200/300",
-    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    video: "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
   },
   {
     id: 2,
     name: "Video 02",
     image: "https://picsum.photos/seed/115/200/300",
-    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
   },
   {
     id: 3,

@@ -1,4 +1,4 @@
-import { View, ScrollView, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
 import {
@@ -22,7 +22,7 @@ export const Container = styled(View)`
   background-color: ${Colors.dark.background};
 `;
 
-export const Content = styled(ScrollView)`
+export const Content = styled(View)`
   width: 100%;
   height: 100%;
   position: relative;
