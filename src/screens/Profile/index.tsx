@@ -5,7 +5,7 @@ import * as S from "./styles";
 import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
 import { LeftArrow } from "@/assets/icons";
-import { Forms } from "@/components/organism";
+import { Forms, MediaViewer } from "@/components/organism";
 import { Loading, SafeScreen } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
@@ -21,8 +21,27 @@ export const Profile = () => {
   const [imageLoading, setImageLoading] = useState(true);
   const [bannerLoading, setBannerLoading] = useState(true);
   const [avatarLoading, setAvatarLoading] = useState(true);
+  const [mediaViewerVisible, setMediaViewerVisible] = useState(false);
+  const [selectedMediaItem, setSelectedMediaItem] = useState<any>(null);
 
-  const renderGridItem = ({ item }: { item: { id: number; name: string; image: string } }) => (
+  const handleMediaPress = (item: any) => {
+    const mediaItem = {
+      id: item.id,
+      name: item.name,
+      image: item.image,
+      video: item.video,
+      type: tabActive === 'videos' ? 'video' : 'image'
+    };
+    setSelectedMediaItem(mediaItem);
+    setMediaViewerVisible(true);
+  };
+
+  const handleCloseMediaViewer = () => {
+    setMediaViewerVisible(false);
+    setSelectedMediaItem(null);
+  };
+
+  const renderGridItem = ({ item }: { item: { id: number; name: string; image: string; video?: string } }) => (
     <View
       style={{
         margin: 2,
@@ -34,7 +53,7 @@ export const Profile = () => {
       }}
     >
       {imageLoading && <Loading />}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => handleMediaPress(item)}>
         <Image
           resizeMode="cover"
           alt={`Image ${item.name}`}
@@ -172,6 +191,12 @@ export const Profile = () => {
         )}
         </S.Content>
       </S.Container>
+
+      <MediaViewer
+        visible={mediaViewerVisible}
+        mediaItem={selectedMediaItem}
+        onClose={handleCloseMediaViewer}
+      />
     </SafeScreen>
   );
 };
