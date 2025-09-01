@@ -16,6 +16,7 @@ import Miles from "./Miles";
 import Error from "./Error";
 import Arrow from "./Arrow";
 import Photo from "./Photo";
+import Pause from "./Pause";
 import Clock from "./Clock";
 import Phone from "./Phone";
 import Search from "./Search";
@@ -77,6 +78,7 @@ export {
   Miles,
   MapPin,
   Filter,
+  Pause,
   Hearts,
   Camera,
   Library,

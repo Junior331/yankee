@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import * as S from "./styles";
 import { MessageBubbleProps } from "./@types";
-import { Phone, Microphone } from "@/assets/icons";
+import {  Pause } from "@/assets/icons";
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({
   id,
@@ -18,7 +18,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   onAudioPause,
 }) => {
   const handleAudioPress = () => {
-    if (audioStatus === 'playing') {
+    if (audioStatus === "playing") {
       onAudioPause?.(id);
     } else {
       onAudioPlay?.(id);
@@ -27,7 +27,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
   const renderAudioWaveform = () => {
     // Usar o ID da mensagem como seed para gerar waveform consistente
-    const seed = parseInt(id.replace(/\D/g, '')) || 1;
+    const seed = parseInt(id.replace(/\D/g, "")) || 1;
     const seededRandom = (index: number) => {
       // Gerador pseudo-random baseado no ID + índice
       const x = Math.sin(seed + index) * 10000;
@@ -36,14 +36,14 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
     const bars = Array.from({ length: 20 }, (_, i) => {
       const height = seededRandom(i) * 15 + 5; // Entre 5 e 20
-      const isActive = audioStatus === 'playing';
-      
+      const isActive = audioStatus === "playing";
+
       return (
-        <S.AudioBar 
-          key={i} 
+        <S.AudioBar
+          key={i}
           height={height}
           style={{
-            backgroundColor: isActive ? (isSender ? 'rgba(255,255,255,0.8)' : '#0084FF') : 'rgba(128,128,128,0.3)',
+            backgroundColor: isActive ? (isSender ? "rgba(255,255,255,0.8)" : "#0084FF") : "#ffffff",
           }}
         />
       );
@@ -53,7 +53,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
 
   const renderContent = () => {
     switch (type) {
-      case 'image':
+      case "image":
         return (
           <>
             {imageUri && (
@@ -65,23 +65,20 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
           </>
         );
 
-      case 'audio':
+      case "audio":
         return (
           <S.AudioContainer>
-            <S.AudioPlayButton onPress={handleAudioPress}>
-              {audioStatus === 'playing' ? (
-                <Phone color={isSender ? "#ffffff" : "#0084FF"} />
-              ) : (
-                <Microphone color={isSender ? "#ffffff" : "#0084FF"} />
-              )}
-            </S.AudioPlayButton>
-            
-            <S.AudioWaveform>
-              {renderAudioWaveform()}
-            </S.AudioWaveform>
+            <S.containerAudioButton>
+              <S.AudioPlayButton onPress={handleAudioPress}>
+                {audioStatus === "playing" ? <Pause color={isSender ? "#ffffff" : "#ffffff"} /> : <S.ButtonPlay />}
+              </S.AudioPlayButton>
 
+              <S.AudioWaveform>{renderAudioWaveform()}</S.AudioWaveform>
+            </S.containerAudioButton>
             <S.AudioDuration isSender={isSender}>
-              {audioDuration ? `${Math.floor(audioDuration / 60)}:${(audioDuration % 60).toString().padStart(2, '0')}` : '0:00'}
+              {audioDuration
+                ? `${Math.floor(audioDuration / 60)}:${(audioDuration % 60).toString().padStart(2, "0")}`
+                : "0:00"}
             </S.AudioDuration>
           </S.AudioContainer>
         );
@@ -91,7 +88,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
     }
   };
 
-  const isImageOnly = type === 'image' && !text;
+  const isImageOnly = type === "image" && !text;
 
   return (
     <S.MessageContainer isSender={isSender}>
@@ -102,9 +99,7 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         ) : (
           // Text or mixed messages: normal bubble styling
           <>
-            <S.MessageBubble isSender={isSender}>
-              {renderContent()}
-            </S.MessageBubble>
+            <S.MessageBubble isSender={isSender}>{renderContent()}</S.MessageBubble>
             <S.MessagePointer isSender={isSender} />
           </>
         )}
