@@ -12,6 +12,7 @@ import { Checkbox } from "./Checkbox";
 import { TitleSoous } from "./TitleSoous";
 import { Datetimepicker } from "./Datetimepicker";
 import { SafeScreen } from "./SafeScreen";
+import { CustomPullToRefresh } from "./CustomPullToRefresh";
 
 export {
   Text,
@@ -28,4 +29,5 @@ export {
   TitleSoous,
   Datetimepicker,
   SafeScreen,
+  CustomPullToRefresh,
 };

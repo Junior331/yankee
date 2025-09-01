@@ -62,12 +62,13 @@ export const ButtonFollow = styled(View)`
   gap: 3px;
   width: 60px;
   height: 20px;
-  background: #fff;
+  background: transparent;
   padding: 2px 6px;
   border-radius: 5px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 1px solid #fff;
 `;
 
 export const IconAdd = styled(View)`
@@ -102,7 +103,7 @@ export const RecentSearchesHeader = styled(View)`
 export const ContainerRecents = styled(View)`
   border-radius: 10px;
   padding: 0 0 0 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #232323;
 `;
 
 export const RecentSearchesTitle = styled(TextComponent)`
@@ -117,7 +118,7 @@ export const DeleteAllButton = styled(TouchableOpacity)`
 
 export const DeleteAllText = styled(TextComponent)`
   font-size: 12px;
-  color: rgb(255, 255, 255);
+  color: #E97070;
 `;
 
 export const RecentSearchItem = styled(View)`
@@ -135,9 +136,27 @@ export const SearchRecent = styled(View)`
 
 export const RecentSearchText = styled(TextComponent)`
   font-size: 12px;
-  color: #4d4c4c;
+  color: #ffffffff;
 `;
 
 export const DeleteButton = styled(TouchableOpacity)`
   padding: 5px;
+`;
+
+export const RecentSearchItemHorizontal = styled(View)`
+  min-width: 140px;
+  max-width: 200px;
+  margin-right: 12px;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+`;
+
+export const SearchRecentHorizontal = styled(View)`
+  gap: 8px;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
 `;

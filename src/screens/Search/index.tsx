@@ -22,7 +22,12 @@ export const Search = () => {
   const [isSearch, setIsSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
-  const [searchHistory, setSearchHistory] = useState<string[]>([]);
+  const [searchHistory, setSearchHistory] = useState<string[]>([
+    "Sarah Johnson", 
+    "Mike Davis", 
+    "Emily Wilson", 
+    "David Brown"
+  ]);
 
   const filteredUsers = mockMessages.filter((user) =>
     user.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -61,7 +66,7 @@ export const Search = () => {
           )}
 
           <S.ContainerInput>
-            <S.SearchIcon name="search" size={20} color="#171717" />
+            <S.SearchIcon name="search" size={20} color="#ffffff" />
             <S.StyledInput
               value={searchValue}
               onChangeText={setSearchValue}

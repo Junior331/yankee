@@ -14,7 +14,7 @@ export const ContainerInput = styled(View)`
   flex-direction: row;
   border-radius: 25px;
   padding: 0 0 0 10px;
-  background-color: #f5f5f5;
+  background-color: #232323;
 `;
 
 export const SearchIcon = styled(Ionicons)`
@@ -22,13 +22,13 @@ export const SearchIcon = styled(Ionicons)`
 `;
 
 export const StyledInput = styled(TextInput).attrs({
-  placeholderTextColor: Colors.dark.background,
+  placeholderTextColor: Colors.dark.text,
 })`
   height: 100%;
   flex: 1 0 auto;
   font-size: 14px;
   margin-top: 3px;
-  color: ${Colors.dark.background};
+  color: ${Colors.dark.text};
 `;
 
 export const MasonryContainer = styled(View)`

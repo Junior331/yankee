@@ -18,6 +18,7 @@ import { GenericBottomSheet } from "./BottomSheet";
 import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
 import { AudioRecordBar } from "./AudioRecordBar";
+import { MediaViewer } from "./MediaViewer";
 // import { NotificationStatus } from "./NotificationStatus";
 
 export {
@@ -41,5 +42,6 @@ export {
   MessageBubble,
   ChatInput,
   AudioRecordBar,
+  MediaViewer,
   // NotificationStatus,
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, Image } from "react-native";
+import { Dimensions, Image, ScrollView } from "react-native";
 
 import * as S from "./styles";
 import { Clock, X } from "@/assets/icons";
@@ -27,17 +27,38 @@ export const SearchProfile = ({
             </S.DeleteAllButton>
           </S.RecentSearchesHeader>
           <S.ContainerRecents>
-            {searchHistory.map((search, index) => (
-              <S.RecentSearchItem key={index}>
-                <S.SearchRecent>
-                  <Clock />
-                  <S.RecentSearchText>{search}</S.RecentSearchText>
-                </S.SearchRecent>
-                <S.DeleteButton onPress={() => handleDeleteSearch(search)}>
-                  <X color="#808080" />
-                </S.DeleteButton>
-              </S.RecentSearchItem>
-            ))}
+            {searchHistory.length > 3 ? (
+              <ScrollView 
+                showsVerticalScrollIndicator={false}
+                style={{ maxHeight: 100 }}
+              >
+                {searchHistory.map((search, index) => (
+                  <S.RecentSearchItem key={index}>
+                    <S.SearchRecent>
+                      <Clock />
+                      <S.RecentSearchText>{search}</S.RecentSearchText>
+                    </S.SearchRecent>
+                    <S.DeleteButton onPress={() => handleDeleteSearch(search)}>
+                      <X color="#ffffff" />
+                    </S.DeleteButton>
+                  </S.RecentSearchItem>
+                ))}
+              </ScrollView>
+            ) : (
+              <>
+                {searchHistory.map((search, index) => (
+                  <S.RecentSearchItem key={index}>
+                    <S.SearchRecent>
+                      <Clock />
+                      <S.RecentSearchText>{search}</S.RecentSearchText>
+                    </S.SearchRecent>
+                    <S.DeleteButton onPress={() => handleDeleteSearch(search)}>
+                      <X color="#808080" />
+                    </S.DeleteButton>
+                  </S.RecentSearchItem>
+                ))}
+              </>
+            )}
           </S.ContainerRecents>
         </S.RecentSearchesContainer>
       )}
@@ -70,7 +91,7 @@ export const SearchProfile = ({
 
               <S.ButtonFollow>
                 <S.Text
-                  color="#171717"
+                  color="#ffffff"
                   tabs
                   style={{
                     fontSize: 9,

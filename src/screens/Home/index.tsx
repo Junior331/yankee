@@ -42,6 +42,7 @@ export const Home = () => {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
   const [comments, setComments] = useState<CommentType[]>(mocks.posts[0].comments as CommentType[]);
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
+  const [collapsedComments, setCollapsedComments] = useState<Set<number>>(new Set());
 
   const handleSnapPress = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -105,6 +106,16 @@ export const Home = () => {
     if (currentPostIndex > 0) {
       setCurrentPostIndex(currentPostIndex - 1);
     }
+  };
+
+  const toggleCommentReplies = (commentId: number) => {
+    const newCollapsed = new Set(collapsedComments);
+    if (newCollapsed.has(commentId)) {
+      newCollapsed.delete(commentId);
+    } else {
+      newCollapsed.add(commentId);
+    }
+    setCollapsedComments(newCollapsed);
   };
 
   return (
@@ -213,15 +224,43 @@ export const Home = () => {
                 onReply={() => handleReply(item.id, item.name)}
               />
               {item.answers && item.answers.length > 0 && (
-                <View style={{ marginLeft: 20 }}>
-                  {item.answers.map((answer) => (
-                    <GenericCommet 
-                      key={answer.id} 
-                      {...answer} 
-                      onReply={() => handleReply(item.id, answer.name)}
-                    />
-                  ))}
-                </View>
+                <>
+                  <TouchableOpacity 
+                    style={{
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      paddingHorizontal: 16,
+                      paddingVertical: 8,
+                      marginTop: 5,
+                    }}
+                    onPress={() => toggleCommentReplies(item.id)}
+                  >
+                    <View style={{
+                      height: 1,
+                      backgroundColor: '#333',
+                      marginRight: 8,
+                      width: 35,
+                    }} />
+                    <S.Text style={{ color: '#ffffff', fontSize: 12 }}>
+                      {collapsedComments.has(item.id) 
+                        ? `View ${item.answers.length} replies` 
+                        : 'View fewer comments'
+                      }
+                    </S.Text>
+                 
+                  </TouchableOpacity>
+                  {!collapsedComments.has(item.id) && (
+                    <View style={{ marginLeft: 20 }}>
+                      {item.answers.map((answer) => (
+                        <GenericCommet 
+                          key={answer.id} 
+                          {...answer} 
+                          onReply={() => handleReply(item.id, answer.name)}
+                        />
+                      ))}
+                    </View>
+                  )}
+                </>
               )}
               <S.Line />
             </View>

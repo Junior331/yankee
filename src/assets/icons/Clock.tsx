@@ -2,7 +2,7 @@ import React from "react";
 import { SvgXml } from "react-native-svg";
 import { IIcons } from "./@types";
 
-const Clock = ({ width = 14, height = 14, color = "#808080" }: IIcons) => {
+const Clock = ({ width = 14, height = 14, color = "#ffffff" }: IIcons) => {
   return (
     <SvgXml
       xml={`
