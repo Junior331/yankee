@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { View, TouchableOpacity } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Colors from "@/constants/Colors";
 import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
@@ -11,25 +10,44 @@ export const Container = styled(View)`
   align-items: center;
 `;
 
-export const BackgroundGradient = styled(LinearGradient)`
+export const Header = styled(View)`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 50px;
+  left: 10px;
+  right: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const BackButton = styled(TouchableOpacity)`
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const HeaderCallDuration = styled(TextComponent)`
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 16px;
 `;
 
 export const Content = styled(View)`
   flex: 1;
   width: 100%;
   padding: 40px 20px;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
 export const ContactInfo = styled(View)`
   align-items: center;
-  margin-top: 80px;
+  margin-top: 150px;
 `;
 
 export const ContactAvatar = styled(View)`
@@ -39,7 +57,11 @@ export const ContactAvatar = styled(View)`
   background-color: #c4c4c4;
   overflow: hidden;
   margin-bottom: 30px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
+`;
+export const ContainerVoiceCall = styled(View)`
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
 `;
 
 export const ContactName = styled(TitleComponent)`
@@ -50,10 +72,9 @@ export const ContactName = styled(TitleComponent)`
   margin-bottom: 8px;
 `;
 
-export const ContactUsername = styled(TextComponent)`
-  font-size: 16px;
-  color: #b0b0b0;
-  text-align: center;
+export const VoiceCall = styled(TextComponent)`
+  font-size: 20px;
+  color: #fff;
 `;
 
 export const CallStatus = styled(TextComponent)`
@@ -65,11 +86,14 @@ export const CallStatus = styled(TextComponent)`
 `;
 
 export const CallDuration = styled(TextComponent)`
-  font-size: 16px;
+  font-size: 20px;
   color: #ffffff;
   text-align: center;
-  margin-top: 10px;
-  font-weight: 500;
+  margin-top: 15px;
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
 `;
 
 export const CallActions = styled(View)`
@@ -81,7 +105,7 @@ export const CallActions = styled(View)`
   margin-bottom: 60px;
 `;
 
-export const ActionButton = styled(TouchableOpacity)<{ variant?: 'primary' | 'secondary' | 'danger' }>`
+export const ActionButton = styled(TouchableOpacity)<{ variant?: "primary" | "secondary" | "danger" }>`
   width: 70px;
   height: 70px;
   border-radius: 35px;
@@ -89,19 +113,14 @@ export const ActionButton = styled(TouchableOpacity)<{ variant?: 'primary' | 'se
   align-items: center;
   background-color: ${({ variant }) => {
     switch (variant) {
-      case 'danger':
-        return '#FF3B30';
-      case 'secondary':
-        return 'rgba(255, 255, 255, 0.2)';
+      case "danger":
+        return "#D63838";
+      case "secondary":
+        return "rgba(255, 255, 255, 0.2)";
       default:
-        return '#34C759';
+        return "#34C759";
     }
   }};
-  shadow-color: #000;
-  shadow-offset: 0px 4px;
-  shadow-opacity: 0.3;
-  shadow-radius: 8px;
-  elevation: 8;
 `;
 
 export const MuteButton = styled(ActionButton)`

@@ -3,23 +3,25 @@ import { Image, Vibration } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import * as S from "./styles";
-import { Phone } from "@/assets/icons";
+import { Phone, LeftArrow, ChatDuringCall, PhoneCall } from "@/assets/icons";
 import { Microphone, MoodSmile } from "@/assets/icons";
 import { SafeScreen } from "@/components/elements";
+import Video from "@/assets/icons/Video";
 
 export const VoiceCall = () => {
   const router = useRouter();
   const params = useLocalSearchParams();
-  
+
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isSpeaker, setIsSpeaker] = useState(false);
 
-  const contactName = params.contactName as string || "Ryan Brooks";
-  const contactAvatar = params.contactAvatar as string || "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__";
-  const contactUsername = params.contactUsername as string || "@Ryan_brooks";
-  const isIncoming = params.isIncoming === 'true';
+  const contactName = (params.contactName as string) || "Ryan Brooks";
+  const contactAvatar =
+    (params.contactAvatar as string) ||
+    "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__";
+  const isIncoming = params.isIncoming === "true";
 
   useEffect(() => {
     if (isIncoming) {
@@ -34,10 +36,10 @@ export const VoiceCall = () => {
 
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
-    
+
     if (isConnected) {
       interval = setInterval(() => {
-        setCallDuration(prev => prev + 1);
+        setCallDuration((prev) => prev + 1);
       }, 1000);
     }
 
@@ -49,7 +51,7 @@ export const VoiceCall = () => {
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleAnswerCall = () => {
@@ -70,39 +72,39 @@ export const VoiceCall = () => {
     setIsSpeaker(!isSpeaker);
   };
 
-  const getCallStatus = () => {
+  const handleGoBack = () => {
+    router.back();
+  };
+
+  const getHeaderStatus = () => {
+    if (!isConnected && !isIncoming) return "Calling...";
     if (isIncoming && !isConnected) return "Incoming call...";
-    if (!isConnected) return "Calling...";
-    return "Connected";
+    if (isConnected) return formatDuration(callDuration);
+    return null;
   };
 
   return (
     <SafeScreen edges={[]}>
       <S.Container>
-        <S.BackgroundGradient
-          colors={['rgba(52, 199, 89, 0.3)', 'rgba(0, 0, 0, 0.8)']}
-          start={[0, 0]}
-          end={[0, 1]}
-        />
-        
+        <S.Header>
+          <S.BackButton onPress={handleGoBack}>
+            <LeftArrow color="#ffffff" />
+          </S.BackButton>
+          {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
+          <ChatDuringCall />
+        </S.Header>
+
         <S.Content>
           <S.ContactInfo>
             <S.ContactAvatar>
-              <Image
-                source={{ uri: contactAvatar }}
-                style={{ width: "100%", height: "100%" }}
-                resizeMode="cover"
-              />
+              <Image source={{ uri: contactAvatar }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
             </S.ContactAvatar>
-            
+
             <S.ContactName>{contactName}</S.ContactName>
-            <S.ContactUsername>{contactUsername}</S.ContactUsername>
-            
-            <S.CallStatus>{getCallStatus()}</S.CallStatus>
-            
-            {isConnected && (
-              <S.CallDuration>{formatDuration(callDuration)}</S.CallDuration>
-            )}
+            <S.ContainerVoiceCall>
+              <Video color="#1976D2" />
+              <S.VoiceCall>Voice Call</S.VoiceCall>
+            </S.ContainerVoiceCall>
           </S.ContactInfo>
 
           {isIncoming && !isConnected ? (
@@ -119,14 +121,14 @@ export const VoiceCall = () => {
               <S.MuteButton onPress={handleMute}>
                 <Microphone color={isMuted ? "#FF3B30" : "#ffffff"} />
               </S.MuteButton>
-              
-              <S.ActionButton variant="danger" onPress={handleEndCall}>
-                <Phone color="#ffffff" />
-              </S.ActionButton>
-              
+
               <S.SpeakerButton onPress={handleSpeaker}>
                 <MoodSmile color={isSpeaker ? "#34C759" : "#ffffff"} />
               </S.SpeakerButton>
+
+              <S.ActionButton variant="danger" onPress={handleEndCall}>
+                <PhoneCall color="#ffffff" />
+              </S.ActionButton>
             </S.CallActions>
           )}
         </S.Content>

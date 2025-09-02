@@ -35,6 +35,7 @@ import Location from "./Location";
 import Ellipse4 from "./Ellipse4";
 import Ellipse5 from "./Ellipse5";
 import Ellipse6 from "./Ellipse6";
+import PhoneCall from "./PhoneCall";
 import PhotoPlus from "./PhotoPlus";
 import LeftArrow from "./LeftArrow";
 import Community from "./Community";
@@ -48,6 +49,7 @@ import Visibility from "./Visibility";
 import SetLocation from "./SetLocation";
 import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
+import ChatDuringCall from "./ChatDuringCall";
 import LocationTarget from "./LocationTarget";
 import ArrowOfLineTop from "./ArrowOfLineTop";
 import CommentSendIcon from "./CommentSendIcon";
@@ -93,6 +95,7 @@ export {
   Ellipse4,
   Ellipse5,
   Ellipse6,
+  PhoneCall,
   MoodSmile,
   PhotoPlus,
   LeftArrow,
@@ -107,6 +110,7 @@ export {
   LibraryPhoto,
   Notification,
   ArrowOfLineTop,
+  ChatDuringCall,
   CommentSendIcon,
   LocationTarget,
   ArrowOfLineDown,
