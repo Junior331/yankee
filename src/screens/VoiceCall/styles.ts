@@ -124,11 +124,12 @@ export const ActionButton = styled(TouchableOpacity)<{ variant?: "primary" | "se
 `;
 
 export const MuteButton = styled(ActionButton)`
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: transparent;
 `;
 
-export const SpeakerButton = styled(ActionButton)`
-  background-color: rgba(255, 255, 255, 0.2);
+
+export const SpeakerIconButton = styled(ActionButton)`
+  background-color: transparent;
 `;
 
 export const IncomingCallActions = styled(View)`

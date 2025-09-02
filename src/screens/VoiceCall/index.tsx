@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Image, Vibration } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { Image, TouchableOpacity, Vibration } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 
 import * as S from "./styles";
-import { Phone, LeftArrow, ChatDuringCall, PhoneCall } from "@/assets/icons";
-import { Microphone, MoodSmile } from "@/assets/icons";
+import { Phone, LeftArrow, ChatDuringCall, PhoneCall, SpeakerIcon } from "@/assets/icons";
+import { Microphone } from "@/assets/icons";
 import { SafeScreen } from "@/components/elements";
 import Video from "@/assets/icons/Video";
 
@@ -15,7 +15,10 @@ export const VoiceCall = () => {
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const [isSpeaker, setIsSpeaker] = useState(false);
+
+  const userName = (params.userName as string) || "User";
+  const userAvatar = (params.userAvatar as string) || "https://i.pravatar.cc/400?img=1";
+  const userUsername = (params.userUsername as string) || "@user";
 
   const contactName = (params.contactName as string) || "Ryan Brooks";
   const contactAvatar =
@@ -25,7 +28,6 @@ export const VoiceCall = () => {
 
   useEffect(() => {
     if (isIncoming) {
-      // Simula toque de chamada recebida
       const interval = setInterval(() => {
         Vibration.vibrate(1000);
       }, 2000);
@@ -68,10 +70,6 @@ export const VoiceCall = () => {
     setIsMuted(!isMuted);
   };
 
-  const handleSpeaker = () => {
-    setIsSpeaker(!isSpeaker);
-  };
-
   const handleGoBack = () => {
     router.back();
   };
@@ -82,6 +80,18 @@ export const VoiceCall = () => {
     if (isConnected) return formatDuration(callDuration);
     return null;
   };
+
+  const handleVideoCall = useCallback(() => {
+    router.push({
+      pathname: "/video-call",
+      params: {
+        contactName: userName,
+        contactAvatar: userAvatar,
+        contactUsername: userUsername,
+        isIncoming: "false",
+      },
+    });
+  }, [router, userName, userAvatar, userUsername]);
 
   return (
     <SafeScreen edges={[]}>
@@ -118,13 +128,17 @@ export const VoiceCall = () => {
             </S.IncomingCallActions>
           ) : (
             <S.CallActions>
-              <S.MuteButton onPress={handleMute}>
-                <Microphone color={isMuted ? "#FF3B30" : "#ffffff"} />
-              </S.MuteButton>
+              <S.SpeakerIconButton>
+                <SpeakerIcon />
+              </S.SpeakerIconButton>
 
-              <S.SpeakerButton onPress={handleSpeaker}>
-                <MoodSmile color={isSpeaker ? "#34C759" : "#ffffff"} />
-              </S.SpeakerButton>
+              <TouchableOpacity onPress={handleVideoCall}>
+                <Video width={30} height={30} />
+              </TouchableOpacity>
+
+              <S.MuteButton onPress={handleMute}>
+                <Microphone color={isMuted ? "#FF3B30" : "#ffffff"} width={30} height={30} />
+              </S.MuteButton>
 
               <S.ActionButton variant="danger" onPress={handleEndCall}>
                 <PhoneCall color="#ffffff" />

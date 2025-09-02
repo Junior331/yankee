@@ -46,9 +46,11 @@ import HeadPhones from "./HeadPhones";
 import Microphone from "./Microphone";
 import Navigation from "./Navigation";
 import Visibility from "./Visibility";
+import SpeakerIcon from "./SpeakerIcon";
 import SetLocation from "./SetLocation";
 import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
+import MicrophoneOff from "./MicrophoneOff";
 import ChatDuringCall from "./ChatDuringCall";
 import LocationTarget from "./LocationTarget";
 import ArrowOfLineTop from "./ArrowOfLineTop";
@@ -106,9 +108,11 @@ export {
   Microphone,
   Navigation,
   Visibility,
+  SpeakerIcon,
   SetLocation,
   LibraryPhoto,
   Notification,
+  MicrophoneOff,
   ArrowOfLineTop,
   ChatDuringCall,
   CommentSendIcon,
