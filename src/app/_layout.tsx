@@ -9,6 +9,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
 import Provider from "@/state/provider";
 import { NotificationsProvider } from "@/contexts/NotificationsContext";
+import { CallProvider } from "@/contexts/CallContext";
+import { CallOverlay } from "@/components/organism/CallOverlay";
 
 export { ErrorBoundary } from "expo-router";
 
@@ -48,18 +50,21 @@ function RootLayoutNav() {
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1, backgroundColor: "grey" }}>
         <NotificationsProvider>
-          <Provider>
-            <ThemeProvider value={DefaultTheme}>
-              <Stack>
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="(public)" options={{ headerShown: false }} />
-                <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-                <Stack.Screen name="chatuser" options={{ headerShown: false }} />
-                <Stack.Screen name="voice-call" options={{ headerShown: false }} />
-                <Stack.Screen name="video-call" options={{ headerShown: false }} />
-              </Stack>
-            </ThemeProvider>
-          </Provider>
+          <CallProvider>
+            <Provider>
+              <ThemeProvider value={DefaultTheme}>
+                <Stack>
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="(public)" options={{ headerShown: false }} />
+                  <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+                  <Stack.Screen name="chatuser" options={{ headerShown: false }} />
+                  <Stack.Screen name="voice-call" options={{ headerShown: false }} />
+                  <Stack.Screen name="video-call" options={{ headerShown: false }} />
+                </Stack>
+                <CallOverlay />
+              </ThemeProvider>
+            </Provider>
+          </CallProvider>
         </NotificationsProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Image, TouchableOpacity, Vibration } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
+import { useCallContext } from "@/contexts/CallContext";
 
 import * as S from "./styles";
-import { Phone, LeftArrow, ChatDuringCall, PhoneCall, SpeakerIcon } from "@/assets/icons";
+import { Phone, LeftArrow, ChatDuringCall, PhoneCall, SpeakerIcon, MicrophoneOff } from "@/assets/icons";
 import { Microphone } from "@/assets/icons";
 import { SafeScreen } from "@/components/elements";
 import Video from "@/assets/icons/Video";
@@ -11,10 +12,19 @@ import Video from "@/assets/icons/Video";
 export const VoiceCall = () => {
   const router = useRouter();
   const params = useLocalSearchParams();
+  const { 
+    startCall, 
+    endCall, 
+    minimizeCall, 
+    updateCallDuration, 
+    updateCallSettings,
+    isCallMinimized 
+  } = useCallContext();
 
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [isSpeakerOn, setIsSpeakerOn] = useState(false);
 
   const userName = (params.userName as string) || "User";
   const userAvatar = (params.userAvatar as string) || "https://i.pravatar.cc/400?img=1";
@@ -25,6 +35,14 @@ export const VoiceCall = () => {
     (params.contactAvatar as string) ||
     "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__";
   const isIncoming = params.isIncoming === "true";
+
+  // Initialize call when component mounts
+  useEffect(() => {
+    startCall({
+      contactName,
+      contactAvatar,
+    });
+  }, [contactName, contactAvatar]);
 
   useEffect(() => {
     if (isIncoming) {
@@ -41,14 +59,18 @@ export const VoiceCall = () => {
 
     if (isConnected) {
       interval = setInterval(() => {
-        setCallDuration((prev) => prev + 1);
+        setCallDuration((prev) => {
+          const newDuration = prev + 1;
+          updateCallDuration(newDuration);
+          return newDuration;
+        });
       }, 1000);
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isConnected]);
+  }, [isConnected, updateCallDuration]);
 
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -58,16 +80,26 @@ export const VoiceCall = () => {
 
   const handleAnswerCall = () => {
     setIsConnected(true);
+    updateCallSettings({ isConnected: true });
     Vibration.cancel();
   };
 
   const handleEndCall = () => {
     Vibration.cancel();
+    endCall();
     router.back();
   };
 
   const handleMute = () => {
-    setIsMuted(!isMuted);
+    const newMuteState = !isMuted;
+    setIsMuted(newMuteState);
+    updateCallSettings({ isMuted: newMuteState });
+  };
+
+  const handleSpeaker = () => {
+    const newSpeakerState = !isSpeakerOn;
+    setIsSpeakerOn(newSpeakerState);
+    updateCallSettings({ isSpeakerOn: newSpeakerState });
   };
 
   const handleGoBack = () => {
@@ -93,6 +125,16 @@ export const VoiceCall = () => {
     });
   }, [router, userName, userAvatar, userUsername]);
 
+  const handleMinimizeCall = () => {
+    minimizeCall();
+    router.back();
+  };
+
+  // Se a ligação foi minimizada pelo contexto, apenas voltar
+  if (isCallMinimized) {
+    return null;
+  }
+
   return (
     <SafeScreen edges={[]}>
       <S.Container>
@@ -101,7 +143,9 @@ export const VoiceCall = () => {
             <LeftArrow color="#ffffff" />
           </S.BackButton>
           {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
-          <ChatDuringCall />
+          <TouchableOpacity onPress={handleMinimizeCall}>
+            <ChatDuringCall />
+          </TouchableOpacity>
         </S.Header>
 
         <S.Content>
@@ -128,17 +172,17 @@ export const VoiceCall = () => {
             </S.IncomingCallActions>
           ) : (
             <S.CallActions>
-              <S.SpeakerIconButton>
-                <SpeakerIcon />
+              <S.SpeakerIconButton onPress={handleSpeaker}>
+                <SpeakerIcon color={isSpeakerOn ? "#FF3B30" : "#ffffff"} />
               </S.SpeakerIconButton>
 
               <TouchableOpacity onPress={handleVideoCall}>
                 <Video width={30} height={30} />
               </TouchableOpacity>
 
-              <S.MuteButton onPress={handleMute}>
-                <Microphone color={isMuted ? "#FF3B30" : "#ffffff"} width={30} height={30} />
-              </S.MuteButton>
+              <TouchableOpacity onPress={handleMute}>
+                {isMuted ? <Microphone width={30} height={30} /> : <MicrophoneOff width={30} height={30} />}
+              </TouchableOpacity>
 
               <S.ActionButton variant="danger" onPress={handleEndCall}>
                 <PhoneCall color="#ffffff" />
