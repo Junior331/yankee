@@ -41,6 +41,7 @@ export type StyledProps = {
   isSingle?: boolean;
   isActive?: boolean;
   transform?: string;
+  textTransform?: string;
   isSecondary?: boolean;
   height?: number | string;
   smallImageHeight?: string;

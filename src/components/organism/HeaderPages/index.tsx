@@ -40,7 +40,7 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
           <Filter />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handlePress("location")}>
-          <LocationTarget color={selectedIcon === "location" ? "red" : "#fff"} />
+          <LocationTarget color={selectedIcon === "location" ? "#F00D0D" : "#fff"} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handlePress("dollar")}>

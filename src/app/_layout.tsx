@@ -60,6 +60,8 @@ function RootLayoutNav() {
                   <Stack.Screen name="chatuser" options={{ headerShown: false }} />
                   <Stack.Screen name="voice-call" options={{ headerShown: false }} />
                   <Stack.Screen name="video-call" options={{ headerShown: false }} />
+                  <Stack.Screen name="live" options={{ headerShown: false }} />
+                  <Stack.Screen name="start-live" options={{ headerShown: false }} />
                 </Stack>
                 <CallOverlay />
               </ThemeProvider>

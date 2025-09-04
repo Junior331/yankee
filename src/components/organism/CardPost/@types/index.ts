@@ -4,8 +4,9 @@ import { ViewStyle, StyleProp } from "react-native";
 export interface ICardPost {
   name: string;
   avatar: string;
-  userTag: string;
+  userTag: ReactNode;
   children: ReactNode;
   buttonHeader: ReactNode;
   style?: StyleProp<ViewStyle>;
+  styleHeader?: StyleProp<ViewStyle>;
 }

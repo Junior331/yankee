@@ -1,0 +1,229 @@
+import styled from "styled-components/native";
+import { LinearGradient } from "expo-linear-gradient";
+
+import { View, ImageBackground as ImageBackgroundReact } from "react-native";
+
+import { Text as TextComponent } from "@/components/elements";
+import { StyledProps } from "@/utils/types";
+
+export const ViewGeneric = styled(View)`
+  display: flex;
+  align-items: start;
+  flex-direction: row;
+  justify-content: start;
+`;
+
+export const Container = styled(ViewGeneric)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+`;
+
+export const Content = styled(ViewGeneric)`
+  width: 100%;
+  flex: 1 0 auto;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  > &:first-child {
+    padding: 0px 15px;
+  }
+`;
+
+export const LiveBadge = styled(View)`
+  gap: 5px;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const Text = styled(TextComponent)<StyledProps>`
+  color: ${({ color }) => color || "#FAF9F9"};
+  font-size: ${({ fontSize }) => fontSize || "10px"};
+  font-weight: ${({ fontWeight }) => fontWeight || 400};
+  text-transform: ${({ textTransform }) => textTransform};
+`;
+
+export const ImageBackground = styled(ImageBackgroundReact)`
+  width: 100%;
+  height: auto;
+  min-height: 450px;
+  position: relative;
+  background-color: transparent;
+`;
+
+export const LiveContainer = styled(ViewGeneric)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: absolute;
+  align-items: start;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const LiveTitleContainer = styled.View`
+  padding: 20px;
+  border-radius: 20px;
+`;
+
+export const LiveContent = styled.View`
+  padding: 0px 10px 15px;
+`;
+
+export const LiveDescription = styled(Text)`
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+`;
+
+export const LiveQuestion = styled(Text)`
+  margin-bottom: 8px;
+`;
+
+export const GradientOverlay = styled(LinearGradient)`
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 276px;
+  flex-shrink: 0;
+  position: absolute;
+`;
+
+export const CommentsSection = styled.View`
+  flex: 1;
+  height: 200px;
+  position: relative;
+  padding-bottom: 8px;
+  padding: 8px 15px 0px;
+`;
+
+export const GradientTop = styled(LinearGradient)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: 60px;
+  pointer-events: none;
+`;
+
+export const GradientBottom = styled(LinearGradient)<StyledProps>`
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  position: absolute;
+  pointer-events: none;
+  height: ${({ height }) => height || "60px"};
+`;
+
+export const CommentItem = styled.View`
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 12px;
+`;
+
+export const CommentAvatar = styled.Image`
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border-radius: 16px;
+`;
+
+export const CommentText = styled(Text)`
+  margin-top: 2px;
+`;
+
+export const BottomSection = styled.View`
+  left: 16px;
+  right: 16px;
+  bottom: 80px;
+  position: absolute;
+`;
+
+export const CommentInputContainer = styled.View`
+  gap: 12px;
+  width: 100%;
+  padding: 0px 15px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CommentInputWrapper = styled.View`
+  flex: 1;
+  border-radius: 100px;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 12px 2px 4px;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.05);
+`;
+
+export const ExternalActionIcons = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const IconButton = styled.View`
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  border-radius: 16px;
+  justify-content: center;
+`;
+
+export const IconText = styled.Text`
+  font-size: 18px;
+  color: #fff;
+`;
+
+export const SendIcon = styled.Text`
+  font-size: 18px;
+  color: #fff;
+`;
+
+export const LiveHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-bottom: 8px;
+`;
+
+export const LiveUserInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+`;
+
+export const LiveAvatar = styled.Image`
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin-right: 12px;
+`;
+
+export const LiveUserDetails = styled.View`
+  flex: 1;
+`;
+
+export const LiveHeaderActions = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const LiveViewersContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 10px;
+  border-radius: 12px;
+`;
