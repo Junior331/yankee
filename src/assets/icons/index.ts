@@ -11,6 +11,8 @@ import User from "./User";
 import Home from "./Home";
 import Chat from "./Chat";
 import Fire from "./Fire";
+import Smile from "./Smile";
+import Share from "./Share";
 import Heart from "./Heart";
 import Miles from "./Miles";
 import Error from "./Error";
@@ -48,8 +50,10 @@ import Navigation from "./Navigation";
 import Visibility from "./Visibility";
 import SpeakerIcon from "./SpeakerIcon";
 import SetLocation from "./SetLocation";
+import HeartDonate from "./HeartDonate";
 import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
+import WarningCircle from "./WarningCircle";
 import MicrophoneOff from "./MicrophoneOff";
 import ChatDuringCall from "./ChatDuringCall";
 import LocationTarget from "./LocationTarget";
@@ -80,6 +84,8 @@ export {
   Phone,
   Heart,
   Miles,
+  Smile,
+  Share,
   MapPin,
   Filter,
   Pause,
@@ -108,10 +114,12 @@ export {
   Microphone,
   Navigation,
   Visibility,
+  HeartDonate,
   SpeakerIcon,
   SetLocation,
   LibraryPhoto,
   Notification,
+  WarningCircle,
   MicrophoneOff,
   ArrowOfLineTop,
   ChatDuringCall,

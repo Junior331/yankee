@@ -17,7 +17,6 @@ export const Container = styled(ViewGeneric)`
   width: 100%;
   height: 100%;
   display: flex;
-  padding: 0px 15px;
   align-items: start;
   justify-content: center;
 `;
@@ -28,9 +27,10 @@ export const Content = styled(ViewGeneric)`
   overflow: hidden;
   position: relative;
   flex-direction: column;
+  > &:first-child {
+    padding: 0px 15px;
+  }
 `;
-
-
 
 export const LiveBadge = styled(View)`
   gap: 5px;
@@ -48,10 +48,8 @@ export const Text = styled(TextComponent)<StyledProps>`
 export const ImageBackground = styled(ImageBackgroundReact)`
   width: 100%;
   height: auto;
-  overflow: hidden;
   min-height: 450px;
   position: relative;
-  border-radius: 24px;
   background-color: transparent;
 `;
 
@@ -97,10 +95,10 @@ export const GradientOverlay = styled(LinearGradient)`
 
 export const CommentsSection = styled.View`
   flex: 1;
-  padding-top: 8px;
+  height: 200px;
   position: relative;
   padding-bottom: 8px;
-  height: 200px;
+  padding: 8px 15px 0px;
 `;
 
 export const GradientTop = styled(LinearGradient)`
@@ -148,17 +146,84 @@ export const BottomSection = styled.View`
 `;
 
 export const CommentInputContainer = styled.View`
+  gap: 12px;
+  width: 100%;
+  padding: 0px 15px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CommentInputWrapper = styled.View`
+  flex: 1;
+  border-radius: 100px;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 12px 2px 4px;
+  justify-content: space-between;
+  background-color: rgba(255, 255, 255, 0.05);
+`;
+
+export const ExternalActionIcons = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+`;
+
+export const IconButton = styled.View`
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  border-radius: 16px;
+  justify-content: center;
+`;
+
+export const IconText = styled.Text`
+  font-size: 18px;
+  color: #fff;
+`;
+
+export const SendIcon = styled.Text`
+  font-size: 18px;
+  color: #fff;
+`;
+
+export const LiveHeader = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 16px 0;
+  margin-bottom: 8px;
 `;
 
-export const ActionIcons = styled.View`
+export const LiveUserInfo = styled.View`
+  flex-direction: row;
+  align-items: center;
+  flex: 1;
+`;
+
+export const LiveAvatar = styled.Image`
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  margin-right: 12px;
+`;
+
+export const LiveUserDetails = styled.View`
+  flex: 1;
+`;
+
+export const LiveHeaderActions = styled.View`
   flex-direction: row;
   align-items: center;
   gap: 16px;
 `;
 
-export const ActionIcon = styled.Text`
-  font-size: 24px;
+export const LiveViewersContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px 10px;
+  border-radius: 12px;
 `;

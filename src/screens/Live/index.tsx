@@ -12,7 +12,7 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { CardPost, Layout } from "@/components/organism";
-import { LocationTarget } from "@/assets/icons";
+import { LocationTarget, Smile, HeartDonate, WarningCircle, Share } from "@/assets/icons";
 import GestureRecognizer from "react-native-swipe-gestures";
 
 interface CommentType {
@@ -190,6 +190,7 @@ export const Live = () => {
         <S.Container style={{ minWidth: width }}>
           <S.Content>
             <CardPost
+            styleHeader={{paddingHorizontal: 14}}
               key={livePost.id}
               name={livePost.user.name}
               buttonHeader={
@@ -212,6 +213,8 @@ export const Live = () => {
             >
               <S.ImageBackground
                 resizeMode="cover"
+                borderTopLeftRadius={32}
+                borderTopRightRadius={32}
                 source={{
                   uri: livePost.image,
                 }}
@@ -247,15 +250,20 @@ export const Live = () => {
                   start={[0, 0]}
                   end={[0, 0.6]}
                   height={`40px`}
-                  colors={["transparent", "rgba(23, 23, 23, 0.85)"]}
+                  colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
+
+                  // start={[0, 0]}
+                  // end={[0, 1.2]}
+                  // height={`40px`}
+                  // colors={["transparent", "rgba(23, 23, 23, 0.95)", "transparent"]}
                 />
               </S.ImageBackground>
             </CardPost>
             <S.CommentsSection>
               <S.GradientTop
                 colors={["rgba(23, 23, 23, 0.95)", "transparent"]}
-                start={[0, 0]}
-                end={[0, 0.6]}
+                start={[0, 0.4]}
+                end={[0, 1.5]}
               />
               <ScrollView
                 ref={scrollViewRef}
@@ -338,28 +346,38 @@ export const Live = () => {
               />
             </S.CommentsSection>
             <S.CommentInputContainer>
-              <TextInput
-                value={comment}
-                style={styles.commentInput}
-                placeholder="Comente..."
-                placeholderTextColor="#999"
-                onChangeText={setComment}
-                onSubmitEditing={() => handleSubmitComment(comment)}
-              />
-              <S.ActionIcons>
+              <S.CommentInputWrapper>
+                <TextInput
+                  value={comment}
+                  style={styles.commentInput}
+                  placeholder="Comente..."
+                  placeholderTextColor="#999"
+                  onChangeText={setComment}
+                  onSubmitEditing={() => handleSubmitComment(comment)}
+                />
                 <TouchableOpacity>
-                  <S.ActionIcon>😊</S.ActionIcon>
+                  <S.IconButton>
+                    <Smile color="#fff" />
+                  </S.IconButton>
+                </TouchableOpacity>
+              </S.CommentInputWrapper>
+              <S.ExternalActionIcons>
+                <TouchableOpacity>
+                  <S.IconButton>
+                    <HeartDonate color="#fff" />
+                  </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <S.ActionIcon>❤️</S.ActionIcon>
+                  <S.IconButton>
+                    <WarningCircle color="#fff" />
+                  </S.IconButton>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <S.ActionIcon>ℹ️</S.ActionIcon>
+                <TouchableOpacity onPress={() => handleSubmitComment(comment)}>
+                  <S.IconButton>
+                    <Share color="#fff" />
+                  </S.IconButton>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                  <S.ActionIcon>📤</S.ActionIcon>
-                </TouchableOpacity>
-              </S.ActionIcons>
+              </S.ExternalActionIcons>
             </S.CommentInputContainer>
           </S.Content>
 
@@ -391,13 +409,9 @@ const styles = StyleSheet.create({
   },
   commentInput: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
     color: "#fff",
-    fontSize: 14,
-    marginRight: 12,
+    fontSize: 16,
+    paddingLeft: 16,
   },
   commentContent: {
     flex: 1,

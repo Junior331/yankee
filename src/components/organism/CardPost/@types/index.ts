@@ -8,4 +8,5 @@ export interface ICardPost {
   children: ReactNode;
   buttonHeader: ReactNode;
   style?: StyleProp<ViewStyle>;
+  styleHeader?: StyleProp<ViewStyle>;
 }
