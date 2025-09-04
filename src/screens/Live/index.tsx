@@ -68,7 +68,9 @@ export const Live = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
   const [commentHistory, setCommentHistory] = useState<CommentType[]>([]);
   const [viewers, setViewers] = useState(908);
-  const [animatedValues, setAnimatedValues] = useState<{[key: number]: Animated.Value}>({});
+  const [animatedValues, setAnimatedValues] = useState<{
+    [key: number]: Animated.Value;
+  }>({});
   const [isUserScrolling, setIsUserScrolling] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollViewRef = useRef<ScrollView>(null);
@@ -95,23 +97,26 @@ export const Live = () => {
       };
 
       // Adicionar ao histórico completo
-      setCommentHistory(prev => [newComment, ...prev]);
-      
+      setCommentHistory((prev) => [newComment, ...prev]);
+
       setComments((prev) => {
         // Criar animação para o novo comentário
         const animValue = new Animated.Value(0);
-        setAnimatedValues(prevAnim => ({...prevAnim, [newComment.id]: animValue}));
-        
+        setAnimatedValues((prevAnim) => ({
+          ...prevAnim,
+          [newComment.id]: animValue,
+        }));
+
         // Animar entrada do comentário
         Animated.timing(animValue, {
           toValue: 1,
           duration: 200,
           useNativeDriver: true,
         }).start();
-        
+
         // Manter apenas os 4 comentários mais recentes
         const newComments = [newComment, ...prev].slice(0, 4);
-        
+
         return newComments;
       });
     }, Math.random() * 3000 + 2000);
@@ -153,23 +158,26 @@ export const Live = () => {
 
     setComment("");
     // Adicionar ao histórico completo
-    setCommentHistory(prev => [newComment, ...prev]);
-    
+    setCommentHistory((prev) => [newComment, ...prev]);
+
     setComments((prev) => {
       // Criar animação para o novo comentário
       const animValue = new Animated.Value(0);
-      setAnimatedValues(prevAnim => ({...prevAnim, [newComment.id]: animValue}));
-      
+      setAnimatedValues((prevAnim) => ({
+        ...prevAnim,
+        [newComment.id]: animValue,
+      }));
+
       // Animar entrada do comentário
       Animated.timing(animValue, {
         toValue: 1,
         duration: 200,
         useNativeDriver: true,
       }).start();
-      
+
       // Manter apenas os 4 comentários mais recentes
       const newComments = [newComment, ...prev].slice(0, 4);
-      
+
       return newComments;
     });
   };
@@ -189,7 +197,9 @@ export const Live = () => {
                   style={styles.closeButton}
                   onPress={() => router.back()}
                 >
-                  <S.CloseIcon>✕</S.CloseIcon>
+                  <S.Text color="#fff" fontSize="18px" fontWeight={`bold`}>
+                    ✕
+                  </S.Text>
                 </TouchableOpacity>
               }
               userTag={
@@ -208,7 +218,13 @@ export const Live = () => {
               >
                 <S.LiveContainer>
                   <S.LiveTitleContainer>
-                    <S.LiveTitle>TITULO DA LIVE</S.LiveTitle>
+                    <S.Text
+                      fontSize="12px"
+                      fontWeight={600}
+                      textTransform="uppercase"
+                    >
+                      TITULO DA LIVE
+                    </S.Text>
                   </S.LiveTitleContainer>
 
                   <S.LiveContent>
@@ -216,15 +232,22 @@ export const Live = () => {
                       I never tire of admiring this view before going to work.
                     </S.LiveDescription>
 
-                    <S.LiveQuestion>What do you think guys?</S.LiveQuestion>
-
-                    <S.LiveSubtext>Alere no dealedat</S.LiveSubtext>
+                    <S.LiveQuestion color="#fff" fontSize="14px">
+                      What do you think guys?
+                    </S.LiveQuestion>
+                    <S.Text color="#ffffff99" fontSize="12px">Alere no dealedat</S.Text>
                   </S.LiveContent>
                 </S.LiveContainer>
                 <S.GradientOverlay
-                  colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
+                  colors={["transparent", "rgba(23, 23, 23, 0.85)"]}
                   start={[0, 0]}
                   end={[0, 0.6]}
+                />
+                <S.GradientBottom
+                  start={[0, 0]}
+                  end={[0, 0.6]}
+                  height={`40px`}
+                  colors={["transparent", "rgba(23, 23, 23, 0.85)"]}
                 />
               </S.ImageBackground>
             </CardPost>
@@ -232,7 +255,7 @@ export const Live = () => {
               <S.GradientTop
                 colors={["rgba(23, 23, 23, 0.95)", "transparent"]}
                 start={[0, 0]}
-                end={[0, 0.4]}
+                end={[0, 0.6]}
               />
               <ScrollView
                 ref={scrollViewRef}
@@ -252,12 +275,11 @@ export const Live = () => {
                     setIsUserScrolling(false);
                   }, 1000);
                 }}
-                onContentSizeChange={(contentWidth, contentHeight) => {
-                  // Só faz scroll automático se o usuário não estiver scrollando manualmente
-                  // e se estiver próximo ao final (últimos 50px)
+                onContentSizeChange={(_contentWidth, contentHeight) => {
                   const scrollView = scrollViewRef.current;
                   if (!isUserScrolling && scrollView) {
-                    const isNearBottom = contentHeight - scrollPosition - 180 <= 50;
+                    const isNearBottom =
+                      contentHeight - scrollPosition - 180 <= 50;
                     if (isNearBottom) {
                       setTimeout(() => {
                         scrollView.scrollToEnd({ animated: true });
@@ -267,25 +289,32 @@ export const Live = () => {
                 }}
               >
                 {[...commentHistory].reverse().map((comment) => {
-                  const animValue = animatedValues[comment.id] || new Animated.Value(1);
-                  const isRecentComment = comments.some(c => c.id === comment.id);
-                  
+                  const animValue =
+                    animatedValues[comment.id] || new Animated.Value(1);
+                  const isRecentComment = comments.some(
+                    (c) => c.id === comment.id
+                  );
+
                   return (
                     <Animated.View
                       key={comment.id}
                       style={{
                         transform: [
                           {
-                            translateY: isRecentComment ? animValue.interpolate({
-                              inputRange: [0, 1],
-                              outputRange: [30, 0],
-                            }) : 0,
+                            translateY: isRecentComment
+                              ? animValue.interpolate({
+                                  inputRange: [0, 1],
+                                  outputRange: [30, 0],
+                                })
+                              : 0,
                           },
                         ],
-                        opacity: isRecentComment ? animValue.interpolate({
-                          inputRange: [0, 0.5, 1],
-                          outputRange: [0, 0.7, 1],
-                        }) : 0.7,
+                        opacity: isRecentComment
+                          ? animValue.interpolate({
+                              inputRange: [0, 0.5, 1],
+                              outputRange: [0, 0.7, 1],
+                            })
+                          : 0.7,
                       }}
                     >
                       <S.CommentItem>
@@ -294,8 +323,8 @@ export const Live = () => {
                           resizeMode="cover"
                         />
                         <View style={styles.commentContent}>
-                          <S.CommentName>{comment.name}</S.CommentName>
-                          <S.CommentText>{comment.description}</S.CommentText>
+                          <S.Text color="#fff" fontSize="14px" fontWeight={`bold`}>{comment.name}</S.Text>
+                          <S.CommentText color="#fff" fontSize="12px">{comment.description}</S.CommentText>
                         </View>
                       </S.CommentItem>
                     </Animated.View>
@@ -303,9 +332,9 @@ export const Live = () => {
                 })}
               </ScrollView>
               <S.GradientBottom
-                  colors={["transparent", "rgba(23, 23, 23, 0.671)"]}
-                  start={[0, 0]}
-                  end={[0, 0.4]}
+                colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
+                start={[0, 0]}
+                end={[0, 0.6]}
               />
             </S.CommentsSection>
             <S.CommentInputContainer>

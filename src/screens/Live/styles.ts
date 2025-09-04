@@ -30,11 +30,7 @@ export const Content = styled(ViewGeneric)`
   flex-direction: column;
 `;
 
-export const CloseIcon = styled.Text`
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-`;
+
 
 export const LiveBadge = styled(View)`
   gap: 5px;
@@ -46,6 +42,7 @@ export const Text = styled(TextComponent)<StyledProps>`
   color: ${({ color }) => color || "#FAF9F9"};
   font-size: ${({ fontSize }) => fontSize || "10px"};
   font-weight: ${({ fontWeight }) => fontWeight || 400};
+  text-transform: ${({ textTransform }) => textTransform};
 `;
 
 export const ImageBackground = styled(ImageBackgroundReact)`
@@ -74,27 +71,18 @@ export const LiveTitleContainer = styled.View`
   border-radius: 20px;
 `;
 
-export const LiveTitle = styled.Text`
-  color: #FAF9F9;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-`;
-
 export const LiveContent = styled.View`
   padding: 0px 10px 15px;
 `;
 
-export const LiveDescription = styled.Text`
+export const LiveDescription = styled(Text)`
   color: #fff;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 12px;
 `;
 
-export const LiveQuestion = styled.Text`
-  color: #fff;
-  font-size: 14px;
+export const LiveQuestion = styled(Text)`
   margin-bottom: 8px;
 `;
 
@@ -105,11 +93,6 @@ export const GradientOverlay = styled(LinearGradient)`
   height: 276px;
   flex-shrink: 0;
   position: absolute;
-`;
-
-export const LiveSubtext = styled.Text`
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
 `;
 
 export const CommentsSection = styled.View`
@@ -130,14 +113,14 @@ export const GradientTop = styled(LinearGradient)`
   pointer-events: none;
 `;
 
-export const GradientBottom = styled(LinearGradient)`
+export const GradientBottom = styled(LinearGradient)<StyledProps>`
   left: 0;
   right: 0;
   bottom: 0;
   z-index: 10;
-  height: 60px;
   position: absolute;
   pointer-events: none;
+  height: ${({ height }) => height || "60px"};
 `;
 
 export const CommentItem = styled.View`
@@ -149,27 +132,19 @@ export const CommentItem = styled.View`
 export const CommentAvatar = styled.Image`
   width: 32px;
   height: 32px;
-  border-radius: 16px;
   margin-right: 8px;
+  border-radius: 16px;
 `;
 
-export const CommentName = styled.Text`
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-export const CommentText = styled.Text`
-  color: #fff;
-  font-size: 12px;
+export const CommentText = styled(Text)`
   margin-top: 2px;
 `;
 
 export const BottomSection = styled.View`
-  position: absolute;
-  bottom: 80px;
   left: 16px;
   right: 16px;
+  bottom: 80px;
+  position: absolute;
 `;
 
 export const CommentInputContainer = styled.View`
