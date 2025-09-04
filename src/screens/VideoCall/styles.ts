@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { View, TouchableOpacity, ImageBackground } from "react-native";
+import Animated from "react-native-reanimated";
 import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   flex: 1;
   background-color: #000000;
   justify-content: flex-end;
-  padding: 35px;
+  padding: 25px;
   
 `;
 
@@ -15,18 +16,16 @@ export const VideoBackground = styled(ImageBackground).attrs({
     borderRadius: 20,
   },
 })`
-  justify-content: flex-end;
+
   width: 100%;
   height: 95%;
   border-radius: 20px;
-  overflow: hidden;
   margin-top: 30px ;
 `;
 export const Header = styled(View)`
   position: absolute;
   top: 10px;
   left: 20px;
-  right: 20px;
   flex-direction: row;
   align-items: center;
   gap: 80px;
@@ -48,11 +47,7 @@ export const HeaderCallDuration = styled(TextComponent)`
   border-radius: 16px;
 `;
 
-export const CallInfo = styled(View)`
-  flex-direction: row;
-  align-items: center;
-  margin-top: 30px;
-`;
+
 
 export const ContactName = styled(TitleComponent)`
   font-size: 18px;
@@ -71,16 +66,14 @@ export const CallDuration = styled(TextComponent)`
   color: #ffffff;
   font-weight: 500;
 `;
-
-export const SelfVideoContainer = styled(View)`
+export const AnimatedSelfVideoContainer = styled(Animated.View)`
   position: absolute;
-  top: 100px;
-  right: 20px;
+  top: -35px;
+  left: 10px;
   width: 120px;
-  height: 180px;
+  height: 190px;
   border-radius: 12px;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.3);
   background-color: #1c1c1e;
 `;
 
@@ -102,7 +95,7 @@ export const BottomControls = styled(View)`
   padding: 10px;
   position: absolute;
   left: 80px;
-  bottom: 40px;
+  bottom: 30px;
 `;
 
 export const CallActions = styled(View)`
@@ -130,10 +123,7 @@ export const ActionButton = styled(TouchableOpacity)<{ variant?: 'primary' | 'se
 
 export const IncomingCallOverlay = styled(View)`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  
   background-color: rgba(0, 0, 0, 0.8);
   justify-content: space-between;
   align-items: center;

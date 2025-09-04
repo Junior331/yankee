@@ -1,12 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Image, Vibration, StatusBar } from "react-native";
+import { Image, Vibration, StatusBar, Dimensions } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
+import { PanGestureHandler, PanGestureHandlerGestureEvent,  } from "react-native-gesture-handler";
+import  { 
+  useAnimatedGestureHandler, 
+  useAnimatedStyle, 
+  useSharedValue, 
+  
+} from "react-native-reanimated";
 
 import * as S from "./styles";
 import Video from "@/assets/icons/Video";
 import { Phone, Microphone, LeftArrow, MicrophoneOff } from "@/assets/icons";
 import { Camera as CameraIcon } from "@/assets/icons";
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
+const VIDEO_CONTAINER_WIDTH = 120;
+const VIDEO_CONTAINER_HEIGHT = 180;
+const CONTAINER_PADDING = 35;
 
 export const VideoCall = () => {
   const router = useRouter();
@@ -19,6 +31,10 @@ export const VideoCall = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOn, setIsVideoOn] = useState(true);
   const [cameraType, setCameraType] = useState<CameraType>("front");
+
+  // Posição animada do contêiner de vídeo próprio
+  const translateX = useSharedValue(SCREEN_WIDTH - VIDEO_CONTAINER_WIDTH - (CONTAINER_PADDING * 2) - 20);
+  const translateY = useSharedValue(100);
 
   const contactName = (params.contactName as string) || "Ryan Brooks";
   const contactAvatar =
@@ -97,6 +113,48 @@ export const VideoCall = () => {
     setCameraType((current) => (current === "back" ? "front" : "back"));
   };
 
+  // Handler para o gesto de arrastar
+  type MyContext = {
+  startX: number;
+  startY: number;
+};
+
+const panGestureHandler = useAnimatedGestureHandler<
+  PanGestureHandlerGestureEvent, // tipo do evento
+  MyContext                      // tipo do contexto
+>({
+  onStart: (_, context) => {
+    context.startX = translateX.value;
+    context.startY = translateY.value;
+  },
+  onActive: (event, context) => {
+    const newX = context.startX + event.translationX;
+    const newY = context.startY + event.translationY;
+
+    // Considera o padding do container e margens do VideoBackground
+    const maxX = SCREEN_WIDTH - VIDEO_CONTAINER_WIDTH - (CONTAINER_PADDING * 2);
+    
+    translateX.value = Math.max(
+      0, 
+      Math.min(newX, maxX)
+    );
+    translateY.value = Math.max(
+      50,
+      Math.min(newY, SCREEN_HEIGHT - VIDEO_CONTAINER_HEIGHT - 120)
+    );
+  },
+});
+
+  // Estilo animado para o contêiner de vídeo
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { translateX: translateX.value },
+        { translateY: translateY.value },
+      ],
+    };
+  });
+
   // const handleMinimize = () => {
   // Implementar lógica de minimizar - pode usar picture-in-picture
   // console.log("Minimize video call");
@@ -172,15 +230,17 @@ export const VideoCall = () => {
         {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
       </S.Header>
       <S.VideoBackground source={{ uri: contactAvatar }} blurRadius={isConnected ? 0 : 10}>
-        <S.SelfVideoContainer>
-          {isVideoOn && permission?.granted ? (
-            <CameraView ref={cameraRef} style={{ width: "100%", height: "100%" }} facing={cameraType} />
-          ) : (
-            <S.SelfVideo>
-              <S.SelfVideoPlaceholder>{!permission?.granted ? "No Permission" : "Camera Off"}</S.SelfVideoPlaceholder>
-            </S.SelfVideo>
-          )}
-        </S.SelfVideoContainer>
+        <PanGestureHandler onGestureEvent={panGestureHandler}>
+          <S.AnimatedSelfVideoContainer style={animatedStyle}>
+            {isVideoOn && permission?.granted ? (
+              <CameraView ref={cameraRef} style={{ width: "100%", height: "100%" }} facing={cameraType} />
+            ) : (
+              <S.SelfVideo>
+                <S.SelfVideoPlaceholder>{!permission?.granted ? "No Permission" : "Camera Off"}</S.SelfVideoPlaceholder>
+              </S.SelfVideo>
+            )}
+          </S.AnimatedSelfVideoContainer>
+        </PanGestureHandler>
       </S.VideoBackground>
       <S.BottomControls>
         <S.CallActions>
