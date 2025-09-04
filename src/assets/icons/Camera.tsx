@@ -2,7 +2,7 @@ import React from "react";
 import { SvgXml } from "react-native-svg";
 import { IIcons } from "./@types";
 
-const Camera = ({ width = 16, height = 16, color = "white" }: IIcons) => {
+const Camera = ({ width = 20, height = 20, color = "white" }: IIcons) => {
   return (
     <SvgXml
       xml={`

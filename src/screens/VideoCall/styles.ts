@@ -5,24 +5,53 @@ import { Text as TextComponent, Title as TitleComponent } from "@/components/ele
 export const Container = styled(View)`
   flex: 1;
   background-color: #000000;
+  justify-content: flex-end;
+  padding: 35px;
+  
 `;
 
-export const VideoBackground = styled(ImageBackground)`
-  flex: 1;
-  justify-content: space-between;
+export const VideoBackground = styled(ImageBackground).attrs({
+  imageStyle: {
+    borderRadius: 20,
+  },
+})`
+  justify-content: flex-end;
+  width: 100%;
+  height: 95%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 30px ;
 `;
-
 export const Header = styled(View)`
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: rgba(0, 0, 0, 0.3);
+  gap: 80px;
+`;
+export const BackButton = styled(TouchableOpacity)`
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const HeaderCallDuration = styled(TextComponent)`
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: transparent;
+  border-radius: 16px;
 `;
 
 export const CallInfo = styled(View)`
-  flex: 1;
+  flex-direction: row;
   align-items: center;
+  margin-top: 30px;
 `;
 
 export const ContactName = styled(TitleComponent)`
@@ -68,15 +97,18 @@ export const SelfVideoPlaceholder = styled(TextComponent)`
 `;
 
 export const BottomControls = styled(View)`
-  padding: 40px 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #171717;
+  border-radius: 30px;
+  padding: 10px;
+  position: absolute;
+  left: 80px;
+  bottom: 40px;
 `;
 
 export const CallActions = styled(View)`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 20px;
 `;
 
 export const ActionButton = styled(TouchableOpacity)<{ variant?: 'primary' | 'secondary' | 'danger' }>`
@@ -90,16 +122,10 @@ export const ActionButton = styled(TouchableOpacity)<{ variant?: 'primary' | 'se
       case 'danger':
         return '#FF3B30';
       case 'secondary':
-        return 'rgba(255, 255, 255, 0.2)';
-      default:
-        return '#34C759';
+        return 'transparent';
+    
     }
   }};
-  shadow-color: #000;
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.25;
-  shadow-radius: 4px;
-  elevation: 5;
 `;
 
 export const IncomingCallOverlay = styled(View)`
