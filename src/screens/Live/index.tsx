@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TextInput,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   Dimensions,
   View,
   Animated,
+  ScrollView,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import * as S from "./styles";
@@ -65,9 +66,12 @@ export const Live = () => {
   const [comment, setComment] = useState("");
   const [isLiveActive] = useState(true);
   const [comments, setComments] = useState<CommentType[]>([]);
+  const [commentHistory, setCommentHistory] = useState<CommentType[]>([]);
   const [viewers, setViewers] = useState(908);
   const [animatedValues, setAnimatedValues] = useState<{[key: number]: Animated.Value}>({});
-  const [exitingComments, setExitingComments] = useState<Set<number>>(new Set());
+  const [isUserScrolling, setIsUserScrolling] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const livePost = mocks.posts.find(
     (p) => p.id === parsedLiveId && p.type === "live"
@@ -90,28 +94,10 @@ export const Live = () => {
         answers: [],
       };
 
+      // Adicionar ao histórico completo
+      setCommentHistory(prev => [newComment, ...prev]);
+      
       setComments((prev) => {
-        const willBeRemoved = prev.slice(2);
-        
-        willBeRemoved.forEach(comment => {
-          const exitAnimValue = animatedValues[comment.id] || new Animated.Value(1);
-          setExitingComments(prevExiting => new Set([...prevExiting, comment.id]));
-          
-          Animated.timing(exitAnimValue, {
-            toValue: 0,
-            duration: 250,
-            useNativeDriver: true,
-          }).start(() => {
-            setExitingComments(prevExiting => {
-              const newExiting = new Set(prevExiting);
-              newExiting.delete(comment.id);
-              return newExiting;
-            });
-          });
-        });
-        
-        const newComments = [newComment, ...prev.slice(0, 2)];
-        
         // Criar animação para o novo comentário
         const animValue = new Animated.Value(0);
         setAnimatedValues(prevAnim => ({...prevAnim, [newComment.id]: animValue}));
@@ -119,9 +105,12 @@ export const Live = () => {
         // Animar entrada do comentário
         Animated.timing(animValue, {
           toValue: 1,
-          duration: 300,
+          duration: 200,
           useNativeDriver: true,
         }).start();
+        
+        // Manter apenas os 4 comentários mais recentes
+        const newComments = [newComment, ...prev].slice(0, 4);
         
         return newComments;
       });
@@ -163,27 +152,10 @@ export const Live = () => {
     };
 
     setComment("");
+    // Adicionar ao histórico completo
+    setCommentHistory(prev => [newComment, ...prev]);
+    
     setComments((prev) => {
-      const willBeRemoved = prev.slice(4);
-      willBeRemoved.forEach(comment => {
-        const exitAnimValue = animatedValues[comment.id] || new Animated.Value(1);
-        setExitingComments(prevExiting => new Set([...prevExiting, comment.id]));
-        
-        Animated.timing(exitAnimValue, {
-          toValue: 0,
-          duration: 250,
-          useNativeDriver: true,
-        }).start(() => {
-          setExitingComments(prevExiting => {
-            const newExiting = new Set(prevExiting);
-            newExiting.delete(comment.id);
-            return newExiting;
-          });
-        });
-      });
-      
-      const newComments = [newComment, ...prev.slice(0, 2)];
-      
       // Criar animação para o novo comentário
       const animValue = new Animated.Value(0);
       setAnimatedValues(prevAnim => ({...prevAnim, [newComment.id]: animValue}));
@@ -191,9 +163,12 @@ export const Live = () => {
       // Animar entrada do comentário
       Animated.timing(animValue, {
         toValue: 1,
-        duration: 300,
+        duration: 200,
         useNativeDriver: true,
       }).start();
+      
+      // Manter apenas os 4 comentários mais recentes
+      const newComments = [newComment, ...prev].slice(0, 4);
       
       return newComments;
     });
@@ -259,49 +234,74 @@ export const Live = () => {
                 start={[0, 0]}
                 end={[0, 0.4]}
               />
-              {comments.slice(0, 4).reverse().map((comment, index) => {
-                const animValue = animatedValues[comment.id] || new Animated.Value(1);
-                const isExiting = exitingComments.has(comment.id);
-                
-                return (
-                  <Animated.View
-                    key={comment.id}
-                    style={{
-                      transform: [
-                        {
-                          translateY: animValue.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [50, 0],
-                          }),
-                        },
-                        {
-                          translateX: isExiting
-                            ? animValue.interpolate({
-                                inputRange: [0, 1],
-                                outputRange: [0, -300],
-                              })
-                            : 0,
-                        },
-                      ],
-                      opacity: animValue.interpolate({
-                        inputRange: [0, 0.3, 1],
-                        outputRange: [0, 0.7, index === 1 ? 1 : 0.6],
-                      }),
-                    }}
-                  >
-                    <S.CommentItem>
-                      <S.CommentAvatar
-                        source={{ uri: comment.avatar }}
-                        resizeMode="cover"
-                      />
-                      <View style={styles.commentContent}>
-                        <S.CommentName>{comment.name}</S.CommentName>
-                        <S.CommentText>{comment.description}</S.CommentText>
-                      </View>
-                    </S.CommentItem>
-                  </Animated.View>
-                );
-              })}
+              <ScrollView
+                ref={scrollViewRef}
+                style={{ flex: 1, maxHeight: 180 }}
+                showsVerticalScrollIndicator={false}
+                nestedScrollEnabled={true}
+                scrollEnabled={true}
+                contentContainerStyle={{ paddingVertical: 10 }}
+                onScroll={(event) => {
+                  setScrollPosition(event.nativeEvent.contentOffset.y);
+                }}
+                onScrollBeginDrag={() => {
+                  setIsUserScrolling(true);
+                }}
+                onScrollEndDrag={() => {
+                  setTimeout(() => {
+                    setIsUserScrolling(false);
+                  }, 1000);
+                }}
+                onContentSizeChange={(contentWidth, contentHeight) => {
+                  // Só faz scroll automático se o usuário não estiver scrollando manualmente
+                  // e se estiver próximo ao final (últimos 50px)
+                  const scrollView = scrollViewRef.current;
+                  if (!isUserScrolling && scrollView) {
+                    const isNearBottom = contentHeight - scrollPosition - 180 <= 50;
+                    if (isNearBottom) {
+                      setTimeout(() => {
+                        scrollView.scrollToEnd({ animated: true });
+                      }, 100);
+                    }
+                  }
+                }}
+              >
+                {[...commentHistory].reverse().map((comment) => {
+                  const animValue = animatedValues[comment.id] || new Animated.Value(1);
+                  const isRecentComment = comments.some(c => c.id === comment.id);
+                  
+                  return (
+                    <Animated.View
+                      key={comment.id}
+                      style={{
+                        transform: [
+                          {
+                            translateY: isRecentComment ? animValue.interpolate({
+                              inputRange: [0, 1],
+                              outputRange: [30, 0],
+                            }) : 0,
+                          },
+                        ],
+                        opacity: isRecentComment ? animValue.interpolate({
+                          inputRange: [0, 0.5, 1],
+                          outputRange: [0, 0.7, 1],
+                        }) : 0.7,
+                      }}
+                    >
+                      <S.CommentItem>
+                        <S.CommentAvatar
+                          source={{ uri: comment.avatar }}
+                          resizeMode="cover"
+                        />
+                        <View style={styles.commentContent}>
+                          <S.CommentName>{comment.name}</S.CommentName>
+                          <S.CommentText>{comment.description}</S.CommentText>
+                        </View>
+                      </S.CommentItem>
+                    </Animated.View>
+                  );
+                })}
+              </ScrollView>
               <S.GradientBottom
                   colors={["transparent", "rgba(23, 23, 23, 0.671)"]}
                   start={[0, 0]}

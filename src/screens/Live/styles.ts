@@ -117,7 +117,7 @@ export const CommentsSection = styled.View`
   padding-top: 8px;
   position: relative;
   padding-bottom: 8px;
-  justify-content: flex-end;
+  height: 200px;
 `;
 
 export const GradientTop = styled(LinearGradient)`
