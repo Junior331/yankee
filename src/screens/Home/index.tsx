@@ -7,6 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import { useRouter } from "expo-router";
 import GestureRecognizer from "react-native-swipe-gestures";
 import {
   Layout,
@@ -18,7 +19,12 @@ import {
 import * as S from "./styles";
 import Heart from "@/assets/icons/Heart";
 import { mocks } from "@/services/mocks";
-import { CommentSendIcon, Location, Menu } from "@/assets/icons";
+import {
+  CommentSendIcon,
+  Location,
+  LocationTarget,
+  Menu,
+} from "@/assets/icons";
 import { formatNumber } from "@/utils/utils";
 
 const { width } = Dimensions.get("screen");
@@ -35,14 +41,19 @@ interface CommentType {
 }
 
 export const Home = () => {
+  const router = useRouter();
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
   const [replyText, setReplyText] = useState("");
   const bottomSheetRef = useRef<BottomSheetModal>(null);
-  const [comments, setComments] = useState<CommentType[]>(mocks.posts[0].comments as CommentType[]);
+  const [comments, setComments] = useState<CommentType[]>(
+    mocks.posts[0].comments as CommentType[]
+  );
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
-  const [collapsedComments, setCollapsedComments] = useState<Set<number>>(new Set());
+  const [collapsedComments, setCollapsedComments] = useState<Set<number>>(
+    new Set()
+  );
 
   const handleSnapPress = useCallback(() => {
     bottomSheetRef.current?.expand();
@@ -81,11 +92,11 @@ export const Home = () => {
       answers: [],
     };
 
-    const updatedComments = comments.map(comment => {
+    const updatedComments = comments.map((comment) => {
       if (comment.id === replyingTo) {
         return {
           ...comment,
-          answers: [...(comment.answers || []), newReply]
+          answers: [...(comment.answers || []), newReply],
         };
       }
       return comment;
@@ -108,6 +119,13 @@ export const Home = () => {
     }
   };
 
+  const handleOpenLive = (postId: number) => {
+    router.push(`/live?liveId=${postId}`);
+  };
+
+  const currentPost = mocks.posts[currentPostIndex];
+  const isLivePost = currentPost.type === "live";
+
   const toggleCommentReplies = (commentId: number) => {
     const newCollapsed = new Set(collapsedComments);
     if (newCollapsed.has(commentId)) {
@@ -120,10 +138,12 @@ export const Home = () => {
 
   return (
     <>
-      <Layout
-        style={{ position: "relative" }}
-        titleHeader="yankee"
-      >
+      <Layout style={{ position: "relative" }} titleHeader="yankee">
+        {/* <TouchableOpacity onPress={handleStartLive}>
+          <S.StartLiveButton>
+            <S.Text color="#fff" fontSize="12px" fontWeight={`bold`}>📹 Live</S.Text>
+          </S.StartLiveButton>
+        </TouchableOpacity> */}
         <GestureRecognizer
           style={{ flex: 1 }}
           onSwipeLeft={handleSwipeLeft}
@@ -132,38 +152,54 @@ export const Home = () => {
           <S.Container style={{ minWidth: width }}>
             <S.Content>
               <CardPost
-                key={mocks.posts[currentPostIndex].id}
-                name={mocks.posts[currentPostIndex].user.name}
+                key={currentPost.id}
+                name={currentPost.user.name}
                 buttonHeader={<Menu />}
-                userTag={mocks.posts[currentPostIndex].timestamp}
-                avatar={mocks.posts[currentPostIndex].user.avatar}
+                userTag={
+                  isLivePost ? (
+                    <S.LiveBadge>
+                      <LocationTarget color="#F00D0D" />
+                      <S.Text color="#F00D0D">{currentPost.timestamp}</S.Text>
+                    </S.LiveBadge>
+                  ) : (
+                    <S.Text color="#DCDADA">{currentPost.timestamp}</S.Text>
+                  )
+                }
+                avatar={currentPost.user.avatar}
               >
-                <S.ImageBackground
-                  resizeMode="cover"
-                  source={{
-                    uri: mocks.posts[currentPostIndex].image,
-                  }}
+                <TouchableOpacity
+                  activeOpacity={isLivePost ? 0.8 : 1}
+                  onPress={
+                    isLivePost
+                      ? () => handleOpenLive(currentPost.id)
+                      : undefined
+                  }
                 >
-                  <S.GradientOverlay
-                    colors={["transparent", "rgba(0, 0, 0, 0.65)"]}
-                    start={[0, 0]}
-                    end={[0, 0.6]}
-                  />
-                  <S.ContentCard>
-                    <S.Header>
-                      <S.Text fontSize={"12px"}>
-                        {mocks.posts[currentPostIndex].location}
-                      </S.Text>
-                      <S.Icon>
-                        <Location />
-                      </S.Icon>
-                    </S.Header>
+                  <S.ImageBackground
+                    resizeMode="cover"
+                    source={{
+                      uri: currentPost.image,
+                    }}
+                  >
+                    <S.GradientOverlay
+                      colors={["transparent", "rgba(0, 0, 0, 0.65)"]}
+                      start={[0, 0]}
+                      end={[0, 0.6]}
+                    />
+                    <S.ContentCard>
+                      <S.Header>
+                        <S.Text fontSize={"12px"}>
+                          {currentPost.location}
+                        </S.Text>
+                        <S.Icon>
+                          <Location />
+                        </S.Icon>
+                      </S.Header>
 
-                    <S.ContainerInfo>
-                      <S.ContainerChips>
-                        <S.AvatarChips>
-                          {mocks.posts[currentPostIndex].listAvatarStack?.map(
-                            (item, index) => (
+                      <S.ContainerInfo>
+                        <S.ContainerChips>
+                          <S.AvatarChips>
+                            {currentPost.listAvatarStack?.map((item, index) => (
                               <S.Avatar
                                 key={index}
                                 resizeMode="cover"
@@ -174,41 +210,38 @@ export const Home = () => {
                                   },
                                 ]}
                               />
-                            )
-                          )}
-                        </S.AvatarChips>
-                        <S.Text color={"#A5A4A4"} style={styles.likesCount}>
-                          {formatNumber(mocks.posts[currentPostIndex].likes)}
+                            ))}
+                          </S.AvatarChips>
+                          <S.Text color={"#A5A4A4"} style={styles.likesCount}>
+                            {isLivePost
+                              ? currentPost.viewers
+                              : formatNumber(currentPost.likes)}
+                          </S.Text>
+                        </S.ContainerChips>
+                        <TouchableOpacity
+                          onPress={() => setLiked((prev) => !prev)}
+                        >
+                          <Heart color={liked ? "#F2F2F2" : ""} />
+                        </TouchableOpacity>
+                        <S.Text fontSize={"12px"}>
+                          {currentPost.description}
                         </S.Text>
-                      </S.ContainerChips>
-                      <TouchableOpacity
-                        onPress={() => setLiked((prev) => !prev)}
-                      >
-                        <Heart color={liked ? "#F2F2F2" : ""} />
-                      </TouchableOpacity>
-                      <S.Text fontSize={"12px"}>
-                        {mocks.posts[currentPostIndex].description}
-                      </S.Text>
 
-                      <TouchableOpacity onPress={handleSnapPress}>
-                        <Comment
-                          name={
-                            mocks.posts[currentPostIndex].last_comment?.name ||
-                            ""
-                          }
-                          avatar={
-                            mocks.posts[currentPostIndex].last_comment
-                              ?.avatar || ""
-                          }
-                          description={
-                            mocks.posts[currentPostIndex].last_comment
-                              ?.description || ""
-                          }
-                        />
-                      </TouchableOpacity>
-                    </S.ContainerInfo>
-                  </S.ContentCard>
-                </S.ImageBackground>
+                        {!isLivePost && (
+                          <TouchableOpacity onPress={handleSnapPress}>
+                            <Comment
+                              name={currentPost.last_comment?.name || ""}
+                              avatar={currentPost.last_comment?.avatar || ""}
+                              description={
+                                currentPost.last_comment?.description || ""
+                              }
+                            />
+                          </TouchableOpacity>
+                        )}
+                      </S.ContainerInfo>
+                    </S.ContentCard>
+                  </S.ImageBackground>
+                </TouchableOpacity>
               </CardPost>
             </S.Content>
           </S.Container>
@@ -219,42 +252,42 @@ export const Home = () => {
         <S.ListComments contentContainerStyle={{ flexGrow: 1 }}>
           {comments.map((item) => (
             <View key={item.id}>
-              <GenericCommet 
-                {...item} 
+              <GenericCommet
+                {...item}
                 onReply={() => handleReply(item.id, item.name)}
               />
               {item.answers && item.answers.length > 0 && (
                 <>
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
+                      flexDirection: "row",
+                      alignItems: "center",
                       paddingHorizontal: 16,
                       paddingVertical: 8,
                       marginTop: 5,
                     }}
                     onPress={() => toggleCommentReplies(item.id)}
                   >
-                    <View style={{
-                      height: 1,
-                      backgroundColor: '#333',
-                      marginRight: 8,
-                      width: 35,
-                    }} />
-                    <S.Text style={{ color: '#ffffff', fontSize: 12 }}>
-                      {collapsedComments.has(item.id) 
-                        ? `View ${item.answers.length} replies` 
-                        : 'View fewer comments'
-                      }
+                    <View
+                      style={{
+                        height: 1,
+                        backgroundColor: "#333",
+                        marginRight: 8,
+                        width: 35,
+                      }}
+                    />
+                    <S.Text style={{ color: "#ffffff", fontSize: 12 }}>
+                      {collapsedComments.has(item.id)
+                        ? `View ${item.answers.length} replies`
+                        : "View fewer comments"}
                     </S.Text>
-                 
                   </TouchableOpacity>
                   {!collapsedComments.has(item.id) && (
                     <View style={{ marginLeft: 20 }}>
                       {item.answers.map((answer) => (
-                        <GenericCommet 
-                          key={answer.id} 
-                          {...answer} 
+                        <GenericCommet
+                          key={answer.id}
+                          {...answer}
                           onReply={() => handleReply(item.id, answer.name)}
                         />
                       ))}
@@ -266,7 +299,7 @@ export const Home = () => {
             </View>
           ))}
         </S.ListComments>
-        
+
         <S.ContainerInput>
           <S.Avatar
             resizeMode="cover"
@@ -287,13 +320,15 @@ export const Home = () => {
               }
             }}
           />
-          <TouchableOpacity onPress={() => {
-            if (replyingTo) {
-              handleSubmitReply();
-            } else {
-              handleSubmitComment(comment);
-            }
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              if (replyingTo) {
+                handleSubmitReply();
+              } else {
+                handleSubmitComment(comment);
+              }
+            }}
+          >
             <CommentSendIcon color="white" />
           </TouchableOpacity>
         </S.ContainerInput>

@@ -3,6 +3,7 @@ import { genericCommets } from "./comments";
 export const posts = [
   {
     id: 1,
+    type: "post",
     user: {
       id: 1,
       name: "Paityn Franci",
@@ -42,13 +43,17 @@ export const posts = [
   },
   {
     id: 2,
+    type: "live",
     user: {
       id: 2,
-      name: "Bruno Lipe",
+      name: "Lorem ipsum sit",
       avatar:
         "https://picsum.photos/seed/7/200/300",
     },
-    likes: 2000,
+    likes: 908,
+    viewers: 908,
+    isLive: true,
+    liveTitle: "TITULO DA LIVE",
     comments: genericCommets,
     last_comment: {
       name: "Zoe Martinez",
@@ -75,13 +80,14 @@ export const posts = [
       },
     ],
     location: "Massachusetts I Boston",
-    timestamp: "Posted 14 minutes ago.",
+    timestamp: "AO VIVO",
     description: "I never tire of admiring this view before going to work.",
     image:
       "https://picsum.photos/seed/12/200/300",
   },
   {
     id: 3,
+    type: "post",
     user: {
       id: 3,
       name: "Samantha Montgomery",
@@ -119,6 +125,50 @@ export const posts = [
     description: "I never tire of admiring this view before going to work.",
     image:
       "https://picsum.photos/seed/18/200/300",
+  },
+  {
+    id: 4,
+    type: "live",
+    user: {
+      id: 4,
+      name: "Carlos Martinez",
+      avatar:
+        "https://picsum.photos/seed/19/200/300",
+    },
+    likes: 1200,
+    viewers: 1200,
+    isLive: true,
+    liveTitle: "Beautiful sunset live",
+    comments: genericCommets,
+    last_comment: {
+      name: "Ana Silva",
+      avatar:
+        "https://picsum.photos/seed/20/200/300",
+      description:
+        "Amazing view!",
+    },
+    listAvatarStack: [
+      {
+        name: "Pedro Santos",
+        avatar:
+          "https://picsum.photos/seed/21/200/300",
+      },
+      {
+        name: "Laura Costa",
+        avatar:
+          "https://picsum.photos/seed/22/200/300",
+      },
+      {
+        name: "Rafael Lima",
+        avatar:
+          "https://picsum.photos/seed/23/200/300",
+      },
+    ],
+    location: "California I Los Angeles",
+    timestamp: "AO VIVO",
+    description: "Sharing this beautiful moment with you all!",
+    image:
+      "https://picsum.photos/seed/24/200/300",
   },
 ];
 

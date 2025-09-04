@@ -32,7 +32,7 @@ export const CardPost = ({
           </S.ContainerAvatar>
           <S.ContainerText>
             <S.Title>{name}</S.Title>
-            <S.Text>{userTag}</S.Text>
+            {userTag}
           </S.ContainerText>
         </S.ContainerUser>
         <S.TouchableOpacity>{buttonHeader}</S.TouchableOpacity>

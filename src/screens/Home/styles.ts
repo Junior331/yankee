@@ -195,3 +195,56 @@ export const OptionFilter = styled(TouchableOpacity)`
   flex-direction: row;
   justify-content: flex-start;
 `;
+
+export const StartLiveButton = styled(View)`
+  background-color: #ff4757;
+  padding: 6px 12px;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const LiveBadge = styled(View)`
+  gap: 5px;
+  align-items: center;
+  flex-direction: row;
+`;
+
+export const LiveIndicator = styled(View)`
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  margin-right: 6px;
+`;
+
+export const LiveText = styled(Text)`
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+`;
+
+export const LiveOverlay = styled(View)`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px 12px;
+  border-radius: 16px;
+  flex-direction: row;
+  align-items: center;
+  z-index: 5;
+`;
+
+export const LiveTitle = styled(Text)`
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  margin-right: 8px;
+`;
+
+export const LiveViewers = styled(Text)`
+  color: #fff;
+  font-size: 10px;
+  opacity: 0.8;
+`;
