@@ -5,7 +5,7 @@ import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
 
 import * as S from "./styles";
 import Video from "@/assets/icons/Video";
-import { Phone, Microphone } from "@/assets/icons";
+import { Phone, Microphone, LeftArrow, MicrophoneOff } from "@/assets/icons";
 import { Camera as CameraIcon } from "@/assets/icons";
 
 export const VideoCall = () => {
@@ -18,13 +18,14 @@ export const VideoCall = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isVideoOn, setIsVideoOn] = useState(true);
-  const [cameraType, setCameraType] = useState<CameraType>('front');
+  const [cameraType, setCameraType] = useState<CameraType>("front");
 
-  const contactName = params.contactName as string || "Ryan Brooks";
-  const contactAvatar = params.contactAvatar as string || "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__";
-  const contactUsername = params.contactUsername as string || "@Ryan_brooks";
-  const isIncoming = params.isIncoming === 'true';
-
+  const contactName = (params.contactName as string) || "Ryan Brooks";
+  const contactAvatar =
+    (params.contactAvatar as string) ||
+    "https://s3-alpha-sig.figma.com/img/1711/8d51/d22a22752beaac6d603ffa8392286385?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=SBIdTSzHW6A0FunNiIFtDBepgMceaMALNgCvnG3AtqnUTIBLubThK9NF2oPrKkUSfUnNHcw0XarZsL4fGIrV0PgJk143HyxKP8e~5LSC333d0BDxqtsB-ouFHMB8Rz9bNweQIMl8j2xWhIzxBz-~9iVqsL3cgZmJQHujz1-AHBPl0amGr6PcjI5xc8WKfX~mdH5hfgWVbtHMMEgfPgDwcY5wKh9ZMqNM~iI34~Pr8hK4MVERZwHz-oKNelpJJ4UUkcO9q4FSWqPfkodUwLkHU7HRgaWqCvXsJeI06UWc8HbDbOJm3jfvxzyAFCpSJ-z1UvGjihuWVrvXlcGgAXnIzQ__";
+  const contactUsername = (params.contactUsername as string) || "@Ryan_brooks";
+  const isIncoming = params.isIncoming === "true";
   // Solicitar permissão da câmera
   useEffect(() => {
     if (!permission?.granted) {
@@ -48,7 +49,7 @@ export const VideoCall = () => {
 
     if (isConnected) {
       interval = setInterval(() => {
-        setCallDuration(prev => prev + 1);
+        setCallDuration((prev) => prev + 1);
       }, 1000);
     }
 
@@ -60,7 +61,7 @@ export const VideoCall = () => {
   const formatDuration = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const handleAnswerCall = () => {
@@ -81,8 +82,19 @@ export const VideoCall = () => {
     setIsVideoOn(!isVideoOn);
   };
 
+  const handleGoBack = () => {
+    router.back();
+  };
+
+  const getHeaderStatus = () => {
+    if (!isConnected && !isIncoming) return "00:00";
+    if (isIncoming && !isConnected) return "Incoming call...";
+    if (isConnected) return formatDuration(callDuration);
+    return null;
+  };
+
   const handleSwitchCamera = () => {
-    setCameraType(current => (current === 'back' ? 'front' : 'back'));
+    setCameraType((current) => (current === "back" ? "front" : "back"));
   };
 
   // const handleMinimize = () => {
@@ -100,18 +112,11 @@ export const VideoCall = () => {
     return (
       <S.Container>
         <StatusBar hidden />
-        <S.VideoBackground
-          source={{ uri: contactAvatar }}
-          blurRadius={20}
-        >
+        <S.VideoBackground source={{ uri: contactAvatar }} blurRadius={20}>
           <S.IncomingCallOverlay>
             <S.IncomingContactInfo>
               <S.IncomingAvatar>
-                <Image
-                  source={{ uri: contactAvatar }}
-                  style={{ width: "100%", height: "100%" }}
-                  resizeMode="cover"
-                />
+                <Image source={{ uri: contactAvatar }} style={{ width: "100%", height: "100%" }} resizeMode="cover" />
               </S.IncomingAvatar>
 
               <S.IncomingContactName>{contactName}</S.IncomingContactName>
@@ -158,62 +163,44 @@ export const VideoCall = () => {
 
   return (
     <S.Container>
-      <S.VideoBackground
-        source={{ uri: contactAvatar }}
-        blurRadius={isConnected ? 0 : 10}
-      >
+      <S.Header>
+        <S.BackButton onPress={handleGoBack}>
+          <LeftArrow color="#ffffff" />
+        </S.BackButton>
+        <S.ContactName>{contactName}</S.ContactName>
 
-        <S.CallInfo>
-          <S.ContactName>{contactName}</S.ContactName>
-          {isConnected ? (
-            <S.CallDuration>{formatDuration(callDuration)}</S.CallDuration>
-          ) : (
-            <S.CallStatus>{getCallStatus()}</S.CallStatus>
-          )}
-        </S.CallInfo>
-
+        {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
+      </S.Header>
+      <S.VideoBackground source={{ uri: contactAvatar }} blurRadius={isConnected ? 0 : 10}>
         <S.SelfVideoContainer>
           {isVideoOn && permission?.granted ? (
-            <CameraView
-              ref={cameraRef}
-              style={{ width: "100%", height: "100%" }}
-              facing={cameraType}
-            />
+            <CameraView ref={cameraRef} style={{ width: "100%", height: "100%" }} facing={cameraType} />
           ) : (
             <S.SelfVideo>
-              <S.SelfVideoPlaceholder>
-                {!permission?.granted ? "No Permission" : "Camera Off"}
-              </S.SelfVideoPlaceholder>
+              <S.SelfVideoPlaceholder>{!permission?.granted ? "No Permission" : "Camera Off"}</S.SelfVideoPlaceholder>
             </S.SelfVideo>
           )}
         </S.SelfVideoContainer>
-
-        <S.BottomControls>
-          <S.CallActions>
-            <S.ActionButton
-              variant={isMuted ? "danger" : "secondary"}
-              onPress={handleMute}
-            >
-              <Microphone color="#ffffff" />
-            </S.ActionButton>
-
-            <S.ActionButton variant="danger" onPress={handleEndCall}>
-              <Phone color="#ffffff" />
-            </S.ActionButton>
-
-            <S.ActionButton
-              variant={isVideoOn ? "secondary" : "danger"}
-              onPress={handleToggleVideo}
-            >
-              <CameraIcon color="#ffffff" />
-            </S.ActionButton>
-
-            <S.ActionButton variant="secondary" onPress={handleSwitchCamera}>
-              <Video color="#ffffff" />
-            </S.ActionButton>
-          </S.CallActions>
-        </S.BottomControls>
       </S.VideoBackground>
+      <S.BottomControls>
+        <S.CallActions>
+          <S.ActionButton variant="secondary" onPress={handleMute}>
+            {isMuted ? <Microphone /> : <MicrophoneOff />}
+          </S.ActionButton>
+
+          <S.ActionButton variant={isVideoOn ? "secondary" : "danger"} onPress={handleToggleVideo}>
+            <CameraIcon color="#ffffff" />
+          </S.ActionButton>
+
+          <S.ActionButton variant="secondary" onPress={handleSwitchCamera}>
+            <Video color="#ffffff" />
+          </S.ActionButton>
+
+          <S.ActionButton variant="danger" onPress={handleEndCall}>
+            <Phone color="#ffffff" />
+          </S.ActionButton>
+        </S.CallActions>
+      </S.BottomControls>
     </S.Container>
   );
 };
