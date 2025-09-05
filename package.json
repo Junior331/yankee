@@ -61,7 +61,8 @@
     "react-native-uuid": "^2.0.3",
     "react-native-web": "^0.20.0",
     "styled-components": "^6.1.14",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "expo-constants": "~17.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

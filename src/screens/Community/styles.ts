@@ -75,7 +75,133 @@ export const ContainerMaps = styled(View)`
   position: relative;
   border-radius: 16px;
   align-items: center;
-  background-color: blue;
+  background-color: #f0f0f0;
+`;
+
+export const MapContainer = styled(View)`
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  overflow: hidden;
+`;
+
+export const MarkerContainer = styled(View)`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MarkerBackground = styled(View)<{ type: string }>`
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  shadow-color: #000;
+  shadow-offset: 0px 3px;
+  shadow-opacity: 0.3;
+  shadow-radius: 4.65px;
+  elevation: 8;
+  border-width: 3px;
+  border-color: #fff;
+  ${({ type }) => {
+    switch (type) {
+      case 'events':
+        return `background-color: #4CAF50;`;
+      case 'sos':
+        return `background-color: #F44336;`;
+      case 'aid':
+        return `background-color: #FF9800;`;
+      case 'chillin':
+        return `background-color: #9C27B0;`;
+      case 'moment':
+        return `background-color: #E91E63;`;
+      case 'general':
+      default:
+        return `background-color: #2196F3;`;
+    }
+  }}
+`;
+
+export const MarkerIcon = styled(View)`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+`;
+
+export const MarkerCount = styled(View)`
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #fff;
+  border-radius: 10px;
+  min-width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 3.84px;
+  elevation: 5;
+`;
+
+export const MarkerCountText = styled(TextComponent)`
+  color: #333;
+  font-size: 11px;
+  font-weight: bold;
+`;
+
+export const MarkerAvatar = styled(View)`
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  border-width: 2px;
+  border-color: #fff;
+  overflow: hidden;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 3.84px;
+  elevation: 5;
+`;
+
+export const SimpleMarker = styled(View)<{ type: string }>`
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-color: #fff;
+  shadow-color: #000;
+  shadow-offset: 0px 2px;
+  shadow-opacity: 0.25;
+  shadow-radius: 3.84px;
+  elevation: 5;
+  ${({ type }) => {
+    switch (type) {
+      case 'events':
+        return `background-color: #4CAF50;`;
+      case 'sos':
+        return `background-color: #F44336;`;
+      case 'aid':
+        return `background-color: #FF9800;`;
+      case 'chillin':
+        return `background-color: #9C27B0;`;
+      case 'moment':
+        return `background-color: #E91E63;`;
+      case 'general':
+      default:
+        return `background-color: #2196F3;`;
+    }
+  }}
 `;
 
 export const ContainerTabs = styled(View)`
