@@ -32,6 +32,7 @@ export const ButtonFollow = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: 1px solid ${({ theme }: any) => theme.colors.text} ;
 `;
 
 export const IconAdd = styled(View)`
@@ -67,7 +68,7 @@ export const ContainerIcon = styled(TouchableOpacity)`
 
 export const Text = styled(TextComponent)<StyledProps>`
   font-size: 10px;
-  color: ${({ color }) => color || "#4d4c4c"};
+  color:${({ theme }: any) => theme.colors.text};
 
   ${({ tabs }) =>
     tabs &&

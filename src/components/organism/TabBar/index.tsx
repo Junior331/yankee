@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 
 import * as S from "./styles";
 import { TabBarProps } from "./@types";
-import Colors from "@/constants/Colors";
 import { TabVisibilityContext } from "@/contexts/tabVisibility";
+import { useTheme } from "@/contexts/ThemeContext";
 import { Community, Home, Hearts, Navigation, Fire } from "@/assets/icons";
+import Colors from "@/constants/Colors";
 
 const routeIcons = {
   community: Community,
@@ -19,6 +20,7 @@ const hiddenRoutes = ["profile", "messages", "stories", "notifications"];
 
 export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
   const { isVisibility } = useContext(TabVisibilityContext);
+  const { theme, colors } = useTheme();
   const orderedRoutes = [...state.routes]
   .filter((route) => !hiddenRoutes.includes(route.name))
   .sort((a: any, b: any) => {
@@ -27,7 +29,7 @@ export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
 
 
   return (
-    <S.Container $Visible={isVisibility}>
+    <S.Container $Visible={isVisibility} theme={theme === 'dark' ? Colors.dark : Colors.light} >
       {orderedRoutes.map(
         (route: { key: string | number; name: any; params: any }) => {
           const { options } = descriptors[route.key];
@@ -73,9 +75,9 @@ export const TabBar = ({ state, descriptors, navigation }: TabBarProps) => {
               className="flex-1 items-center"
               accessibilityLabel={options.tabBarAccessibilityLabel}
               accessibilityState={isFocused ? { selected: true } : {}}
-              bg_color={isFocused ? Colors.light.background : "transparent"}
+              bg_color={isFocused ? colors.background : "transparent"}
             >
-              <IconComponent color={isFocused ? "#000" : "#fff"} />
+              <IconComponent color={isFocused ? colors.icon : (theme === 'dark' ? "#fff" : "#121212")} />
             </S.ContainerIcon>
           );
         }

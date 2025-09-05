@@ -9,8 +9,11 @@ import { DollarSign, Filter, LocationTarget, Notification } from "@/assets/icons
 import { Loading, Slider } from "@/components/elements";
 import { mocks } from "@/services/mocks";
 import { useNotificationsContext } from "@/contexts/NotificationsContext";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
   const router = useRouter();
+    const { theme } = useTheme();
   const [imageLoading, setImageLoading] = useState(true);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   
@@ -37,21 +40,21 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
     <S.Container>
       <S.IconContainer>
         <TouchableOpacity onPress={() => handleSetFilter("", !showFilter)}>
-          <Filter />
+          <Filter color={theme === 'dark' ? Colors.dark.text : Colors.light.text } />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => handlePress("location")}>
-          <LocationTarget color={selectedIcon === "location" ? "#F00D0D" : "#fff"} />
+        <TouchableOpacity onPress={() => handlePress("location")} >
+          <LocationTarget color={ selectedIcon === "location" ? "#F00D0D" : theme === 'dark' ? Colors.dark.text : Colors.light.text}  />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => handlePress("dollar")}>
-          <DollarSign color={selectedIcon === "dollar" ? "red" : "#fff"} />
+          <DollarSign color={selectedIcon === "dollar" ? "red" : theme === 'dark' ? Colors.dark.text : Colors.light.text}  />
         </TouchableOpacity>
       </S.IconContainer>
 
       {title && <S.Title>{title}</S.Title>}
       <S.ContainerUser>
         <S.ContainerBadge onPress={() => router.push("/(tabs)/notifications")}>
-          <Notification />
+          <Notification color={theme === 'dark' ? Colors.dark.text : Colors.light.text } />
 
           {unreadCount > 0 && (
             <S.Badge>
@@ -85,7 +88,7 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
                 {item.icon}
                 <S.Text>{item.label}</S.Text>
               </S.OptionFilter>
-              <S.Line />
+              <S.Line  />
             </>
           ))}
         </S.ContainerFilter>

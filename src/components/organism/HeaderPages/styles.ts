@@ -6,7 +6,6 @@ import {
   Title as Titleomponent,
 } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
-import Colors from "@/constants/Colors";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -92,7 +91,7 @@ export const ContainerFilter = styled(ViewGeneric)<StyledProps>`
   border: 1px solid #dcdada;
   width: ${({ width }) => width || "110px"};
   height: ${({ height }) => height || "auto"};
-  background-color: ${Colors.dark.background};
+  background-color: ${({ theme }: any) => theme.colors.background};
     z-index: 1;
 `;
 export const OptionFilter = styled(TouchableOpacity)`

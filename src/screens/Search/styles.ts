@@ -5,7 +5,7 @@ import { TextInput } from "react-native";
 import Colors from "@/constants/Colors";
 import { Ionicons } from "@expo/vector-icons";
 
-export const ContainerInput = styled(View)`
+export const ContainerInput = styled(View) <{ $Visible?: boolean, theme: any }>`
   flex: 1; 
   flex-grow: 1;
   height: 36px;
@@ -14,11 +14,12 @@ export const ContainerInput = styled(View)`
   flex-direction: row;
   border-radius: 25px;
   padding: 0 0 0 10px;
-  background-color: #232323;
+ background-color: ${({ theme }) => theme.tabBar};
 `;
 
 export const SearchIcon = styled(Ionicons)`
   margin-right: 10px;
+  
 `;
 
 export const StyledInput = styled(TextInput).attrs({

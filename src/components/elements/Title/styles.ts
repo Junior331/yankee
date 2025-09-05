@@ -5,5 +5,5 @@ export const Title = styled(ReactText)`
   font-size: 20px;
   font-weight: 700;
   font-family: "Poppins-Bold";
-  color: #ffffff;
+  color: ${({ theme }: any) => theme.colors.text};
 `;

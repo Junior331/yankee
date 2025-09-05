@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { View, Image, FlatList, Dimensions, TouchableOpacity } from "react-native";
+import { View, Image, FlatList, Dimensions, TouchableOpacity, Text } from "react-native";
 
 import * as S from "./styles";
-import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
 import { LeftArrow } from "@/assets/icons";
 import { Forms, MediaViewer } from "@/components/organism";
@@ -10,12 +9,15 @@ import { Loading, SafeScreen } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
 import { useRouter } from "expo-router";
+import { useTheme } from "@/contexts/ThemeContext";
+import Colors from "@/constants/Colors";
 
 const { width } = Dimensions.get("window");
 
 export const Profile = () => {
   const router = useRouter();
   const { goBack } = useNavigationHandler();
+  const { theme, toggleTheme } = useTheme();
   const [isEdit, setIsEdit] = useState(false);
   const [tabActive, setTabActive] = useState("photos");
   const [bannerLoading, setBannerLoading] = useState(true);
@@ -59,17 +61,33 @@ export const Profile = () => {
           />
         </S.ContainerBanner>
         <S.ButtonIcon onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}>
-          <LeftArrow color={isEdit ? Colors.dark.text : Colors.dark.background} />
+          <LeftArrow color={isEdit ? '#FFFFFF' : (theme === 'dark' ? '#FFFFFF' : '#121212')} />
         </S.ButtonIcon>
-        <S.ButtonIcon onPress={goBack}>
-          {isEdit ? (
-            <S.ButtonEdit>
-              <Edit />
-            </S.ButtonEdit>
-          ) : (
-            <Menu color={Colors.dark.background} />
-          )}
-        </S.ButtonIcon>
+        <View style={{ flexDirection: 'row', gap: 10 }}>
+          {/* <TouchableOpacity 
+            onPress={toggleTheme}
+            style={{ 
+              backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+              padding: 10, 
+              borderRadius: 20,
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </Text>
+          </TouchableOpacity> */}
+          <S.ButtonIcon onPress={goBack}>
+            {isEdit ? (
+              <S.ButtonEdit>
+                <Edit />
+              </S.ButtonEdit>
+            ) : (
+              <Menu color={theme === 'dark' ? '#FFFFFF' : '#121212'} />
+            )}
+          </S.ButtonIcon>
+        </View>
       </S.Header>
 
       <S.ContainerAvatar>

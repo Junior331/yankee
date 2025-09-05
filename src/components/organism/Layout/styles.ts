@@ -1,8 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components";
 
-import Colors from "@/constants/Colors";
-
 export const ViewGeneric = styled(View)`
   display: flex;
   align-items: center;
@@ -14,7 +12,7 @@ export const Container = styled(View)`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${Colors.dark.background};
+  background-color: ${({ theme }: any) => theme.colors.background};
 `;
 
 export const Content = styled(ViewGeneric)`

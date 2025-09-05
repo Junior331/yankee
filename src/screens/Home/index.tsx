@@ -26,6 +26,8 @@ import {
   Menu,
 } from "@/assets/icons";
 import { formatNumber } from "@/utils/utils";
+import { useTheme } from "@/contexts/ThemeContext";
+import Colors from "@/constants/Colors";
 
 const { width } = Dimensions.get("screen");
 
@@ -50,6 +52,8 @@ export const Home = () => {
   const [comments, setComments] = useState<CommentType[]>(
     mocks.posts[0].comments as CommentType[]
   );
+      const { theme } = useTheme();
+  
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
   const [collapsedComments, setCollapsedComments] = useState<Set<number>>(
     new Set()
@@ -154,7 +158,7 @@ export const Home = () => {
               <CardPost
                 key={currentPost.id}
                 name={currentPost.user.name}
-                buttonHeader={<Menu />}
+                buttonHeader={<Menu color={theme === 'dark' ? Colors.dark.text : Colors.light.text } />}
                 userTag={
                   isLivePost ? (
                     <S.LiveBadge>
@@ -162,7 +166,7 @@ export const Home = () => {
                       <S.Text color="#F00D0D">{currentPost.timestamp}</S.Text>
                     </S.LiveBadge>
                   ) : (
-                    <S.Text color="#DCDADA">{currentPost.timestamp}</S.Text>
+                    <S.Text color="#8B8B8B">{currentPost.timestamp}</S.Text>
                   )
                 }
                 avatar={currentPost.user.avatar}

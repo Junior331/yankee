@@ -40,7 +40,7 @@ export const TabCommunity = ({ posts, toggleLike }:ICommunity) => {
           avatar={item.user.avatar}
           userTag={item.user.userTag}
         >
-          <S.Text color={"#FFFFFF"}>{item.description}</S.Text>
+          <S.Text>{item.description}</S.Text>
           <DynamicGrid items={item.image} />
           <S.FooterCardPost>
             <S.ContainerInteractions>
@@ -48,13 +48,13 @@ export const TabCommunity = ({ posts, toggleLike }:ICommunity) => {
                 <Heart
                   width={15}
                   height={13}
-                  color={item.liked ? "#d63838" : ""}
+                  color={item.liked ? "#d63838" : "#121212"}
                 />
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.likes)}</S.Text>
               </S.ContainerIcon>
               <S.ContainerIcon>
                 <TouchableOpacity>
-                  <Chat color={"#F2F2F2"} />
+                  <Chat color={"#121212"} />
                 </TouchableOpacity>
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.comments.length)}</S.Text>
               </S.ContainerIcon>
