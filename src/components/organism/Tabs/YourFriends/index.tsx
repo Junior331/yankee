@@ -7,8 +7,11 @@ import { formatNumber } from "@/utils/utils";
 import { CardPost } from "@/components/organism";
 import { Chat, Heart, Menu } from "@/assets/icons";
 import { DynamicGrid } from "@/components/modules";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const TabYourFriends = ({ posts, toggleLike }:IYourFriend) => {
+  const { theme } = useTheme();
   return (
     <S.ContainerNotions>
       {posts.map((item) => (
@@ -42,13 +45,18 @@ export const TabYourFriends = ({ posts, toggleLike }:IYourFriend) => {
                 <Heart
                   width={15}
                   height={13}
-                  color={item.liked ? "#d63838" : ""}
+                  color={item.liked ? Colors.liked : theme === "dark" ? Colors.dark.iconHeart : Colors.light.iconHeart}
                 />
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.likes)}</S.Text>
               </S.ContainerIcon>
               <S.ContainerIcon>
                 <TouchableOpacity>
-                  <Chat color={"#F2F2F2"} />
+                  <Chat  color={
+                  theme === "dark"
+                    ? Colors.dark.icon
+                    : Colors.light.icon
+                  
+              } />
                 </TouchableOpacity>
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.comments.length)}</S.Text>
               </S.ContainerIcon>

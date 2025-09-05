@@ -11,6 +11,8 @@ import { Loading } from "@/components/elements";
 import { Filter, LeftArrow, LibraryPhoto, PhotoPlus } from "@/assets/icons";
 import { post, trend } from "@/components/organism/Tabs/@types";
 import { Layout, ModalGeneric, Tabs } from "@/components/organism";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const Community = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ export const Community = () => {
   const [posts, setPosts] = useState(mocks.postsCommunity);
   const [isModalAddEvent, setModalAddEvent] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
+const { theme } = useTheme();
 
   const toggleLike = (postId: number) => {
     setPosts((prevPosts) => {
@@ -211,14 +214,14 @@ export const Community = () => {
                   <S.Tabs>
                     {mocks.tabs.community.map((tab) => (
                       <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-                        <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
+                        <S.Text tabs color={tabActive === tab.value ? theme === "dark" ? Colors.dark.text : Colors.light.text : "#848383"}>
                           {tab.label}
                         </S.Text>
                       </S.Tab>
                     ))}
                   </S.Tabs>
                   <S.ContentPost>
-                    <S.InputContainer>
+                    <S.InputContainer bg_color={theme === "dark" ? Colors.dark.tabBar : Colors.light.tabBar}>
                       <S.ContentInputUser>
                         <TouchableOpacity>
                           <Image
@@ -235,14 +238,14 @@ export const Community = () => {
                             resizeMode="cover"
                           />
                         </TouchableOpacity>
-                        <S.InputPost placeholder="What's new?" placeholderTextColor="#FFFFFF" />
+                        <S.InputPost  placeholder="What's new?" theme={theme} />
                       </S.ContentInputUser>
                       <S.ContentIconButton>
                         <TouchableOpacity>
-                        <Filter />
+                        <Filter color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
                       </TouchableOpacity>
                       <TouchableOpacity>
-                        <LibraryPhoto />
+                        <LibraryPhoto color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
                       </TouchableOpacity>
                         <TouchableOpacity>
                           <S.ButtonPost>

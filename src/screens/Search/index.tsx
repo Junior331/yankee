@@ -57,6 +57,7 @@ export const Search = () => {
     setIsSearch(false);
     setSearchValue("");
   };
+  
 
   return (
     <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -64,18 +65,29 @@ export const Search = () => {
         <S.ContainerHeader>
           {isSearch && (
             <S.ButtonIcon onPress={handleBack}>
-              <LeftArrow color="#ffffff" />
+              <LeftArrow color={
+                  theme === "dark"
+                    ? Colors.dark.icon
+                    : Colors.light.icon
+                  
+              }/>
             </S.ButtonIcon>
           )}
 
           <S.ContainerInput theme={theme === 'dark' ? Colors.dark : Colors.light}>
-            <S.SearchIcon name="search" size={20} color="#ffffff" />
+            <S.SearchIcon name="search" size={20}  color={
+                theme === "dark"
+                    ? Colors.dark.icon
+                    : Colors.light.icon
+                
+              } />
             <S.StyledInput
+            theme={theme}
               value={searchValue}
               onChangeText={setSearchValue}
               onSubmitEditing={handleSearch}
               onPress={() => setIsSearch(true)}
-              placeholder={isSearch ? "Type here..." : "Search"}
+              placeholder={isSearch ? "Type here..." : "Search" }
             />
           </S.ContainerInput>
         </S.ContainerHeader>

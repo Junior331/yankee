@@ -22,14 +22,16 @@ export const SearchIcon = styled(Ionicons)`
   
 `;
 
-export const StyledInput = styled(TextInput).attrs({
-  placeholderTextColor: Colors.dark.text,
-})`
+export const StyledInput = styled(TextInput).attrs(({ theme }) => ({
+  placeholderTextColor:
+    theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
+}))`
   height: 100%;
   flex: 1 0 auto;
   font-size: 14px;
   margin-top: 3px;
-  color: ${Colors.dark.text};
+  color: ${({ theme }) =>
+    theme=== "dark" ? Colors.dark.text : Colors.light.text};
 `;
 
 export const MasonryContainer = styled(View)`
