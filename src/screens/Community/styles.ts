@@ -37,15 +37,16 @@ export const ContainerStory = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-export const AddStory = styled(View)`
+export const AddStory = styled(View)<{ hasStory?: boolean }>`
   width: 64px;
   height: 64px;
-  padding: 2px;
-  overflow: hidden;
+  overflow: ${({ hasStory }) => hasStory ? 'none' : 'hidden'};
   border-radius: 64px;
   align-items: center;
   justify-content: center;
-  background-color: #c4c4c4;
+  background: rgba(255, 255, 255, 0.04);
+  border-width: ${({ hasStory }) => hasStory ? '2px' : '0px'};
+  border-color: ${({ hasStory }) => hasStory ? '#1976d2' : 'transparent'};
 `;
 
 export const Story = styled(AddStory)`
@@ -401,4 +402,38 @@ export const PostButtonText = styled(Text)`
   color: #fff;
   font-size: 14px;
   font-weight: 400;
+`;
+
+export const StoryChoiceModal = styled(View)`
+  background-color: rgba(40, 40, 40, 0.95);
+  border-radius: 16px;
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  align-self: center;
+  margin-top: auto;
+  margin-bottom: auto;
+`;
+
+export const StoryChoiceButton = styled(TouchableOpacity)`
+  width: 100%;
+  padding: 16px;
+  align-items: center;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+`;
+
+export const AddStoryOverlay = styled(View)`
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: #007AFF;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
 `;

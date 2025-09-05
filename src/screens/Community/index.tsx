@@ -2,7 +2,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { FlatList } from "react-native-gesture-handler";
-import { View, Image, Alert, Platform, ActionSheetIOS, TouchableOpacity } from "react-native";
+import { View, Image, Alert, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import * as S from "./styles";
@@ -20,6 +20,11 @@ export const Community = () => {
   const [posts, setPosts] = useState(mocks.postsCommunity);
   const [isModalAddEvent, setModalAddEvent] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [storiesData, setStoriesData] = useState(mocks.storys);
+  const [selectedStoryImage, setSelectedStoryImage] = useState<string | null>(null);
+  const [userStories, setUserStories] = useState<any[]>([]);
+  const [showStoryModal, setShowStoryModal] = useState(false);
+  const [showAddStoryModal, setShowAddStoryModal] = useState(false);
 
   // Mock data para marcadores do mapa
   const mapMarkers = [
@@ -140,7 +145,8 @@ export const Community = () => {
     });
 
     if (!pickerResult.canceled) {
-      setProfileImage(pickerResult.assets[0].uri);
+      setSelectedStoryImage(pickerResult.assets[0].uri);
+      addNewStory(pickerResult.assets[0].uri);
     }
   };
 
@@ -159,46 +165,48 @@ export const Community = () => {
     });
 
     if (!pickerResult.canceled) {
-      setProfileImage(pickerResult.assets[0].uri);
+      setSelectedStoryImage(pickerResult.assets[0].uri);
+      addNewStory(pickerResult.assets[0].uri);
     }
   };
 
-  const handleAddStory = () => {
-    if (Platform.OS === "ios") {
-      ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: ["Cancelar", "Tirar Foto", "Escolher da Galeria"],
-          cancelButtonIndex: 0,
-        },
-        (buttonIndex) => {
-          if (buttonIndex === 1) {
-            handleTakePhoto();
-          } else if (buttonIndex === 2) {
-            handlePickImage();
-          }
-        }
-      );
-    } else {
-      Alert.alert(
-        "Adicionar Story",
-        "Escolha uma opção",
-        [
-          {
-            text: "Cancelar",
-            style: "cancel",
-          },
-          {
-            text: "Tirar Foto",
-            onPress: handleTakePhoto,
-          },
-          {
-            text: "Escolher da Galeria",
-            onPress: handlePickImage,
-          },
-        ],
-        { cancelable: true }
-      );
+  const addNewStory = (imageUri: string) => {
+    const newStoryItem = {
+      id: Date.now(),
+      image: imageUri,
+    };
+
+    // Adiciona à lista de stories do usuário
+    setUserStories((prevStories) => [...prevStories, newStoryItem]);
+  };
+
+  const hasUserStory = userStories.length > 0;
+
+  const viewUserStory = () => {
+    setShowStoryModal(false);
+    // Navegar para a tela de stories com o ID do usuário
+    if (userStories.length > 0) {
+      router.push(`/(tabs)/stories?id=user_story`);
     }
+  };
+
+  const addMoreStory = () => {
+    setShowStoryModal(false);
+    setShowAddStoryModal(true);
+  };
+
+  const handleTakePhotoFromModal = () => {
+    setShowAddStoryModal(false);
+    handleTakePhoto();
+  };
+
+  const handlePickImageFromModal = () => {
+    setShowAddStoryModal(false);
+    handlePickImage();
+  };
+
+  const handleAddStory = () => {
+    setShowAddStoryModal(true);
   };
 
   return (
@@ -214,7 +222,7 @@ export const Community = () => {
                 <S.ListStorys>
                   <FlatList
                     horizontal
-                    data={mocks.storys}
+                    data={storiesData}
                     style={{ width: "100%" }}
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item) => String(item.id)}
@@ -222,9 +230,28 @@ export const Community = () => {
                     renderItem={({ item }) => {
                       if (item.id === "add_story") {
                         return (
-                          <S.ContainerStory onPress={handleAddStory}>
-                            <S.AddStory>
-                              <S.Text style={{ fontSize: 32 }}>+</S.Text>
+                          <S.ContainerStory onPress={() => {
+                            if (hasUserStory) {
+                              setShowStoryModal(true);
+                            } else {
+                              handleAddStory();
+                            }
+                          }}>
+                            <S.AddStory hasStory={hasUserStory}>
+                              {hasUserStory && userStories.length > 0 ? (
+                                <>
+                                  <Image
+                                    source={{ uri: userStories[userStories.length - 1].image }}
+                                    style={{ width: "100%", height: "100%", borderRadius: 30 }}
+                                    resizeMode="cover"
+                                  />
+                                  <S.AddStoryOverlay>
+                                    <S.Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>+</S.Text>
+                                  </S.AddStoryOverlay>
+                                </>
+                              ) : (
+                                <S.Text style={{ fontSize: 32, color: "#fff", position: 'relative', zIndex: 10 }}>+</S.Text>
+                              )}
                             </S.AddStory>
                             <S.Text>Add</S.Text>
                           </S.ContainerStory>
@@ -442,6 +469,68 @@ export const Community = () => {
               <S.PostButtonText>Post</S.PostButtonText>
             </S.PostButton>
           </S.CardAddEvent>
+        </ModalGeneric>
+
+        {/* Modal de escolha de Story */}
+        <ModalGeneric
+          modalVisible={showStoryModal}
+          setModalVisible={setShowStoryModal}
+          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+        >
+          <S.StoryChoiceModal>
+            <S.Text color="#fff" fontSize="18px" fontWeight="bold" style={{ marginBottom: 20 }}>
+              Escolha uma opção
+            </S.Text>
+            
+            <S.StoryChoiceButton onPress={viewUserStory}>
+              <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
+                Visualizar seu Story
+              </S.Text>
+            </S.StoryChoiceButton>
+            
+            <S.StoryChoiceButton onPress={addMoreStory}>
+              <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
+                Adicionar ao Story
+              </S.Text>
+            </S.StoryChoiceButton>
+            
+            <S.StoryChoiceButton onPress={() => setShowStoryModal(false)}>
+              <S.Text color="#FF3B30" fontSize="16px" fontWeight="500">
+                Cancelar
+              </S.Text>
+            </S.StoryChoiceButton>
+          </S.StoryChoiceModal>
+        </ModalGeneric>
+
+        {/* Modal de adicionar Story */}
+        <ModalGeneric
+          modalVisible={showAddStoryModal}
+          setModalVisible={setShowAddStoryModal}
+          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+        >
+          <S.StoryChoiceModal>
+            <S.Text color="#fff" fontSize="18px" fontWeight="bold" style={{ marginBottom: 20 }}>
+              Adicionar Story
+            </S.Text>
+            
+            <S.StoryChoiceButton onPress={handleTakePhotoFromModal}>
+              <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
+                Tirar Foto
+              </S.Text>
+            </S.StoryChoiceButton>
+            
+            <S.StoryChoiceButton onPress={handlePickImageFromModal}>
+              <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
+                Escolher da Galeria
+              </S.Text>
+            </S.StoryChoiceButton>
+            
+            <S.StoryChoiceButton onPress={() => setShowAddStoryModal(false)}>
+              <S.Text color="#FF3B30" fontSize="16px" fontWeight="500">
+                Cancelar
+              </S.Text>
+            </S.StoryChoiceButton>
+          </S.StoryChoiceModal>
         </ModalGeneric>
       </S.Container>
     </Layout>
