@@ -15,6 +15,8 @@ import { Layout } from "@/components/organism";
 import { dismissKeyboard } from "@/utils/utils";
 import { Loading } from "@/components/elements";
 import { SearchProfile } from "../SearchProfile";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const { width } = Dimensions.get("window");
 
@@ -28,6 +30,7 @@ export const Search = () => {
     "Emily Wilson", 
     "David Brown"
   ]);
+  const { theme } = useTheme();
 
   const filteredUsers = mockMessages.filter((user) =>
     user.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -65,7 +68,7 @@ export const Search = () => {
             </S.ButtonIcon>
           )}
 
-          <S.ContainerInput>
+          <S.ContainerInput theme={theme === 'dark' ? Colors.dark : Colors.light}>
             <S.SearchIcon name="search" size={20} color="#ffffff" />
             <S.StyledInput
               value={searchValue}

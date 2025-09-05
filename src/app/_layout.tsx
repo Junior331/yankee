@@ -10,6 +10,7 @@ import "react-native-reanimated";
 import Provider from "@/state/provider";
 import { NotificationsProvider } from "@/contexts/NotificationsContext";
 import { CallProvider } from "@/contexts/CallContext";
+import { ThemeProvider as CustomThemeProvider } from "@/contexts/ThemeContext";
 import { CallOverlay } from "@/components/organism/CallOverlay";
 
 export { ErrorBoundary } from "expo-router";
@@ -49,25 +50,27 @@ function RootLayoutNav() {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView style={{ flex: 1, backgroundColor: "grey" }}>
-        <NotificationsProvider>
-          <CallProvider>
-            <Provider>
-              <ThemeProvider value={DefaultTheme}>
-                <Stack>
-                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                  <Stack.Screen name="(public)" options={{ headerShown: false }} />
-                  <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-                  <Stack.Screen name="chatuser" options={{ headerShown: false }} />
-                  <Stack.Screen name="voice-call" options={{ headerShown: false }} />
-                  <Stack.Screen name="video-call" options={{ headerShown: false }} />
-                  <Stack.Screen name="live" options={{ headerShown: false }} />
-                  <Stack.Screen name="start-live" options={{ headerShown: false }} />
-                </Stack>
-                <CallOverlay />
-              </ThemeProvider>
-            </Provider>
-          </CallProvider>
-        </NotificationsProvider>
+        <CustomThemeProvider>
+          <NotificationsProvider>
+            <CallProvider>
+              <Provider>
+                <ThemeProvider value={DefaultTheme}>
+                  <Stack>
+                    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                    <Stack.Screen name="(public)" options={{ headerShown: false }} />
+                    <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+                    <Stack.Screen name="chatuser" options={{ headerShown: false }} />
+                    <Stack.Screen name="voice-call" options={{ headerShown: false }} />
+                    <Stack.Screen name="video-call" options={{ headerShown: false }} />
+                    <Stack.Screen name="live" options={{ headerShown: false }} />
+                    <Stack.Screen name="start-live" options={{ headerShown: false }} />
+                  </Stack>
+                  <CallOverlay />
+                </ThemeProvider>
+              </Provider>
+            </CallProvider>
+          </NotificationsProvider>
+        </CustomThemeProvider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
   );

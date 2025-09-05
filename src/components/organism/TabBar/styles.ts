@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { StyledProps } from "@/utils/types";
 import { View, TouchableOpacity } from "react-native";
 
-export const Container = styled(View)<{ $Visible?: boolean }>`
+export const Container = styled(View)<{ $Visible?: boolean, theme: any }>`
   left: 5%;
   right: 5%;
   z-index: 2;
@@ -15,7 +15,7 @@ export const Container = styled(View)<{ $Visible?: boolean }>`
   flex-direction: row;
   border-radius: 23px;
   align-items: center;
-  background-color: #121212;
+  background-color: ${({ theme }) => theme.tabBar};
   justify-content: space-between;
   display: ${({$Visible}) => $Visible ? "flex" : "none"};
 `;
