@@ -1,20 +1,23 @@
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import * as ImagePicker from "expo-image-picker";
+import MapView, { Marker } from "react-native-maps";
 import { FlatList } from "react-native-gesture-handler";
 import { View, Image, Alert, TouchableOpacity } from "react-native";
-import MapView, { Marker } from "react-native-maps";
 
 import * as S from "./styles";
+import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
 import { filters, iconMapping } from "./utils";
 import { Loading } from "@/components/elements";
-import { Filter, LeftArrow, LibraryPhoto, PhotoPlus, Chillin, AID, Events, SOS, Moment, MapPin } from "@/assets/icons";
+import { useTheme } from "@/contexts/ThemeContext";
 import { post, trend } from "@/components/organism/Tabs/@types";
 import { Layout, ModalGeneric, Tabs } from "@/components/organism";
+import { Filter, LeftArrow, LibraryPhoto, PhotoPlus, Chillin, AID, Events, SOS, Moment, MapPin } from "@/assets/icons";
 
 export const Community = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const [imageLoading, setImageLoading] = useState(true);
   const [tabActive, setTabActive] = useState("community");
   const [posts, setPosts] = useState(mocks.postsCommunity);
@@ -334,14 +337,14 @@ export const Community = () => {
                   <S.Tabs>
                     {mocks.tabs.community.map((tab) => (
                       <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-                        <S.Text tabs color={tabActive === tab.value ? "#fff" : "#4d4c4c"}>
+                        <S.Text tabs color={tabActive === tab.value ? theme === "dark" ? Colors.dark.text : Colors.light.text : "#848383"}>
                           {tab.label}
                         </S.Text>
                       </S.Tab>
                     ))}
                   </S.Tabs>
                   <S.ContentPost>
-                    <S.InputContainer>
+                    <S.InputContainer bg_color={theme === "dark" ? Colors.dark.tabBar : Colors.light.tabBar}>
                       <S.ContentInputUser>
                         <TouchableOpacity>
                           <Image
@@ -358,14 +361,14 @@ export const Community = () => {
                             resizeMode="cover"
                           />
                         </TouchableOpacity>
-                        <S.InputPost placeholder="What's new?" placeholderTextColor="#FFFFFF" />
+                        <S.InputPost  placeholder="What's new?" theme={theme} />
                       </S.ContentInputUser>
                       <S.ContentIconButton>
                         <TouchableOpacity>
-                        <Filter />
+                        <Filter color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
                       </TouchableOpacity>
                       <TouchableOpacity>
-                        <LibraryPhoto />
+                        <LibraryPhoto color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
                       </TouchableOpacity>
                         <TouchableOpacity>
                           <S.ButtonPost>

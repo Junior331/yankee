@@ -27,5 +27,5 @@ export const ContainerIcon = styled(TouchableOpacity)<StyledProps>`
   border-radius: 60px;
   align-items: center;
   justify-content: center;
-  background-color: ${({ bg_color }) => bg_color || "transparent"};
+  background-color: ${({ bg_color }) => bg_color};
 `;

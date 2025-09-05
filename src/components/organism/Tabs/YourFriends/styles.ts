@@ -58,7 +58,7 @@ export const ContainerIcon = styled(TouchableOpacity)`
 
 export const Text = styled(TextComponent)<StyledProps>`
   font-size: 10px;
-  color: ${({ color }) => color || "#4d4c4c"};
+ color:${({ theme }: any) => theme.colors.text};
 
   ${({ tabs }) =>
     tabs &&

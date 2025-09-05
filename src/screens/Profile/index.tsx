@@ -64,7 +64,7 @@ export const Profile = () => {
           <LeftArrow color={isEdit ? '#FFFFFF' : (theme === 'dark' ? '#FFFFFF' : '#121212')} />
         </S.ButtonIcon>
         <View style={{ flexDirection: 'row', gap: 10 }}>
-          {/* <TouchableOpacity 
+          <TouchableOpacity 
             onPress={toggleTheme}
             style={{ 
               backgroundColor: 'rgba(0, 0, 0, 0.5)', 
@@ -77,7 +77,7 @@ export const Profile = () => {
             <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
               {theme === 'dark' ? '☀️' : '🌙'}
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
           <S.ButtonIcon onPress={goBack}>
             {isEdit ? (
               <S.ButtonEdit>

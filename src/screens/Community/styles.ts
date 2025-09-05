@@ -313,20 +313,19 @@ export const ContainerInput = styled(View)`
   width: 100%;
   flex-direction: column;
 `;
-export const InputContainer = styled(View)`
+export const InputContainer = styled(View)<{ $Visible?: boolean; bg_color: string }>`
   width: 100%;
   align-items: center;
   justify-content: space-between;
   border-radius: 15px;
   flex-direction: column;
   margin: 10px 0 30px 0;
-  background-color: #232323;
+  background-color: ${({ bg_color }) => bg_color};
 `;
 export const ContentPost = styled(View)`
   width: 100%;
   margin: 30px 0 0;
   justify-content: flex-end;
-
 `;
 
 export const ContentInputUser = styled(View)`
@@ -344,7 +343,10 @@ export const Input = styled(TextInput).attrs(() => ({
   border: 1px solid #dcdada;
   background-color: transparent;
 `;
-export const InputPost = styled(TextInput)`
+
+export const InputPost = styled(TextInput).attrs(({ theme }) => ({
+  placeholderTextColor: theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
+}))`
   flex: 1;
   height: 40px;
   margin: 0 10px;
@@ -357,8 +359,8 @@ export const ContentIconButton = styled(View)`
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-   align-items: flex-end;
-  padding: 0 10px 10px  ;
+  align-items: flex-end;
+  padding: 0 10px 10px;
   gap: 10px;
 `;
 export const ButtonPost = styled(View)`
@@ -367,6 +369,7 @@ export const ButtonPost = styled(View)`
   height: 20px;
   background: #fff;
   padding: 2px 6px;
+  border: 1px solid #121212;
   border-radius: 5px;
   flex-direction: row;
   align-items: center;
