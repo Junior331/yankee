@@ -1,10 +1,10 @@
 import React from "react";
-import { TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback, Keyboard } from "react-native";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import * as S from "./styles";
 import { Text, SafeScreen } from "@/components/elements";
 import { Header } from "@/components/organism";
-import { dismissKeyboard } from "@/utils/utils";
 import { LayoutAbstractProps } from "./@types";
 
 export const LayoutAbstract = ({
@@ -18,14 +18,24 @@ export const LayoutAbstract = ({
 }: LayoutAbstractProps) => {
   return (
     <SafeScreen>
-      <TouchableWithoutFeedback onPress={dismissKeyboard}>
-        <S.Container>
-          <Header
-            label={labelHeader}
-            isSecondary={isSecondary}
-            handleOnPress={handleOnPressHeader}
-          />
-          <S.ContainerScrollView>
+      <S.Container>
+        <Header
+          label={labelHeader}
+          isSecondary={isSecondary}
+          handleOnPress={handleOnPressHeader}
+        />
+        <KeyboardAwareScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          enableOnAndroid={true}
+          extraScrollHeight={50}
+          keyboardOpeningTime={250}
+          enableAutomaticScroll={true}
+          bounces={false}
+        >
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <S.Content>
               {title && <S.Title fontSize="32px">{title}</S.Title>}
               <S.ContainerText>
@@ -34,9 +44,9 @@ export const LayoutAbstract = ({
               </S.ContainerText>
               {children}
             </S.Content>
-          </S.ContainerScrollView>
-        </S.Container>
-      </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
+      </S.Container>
     </SafeScreen>
   );
 };

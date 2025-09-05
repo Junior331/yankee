@@ -227,3 +227,89 @@ export const LiveViewersContainer = styled.View`
   padding: 6px 10px;
   border-radius: 12px;
 `;
+
+export const ModalOverlay = styled.View`
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: flex-end;
+`;
+
+export const DonationModal = styled.View`
+  background-color: #2a2a2a;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 20px;
+  min-height: 400px;
+`;
+
+export const ModalHandle = styled.View`
+  width: 40px;
+  height: 4px;
+  background-color: #666;
+  border-radius: 2px;
+  align-self: center;
+  margin-bottom: 20px;
+`;
+
+export const DonationTitle = styled.View`
+  margin-bottom: 8px;
+`;
+
+export const DonationDescription = styled.View`
+  margin-bottom: 24px;
+`;
+
+export const AmountContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+`;
+
+export const AmountButton = styled.View<{ selected?: boolean }>`
+  background-color: ${({ selected }) => selected ? "#fff" : "#3a3a3a"};
+  padding: 12px 16px;
+  border-radius: 8px;
+  min-width: 60px;
+  align-items: center;
+`;
+
+export const CustomAmountSection = styled.View`
+  margin-bottom: 24px;
+`;
+
+export const CustomAmountInput = styled.View`
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 8px;
+`;
+
+export const DonateButton = styled.TouchableOpacity`
+  background-color: #007AFF;
+  padding: 16px;
+  border-radius: 12px;
+  align-items: center;
+  margin-top: 8px;
+`;
+
+export const PaymentMethodsContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+`;
+
+export const PaymentMethodButton = styled.View<{ selected?: boolean }>`
+  background-color: ${({ selected }) => selected ? "#fff" : "#3a3a3a"};
+  padding: 12px 20px;
+  border-radius: 8px;
+  align-items: center;
+`;
+
+export const ConfirmationContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+`;
