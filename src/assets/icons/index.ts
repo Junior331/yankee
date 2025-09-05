@@ -51,6 +51,7 @@ import Visibility from "./Visibility";
 import SpeakerIcon from "./SpeakerIcon";
 import SetLocation from "./SetLocation";
 import HeartDonate from "./HeartDonate";
+import DonationDone from "./DonationDone";
 import LibraryPhoto from "./LibraryPhoto";
 import Notification from "./Notification";
 import WarningCircle from "./WarningCircle";
@@ -117,6 +118,7 @@ export {
   HeartDonate,
   SpeakerIcon,
   SetLocation,
+  DonationDone,
   LibraryPhoto,
   Notification,
   WarningCircle,

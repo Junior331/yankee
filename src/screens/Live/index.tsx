@@ -14,7 +14,15 @@ import { useRouter, useLocalSearchParams } from "expo-router";
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { CardPost, Layout } from "@/components/organism";
-import { LocationTarget, Smile, HeartDonate, WarningCircle, Share } from "@/assets/icons";
+import {
+  LocationTarget,
+  Smile,
+  HeartDonate,
+  WarningCircle,
+  Share,
+  LeftArrow,
+  DonationDone,
+} from "@/assets/icons";
 import GestureRecognizer from "react-native-swipe-gestures";
 
 interface CommentType {
@@ -78,10 +86,15 @@ export const Live = () => {
   const [isDonationModalVisible, setIsDonationModalVisible] = useState(false);
   const [selectedAmount, setSelectedAmount] = useState<string>("");
   const [customAmount, setCustomAmount] = useState<string>("");
-  const [donationStep, setDonationStep] = useState<'amount' | 'payment' | 'confirmation'>('amount');
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState<string>("");
+  const [donationStep, setDonationStep] = useState<
+    "amount" | "payment" | "processing" | "confirmation"
+  >("amount");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<string>("");
+  const [validationError, setValidationError] = useState<string>("");
   const scrollViewRef = useRef<ScrollView>(null);
-  const translateY = useRef(new Animated.Value(600)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const spinValue = useRef(new Animated.Value(0)).current;
   const backdropOpacity = useRef(new Animated.Value(0)).current;
 
   const livePost = mocks.posts.find(
@@ -153,15 +166,15 @@ export const Live = () => {
   }
 
   const formatCurrency = (value: string) => {
-    const numericValue = value.replace(/\D/g, '');
-    if (!numericValue) return '';
+    const numericValue = value.replace(/\D/g, "");
+    if (!numericValue) return "";
     const formattedValue = (parseInt(numericValue) / 100).toFixed(2);
-    return `R$ ${formattedValue.replace('.', ',')}`;
+    return `R$ ${formattedValue.replace(".", ",")}`;
   };
 
   const openDonationModal = () => {
     setIsDonationModalVisible(true);
-    
+
     // Animate modal slide up and backdrop fade in
     Animated.parallel([
       Animated.timing(translateY, {
@@ -173,20 +186,30 @@ export const Live = () => {
         toValue: 1,
         duration: 300,
         useNativeDriver: true,
-      })
+      }),
     ]).start();
+  };
+
+  const startSpinAnimation = () => {
+    Animated.loop(
+      Animated.timing(spinValue, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      })
+    ).start();
   };
 
   const closeDonationModal = () => {
     // Hide modal immediately to prevent flash
     setIsDonationModalVisible(false);
-    
+
     // Reset states immediately
-    setDonationStep('amount');
-    setSelectedAmount('');
-    setCustomAmount('');
-    setSelectedPaymentMethod('');
-    
+    setDonationStep("amount");
+    setSelectedAmount("");
+    setCustomAmount("");
+    setSelectedPaymentMethod("");
+
     // Reset animation values for next opening
     setTimeout(() => {
       translateY.setValue(600);
@@ -202,7 +225,7 @@ export const Live = () => {
   const onHandlerStateChange = (event: any) => {
     if (event.nativeEvent.oldState === State.ACTIVE) {
       const { translationY, velocityY } = event.nativeEvent;
-      
+
       // More sensitive thresholds for better UX on both platforms
       if (translationY > 100 || velocityY > 500) {
         closeDonationModal();
@@ -226,14 +249,55 @@ export const Live = () => {
     }
   };
 
+  const validateAmount = () => {
+    if (!selectedAmount && !customAmount) {
+      setValidationError("Selecione ou insira um valor para doar");
+      return false;
+    }
+    if (customAmount && parseInt(customAmount) < 100) {
+      // Mínimo R$ 1,00
+      setValidationError("Valor mínimo é R$ 1,00");
+      return false;
+    }
+    setValidationError("");
+    return true;
+  };
+
+  const validatePayment = () => {
+    if (!selectedPaymentMethod) {
+      setValidationError("Selecione uma forma de pagamento");
+      return false;
+    }
+    setValidationError("");
+    return true;
+  };
+
   const handleNextStep = () => {
-    if (donationStep === 'amount') {
-      setDonationStep('payment');
-    } else if (donationStep === 'payment') {
-      setDonationStep('confirmation');
-      setTimeout(() => {
-        closeDonationModal();
-      }, 3000);
+    if (donationStep === "amount") {
+      if (validateAmount()) {
+        setDonationStep("payment");
+      }
+    } else if (donationStep === "payment") {
+      if (validatePayment()) {
+        setDonationStep("processing");
+        startSpinAnimation();
+        // Simula processamento por 2 segundos
+        setTimeout(() => {
+          setDonationStep("confirmation");
+          setTimeout(() => {
+            closeDonationModal();
+          }, 3000);
+        }, 2000);
+      }
+    }
+  };
+
+  const handlePreviousStep = () => {
+    setValidationError("");
+    if (donationStep === "payment") {
+      setDonationStep("amount");
+    } else if (donationStep === "confirmation") {
+      setDonationStep("payment");
     }
   };
 
@@ -284,7 +348,7 @@ export const Live = () => {
         <S.Container style={{ minWidth: width }}>
           <S.Content>
             <CardPost
-            styleHeader={{paddingHorizontal: 14}}
+              styleHeader={{ paddingHorizontal: 14 }}
               key={livePost.id}
               name={livePost.user.name}
               buttonHeader={
@@ -332,7 +396,9 @@ export const Live = () => {
                     <S.LiveQuestion color="#fff" fontSize="14px">
                       What do you think guys?
                     </S.LiveQuestion>
-                    <S.Text color="#ffffff99" fontSize="12px">Alere no dealedat</S.Text>
+                    <S.Text color="#ffffff99" fontSize="12px">
+                      Alere no dealedat
+                    </S.Text>
                   </S.LiveContent>
                 </S.LiveContainer>
                 <S.GradientOverlay
@@ -425,8 +491,16 @@ export const Live = () => {
                           resizeMode="cover"
                         />
                         <View style={styles.commentContent}>
-                          <S.Text color="#fff" fontSize="14px" fontWeight={`bold`}>{comment.name}</S.Text>
-                          <S.CommentText color="#fff" fontSize="12px">{comment.description}</S.CommentText>
+                          <S.Text
+                            color="#fff"
+                            fontSize="14px"
+                            fontWeight={`bold`}
+                          >
+                            {comment.name}
+                          </S.Text>
+                          <S.CommentText color="#fff" fontSize="12px">
+                            {comment.description}
+                          </S.CommentText>
                         </View>
                       </S.CommentItem>
                     </Animated.View>
@@ -458,7 +532,7 @@ export const Live = () => {
               <S.ExternalActionIcons>
                 <TouchableOpacity onPress={openDonationModal}>
                   <S.IconButton>
-                    <HeartDonate color="#fff" /> 
+                    <HeartDonate color="#fff" />
                   </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -485,18 +559,18 @@ export const Live = () => {
           onRequestClose={closeDonationModal}
           statusBarTranslucent={true}
         >
-          <Animated.View 
+          <Animated.View
             style={[
-              { 
-                flex: 1, 
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              {
+                flex: 1,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
               },
-              { opacity: backdropOpacity }
+              { opacity: backdropOpacity },
             ]}
           >
-            <TouchableOpacity 
-              style={{ flex: 1 }} 
-              activeOpacity={1} 
+            <TouchableOpacity
+              style={{ flex: 1 }}
+              activeOpacity={1}
               onPress={closeDonationModal}
             />
             <PanGestureHandler
@@ -514,127 +588,192 @@ export const Live = () => {
               >
                 <S.DonationModal>
                   <S.ModalHandle />
-                
-                {donationStep === 'amount' && (
-                  <>
-                    <S.DonationTitle>
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
-                        Lorem ipsum (Donation)
-                      </S.Text>
-                    </S.DonationTitle>
 
-                    <S.DonationDescription>
-                      <S.Text color="#999" fontSize="14px">
-                        Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
-                      </S.Text>
-                    </S.DonationDescription>
+                  {donationStep === "amount" && (
+                    <>
+                      <S.DonationTitle>
+                        <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                          Lorem ipsum (Donation)
+                        </S.Text>
+                      </S.DonationTitle>
 
-                    <S.AmountContainer>
-                      {["R$10", "R$25", "R$50", "R$55", "R$60", "R$65"].map((amount) => (
-                        <TouchableOpacity
-                          key={amount}
-                          onPress={() => setSelectedAmount(amount)}
-                        >
-                          <S.AmountButton selected={selectedAmount === amount}>
-                            <S.Text 
-                              color={selectedAmount === amount ? "#000" : "#fff"} 
-                              fontSize="14px"
-                              fontWeight="500"
+                      <S.DonationDescription>
+                        <S.Text color="#999" fontSize="14px">
+                          Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
+                        </S.Text>
+                      </S.DonationDescription>
+
+                      <S.AmountContainer>
+                        {["R$10", "R$25", "R$50", "R$55", "R$60", "R$65"].map(
+                          (amount) => (
+                            <TouchableOpacity
+                              key={amount}
+                              onPress={() => {
+                                setSelectedAmount(amount);
+                                setCustomAmount("");
+                              }}
                             >
-                              {amount}
-                            </S.Text>
-                          </S.AmountButton>
-                        </TouchableOpacity>
-                      ))}
-                    </S.AmountContainer>
+                              <S.AmountButton
+                                selected={selectedAmount === amount}
+                              >
+                                <S.Text
+                                  color={
+                                    selectedAmount === amount ? "#000" : "#fff"
+                                  }
+                                  fontSize="14px"
+                                  fontWeight="500"
+                                >
+                                  {amount}
+                                </S.Text>
+                              </S.AmountButton>
+                            </TouchableOpacity>
+                          )
+                        )}
+                      </S.AmountContainer>
 
-                    <S.CustomAmountSection>
-                      <S.Text color="#fff" fontSize="14px" fontWeight="500">
-                        Valor desejado a doar:
-                      </S.Text>
-                      <S.CustomAmountInput>
-                        <TextInput
-                          value={selectedAmount ? selectedAmount : formatCurrency(customAmount)}
-                          onChangeText={(text) => {
-                            if (text.startsWith('R$')) {
-                              // Se já tem R$, remove e pega apenas os números
-                              const numericValue = text.replace(/\D/g, '');
-                              setCustomAmount(numericValue);
-                            } else {
-                              // Se não tem R$, trata como entrada normal
-                              const numericValue = text.replace(/\D/g, '');
-                              setCustomAmount(numericValue);
+                      <S.CustomAmountSection>
+                        <S.Text color="#fff" fontSize="14px" fontWeight="500">
+                          Valor desejado a doar:
+                        </S.Text>
+                        <S.CustomAmountInput>
+                          <TextInput
+                            value={
+                              selectedAmount || formatCurrency(customAmount)
                             }
-                            setSelectedAmount('');
-                          }}
-                          placeholder="Insira o valor"
-                          placeholderTextColor="#666"
-                          style={styles.customAmountInput}
-                          keyboardType="numeric"
-                        />
-                      </S.CustomAmountInput>
-                    </S.CustomAmountSection>
+                            onChangeText={(text) => {
+                              const numericValue = text.replace(/\D/g, "");
+                              setCustomAmount(numericValue);
+                              setSelectedAmount("");
+                            }}
+                            placeholder="Insira o valor"
+                            placeholderTextColor="#999"
+                            style={styles.customAmountInput}
+                            keyboardType="numeric"
+                          />
+                        </S.CustomAmountInput>
+                      </S.CustomAmountSection>
 
-                    <S.DonateButton onPress={handleNextStep}>
-                      <S.Text color="#fff" fontSize="16px" fontWeight="bold">
-                        Próxima etapa
-                      </S.Text>
-                    </S.DonateButton>
-                  </>
-                )}
+                      {validationError ? (
+                        <S.ValidationError>
+                          <S.Text color="#FF4444" fontSize="14px">
+                            {validationError}
+                          </S.Text>
+                        </S.ValidationError>
+                      ) : null}
 
-                {donationStep === 'payment' && (
-                  <>
-                    <S.DonationTitle>
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
-                        Forma de pagamento (Donation)
-                      </S.Text>
-                    </S.DonationTitle>
+                      <S.DonateButton onPress={handleNextStep}>
+                        <S.Text color="#fff" fontSize="16px" fontWeight="bold">
+                          Próxima etapa
+                        </S.Text>
+                      </S.DonateButton>
+                    </>
+                  )}
 
-                    <S.DonationDescription>
-                      <S.Text color="#999" fontSize="14px">
-                        Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
-                      </S.Text>
-                    </S.DonationDescription>
-
-                    <S.PaymentMethodsContainer>
-                      {["PayPal", "Crédito", "Pix", "Boleto bancário"].map((method) => (
-                        <TouchableOpacity
-                          key={method}
-                          onPress={() => setSelectedPaymentMethod(method)}
-                        >
-                          <S.PaymentMethodButton selected={selectedPaymentMethod === method}>
-                            <S.Text 
-                              color={selectedPaymentMethod === method ? "#000" : "#fff"} 
-                              fontSize="14px"
-                              fontWeight="500"
-                            >
-                              {method}
-                            </S.Text>
-                          </S.PaymentMethodButton>
+                  {donationStep === "payment" && (
+                    <>
+                      <S.StepHeader>
+                        <TouchableOpacity onPress={handlePreviousStep}>
+                          <S.BackButton>
+                            <LeftArrow color="#fff" />
+                          </S.BackButton>
                         </TouchableOpacity>
-                      ))}
-                    </S.PaymentMethodsContainer>
+                        <S.DonationTitle>
+                          <S.Text
+                            color="#fff"
+                            fontSize="18px"
+                            fontWeight="bold"
+                          >
+                            Forma de pagamento (Donation)
+                          </S.Text>
+                        </S.DonationTitle>
+                        <View style={{ width: 32 }} />
+                      </S.StepHeader>
 
-                    <S.DonateButton onPress={handleNextStep}>
-                      <S.Text color="#fff" fontSize="16px" fontWeight="bold">
-                        Próxima etapa
+                      <S.DonationDescription>
+                        <S.Text color="#999" fontSize="14px">
+                          Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
+                        </S.Text>
+                      </S.DonationDescription>
+
+                      <S.PaymentMethodsContainer>
+                        {["PayPal", "Crédito", "Pix", "Boleto bancário"].map(
+                          (method) => (
+                            <TouchableOpacity
+                              key={method}
+                              onPress={() => setSelectedPaymentMethod(method)}
+                            >
+                              <S.PaymentMethodButton
+                                selected={selectedPaymentMethod === method}
+                              >
+                                <S.Text
+                                  color={
+                                    selectedPaymentMethod === method
+                                      ? "#000"
+                                      : "#fff"
+                                  }
+                                  fontSize="14px"
+                                  fontWeight="500"
+                                >
+                                  {method}
+                                </S.Text>
+                              </S.PaymentMethodButton>
+                            </TouchableOpacity>
+                          )
+                        )}
+                      </S.PaymentMethodsContainer>
+
+                      {validationError ? (
+                        <S.ValidationError>
+                          <S.Text color="#FF4444" fontSize="14px">
+                            {validationError}
+                          </S.Text>
+                        </S.ValidationError>
+                      ) : null}
+
+                      <S.DonateButton onPress={handleNextStep}>
+                        <S.Text color="#fff" fontSize="16px" fontWeight="bold">
+                          Próxima etapa
+                        </S.Text>
+                      </S.DonateButton>
+                    </>
+                  )}
+
+                  {donationStep === "processing" && (
+                    <S.ProcessingContainer>
+                      <Animated.View
+                        style={{
+                          transform: [
+                            {
+                              rotate: spinValue.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: ["0deg", "360deg"],
+                              }),
+                            },
+                          ],
+                        }}
+                      >
+                        <S.LoadingSpinner />
+                      </Animated.View>
+                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                        Processando pagamento...
                       </S.Text>
-                    </S.DonateButton>
-                  </>
-                )}
+                      <S.Text color="#999" fontSize="14px">
+                        Aguarde enquanto processamos sua doação
+                      </S.Text>
+                    </S.ProcessingContainer>
+                  )}
 
-                {donationStep === 'confirmation' && (
-                  <S.ConfirmationContainer>
-                    <S.Text color="#00D084" fontSize="48px">✓</S.Text>
-                    <S.Text color="#fff" fontSize="18px" fontWeight="bold">
-                      Doação realizada com sucesso!
-                    </S.Text>
-                    <S.Text color="#999" fontSize="14px">
-                      Obrigado pela sua contribuição
-                    </S.Text>
-                  </S.ConfirmationContainer>
-                )}
+                  {donationStep === "confirmation" && (
+                    <S.ConfirmationContainer>
+                      <DonationDone />
+                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                        Doação realizada com sucesso!
+                      </S.Text>
+                      <S.Text color="#999" fontSize="14px">
+                        Obrigado pela sua contribuição
+                      </S.Text>
+                    </S.ConfirmationContainer>
+                  )}
                 </S.DonationModal>
               </Animated.View>
             </PanGestureHandler>
@@ -677,5 +816,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     flex: 1,
+    padding: 0,
+    margin: 0,
   },
 });

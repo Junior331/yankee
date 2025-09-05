@@ -260,9 +260,9 @@ export const DonationDescription = styled.View`
 `;
 
 export const AmountContainer = styled.View`
-  flex-direction: row;
+  gap: 8px;
   flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: row;
   margin-bottom: 24px;
 `;
 
@@ -281,8 +281,10 @@ export const CustomAmountSection = styled.View`
 export const CustomAmountInput = styled.View`
   background-color: #3a3a3a;
   border-radius: 8px;
-  padding: 12px 16px;
+  padding: 16px;
   margin-top: 8px;
+  min-height: 50px;
+  justify-content: center;
 `;
 
 export const DonateButton = styled.TouchableOpacity`
@@ -294,17 +296,58 @@ export const DonateButton = styled.TouchableOpacity`
 `;
 
 export const PaymentMethodsContainer = styled.View`
+  gap: 5px;
+  margin-bottom: 24px;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
 `;
 
 export const PaymentMethodButton = styled.View<{ selected?: boolean }>`
   background-color: ${({ selected }) => selected ? "#fff" : "#3a3a3a"};
-  padding: 12px 20px;
+  padding: 12px 18px;
   border-radius: 8px;
   align-items: center;
+`;
+
+export const ValidationError = styled.View`
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  background-color: rgba(255, 68, 68, 0.1);
+  border-radius: 6px;
+  border-left-width: 3px;
+  border-left-color: #FF4444;
+`;
+
+export const StepHeader = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+`;
+
+export const BackButton = styled.View`
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ProcessingContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+`;
+
+export const LoadingSpinner = styled.View`
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  border-width: 4px;
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: #007AFF;
 `;
 
 export const ConfirmationContainer = styled.View`
