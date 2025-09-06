@@ -1,16 +1,15 @@
 import styled, { css } from "styled-components";
 import { ScrollView, View } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 import { removeScrollUi } from "@/utils/utils";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   width: 100%;
   flex: 1;
-  background-color: ${Colors.dark.background};
+ background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const HeaderContainer = styled(View)`
@@ -61,6 +60,7 @@ export const ContainerUser = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  
 `;
 
 export const ContainerList = styled(ScrollView).attrs(removeScrollUi)`
@@ -80,10 +80,10 @@ export const ContainerText = styled(View)`
   flex: 1;
 `;
 
-export const Title = styled(TitleComponent)`
+export const Title = styled(TitleComponent)<StyledProps>`
   font-size: 12px;
   font-weight: 500;
-  color: #f2f2f2;
+  color: ${({ color }) => color || "#ffffff"};
   margin: 0 0 4px 0;
   text-overflow: ellipsis;
   font-family: "Poppins-Medium";
@@ -102,11 +102,11 @@ export const Text = styled(TextComponent)<StyledProps>`
     `};
 `;
 
-export const ButtonFollow = styled(View)`
+export const ButtonFollow = styled(View)<StyledProps>`
   gap: 3px;
   width: 60px;
   height: 20px;
-  background: #fff;
+  background-color: ${({ bg_color }) => bg_color};
   padding: 2px 6px;
   border-radius: 5px;
   flex-direction: row;
