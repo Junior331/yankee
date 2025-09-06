@@ -45,7 +45,14 @@ export const TabYourFriends = ({ posts, toggleLike }:IYourFriend) => {
                 <Heart
                   width={15}
                   height={13}
-                  color={item.liked ? Colors.liked : theme === "dark" ? Colors.dark.iconHeart : Colors.light.iconHeart}
+                  color={
+                    item.liked
+                      ? Colors.liked
+                      : theme === "dark"
+                      ? Colors.dark.iconHeart
+                      : Colors.light.iconHeart
+                  }
+                  fill={item.liked ? Colors.liked : ""}
                 />
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.likes)}</S.Text>
               </S.ContainerIcon>

@@ -2,14 +2,13 @@ import { Ionicons } from "@expo/vector-icons";
 import styled, { css } from "styled-components";
 import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)<StyledProps>`
   width: 100%;
-  flex: 1;
+  flex-direction: column;
   background-color: ${({ bg_color }) => bg_color};
 `;
 

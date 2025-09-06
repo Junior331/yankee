@@ -24,6 +24,8 @@ import {
   DonationDone,
 } from "@/assets/icons";
 import GestureRecognizer from "react-native-swipe-gestures";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CommentType {
   id: number;
@@ -70,6 +72,7 @@ const simulatedComments = [
 
 export const Live = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const { liveId } = useLocalSearchParams<{ liveId: string }>();
   const parsedLiveId = parseInt(liveId || "0", 10);
 
@@ -286,8 +289,8 @@ export const Live = () => {
           setDonationStep("confirmation");
           setTimeout(() => {
             closeDonationModal();
-          }, 3000);
-        }, 2000);
+          }, 30000);
+        }, 20000);
       }
     }
   };
@@ -343,7 +346,11 @@ export const Live = () => {
   const { width } = Dimensions.get("screen");
 
   return (
-    <Layout style={{ position: "relative" }} titleHeader="yankee">
+    <Layout
+      style={{ position: "relative" }}
+      titleHeader="yankee"
+      // isShowHeader={false}
+    >
       <GestureRecognizer style={{ flex: 1 }}>
         <S.Container style={{ minWidth: width }}>
           <S.Content>
@@ -356,7 +363,11 @@ export const Live = () => {
                   style={styles.closeButton}
                   onPress={() => router.back()}
                 >
-                  <S.Text color="#fff" fontSize="18px" fontWeight={`bold`}>
+                  <S.Text
+                    color={Colors[theme].text}
+                    fontSize="18px"
+                    fontWeight={`bold`}
+                  >
                     ✕
                   </S.Text>
                 </TouchableOpacity>
@@ -383,26 +394,41 @@ export const Live = () => {
                       fontSize="12px"
                       fontWeight={600}
                       textTransform="uppercase"
+                      color={Colors[theme].text}
                     >
                       TITULO DA LIVE
                     </S.Text>
                   </S.LiveTitleContainer>
 
                   <S.LiveContent>
-                    <S.LiveDescription>
+                    <S.LiveDescription color={Colors[theme].text}>
                       I never tire of admiring this view before going to work.
                     </S.LiveDescription>
 
-                    <S.LiveQuestion color="#fff" fontSize="14px">
+                    <S.LiveQuestion color={Colors[theme].text} fontSize="14px">
                       What do you think guys?
                     </S.LiveQuestion>
-                    <S.Text color="#ffffff99" fontSize="12px">
+                    <S.Text
+                      color={
+                        theme === `dark`
+                          ? "rgba(255, 255, 255, 0.6)"
+                          : "rgba(0, 0, 0, 0.6)"
+                      }
+                      fontSize="12px"
+                    >
                       Alere no dealedat
                     </S.Text>
                   </S.LiveContent>
                 </S.LiveContainer>
                 <S.GradientOverlay
-                  colors={["transparent", "rgba(23, 23, 23, 0.85)"]}
+                  colors={[
+                    "transparent",
+                    `${
+                      theme === `dark`
+                        ? "rgba(23, 23, 23, 0.85)"
+                        : "rgba(255, 255, 255, 0.85)"
+                    }`,
+                  ]}
                   start={[0, 0]}
                   end={[0, 0.6]}
                 />
@@ -410,24 +436,19 @@ export const Live = () => {
                   start={[0, 0]}
                   end={[0, 0.6]}
                   height={`40px`}
-                  colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
-
-                  // start={[0, 0]}
-                  // end={[0, 1.2]}
-                  // height={`40px`}
-                  // colors={["transparent", "rgba(23, 23, 23, 0.95)", "transparent"]}
+                  colors={["transparent", Colors[theme].background]}
                 />
               </S.ImageBackground>
             </CardPost>
             <S.CommentsSection>
               <S.GradientTop
-                colors={["rgba(23, 23, 23, 0.95)", "transparent"]}
+                colors={[Colors[theme].background, "transparent"]}
                 start={[0, 0.4]}
                 end={[0, 1.5]}
               />
               <ScrollView
                 ref={scrollViewRef}
-                style={{ flex: 1, maxHeight: 180 }}
+                style={{ flex: 1, maxHeight: 250 }}
                 showsVerticalScrollIndicator={false}
                 nestedScrollEnabled={true}
                 scrollEnabled={true}
@@ -447,7 +468,7 @@ export const Live = () => {
                   const scrollView = scrollViewRef.current;
                   if (!isUserScrolling && scrollView) {
                     const isNearBottom =
-                      contentHeight - scrollPosition - 180 <= 50;
+                      contentHeight - scrollPosition - 250 <= 50;
                     if (isNearBottom) {
                       setTimeout(() => {
                         scrollView.scrollToEnd({ animated: true });
@@ -492,13 +513,16 @@ export const Live = () => {
                         />
                         <View style={styles.commentContent}>
                           <S.Text
-                            color="#fff"
+                            color={Colors[theme].text}
                             fontSize="14px"
                             fontWeight={`bold`}
                           >
                             {comment.name}
                           </S.Text>
-                          <S.CommentText color="#fff" fontSize="12px">
+                          <S.CommentText
+                            color={Colors[theme].text}
+                            fontSize="12px"
+                          >
                             {comment.description}
                           </S.CommentText>
                         </View>
@@ -508,13 +532,13 @@ export const Live = () => {
                 })}
               </ScrollView>
               <S.GradientBottom
-                colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
+                colors={["transparent", Colors[theme].background]}
                 start={[0, 0]}
                 end={[0, 0.6]}
               />
             </S.CommentsSection>
             <S.CommentInputContainer>
-              <S.CommentInputWrapper>
+              <S.CommentInputWrapper bg_color={Colors[theme].comment}>
                 <TextInput
                   value={comment}
                   style={styles.commentInput}
@@ -525,24 +549,24 @@ export const Live = () => {
                 />
                 <TouchableOpacity>
                   <S.IconButton>
-                    <Smile color="#fff" />
+                    <Smile color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
               </S.CommentInputWrapper>
               <S.ExternalActionIcons>
                 <TouchableOpacity onPress={openDonationModal}>
                   <S.IconButton>
-                    <HeartDonate color="#fff" />
+                    <HeartDonate color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <S.IconButton>
-                    <WarningCircle color="#fff" />
+                    <WarningCircle color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleSubmitComment(comment)}>
                   <S.IconButton>
-                    <Share color="#fff" />
+                    <Share color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
               </S.ExternalActionIcons>
@@ -586,19 +610,23 @@ export const Live = () => {
                   transform: [{ translateY: translateY }],
                 }}
               >
-                <S.DonationModal>
+                <S.DonationModal bg_color={Colors[theme].background}>
                   <S.ModalHandle />
 
                   {donationStep === "amount" && (
                     <>
                       <S.DonationTitle>
-                        <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                        <S.Text
+                          color={Colors[theme].text}
+                          fontSize="18px"
+                          fontWeight="bold"
+                        >
                           Lorem ipsum (Donation)
                         </S.Text>
                       </S.DonationTitle>
 
                       <S.DonationDescription>
-                        <S.Text color="#999" fontSize="14px">
+                        <S.Text color={Colors[theme].text} fontSize="14px">
                           Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
                         </S.Text>
                       </S.DonationDescription>
@@ -614,11 +642,17 @@ export const Live = () => {
                               }}
                             >
                               <S.AmountButton
-                                selected={selectedAmount === amount}
+                                bg_color={
+                                  selectedAmount === amount
+                                    ? Colors[theme].text
+                                    : Colors[theme].donateBox
+                                }
                               >
                                 <S.Text
                                   color={
-                                    selectedAmount === amount ? "#000" : "#fff"
+                                    selectedAmount === amount
+                                      ? Colors[theme].background
+                                      : Colors[theme].text
                                   }
                                   fontSize="14px"
                                   fontWeight="500"
@@ -635,7 +669,7 @@ export const Live = () => {
                         <S.Text color="#fff" fontSize="14px" fontWeight="500">
                           Valor desejado a doar:
                         </S.Text>
-                        <S.CustomAmountInput>
+                        <S.CustomAmountInput bg_color={Colors[theme].donateBox}>
                           <TextInput
                             value={
                               selectedAmount || formatCurrency(customAmount)
@@ -646,7 +680,7 @@ export const Live = () => {
                               setSelectedAmount("");
                             }}
                             placeholder="Insira o valor"
-                            placeholderTextColor="#999"
+                            placeholderTextColor={Colors[theme].textMessage}
                             style={styles.customAmountInput}
                             keyboardType="numeric"
                           />
@@ -674,19 +708,18 @@ export const Live = () => {
                       <S.StepHeader>
                         <TouchableOpacity onPress={handlePreviousStep}>
                           <S.BackButton>
-                            <LeftArrow color="#fff" />
+                            <LeftArrow color={Colors[theme].text} />
                           </S.BackButton>
                         </TouchableOpacity>
                         <S.DonationTitle>
                           <S.Text
-                            color="#fff"
+                            color={Colors[theme].text}
                             fontSize="18px"
                             fontWeight="bold"
                           >
                             Forma de pagamento (Donation)
                           </S.Text>
                         </S.DonationTitle>
-                        <View style={{ width: 32 }} />
                       </S.StepHeader>
 
                       <S.DonationDescription>
@@ -702,21 +735,25 @@ export const Live = () => {
                               key={method}
                               onPress={() => setSelectedPaymentMethod(method)}
                             >
-                              <S.PaymentMethodButton
-                                selected={selectedPaymentMethod === method}
+                              <S.AmountButton
+                                bg_color={
+                                  selectedPaymentMethod === method
+                                    ? Colors[theme].text
+                                    : Colors[theme].donateBox
+                                }
                               >
                                 <S.Text
                                   color={
                                     selectedPaymentMethod === method
-                                      ? "#000"
-                                      : "#fff"
+                                      ? Colors[theme].background
+                                      : Colors[theme].text
                                   }
                                   fontSize="14px"
                                   fontWeight="500"
                                 >
                                   {method}
                                 </S.Text>
-                              </S.PaymentMethodButton>
+                              </S.AmountButton>
                             </TouchableOpacity>
                           )
                         )}
@@ -752,9 +789,9 @@ export const Live = () => {
                           ],
                         }}
                       >
-                        <S.LoadingSpinner />
+                        <S.LoadingSpinner isSecondary={theme === `dark`} />
                       </Animated.View>
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                      <S.Text color={Colors[theme].text} fontSize="18px" fontWeight="bold">
                         Processando pagamento...
                       </S.Text>
                       <S.Text color="#999" fontSize="14px">
@@ -765,8 +802,8 @@ export const Live = () => {
 
                   {donationStep === "confirmation" && (
                     <S.ConfirmationContainer>
-                      <DonationDone />
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                      <DonationDone fill={Colors[theme].bubble}/>
+                      <S.Text color={Colors[theme].text} fontSize="18px" fontWeight="bold">
                         Doação realizada com sucesso!
                       </S.Text>
                       <S.Text color="#999" fontSize="14px">

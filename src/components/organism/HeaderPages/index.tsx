@@ -135,31 +135,31 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
       {showUserMenu && (
         <S.UserMenu>
           <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
-            <S.Text color="#fff" fontSize="12px">Saldo na conta: ----</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Saldo na conta: ----</S.Text>
           </S.UserMenuOption>
           
           <S.MenuDivider />
           
           <S.UserMenuOption onPress={handleConfigPress}>
-            <S.Text color="#fff" fontSize="12px">Configurações</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Configurações</S.Text>
           </S.UserMenuOption>
           
           <S.MenuDivider />
           
           <S.UserMenuOption onPress={handleThemePress}>
-            <S.Text color="#fff" fontSize="12px">Temas: {theme === 'dark' ? 'Escuro' : 'Claro'}</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Temas: {theme === 'dark' ? 'Escuro' : 'Claro'}</S.Text>
           </S.UserMenuOption>
           
           <S.MenuDivider />
           
           <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
-            <S.Text color="#fff" fontSize="12px">Ajuda</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Ajuda</S.Text>
           </S.UserMenuOption>
           
           <S.MenuDivider />
           
           <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
-            <S.Text color="#fff" fontSize="12px">Sair</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Sair</S.Text>
           </S.UserMenuOption>
         </S.UserMenu>
       )}
@@ -168,13 +168,13 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
       {showThemeModal && (
         <S.UserMenu>
           <S.UserMenuOption onPress={() => handleThemeSelect('light')}>
-            <S.Text color="#fff" fontSize="12px">Claro</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Claro</S.Text>
           </S.UserMenuOption>
           
           <S.MenuDivider />
           
           <S.UserMenuOption onPress={() => handleThemeSelect('dark')}>
-            <S.Text color="#fff" fontSize="12px">Escuro</S.Text>
+            <S.Text color={Colors[theme].text} fontSize="12px">Escuro</S.Text>
           </S.UserMenuOption>
         </S.UserMenu>
       )}

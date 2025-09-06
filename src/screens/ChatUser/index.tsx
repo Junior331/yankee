@@ -15,8 +15,7 @@ import {
   Menu,
   Phone,
 } from "@/assets/icons";
-import { MessageBubble, ChatInput } from "@/components/organism";
-import { SafeScreen } from "@/components/elements";
+import { MessageBubble, ChatInput, Layout } from "@/components/organism";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import { useMessages } from "@/hooks/useMessages";
@@ -159,7 +158,7 @@ export const ChatUser = () => {
   }, [router, userName, userAvatar, userUsername]);
 
   return (
-    <SafeScreen edges={['top']}>
+    <Layout titleHeader={userName}>
       <KeyboardAvoidingView 
         style={{ flex: 1 }}
         behavior={Platform.OS !== 'ios' ? 'padding' : 'height'}
@@ -259,6 +258,6 @@ export const ChatUser = () => {
           />
         </S.Container>
       </KeyboardAvoidingView>
-    </SafeScreen>
+    </Layout>
   );
 };

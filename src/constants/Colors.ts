@@ -3,6 +3,7 @@ const Colors = {
   light: {
     text: "#121212",
     icon: "#121212",
+    bubble: "#DADADA",
     iconHeart: "#121212",
     error: "#D63838",
     background: "#fff",
@@ -11,6 +12,8 @@ const Colors = {
     tabBgIconDefault: "#121212",
     tabBar: "#FAFAFA",
     placeholder: "#000000ff",
+    comment: "#DADADA",
+    donateBox: "#DADADA",
     mg_bubble: "#DADADA",
   },
   dark: {
@@ -18,6 +21,8 @@ const Colors = {
     icon: "#FFFFFF",
     iconHeart: "#ffffffff",
     error: "#D63838",
+    comment: "#121212",
+    bubble: "#FFFFFF",
     background: "#171717",
     textMessage: "#848383",
     bottomColor: "#1976D2",
@@ -28,6 +33,7 @@ const Colors = {
     tabIconDefault: "#121212",
     tabBgIconDefault: "#FFFFFF",
     tabBar: "#121212",
+    donateBox: "#3a3a3a",
   },
 };
 
