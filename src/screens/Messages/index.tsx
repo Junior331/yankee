@@ -9,9 +9,13 @@ import { SubHeader } from "@/components/organism";
 import { ChatConversation } from "@/services/mocks/users";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
 import { SafeScreen } from "@/components/elements";
+import { useTheme } from "@/contexts/ThemeContext";
+import Colors from "@/constants/Colors";
 
 export const Messages = () => {
   const router = useRouter();
+    const { theme } = useTheme();
+  
   const insets = useSafeAreaInsets();
   const [text, setText] = useState("");
   const [tabActive, setTabActive] = useState(1); // 1 = Principal, 2 = Chat Requests
@@ -183,7 +187,7 @@ export const Messages = () => {
 
   return (
     <SafeScreen edges={['top', 'left', 'right']}>
-      <S.Container>
+      <S.Container bg_color={Colors[theme].background}>
         <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <SubHeader title={"Messages"} handleOnPress={() => router.push("/(tabs)/profile")} />

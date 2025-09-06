@@ -7,10 +7,10 @@ import { StyledProps } from "@/utils/types";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   width: 100%;
   flex: 1;
-  background-color: ${Colors.dark.background};
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ContainerTabs = styled(View)`
