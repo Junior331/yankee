@@ -14,7 +14,7 @@ export const Messages = () => {
 
   return (
     <S.Container>
-      <SubHeader title={"Message"} handleOnPress={() => router.push("/(tabs)/profile")} />
+      <SubHeader title={"yankee"} handleOnPress={() => router.push("/(tabs)/profile")} />
       <S.ContainerTabs>
         <S.Tabs>
           {mocks.tabs.messages.map((tab) => (

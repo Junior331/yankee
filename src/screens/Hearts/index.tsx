@@ -4,7 +4,7 @@ import { Layout } from "@/components/organism";
 
 export const Hearts = () => {
   return (
-    <Layout>
+    <Layout titleHeader="yankee">
       <Text>Hearts</Text>
     </Layout>
   );
