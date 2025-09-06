@@ -224,7 +224,20 @@ export const Stories = () => {
         animationFrameRef.current = requestAnimationFrame(animateProgress);
       } else {
         setProgress(100);
-        handleNextStory();
+        // Moveu a lógica para dentro do useEffect para evitar dependência de handleNextStory
+        if (currentStory < currentUserStories.length - 1) {
+          setCurrentStory((prev) => prev + 1);
+        } else {
+          if (currentUserId < mocks.storys.length - 1) {
+            setCurrentUserId((prev) => prev + 1);
+            setCurrentStory(0);
+          } else {
+            setIsModalVisible(false);
+            router.push("/(tabs)/community");
+          }
+        }
+        startTimeRef.current = performance.now();
+        setProgress(0);
       }
     };
 
@@ -236,7 +249,7 @@ export const Stories = () => {
       if (animationFrameRef.current)
         cancelAnimationFrame(animationFrameRef.current);
     };
-  }, [isModalVisible, currentStory, handleNextStory]);
+  }, [isModalVisible, currentStory, currentUserId, currentUserStories.length, router]);
 
   return (
     <Modal

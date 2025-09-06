@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { TouchableOpacity, View, TextInput } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Colors from "@/constants/Colors";
 import { Text as TextComponent } from "@/components/elements";
@@ -7,7 +8,7 @@ import { Title as TitleComponent } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
 import { BottomSheetView } from "@gorhom/bottom-sheet";
 
-export const Container = styled(View)`
+export const Container = styled(SafeAreaView)`
   flex: 1;
   background-color: ${Colors.dark.background};
 `;
@@ -15,7 +16,7 @@ export const Container = styled(View)`
 export const ContainerHeader = styled(View)`
   gap: 20px;
   width: 100%;
-  padding: 15px 15px;
+  padding: 35px 15px 15px;
   flex-direction: row;
   align-items: center;
 `;
