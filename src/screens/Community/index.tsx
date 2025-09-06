@@ -636,9 +636,9 @@ export const Community = () => {
         <ModalGeneric
           modalVisible={showAddStoryModal}
           setModalVisible={setShowAddStoryModal}
-          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+          style={{ backgroundColor: "transparent" }}
         >
-          <S.StoryChoiceModal>
+          <S.StoryChoiceModal bg_color={Colors[theme].background}>
             <S.Text
               color="#fff"
               fontSize="18px"
