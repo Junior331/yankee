@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { ScrollView, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
@@ -7,10 +8,11 @@ import { removeScrollUi } from "@/utils/utils";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 
-export const Container = styled(View)`
+export const Container = styled(SafeAreaView)`
+  flex: 1;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 35px 20px 20px;
   background-color: ${Colors.dark.background};
 `;
 
