@@ -127,7 +127,7 @@ export const UserMenu = styled(View)`
 `;
 
 export const UserMenuOption = styled(TouchableOpacity)`
-  padding: 11px 9px;
+  padding: 11px;
   align-items: center;
   justify-content: center;
 `;

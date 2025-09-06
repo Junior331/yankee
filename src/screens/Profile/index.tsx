@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image, FlatList, Dimensions, TouchableOpacity, Text } from "react-native";
+import { View, Image, FlatList, Dimensions, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
@@ -17,7 +17,7 @@ const { width } = Dimensions.get("window");
 export const Profile = () => {
   const router = useRouter();
   const { goBack } = useNavigationHandler();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
   const [isEdit, setIsEdit] = useState(false);
   const [tabActive, setTabActive] = useState("photos");
   const [bannerLoading, setBannerLoading] = useState(true);
@@ -64,20 +64,6 @@ export const Profile = () => {
           <LeftArrow color={isEdit ? '#FFFFFF' : (theme === 'dark' ? '#FFFFFF' : '#121212')} />
         </S.ButtonIcon>
         <View style={{ flexDirection: 'row', gap: 10 }}>
-          <TouchableOpacity 
-            onPress={toggleTheme}
-            style={{ 
-              backgroundColor: 'rgba(0, 0, 0, 0.5)', 
-              padding: 10, 
-              borderRadius: 20,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-          >
-            <Text style={{ color: 'white', fontSize: 12, fontWeight: 'bold' }}>
-              {theme === 'dark' ? '☀️' : '🌙'}
-            </Text>
-          </TouchableOpacity>
           <S.ButtonIcon onPress={goBack}>
             {isEdit ? (
               <S.ButtonEdit>
