@@ -21,6 +21,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useKeyboardHeight } from "@/hooks/useKeyboardHeight";
 import { useMessages } from "@/hooks/useMessages";
 import { useAudioRecorder } from "@/hooks/useAudioRecorderSimple";
+import { useTheme } from "@/contexts/ThemeContext";
+import Colors from "@/constants/Colors";
 
 export const ChatUser = () => {
   const router = useRouter();
@@ -29,6 +31,7 @@ export const ChatUser = () => {
   const flatListRef = useRef<FlatList>(null);
   const insets = useSafeAreaInsets();
   const { isKeyboardVisible } = useKeyboardHeight();
+    const { theme } = useTheme();
   
   // Extract user data from navigation params
   const userId = params.userId as string;
@@ -162,10 +165,10 @@ export const ChatUser = () => {
         behavior={Platform.OS !== 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={0}
       >
-        <S.Container>
+        <S.Container bg_color={Colors[theme].background}>
           <S.ContainerHeader >
-            <S.ButtonIcon onPress={() => router.back()}>
-              <LeftArrow color="#ffffff" />
+            <S.ButtonIcon onPress={() => router.back()} >
+              <LeftArrow color={Colors[theme].icon} />
             </S.ButtonIcon>
 
             <S.ContainerUser>
@@ -189,21 +192,21 @@ export const ChatUser = () => {
               </S.ContainerAvatar>
 
               <S.ContainerText>
-                <S.Title numberOfLines={1}>{userName}</S.Title>
-                <S.Text numberOfLines={2} color="#f2f2f2">
+                <S.Title numberOfLines={1} color={Colors[theme].text}>{userName}</S.Title>
+                <S.Text numberOfLines={2} color={Colors[theme].text}>
                   {userUsername}
                 </S.Text>
               </S.ContainerText>
               
               <S.ContainerIcons>
                 <TouchableOpacity onPress={handleVoiceCall}>
-                  <Phone />
+                  <Phone color={Colors[theme].icon}/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleVideoCall}>
-                  <Video />
+                  <Video color={Colors[theme].icon}/>
                 </TouchableOpacity>
                 <TouchableOpacity>
-                  <Menu />
+                  <Menu color={Colors[theme].icon}/>
                 </TouchableOpacity>
               </S.ContainerIcons>
             </S.ContainerUser>

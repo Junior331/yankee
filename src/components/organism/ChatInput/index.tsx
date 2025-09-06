@@ -7,6 +7,8 @@ import { ChatInputProps } from "./@types";
 import { PaperClip, Camera, Microphone, MoodSmile } from "@/assets/icons";
 import { CommentSendIcon } from "@/assets/icons";
 import { AudioRecordBar } from "../AudioRecordBar";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const ChatInput: React.FC<ChatInputProps> = ({
   value,
@@ -23,6 +25,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
       onSendText();
     }
   };
+  const { theme } = useTheme();
 
   const handleImagePicker = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -89,23 +92,23 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   }
 
   return (
-    <S.Container>
-      <S.InputContainer>
+    <S.Container  bg_color={Colors[theme].background}>
+      <S.InputContainer  bg_color={Colors[theme].tabBar}>
         <S.AttachmentButton onPress={handleImagePicker}>
-          <PaperClip color="#ffffff" />
+          <PaperClip color={Colors[theme].icon} />
         </S.AttachmentButton>
         <S.AttachmentButton onPress={handleCameraCapture}>
-          <Camera color="#ffffff" />
+          <Camera color={Colors[theme].icon} />
         </S.AttachmentButton>
         <S.AttachmentButton >
-          <MoodSmile color="#ffffff" />
+          <MoodSmile color={Colors[theme].icon} />
         </S.AttachmentButton>
 
         <S.Input
           value={value}
           onChangeText={onChangeText}
           placeholder="Type a message..."
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
+          placeholderTextColor="rgba(136, 129, 129, 0.5)"
           multiline
           returnKeyType="send"
           onSubmitEditing={handleSendText}
@@ -115,11 +118,11 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
         {value.trim() ? (
           <S.ActionButton variant="send" onPress={handleSendText} disabled={disabled}>
-            <CommentSendIcon color="#ffffff" />
+            <CommentSendIcon  color={Colors[theme].icon} />
           </S.ActionButton>
         ) : (
           <S.ActionButton onPress={handleStartRecording} disabled={disabled}>
-            <Microphone color="#ffffff" />
+            <Microphone  color={Colors[theme].icon} />
           </S.ActionButton>
         )}
       </S.InputContainer>

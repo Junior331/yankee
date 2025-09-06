@@ -20,7 +20,7 @@ export const MessageBubble = styled(View)<StyledProps>`
   position: relative;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
-  background-color: ${({ isSender }) => (isSender ? "#0084FF" : "#232323")};
+  background-color: ${({ isSender, bg_color }) => (isSender ? "#0084FF" : bg_color)};
   border-top-left-radius: ${({ isSender }) => (isSender ? "18px" : "0px")};
   border-top-right-radius: ${({ isSender }) => (isSender ? "3px" : "18px")};
 `;
@@ -29,7 +29,7 @@ export const MessageText = styled(TextComponent)<StyledProps>`
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  color: ${({ isSender }) => (isSender ? "#ffffff" : "#ffffffff")};
+  color: ${({ isSender, color }) => (isSender ? "#ffffff" : color)};
 `;
 
 export const MessagePointer = styled(View)<StyledProps>`
@@ -38,7 +38,7 @@ export const MessagePointer = styled(View)<StyledProps>`
   height: 0;
   position: absolute;
 
-  ${({ isSender }) =>
+  ${({ isSender,bg_color }) =>
     isSender
       ? css`
           right: -2px;
@@ -58,7 +58,8 @@ export const MessagePointer = styled(View)<StyledProps>`
           border-bottom-width: 12px;
           border-left-color: transparent;
           border-right-color: transparent;
-          border-bottom-color: #232323;
+            border-bottom-color: ${bg_color};
+
           transform: rotate(90deg);
           border-radius: 2px;
         `}

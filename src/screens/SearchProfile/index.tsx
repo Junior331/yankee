@@ -5,6 +5,8 @@ import * as S from "./styles";
 import { Clock, X } from "@/assets/icons";
 import { ISearchProfile } from "./@types";
 import { Loading } from "@/components/elements";
+import { useTheme } from "@/contexts/ThemeContext";
+import Colors from "@/constants/Colors";
 
 const { width } = Dimensions.get("screen");
 
@@ -15,18 +17,19 @@ export const SearchProfile = ({
   handleDeleteSearch,
 }: ISearchProfile) => {
   const [imageLoading, setImageLoading] = useState(true);
+    const { theme } = useTheme();
 
   return (
-    <S.Container style={{ minWidth: width * 0.94 }}>
+    <S.Container style={{ minWidth: width * 0.94 }} bg_color={Colors[theme].background}>
       {searchHistory?.length > 0 && (
         <S.RecentSearchesContainer>
           <S.RecentSearchesHeader>
-            <S.RecentSearchesTitle>Recent Searches</S.RecentSearchesTitle>
+            <S.RecentSearchesTitle color={Colors[theme].text}>Recent Searches</S.RecentSearchesTitle>
             <S.DeleteAllButton onPress={handleDeleteAll}>
               <S.DeleteAllText>Delete all</S.DeleteAllText>
             </S.DeleteAllButton>
           </S.RecentSearchesHeader>
-          <S.ContainerRecents>
+          <S.ContainerRecents color={Colors[theme].tabBar}>
             {searchHistory.length > 3 ? (
               <ScrollView 
                 showsVerticalScrollIndicator={false}
@@ -35,11 +38,11 @@ export const SearchProfile = ({
                 {searchHistory.map((search, index) => (
                   <S.RecentSearchItem key={index}>
                     <S.SearchRecent>
-                      <Clock />
-                      <S.RecentSearchText>{search}</S.RecentSearchText>
+                      <Clock color={Colors[theme].icon}  />
+                      <S.RecentSearchText color={Colors[theme].text}>{search}</S.RecentSearchText>
                     </S.SearchRecent>
                     <S.DeleteButton onPress={() => handleDeleteSearch(search)}>
-                      <X color="#ffffff" />
+                      <X color={Colors[theme].icon}  />
                     </S.DeleteButton>
                   </S.RecentSearchItem>
                 ))}
@@ -49,11 +52,11 @@ export const SearchProfile = ({
                 {searchHistory.map((search, index) => (
                   <S.RecentSearchItem key={index}>
                     <S.SearchRecent>
-                      <Clock />
-                      <S.RecentSearchText>{search}</S.RecentSearchText>
+                      <Clock color={Colors[theme].icon}/>
+                      <S.RecentSearchText color={Colors[theme].text}>{search}</S.RecentSearchText>
                     </S.SearchRecent>
                     <S.DeleteButton onPress={() => handleDeleteSearch(search)}>
-                      <X color="#808080" />
+                      <X color={Colors[theme].icon} />
                     </S.DeleteButton>
                   </S.RecentSearchItem>
                 ))}
@@ -64,7 +67,7 @@ export const SearchProfile = ({
       )}
 
       <S.ContainerProfiles>
-        <S.Title numberOfLines={1}>Profiles</S.Title>
+        <S.Title numberOfLines={1} color={Colors[theme].text}>Profiles</S.Title>
         {filteredUsers.map((message) => (
           <S.ContainerUser key={message.id}>
             <S.UserContent>
@@ -83,15 +86,15 @@ export const SearchProfile = ({
               </S.ContainerAvatar>
 
               <S.ContainerText>
-                <S.Title numberOfLines={1}>{message.name}</S.Title>
-                <S.Text numberOfLines={2} color="#f2f2f2">
+                <S.Title numberOfLines={1} color={Colors[theme].text}>{message.name}</S.Title>
+                <S.Text numberOfLines={2} color={Colors[theme].text}>
                   @{message.name.replace(/\s+/g, "_").toLowerCase()}
                 </S.Text>
               </S.ContainerText>
 
-              <S.ButtonFollow>
+              <S.ButtonFollow color={Colors[theme].text}>
                 <S.Text
-                  color="#ffffff"
+                 color={Colors[theme].text}
                   tabs
                   style={{
                     fontSize: 9,
@@ -102,13 +105,13 @@ export const SearchProfile = ({
                   Follow
                 </S.Text>
                 <S.IconAdd>
-                  <S.Text tabs style={{ fontSize: 8, marginTop: -1.4 }}>
+                  <S.Text tabs style={{ fontSize: 8, marginTop: -1.4 }} color={Colors[theme].text}>
                     +
                   </S.Text>
-                </S.IconAdd>
-              </S.ButtonFollow>
+                </S.IconAdd  >
+              </S.ButtonFollow >
             </S.UserContent>
-            <X />
+            <X color={Colors[theme].icon}/>
           </S.ContainerUser>
         ))}
       </S.ContainerProfiles>

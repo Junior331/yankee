@@ -159,8 +159,8 @@ export const Messages = () => {
             </S.ContainerAvatar>
 
             <S.ContainerText>
-              <S.Title numberOfLines={1}>{conversation.user.name}</S.Title>
-              <S.Text numberOfLines={2} color="#f2f2f2">
+              <S.Title numberOfLines={1} color={Colors[theme].text}>{conversation.user.name}</S.Title>
+              <S.Text numberOfLines={2} color={Colors[theme].text}>
                 {formatLastMessage(conversation)}
               </S.Text>
             </S.ContainerText>
@@ -194,13 +194,13 @@ export const Messages = () => {
           </View>
         
         <S.ContainerTabs>
-          <S.Tabs>
+          <S.Tabs >
             {[
               { id: 1, label: "Principal" },
               { id: 2, label: "Chat requests" }
             ].map((tab) => (
               <S.Tab key={tab.id} onPress={() => setTabActive(tab.id)}>
-                <S.Text tabs color={tabActive === tab.id ? "#fff" : "#999494"}>
+                <S.Text tabs color={tabActive === tab.id ? theme === "dark" ? Colors.dark.text : Colors.light.text : "#848383"}>
                   {tab.label}
                   {/* Badge com contador */}
                   {tab.id === 1 && unreadCounts.mainConversations > 0 && (

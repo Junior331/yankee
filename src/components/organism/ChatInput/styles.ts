@@ -2,16 +2,17 @@ import styled from "styled-components";
 import { View, TouchableOpacity, TextInput } from "react-native";
 import { Text as TextComponent } from "@/components/elements";
 import Colors from "@/constants/Colors";
+import { StyledProps } from "@/utils/types";
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   padding: 15px 5px;
-  background-color: ${Colors.dark.background};
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
-export const InputContainer = styled(View)`
+export const InputContainer = styled(View)<StyledProps>`
   flex-direction: row;
   align-items: flex-end;
-  background-color: rgba(255, 255, 255, 0.1);
+ background-color: ${({ bg_color }) => bg_color};
   border-radius: 25px;
   padding: 8px;
   min-height: 50px;
@@ -26,14 +27,14 @@ export const AttachmentButton = styled(TouchableOpacity)`
   margin-right: 8px;
 `;
 
-export const Input = styled(TextInput)`
+export const Input = styled(TextInput)<StyledProps>`
   flex: 1;
   min-height: 35px;
   max-height: 100px;
   padding: 8px 12px;
   color: #ffffff;
   font-size: 16px;
-  background-color: transparent;
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ActionButton = styled(TouchableOpacity)<{ variant?: 'send' | 'record' }>`
