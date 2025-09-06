@@ -3,6 +3,8 @@ import { TouchableOpacity } from "react-native";
 import * as S from "./styles";
 import { MessageBubbleProps } from "./@types";
 import {  Pause } from "@/assets/icons";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const MessageBubble: React.FC<MessageBubbleProps> = ({
   id,
@@ -17,6 +19,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
   onAudioPlay,
   onAudioPause,
 }) => {
+    const { theme } = useTheme();
+  
   const handleAudioPress = () => {
     if (audioStatus === "playing") {
       onAudioPause?.(id);
@@ -99,8 +103,8 @@ export const MessageBubble: React.FC<MessageBubbleProps> = ({
         ) : (
           // Text or mixed messages: normal bubble styling
           <>
-            <S.MessageBubble isSender={isSender}>{renderContent()}</S.MessageBubble>
-            <S.MessagePointer isSender={isSender} />
+            <S.MessageBubble isSender={isSender} bg_color={Colors[theme].mg_bubble}>{renderContent()}</S.MessageBubble>
+            <S.MessagePointer isSender={isSender} color={Colors[theme].text} bg_color={Colors[theme].mg_bubble}/>
           </>
         )}
       </S.MessageBubbleWrapper>

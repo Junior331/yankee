@@ -119,10 +119,10 @@ export const ContainerText = styled(View)`
   flex: 1;
 `;
 
-export const Title = styled(TitleComponent)`
+export const Title = styled(TitleComponent)<StyledProps>`
   font-size: 12px;
   font-weight: 500;
-  color: #f2f2f2;
+  color: ${({ color }) => color || "#ffffff"};
   margin: 0 0 4px 0;
   text-overflow: ellipsis;
   font-family: "Poppins-Medium";

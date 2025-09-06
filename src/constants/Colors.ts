@@ -14,6 +14,7 @@ const Colors = {
     placeholder: "#000000ff",
     comment: "#DADADA",
     donateBox: "#DADADA",
+    mg_bubble: "#DADADA",
   },
   dark: {
     text: "#FFFFFF",
@@ -28,6 +29,7 @@ const Colors = {
     placeholder: "#DADADA",
     borderColor: "#979696",
     signInColor: "#F2F2F2",
+    mg_bubble: "#232323",
     tabIconDefault: "#121212",
     tabBgIconDefault: "#FFFFFF",
     tabBar: "#121212",

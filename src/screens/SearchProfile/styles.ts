@@ -6,11 +6,11 @@ import { StyledProps } from "@/utils/types";
 import { Title as TitleComponent } from "@/components/elements";
 import { Text as TextComponent } from "@/components/elements";
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   width: 100%;
   height: 100%;
   padding: 15px 0 0 0;
-  background-color: ${Colors.dark.background};
+   background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ContainerUser = styled(View)`
@@ -36,10 +36,10 @@ export const ContainerText = styled(View)`
   flex: 1;
 `;
 
-export const Title = styled(TitleComponent)`
+export const Title = styled(TitleComponent)<StyledProps>`
   font-size: 12px;
   font-weight: 500;
-  color: #f2f2f2;
+   color: ${({ color }) => color || "#ffffff"};
   margin: 0 0 4px 0;
   text-overflow: ellipsis;
   font-family: "Poppins-Medium";
@@ -58,7 +58,7 @@ export const Text = styled(TextComponent)<StyledProps>`
     `};
 `;
 
-export const ButtonFollow = styled(View)`
+export const ButtonFollow = styled(View)<StyledProps>`
   gap: 3px;
   width: 60px;
   height: 20px;
@@ -68,7 +68,7 @@ export const ButtonFollow = styled(View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border: 1px solid #fff;
+  border: 1px solid ${({ color }) => color || "#FFFFFF"};
 `;
 
 export const IconAdd = styled(View)`
@@ -100,16 +100,17 @@ export const RecentSearchesHeader = styled(View)`
   justify-content: space-between;
 `;
 
-export const ContainerRecents = styled(View)`
+export const ContainerRecents = styled(View)<StyledProps>`
   border-radius: 10px;
   padding: 0 0 0 10px;
-  background-color: #232323;
+  background-color: ${({ color }) => color || "#FFFFFF"};
+
 `;
 
-export const RecentSearchesTitle = styled(TextComponent)`
+export const RecentSearchesTitle = styled(TextComponent)<StyledProps>`
   font-size: 14px;
   font-weight: 500;
-  color: #f2f2f2;
+    color: ${({ color }) => color || "#ffffff"};
 `;
 
 export const DeleteAllButton = styled(TouchableOpacity)`
@@ -134,9 +135,9 @@ export const SearchRecent = styled(View)`
   align-items: center;
 `;
 
-export const RecentSearchText = styled(TextComponent)`
+export const RecentSearchText = styled(TextComponent)<StyledProps>`
   font-size: 12px;
-  color: #ffffffff;
+   color: ${({ color }) => color || "#ffffff"};
 `;
 
 export const DeleteButton = styled(TouchableOpacity)`
