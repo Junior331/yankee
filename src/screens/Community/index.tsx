@@ -13,7 +13,18 @@ import { Loading } from "@/components/elements";
 import { useTheme } from "@/contexts/ThemeContext";
 import { post, trend } from "@/components/organism/Tabs/@types";
 import { Layout, ModalGeneric, Tabs } from "@/components/organism";
-import { Filter, LeftArrow, LibraryPhoto, PhotoPlus, Chillin, AID, Events, SOS, Moment, MapPin } from "@/assets/icons";
+import {
+  Filter,
+  LeftArrow,
+  LibraryPhoto,
+  PhotoPlus,
+  Chillin,
+  AID,
+  Events,
+  SOS,
+  Moment,
+  MapPin,
+} from "@/assets/icons";
 
 export const Community = () => {
   const router = useRouter();
@@ -24,7 +35,9 @@ export const Community = () => {
   const [isModalAddEvent, setModalAddEvent] = useState(false);
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [storiesData, setStoriesData] = useState(mocks.storys);
-  const [selectedStoryImage, setSelectedStoryImage] = useState<string | null>(null);
+  const [selectedStoryImage, setSelectedStoryImage] = useState<string | null>(
+    null
+  );
   const [userStories, setUserStories] = useState<any[]>([]);
   const [showStoryModal, setShowStoryModal] = useState(false);
   const [showAddStoryModal, setShowAddStoryModal] = useState(false);
@@ -49,7 +62,7 @@ export const Community = () => {
     },
     {
       id: 3,
-      coordinate: { latitude: 42.3736, longitude: -71.0420 }, // North End
+      coordinate: { latitude: 42.3736, longitude: -71.042 }, // North End
       title: "Food Share",
       type: "aid",
       count: 10,
@@ -65,7 +78,7 @@ export const Community = () => {
     },
     {
       id: 5,
-      coordinate: { latitude: 42.3320, longitude: -71.0202 }, // South Boston
+      coordinate: { latitude: 42.332, longitude: -71.0202 }, // South Boston
       title: "Beach Moment",
       type: "moment",
       count: 15,
@@ -104,14 +117,15 @@ export const Community = () => {
       if (tabActive === "community" || tabActive === "yourfriends") {
         return {
           ...prevPosts,
-          [tabActive]: prevPosts[tabActive as keyof typeof prevPosts].map((post: any) =>
-            post.id === postId
-              ? {
-                  ...post,
-                  likes: post.likes + (post.liked ? -1 : 1),
-                  liked: !post.liked,
-                }
-              : post
+          [tabActive]: prevPosts[tabActive as keyof typeof prevPosts].map(
+            (post: any) =>
+              post.id === postId
+                ? {
+                    ...post,
+                    likes: post.likes + (post.liked ? -1 : 1),
+                    liked: !post.liked,
+                  }
+                : post
           ),
         };
       }
@@ -123,21 +137,35 @@ export const Community = () => {
   const renderTabContent = () => {
     switch (tabActive) {
       case "community":
-        return <Tabs.TabCommunity posts={posts.community as post[]} toggleLike={toggleLike} />;
+        return (
+          <Tabs.TabCommunity
+            posts={posts.community as post[]}
+            toggleLike={toggleLike}
+          />
+        );
       case "trending":
         return <Tabs.TabTrending trendings={posts.trending as trend[]} />;
       case "yourfriends":
-        return <Tabs.TabYourFriends posts={posts.yourfriends as post[]} toggleLike={toggleLike} />;
+        return (
+          <Tabs.TabYourFriends
+            posts={posts.yourfriends as post[]}
+            toggleLike={toggleLike}
+          />
+        );
       default:
         return null;
     }
   };
 
   const handlePickImage = async () => {
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permissionResult.granted) {
-      Alert.alert("Permissão Necessária", "É necessário permitir o acesso às fotos para selecionar uma imagem.");
+      Alert.alert(
+        "Permissão Necessária",
+        "É necessário permitir o acesso às fotos para selecionar uma imagem."
+      );
       return;
     }
 
@@ -157,7 +185,10 @@ export const Community = () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
 
     if (!permissionResult.granted) {
-      Alert.alert("Permissão Necessária", "É necessário permitir o acesso à câmera para tirar uma foto.");
+      Alert.alert(
+        "Permissão Necessária",
+        "É necessário permitir o acesso à câmera para tirar uma foto."
+      );
       return;
     }
 
@@ -229,31 +260,66 @@ export const Community = () => {
                     style={{ width: "100%" }}
                     showsHorizontalScrollIndicator={false}
                     keyExtractor={(item) => String(item.id)}
-                    ItemSeparatorComponent={() => <View style={{ width: 10 }} />}
+                    ItemSeparatorComponent={() => (
+                      <View style={{ width: 10 }} />
+                    )}
                     renderItem={({ item }) => {
                       if (item.id === "add_story") {
                         return (
-                          <S.ContainerStory onPress={() => {
-                            if (hasUserStory) {
-                              setShowStoryModal(true);
-                            } else {
-                              handleAddStory();
-                            }
-                          }}>
-                            <S.AddStory hasStory={hasUserStory}>
+                          <S.ContainerStory
+                            onPress={() => {
+                              if (hasUserStory) {
+                                setShowStoryModal(true);
+                              } else {
+                                handleAddStory();
+                              }
+                            }}
+                          >
+                            <S.AddStory
+                              hasStory={hasUserStory}
+                              bg_color={
+                                theme === `dark`
+                                  ? "rgba(255, 255, 255, 0.04)"
+                                  : Colors.light.donateBox
+                              }
+                            >
                               {hasUserStory && userStories.length > 0 ? (
                                 <>
                                   <Image
-                                    source={{ uri: userStories[userStories.length - 1].image }}
-                                    style={{ width: "100%", height: "100%", borderRadius: 30 }}
+                                    source={{
+                                      uri: userStories[userStories.length - 1]
+                                        .image,
+                                    }}
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      borderRadius: 30,
+                                    }}
                                     resizeMode="cover"
                                   />
                                   <S.AddStoryOverlay>
-                                    <S.Text style={{ fontSize: 12, color: "#fff", fontWeight: "bold" }}>+</S.Text>
+                                    <S.Text
+                                      style={{
+                                        fontSize: 12,
+                                        color: "#fff",
+                                        fontWeight: "bold",
+                                      }}
+                                    >
+                                      +
+                                    </S.Text>
                                   </S.AddStoryOverlay>
                                 </>
                               ) : (
-                                <S.Text style={{ fontSize: 32, color: "#fff", position: 'relative', zIndex: 10 }}>+</S.Text>
+                                <S.Text
+                                  style={{
+                                    fontSize: 32,
+                                    color: "#fff",
+                                    position: "relative",
+                                    zIndex: 10,
+                                  }}
+                                >
+                                  +
+                                </S.Text>
                               )}
                             </S.AddStory>
                             <S.Text>Add</S.Text>
@@ -262,7 +328,11 @@ export const Community = () => {
                       }
 
                       return (
-                        <S.ContainerStory onPress={() => router.push(`/(tabs)/stories?id=${item.id}`)}>
+                        <S.ContainerStory
+                          onPress={() =>
+                            router.push(`/(tabs)/stories?id=${item.id}`)
+                          }
+                        >
                           <S.Story>
                             {imageLoading && <Loading />}
                             <Image
@@ -284,14 +354,16 @@ export const Community = () => {
                 <S.ContainerMaps>
                   <S.FilterContainer>
                     {filters.map((item) => {
-                      const IconComponent = iconMapping[item as keyof typeof iconMapping];
+                      const IconComponent =
+                        iconMapping[item as keyof typeof iconMapping];
 
                       return (
                         <S.FilterItem
                           key={item}
                           activeOpacity={0.7}
                           style={{
-                            boxShadow: "0px 2px 4px 0px rgba(35, 171, 255, 0.4)",
+                            boxShadow:
+                              "0px 2px 4px 0px rgba(35, 171, 255, 0.4)",
                           }}
                         >
                           <S.FilterText>{item}</S.FilterText>
@@ -326,7 +398,10 @@ export const Community = () => {
                     </MapView>
                   </S.MapContainer>
 
-                  <S.Addevent activeOpacity={0.5} onPress={() => setModalAddEvent(true)}>
+                  <S.Addevent
+                    activeOpacity={0.5}
+                    onPress={() => setModalAddEvent(true)}
+                  >
                     <S.Text fontWeight={700} fontSize="15px">
                       +
                     </S.Text>
@@ -336,15 +411,33 @@ export const Community = () => {
                 <S.ContainerTabs>
                   <S.Tabs>
                     {mocks.tabs.community.map((tab) => (
-                      <S.Tab key={tab.id} onPress={() => setTabActive(tab.value)}>
-                        <S.Text tabs color={tabActive === tab.value ? theme === "dark" ? Colors.dark.text : Colors.light.text : "#848383"}>
+                      <S.Tab
+                        key={tab.id}
+                        onPress={() => setTabActive(tab.value)}
+                      >
+                        <S.Text
+                          tabs
+                          color={
+                            tabActive === tab.value
+                              ? theme === "dark"
+                                ? Colors.dark.text
+                                : Colors.light.text
+                              : "#848383"
+                          }
+                        >
                           {tab.label}
                         </S.Text>
                       </S.Tab>
                     ))}
                   </S.Tabs>
                   <S.ContentPost>
-                    <S.InputContainer bg_color={theme === "dark" ? Colors.dark.tabBar : Colors.light.tabBar}>
+                    <S.InputContainer
+                      bg_color={
+                        theme === "dark"
+                          ? Colors.dark.tabBar
+                          : Colors.light.tabBar
+                      }
+                    >
                       <S.ContentInputUser>
                         <TouchableOpacity>
                           <Image
@@ -355,21 +448,33 @@ export const Community = () => {
                               width: 35,
                               height: 35,
                               borderRadius: 100,
-                              marginTop: 10 ,
-                              marginLeft: 10 ,
+                              marginTop: 10,
+                              marginLeft: 10,
                             }}
                             resizeMode="cover"
                           />
                         </TouchableOpacity>
-                        <S.InputPost  placeholder="What's new?" theme={theme} />
+                        <S.InputPost placeholder="What's new?" theme={theme} />
                       </S.ContentInputUser>
                       <S.ContentIconButton>
                         <TouchableOpacity>
-                        <Filter color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
-                      </TouchableOpacity>
-                      <TouchableOpacity>
-                        <LibraryPhoto color={theme === 'dark' ? Colors.dark.icon : Colors.light.icon } />
-                      </TouchableOpacity>
+                          <Filter
+                            color={
+                              theme === "dark"
+                                ? Colors.dark.icon
+                                : Colors.light.icon
+                            }
+                          />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                          <LibraryPhoto
+                            color={
+                              theme === "dark"
+                                ? Colors.dark.icon
+                                : Colors.light.icon
+                            }
+                          />
+                        </TouchableOpacity>
                         <TouchableOpacity>
                           <S.ButtonPost>
                             <S.Text
@@ -387,7 +492,6 @@ export const Community = () => {
                         </TouchableOpacity>
                       </S.ContentIconButton>
                     </S.InputContainer>
-                    
                   </S.ContentPost>
                 </S.ContainerTabs>
               </View>
@@ -401,10 +505,13 @@ export const Community = () => {
           setModalVisible={setModalAddEvent}
           style={{ backgroundColor: "transparent" }}
         >
-          <S.CardAddEvent>
+          <S.CardAddEvent bg_color={Colors[theme].background}>
             <S.Header>
-              <TouchableOpacity activeOpacity={0.5} onPress={() => setModalAddEvent(false)}>
-                <LeftArrow />
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => setModalAddEvent(false)}
+              >
+                <LeftArrow color={Colors[theme].text} />
               </TouchableOpacity>
               <S.Title>Add Event</S.Title>
             </S.Header>
@@ -427,14 +534,14 @@ export const Community = () => {
             </TouchableOpacity>
 
             <S.ContainerInput>
-              <S.Text color="#fff" fontSize="14px">
+              <S.Text color={Colors[theme].text} fontSize="14px">
                 Event name
               </S.Text>
               <S.Input placeholder="Event Name" />
             </S.ContainerInput>
 
             <S.ContainerInput>
-              <S.Text color="#fff" fontSize="14px">
+              <S.Text color={Colors[theme].text} fontSize="14px">
                 Description
               </S.Text>
               <S.Input
@@ -450,19 +557,19 @@ export const Community = () => {
 
             <S.DatePickerContainer>
               <S.DatePicker>
-                <S.Text fontSize="14px" color="#171717">
+                <S.Text fontSize="14px" color={Colors[theme].background}>
                   Start
                 </S.Text>
               </S.DatePicker>
               <S.DatePicker>
-                <S.Text fontSize="14px" color="#171717">
+                <S.Text fontSize="14px" color={Colors[theme].background}>
                   End (Optional)
                 </S.Text>
               </S.DatePicker>
             </S.DatePickerContainer>
 
             <S.ContainerInput>
-              <S.Text color="#fff" fontSize="14px">
+              <S.Text color={Colors[theme].text} fontSize="14px">
                 Location
               </S.Text>
               <S.Input placeholder="Location" />
@@ -478,26 +585,46 @@ export const Community = () => {
         <ModalGeneric
           modalVisible={showStoryModal}
           setModalVisible={setShowStoryModal}
-          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
+          style={{ backgroundColor: "transparent" }}
         >
-          <S.StoryChoiceModal>
-            <S.Text color="#fff" fontSize="18px" fontWeight="bold" style={{ marginBottom: 20 }}>
+          <S.StoryChoiceModal bg_color={Colors[theme].background}>
+            <S.Text
+              color={Colors[theme].text}
+              fontSize="18px"
+              fontWeight="bold"
+              style={{ marginBottom: 20 }}
+            >
               Escolha uma opção
             </S.Text>
-            
-            <S.StoryChoiceButton onPress={viewUserStory}>
+
+            <S.StoryChoiceButton
+              bg_color={
+                theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+              }
+              onPress={viewUserStory}
+            >
               <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
                 Visualizar seu Story
               </S.Text>
             </S.StoryChoiceButton>
-            
-            <S.StoryChoiceButton onPress={addMoreStory}>
+
+            <S.StoryChoiceButton
+              bg_color={
+                theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+              }
+              onPress={addMoreStory}
+            >
               <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
                 Adicionar ao Story
               </S.Text>
             </S.StoryChoiceButton>
-            
-            <S.StoryChoiceButton onPress={() => setShowStoryModal(false)}>
+
+            <S.StoryChoiceButton
+              bg_color={
+                theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"
+              }
+              onPress={() => setShowStoryModal(false)}
+            >
               <S.Text color="#FF3B30" fontSize="16px" fontWeight="500">
                 Cancelar
               </S.Text>
@@ -512,22 +639,27 @@ export const Community = () => {
           style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
         >
           <S.StoryChoiceModal>
-            <S.Text color="#fff" fontSize="18px" fontWeight="bold" style={{ marginBottom: 20 }}>
+            <S.Text
+              color="#fff"
+              fontSize="18px"
+              fontWeight="bold"
+              style={{ marginBottom: 20 }}
+            >
               Adicionar Story
             </S.Text>
-            
+
             <S.StoryChoiceButton onPress={handleTakePhotoFromModal}>
               <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
                 Tirar Foto
               </S.Text>
             </S.StoryChoiceButton>
-            
+
             <S.StoryChoiceButton onPress={handlePickImageFromModal}>
               <S.Text color="#007AFF" fontSize="16px" fontWeight="500">
                 Escolher da Galeria
               </S.Text>
             </S.StoryChoiceButton>
-            
+
             <S.StoryChoiceButton onPress={() => setShowAddStoryModal(false)}>
               <S.Text color="#FF3B30" fontSize="16px" fontWeight="500">
                 Cancelar

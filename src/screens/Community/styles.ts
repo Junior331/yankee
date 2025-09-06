@@ -3,7 +3,10 @@ import { TextInput, TouchableOpacity, View } from "react-native";
 
 import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
-import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
+import {
+  Text as TextComponent,
+  Title as TitleComponent,
+} from "@/components/elements";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -37,16 +40,16 @@ export const ContainerStory = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-export const AddStory = styled(View)<{ hasStory?: boolean }>`
+export const AddStory = styled(View)<{ hasStory?: boolean; bg_color?: string }>`
   width: 64px;
   height: 64px;
-  overflow: ${({ hasStory }) => hasStory ? 'none' : 'hidden'};
+  overflow: ${({ hasStory }) => (hasStory ? "none" : "hidden")};
   border-radius: 64px;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
-  border-width: ${({ hasStory }) => hasStory ? '2px' : '0px'};
-  border-color: ${({ hasStory }) => hasStory ? '#1976d2' : 'transparent'};
+  background-color: ${({ bg_color }) => bg_color};
+  border-width: ${({ hasStory }) => (hasStory ? "2px" : "0px")};
+  border-color: ${({ hasStory }) => (hasStory ? "#1976d2" : "transparent")};
 `;
 
 export const Story = styled(AddStory)`
@@ -110,17 +113,17 @@ export const MarkerBackground = styled(View)<{ type: string }>`
   border-color: #fff;
   ${({ type }) => {
     switch (type) {
-      case 'events':
+      case "events":
         return `background-color: #4CAF50;`;
-      case 'sos':
+      case "sos":
         return `background-color: #F44336;`;
-      case 'aid':
+      case "aid":
         return `background-color: #FF9800;`;
-      case 'chillin':
+      case "chillin":
         return `background-color: #9C27B0;`;
-      case 'moment':
+      case "moment":
         return `background-color: #E91E63;`;
-      case 'general':
+      case "general":
       default:
         return `background-color: #2196F3;`;
     }
@@ -188,17 +191,17 @@ export const SimpleMarker = styled(View)<{ type: string }>`
   elevation: 5;
   ${({ type }) => {
     switch (type) {
-      case 'events':
+      case "events":
         return `background-color: #4CAF50;`;
-      case 'sos':
+      case "sos":
         return `background-color: #F44336;`;
-      case 'aid':
+      case "aid":
         return `background-color: #FF9800;`;
-      case 'chillin':
+      case "chillin":
         return `background-color: #9C27B0;`;
-      case 'moment':
+      case "moment":
         return `background-color: #E91E63;`;
-      case 'general':
+      case "general":
       default:
         return `background-color: #2196F3;`;
     }
@@ -270,7 +273,7 @@ export const FilterText = styled(TextComponent)`
   font-weight: 400;
 `;
 
-export const CardAddEvent = styled(View)`
+export const CardAddEvent = styled(View)<StyledProps>`
   gap: 20px;
   width: 98%;
   margin: auto;
@@ -278,7 +281,7 @@ export const CardAddEvent = styled(View)`
   align-items: center;
   flex-direction: column;
   padding: 36px 26px 32px;
-  background: ${Colors.dark.background};
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const Header = styled(View)`
@@ -313,7 +316,10 @@ export const ContainerInput = styled(View)`
   width: 100%;
   flex-direction: column;
 `;
-export const InputContainer = styled(View)<{ $Visible?: boolean; bg_color: string }>`
+export const InputContainer = styled(View)<{
+  $Visible?: boolean;
+  bg_color: string;
+}>`
   width: 100%;
   align-items: center;
   justify-content: space-between;
@@ -345,7 +351,8 @@ export const Input = styled(TextInput).attrs(() => ({
 `;
 
 export const InputPost = styled(TextInput).attrs(({ theme }) => ({
-  placeholderTextColor: theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
+  placeholderTextColor:
+    theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
 }))`
   flex: 1;
   height: 40px;
@@ -407,8 +414,10 @@ export const PostButtonText = styled(Text)`
   font-weight: 400;
 `;
 
-export const StoryChoiceModal = styled(View)`
-  background-color: rgba(40, 40, 40, 0.95);
+export const StoryChoiceModal = styled(View)<StyledProps>`
+  background-color: ${({ bg_color }) => bg_color};
+  /* background-color: rgba(40, 40, 40, 0.95); */
+
   border-radius: 16px;
   padding: 24px;
   align-items: center;
@@ -419,13 +428,13 @@ export const StoryChoiceModal = styled(View)`
   margin-bottom: auto;
 `;
 
-export const StoryChoiceButton = styled(TouchableOpacity)`
+export const StoryChoiceButton = styled(TouchableOpacity)<StyledProps>`
   width: 100%;
   padding: 16px;
   align-items: center;
   margin-bottom: 8px;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const AddStoryOverlay = styled(View)`
@@ -435,7 +444,7 @@ export const AddStoryOverlay = styled(View)`
   width: 20px;
   height: 20px;
   border-radius: 10px;
-  background-color: #007AFF;
+  background-color: #007aff;
   align-items: center;
   justify-content: center;
   border: 2px solid #fff;
