@@ -289,8 +289,8 @@ export const Live = () => {
           setDonationStep("confirmation");
           setTimeout(() => {
             closeDonationModal();
-          }, 3000);
-        }, 2000);
+          }, 30000);
+        }, 20000);
       }
     }
   };
@@ -363,7 +363,11 @@ export const Live = () => {
                   style={styles.closeButton}
                   onPress={() => router.back()}
                 >
-                  <S.Text color={Colors[theme].text} fontSize="18px" fontWeight={`bold`}>
+                  <S.Text
+                    color={Colors[theme].text}
+                    fontSize="18px"
+                    fontWeight={`bold`}
+                  >
                     ✕
                   </S.Text>
                 </TouchableOpacity>
@@ -606,19 +610,23 @@ export const Live = () => {
                   transform: [{ translateY: translateY }],
                 }}
               >
-                <S.DonationModal>
+                <S.DonationModal bg_color={Colors[theme].background}>
                   <S.ModalHandle />
 
                   {donationStep === "amount" && (
                     <>
                       <S.DonationTitle>
-                        <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                        <S.Text
+                          color={Colors[theme].text}
+                          fontSize="18px"
+                          fontWeight="bold"
+                        >
                           Lorem ipsum (Donation)
                         </S.Text>
                       </S.DonationTitle>
 
                       <S.DonationDescription>
-                        <S.Text color="#999" fontSize="14px">
+                        <S.Text color={Colors[theme].text} fontSize="14px">
                           Lorem ipsum sit dolor amet, lorem ipsum sit dolor.
                         </S.Text>
                       </S.DonationDescription>
@@ -634,11 +642,17 @@ export const Live = () => {
                               }}
                             >
                               <S.AmountButton
-                                selected={selectedAmount === amount}
+                                bg_color={
+                                  selectedAmount === amount
+                                    ? Colors[theme].text
+                                    : Colors[theme].donateBox
+                                }
                               >
                                 <S.Text
                                   color={
-                                    selectedAmount === amount ? "#000" : "#fff"
+                                    selectedAmount === amount
+                                      ? Colors[theme].background
+                                      : Colors[theme].text
                                   }
                                   fontSize="14px"
                                   fontWeight="500"
@@ -655,7 +669,7 @@ export const Live = () => {
                         <S.Text color="#fff" fontSize="14px" fontWeight="500">
                           Valor desejado a doar:
                         </S.Text>
-                        <S.CustomAmountInput>
+                        <S.CustomAmountInput bg_color={Colors[theme].donateBox}>
                           <TextInput
                             value={
                               selectedAmount || formatCurrency(customAmount)
@@ -666,7 +680,7 @@ export const Live = () => {
                               setSelectedAmount("");
                             }}
                             placeholder="Insira o valor"
-                            placeholderTextColor="#999"
+                            placeholderTextColor={Colors[theme].textMessage}
                             style={styles.customAmountInput}
                             keyboardType="numeric"
                           />
@@ -694,19 +708,18 @@ export const Live = () => {
                       <S.StepHeader>
                         <TouchableOpacity onPress={handlePreviousStep}>
                           <S.BackButton>
-                            <LeftArrow color="#fff" />
+                            <LeftArrow color={Colors[theme].text} />
                           </S.BackButton>
                         </TouchableOpacity>
                         <S.DonationTitle>
                           <S.Text
-                            color="#fff"
+                            color={Colors[theme].text}
                             fontSize="18px"
                             fontWeight="bold"
                           >
                             Forma de pagamento (Donation)
                           </S.Text>
                         </S.DonationTitle>
-                        <View style={{ width: 32 }} />
                       </S.StepHeader>
 
                       <S.DonationDescription>
@@ -722,21 +735,25 @@ export const Live = () => {
                               key={method}
                               onPress={() => setSelectedPaymentMethod(method)}
                             >
-                              <S.PaymentMethodButton
-                                selected={selectedPaymentMethod === method}
+                              <S.AmountButton
+                                bg_color={
+                                  selectedPaymentMethod === method
+                                    ? Colors[theme].text
+                                    : Colors[theme].donateBox
+                                }
                               >
                                 <S.Text
                                   color={
                                     selectedPaymentMethod === method
-                                      ? "#000"
-                                      : "#fff"
+                                      ? Colors[theme].background
+                                      : Colors[theme].text
                                   }
                                   fontSize="14px"
                                   fontWeight="500"
                                 >
                                   {method}
                                 </S.Text>
-                              </S.PaymentMethodButton>
+                              </S.AmountButton>
                             </TouchableOpacity>
                           )
                         )}
@@ -772,9 +789,9 @@ export const Live = () => {
                           ],
                         }}
                       >
-                        <S.LoadingSpinner />
+                        <S.LoadingSpinner isSecondary={theme === `dark`} />
                       </Animated.View>
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                      <S.Text color={Colors[theme].text} fontSize="18px" fontWeight="bold">
                         Processando pagamento...
                       </S.Text>
                       <S.Text color="#999" fontSize="14px">
@@ -785,8 +802,8 @@ export const Live = () => {
 
                   {donationStep === "confirmation" && (
                     <S.ConfirmationContainer>
-                      <DonationDone />
-                      <S.Text color="#fff" fontSize="18px" fontWeight="bold">
+                      <DonationDone fill={Colors[theme].bubble}/>
+                      <S.Text color={Colors[theme].text} fontSize="18px" fontWeight="bold">
                         Doação realizada com sucesso!
                       </S.Text>
                       <S.Text color="#999" fontSize="14px">

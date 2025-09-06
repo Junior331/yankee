@@ -177,68 +177,12 @@ export const IconButton = styled.View`
   justify-content: center;
 `;
 
-export const IconText = styled.Text`
-  font-size: 18px;
-  color: #fff;
-`;
-
-export const SendIcon = styled.Text`
-  font-size: 18px;
-  color: #fff;
-`;
-
-export const LiveHeader = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 0;
-  margin-bottom: 8px;
-`;
-
-export const LiveUserInfo = styled.View`
-  flex-direction: row;
-  align-items: center;
-  flex: 1;
-`;
-
-export const LiveAvatar = styled.Image`
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  margin-right: 12px;
-`;
-
-export const LiveUserDetails = styled.View`
-  flex: 1;
-`;
-
-export const LiveHeaderActions = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
-`;
-
-export const LiveViewersContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  gap: 4px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px 10px;
-  border-radius: 12px;
-`;
-
-export const ModalOverlay = styled.View`
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.7);
-  justify-content: flex-end;
-`;
-
-export const DonationModal = styled.View`
-  background-color: #2a2a2a;
+export const DonationModal = styled.View<StyledProps>`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 20px;
   min-height: 400px;
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ModalHandle = styled.View`
@@ -265,8 +209,8 @@ export const AmountContainer = styled.View`
   margin-bottom: 24px;
 `;
 
-export const AmountButton = styled.View<{ selected?: boolean }>`
-  background-color: ${({ selected }) => (selected ? "#fff" : "#3a3a3a")};
+export const AmountButton = styled.View<StyledProps>`
+  background-color: ${({ bg_color }) => bg_color};
   padding: 12px 16px;
   border-radius: 8px;
   min-width: 60px;
@@ -277,8 +221,8 @@ export const CustomAmountSection = styled.View`
   margin-bottom: 24px;
 `;
 
-export const CustomAmountInput = styled.View`
-  background-color: #3a3a3a;
+export const CustomAmountInput = styled.View<StyledProps>`
+  background-color: ${({ bg_color }) => bg_color};
   border-radius: 8px;
   padding: 16px;
   margin-top: 8px;
@@ -318,18 +262,16 @@ export const ValidationError = styled.View`
 `;
 
 export const StepHeader = styled.View`
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+  flex-direction: row;
+  justify-content: start;
 `;
 
 export const BackButton = styled.View`
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0;
   align-items: center;
+  flex-direction: row;
+  margin-left: -8px;
   justify-content: center;
 `;
 
@@ -340,13 +282,14 @@ export const ProcessingContainer = styled.View`
   gap: 16px;
 `;
 
-export const LoadingSpinner = styled.View`
+export const LoadingSpinner = styled.View<StyledProps>`
   width: 48px;
   height: 48px;
   border-radius: 24px;
   border-width: 4px;
-  border-color: rgba(255, 255, 255, 0.3);
   border-top-color: #007aff;
+  border-color:  ${({ isSecondary }) => (isSecondary ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)")};
+  
 `;
 
 export const ConfirmationContainer = styled.View`
