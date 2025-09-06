@@ -44,6 +44,7 @@ interface CommentType {
 
 export const Home = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const [liked, setLiked] = useState(false);
   const [comment, setComment] = useState("");
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
@@ -52,7 +53,6 @@ export const Home = () => {
   const [comments, setComments] = useState<CommentType[]>(
     mocks.posts[0].comments as CommentType[]
   );
-      const { theme } = useTheme();
   
   const [currentPostIndex, setCurrentPostIndex] = useState(0);
   const [collapsedComments, setCollapsedComments] = useState<Set<number>>(
@@ -225,7 +225,7 @@ export const Home = () => {
                         <TouchableOpacity
                           onPress={() => setLiked((prev) => !prev)}
                         >
-                          <Heart color={liked ? "#F2F2F2" : ""} />
+                          <Heart fill={liked ? "#F2F2F2" : ""} />
                         </TouchableOpacity>
                         <S.Text fontSize={"12px"}>
                           {currentPost.description}
@@ -280,7 +280,7 @@ export const Home = () => {
                         width: 35,
                       }}
                     />
-                    <S.Text style={{ color: "#ffffff", fontSize: 12 }}>
+                    <S.Text style={{ color: Colors[theme].text, fontSize: 12 }}>
                       {collapsedComments.has(item.id)
                         ? `View ${item.answers.length} replies`
                         : "View fewer comments"}
@@ -333,7 +333,7 @@ export const Home = () => {
               }
             }}
           >
-            <CommentSendIcon color="white" />
+            <CommentSendIcon color={Colors[theme].text} />
           </TouchableOpacity>
         </S.ContainerInput>
       </GenericBottomSheet>

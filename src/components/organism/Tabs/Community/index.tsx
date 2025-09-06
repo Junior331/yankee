@@ -11,8 +11,8 @@ import Colors from "@/constants/Colors";
 import { useTheme } from "@/contexts/ThemeContext";
 
 export const TabCommunity = ({ posts, toggleLike }: ICommunity) => {
-    const { theme } = useTheme();
-  
+  const { theme } = useTheme();
+
   return (
     <S.ContainerNotions>
       {posts.map((item) => (
@@ -27,14 +27,16 @@ export const TabCommunity = ({ posts, toggleLike }: ICommunity) => {
                   fontSize: 8,
                   fontWeight: 500,
                   fontFamily: "Poppins-Medium",
-                color:"#121212"
-
+                  color: "#121212",
                 }}
               >
                 Follow
               </S.Text>
               <S.IconAdd>
-                <S.Text tabs style={{ fontSize: 8, marginTop: -1.4, color: '#121212' }}>
+                <S.Text
+                  tabs
+                  style={{ fontSize: 8, marginTop: -1.4, color: "#121212" }}
+                >
                   +
                 </S.Text>
               </S.IconAdd>
@@ -48,19 +50,31 @@ export const TabCommunity = ({ posts, toggleLike }: ICommunity) => {
           <S.FooterCardPost>
             <S.ContainerInteractions>
               <S.ContainerIcon onPress={() => toggleLike(item.id)}>
-                <Heart width={15} height={13} color={item.liked ? Colors.liked : theme === "dark" ? Colors.dark.iconHeart : Colors.light.iconHeart} />
+                <Heart
+                  width={15}
+                  height={13}
+                  color={
+                    item.liked
+                      ? Colors.liked
+                      : theme === "dark"
+                      ? Colors.dark.iconHeart
+                      : Colors.light.iconHeart
+                  }
+                  fill={item.liked ? Colors.liked : ""}
+                />
                 <S.Text color={"#FFFFFF"}>{formatNumber(item.likes)}</S.Text>
               </S.ContainerIcon>
               <S.ContainerIcon>
                 <TouchableOpacity>
-                  <Chat  color={
-                  theme === "dark"
-                    ? Colors.dark.icon
-                    : Colors.light.icon
-                  
-              } />
+                  <Chat
+                    color={
+                      theme === "dark" ? Colors.dark.icon : Colors.light.icon
+                    }
+                  />
                 </TouchableOpacity>
-                <S.Text color={"#FFFFFF"}>{formatNumber(item.comments.length)}</S.Text>
+                <S.Text color={"#FFFFFF"}>
+                  {formatNumber(item.comments.length)}
+                </S.Text>
               </S.ContainerIcon>
             </S.ContainerInteractions>
             <View style={{ transform: "rotate(90deg)" }}>

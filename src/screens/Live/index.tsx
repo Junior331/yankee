@@ -24,6 +24,8 @@ import {
   DonationDone,
 } from "@/assets/icons";
 import GestureRecognizer from "react-native-swipe-gestures";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CommentType {
   id: number;
@@ -70,6 +72,7 @@ const simulatedComments = [
 
 export const Live = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const { liveId } = useLocalSearchParams<{ liveId: string }>();
   const parsedLiveId = parseInt(liveId || "0", 10);
 
@@ -343,7 +346,11 @@ export const Live = () => {
   const { width } = Dimensions.get("screen");
 
   return (
-    <Layout style={{ position: "relative" }} titleHeader="yankee" isShowHeader={false}>
+    <Layout
+      style={{ position: "relative" }}
+      titleHeader="yankee"
+      // isShowHeader={false}
+    >
       <GestureRecognizer style={{ flex: 1 }}>
         <S.Container style={{ minWidth: width }}>
           <S.Content>
@@ -356,7 +363,7 @@ export const Live = () => {
                   style={styles.closeButton}
                   onPress={() => router.back()}
                 >
-                  <S.Text color="#fff" fontSize="18px" fontWeight={`bold`}>
+                  <S.Text color={Colors[theme].text} fontSize="18px" fontWeight={`bold`}>
                     ✕
                   </S.Text>
                 </TouchableOpacity>
@@ -383,26 +390,41 @@ export const Live = () => {
                       fontSize="12px"
                       fontWeight={600}
                       textTransform="uppercase"
+                      color={Colors[theme].text}
                     >
                       TITULO DA LIVE
                     </S.Text>
                   </S.LiveTitleContainer>
 
                   <S.LiveContent>
-                    <S.LiveDescription>
+                    <S.LiveDescription color={Colors[theme].text}>
                       I never tire of admiring this view before going to work.
                     </S.LiveDescription>
 
-                    <S.LiveQuestion color="#fff" fontSize="14px">
+                    <S.LiveQuestion color={Colors[theme].text} fontSize="14px">
                       What do you think guys?
                     </S.LiveQuestion>
-                    <S.Text color="#ffffff99" fontSize="12px">
+                    <S.Text
+                      color={
+                        theme === `dark`
+                          ? "rgba(255, 255, 255, 0.6)"
+                          : "rgba(0, 0, 0, 0.6)"
+                      }
+                      fontSize="12px"
+                    >
                       Alere no dealedat
                     </S.Text>
                   </S.LiveContent>
                 </S.LiveContainer>
                 <S.GradientOverlay
-                  colors={["transparent", "rgba(23, 23, 23, 0.85)"]}
+                  colors={[
+                    "transparent",
+                    `${
+                      theme === `dark`
+                        ? "rgba(23, 23, 23, 0.85)"
+                        : "rgba(255, 255, 255, 0.85)"
+                    }`,
+                  ]}
                   start={[0, 0]}
                   end={[0, 0.6]}
                 />
@@ -410,24 +432,19 @@ export const Live = () => {
                   start={[0, 0]}
                   end={[0, 0.6]}
                   height={`40px`}
-                  colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
-
-                  // start={[0, 0]}
-                  // end={[0, 1.2]}
-                  // height={`40px`}
-                  // colors={["transparent", "rgba(23, 23, 23, 0.95)", "transparent"]}
+                  colors={["transparent", Colors[theme].background]}
                 />
               </S.ImageBackground>
             </CardPost>
             <S.CommentsSection>
               <S.GradientTop
-                colors={["rgba(23, 23, 23, 0.95)", "transparent"]}
+                colors={[Colors[theme].background, "transparent"]}
                 start={[0, 0.4]}
                 end={[0, 1.5]}
               />
               <ScrollView
                 ref={scrollViewRef}
-                style={{ flex: 1, maxHeight: 180 }}
+                style={{ flex: 1, maxHeight: 250 }}
                 showsVerticalScrollIndicator={false}
                 nestedScrollEnabled={true}
                 scrollEnabled={true}
@@ -447,7 +464,7 @@ export const Live = () => {
                   const scrollView = scrollViewRef.current;
                   if (!isUserScrolling && scrollView) {
                     const isNearBottom =
-                      contentHeight - scrollPosition - 180 <= 50;
+                      contentHeight - scrollPosition - 250 <= 50;
                     if (isNearBottom) {
                       setTimeout(() => {
                         scrollView.scrollToEnd({ animated: true });
@@ -492,13 +509,16 @@ export const Live = () => {
                         />
                         <View style={styles.commentContent}>
                           <S.Text
-                            color="#fff"
+                            color={Colors[theme].text}
                             fontSize="14px"
                             fontWeight={`bold`}
                           >
                             {comment.name}
                           </S.Text>
-                          <S.CommentText color="#fff" fontSize="12px">
+                          <S.CommentText
+                            color={Colors[theme].text}
+                            fontSize="12px"
+                          >
                             {comment.description}
                           </S.CommentText>
                         </View>
@@ -508,13 +528,13 @@ export const Live = () => {
                 })}
               </ScrollView>
               <S.GradientBottom
-                colors={["transparent", "rgba(23, 23, 23, 0.95)"]}
+                colors={["transparent", Colors[theme].background]}
                 start={[0, 0]}
                 end={[0, 0.6]}
               />
             </S.CommentsSection>
             <S.CommentInputContainer>
-              <S.CommentInputWrapper>
+              <S.CommentInputWrapper bg_color={Colors[theme].comment}>
                 <TextInput
                   value={comment}
                   style={styles.commentInput}
@@ -525,24 +545,24 @@ export const Live = () => {
                 />
                 <TouchableOpacity>
                   <S.IconButton>
-                    <Smile color="#fff" />
+                    <Smile color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
               </S.CommentInputWrapper>
               <S.ExternalActionIcons>
                 <TouchableOpacity onPress={openDonationModal}>
                   <S.IconButton>
-                    <HeartDonate color="#fff" />
+                    <HeartDonate color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity>
                   <S.IconButton>
-                    <WarningCircle color="#fff" />
+                    <WarningCircle color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleSubmitComment(comment)}>
                   <S.IconButton>
-                    <Share color="#fff" />
+                    <Share color={Colors[theme].text} />
                   </S.IconButton>
                 </TouchableOpacity>
               </S.ExternalActionIcons>

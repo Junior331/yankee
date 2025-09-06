@@ -6,6 +6,7 @@ export interface Ellipse3Props {
   style?: StyleProp<ViewStyle>;
 }
 export interface IIcons {
+  fill?: string;
   color?: string;
   width?: number;
   height?: number;

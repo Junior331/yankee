@@ -4,10 +4,12 @@ import React, { useMemo, forwardRef, useContext, useCallback } from "react";
 import * as S from "./styles";
 import Colors from "@/constants/Colors";
 import { IBottomSheet } from "./@types";
+import { useTheme } from "@/contexts/ThemeContext";
 import { TabVisibilityContext } from "@/contexts/tabVisibility";
 
 export const GenericBottomSheet = forwardRef<BottomSheet, IBottomSheet>(
   ({ style, children, size = -1, ...res }, ref) => {
+    const { theme } = useTheme();
     const snapPoints = useMemo(() => ["30%", "70%", "95%"], []);
     const { setIsVisibility } = useContext(TabVisibilityContext);
 
@@ -24,7 +26,7 @@ export const GenericBottomSheet = forwardRef<BottomSheet, IBottomSheet>(
           snapPoints={snapPoints}
           enablePanDownToClose={true}
           onChange={handleSheetChanges}
-          backgroundStyle={{ backgroundColor: Colors.dark.background }}
+          backgroundStyle={{ backgroundColor: Colors[theme].background }}
           handleIndicatorStyle={{ backgroundColor: "#838485" }}
         >
           {children}

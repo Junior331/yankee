@@ -4,8 +4,10 @@ import { Image, TouchableOpacity } from "react-native";
 
 import * as S from "./styles";
 import { Heart } from "@/assets/icons";
+import Colors from "@/constants/Colors";
 import { IGenericCommet } from "./@types";
 import { Loading } from "@/components/elements";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const GenericCommet = ({
   likes,
@@ -15,6 +17,7 @@ export const GenericCommet = ({
   description,
   onReply,
 }: IGenericCommet & { onReply?: () => void }) => {
+  const { theme } = useTheme();
   const [liked, setLiked] = useState(false);
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -49,7 +52,10 @@ export const GenericCommet = ({
       </S.ContainerUser>
       <S.ContainerLike>
         <TouchableOpacity onPress={() => setLiked((prev) => !prev)}>
-          <Heart color={liked ? "#d63838" : ""} />
+          <Heart
+            color={liked ? Colors.liked : Colors[theme].text}
+            fill={liked ? Colors.liked : ""}
+          />
         </TouchableOpacity>
         <S.Text>{liked ? likes + 1 : likes}</S.Text>
       </S.ContainerLike>

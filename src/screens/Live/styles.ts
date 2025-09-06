@@ -74,7 +74,6 @@ export const LiveContent = styled.View`
 `;
 
 export const LiveDescription = styled(Text)`
-  color: #fff;
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 12px;
@@ -154,14 +153,14 @@ export const CommentInputContainer = styled.View`
   align-items: center;
 `;
 
-export const CommentInputWrapper = styled.View`
+export const CommentInputWrapper = styled.View<StyledProps>`
   flex: 1;
   border-radius: 100px;
   flex-direction: row;
   align-items: center;
   padding: 2px 12px 2px 4px;
   justify-content: space-between;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ExternalActionIcons = styled.View`
@@ -267,7 +266,7 @@ export const AmountContainer = styled.View`
 `;
 
 export const AmountButton = styled.View<{ selected?: boolean }>`
-  background-color: ${({ selected }) => selected ? "#fff" : "#3a3a3a"};
+  background-color: ${({ selected }) => (selected ? "#fff" : "#3a3a3a")};
   padding: 12px 16px;
   border-radius: 8px;
   min-width: 60px;
@@ -288,7 +287,7 @@ export const CustomAmountInput = styled.View`
 `;
 
 export const DonateButton = styled.TouchableOpacity`
-  background-color: #007AFF;
+  background-color: #007aff;
   padding: 16px;
   border-radius: 12px;
   align-items: center;
@@ -303,7 +302,7 @@ export const PaymentMethodsContainer = styled.View`
 `;
 
 export const PaymentMethodButton = styled.View<{ selected?: boolean }>`
-  background-color: ${({ selected }) => selected ? "#fff" : "#3a3a3a"};
+  background-color: ${({ selected }) => (selected ? "#fff" : "#3a3a3a")};
   padding: 12px 18px;
   border-radius: 8px;
   align-items: center;
@@ -315,7 +314,7 @@ export const ValidationError = styled.View`
   background-color: rgba(255, 68, 68, 0.1);
   border-radius: 6px;
   border-left-width: 3px;
-  border-left-color: #FF4444;
+  border-left-color: #ff4444;
 `;
 
 export const StepHeader = styled.View`
@@ -347,7 +346,7 @@ export const LoadingSpinner = styled.View`
   border-radius: 24px;
   border-width: 4px;
   border-color: rgba(255, 255, 255, 0.3);
-  border-top-color: #007AFF;
+  border-top-color: #007aff;
 `;
 
 export const ConfirmationContainer = styled.View`
