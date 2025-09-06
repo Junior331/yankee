@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { ScrollView, View } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 import { removeScrollUi } from "@/utils/utils";
 import { Text as TextComponent } from "@/components/elements";
