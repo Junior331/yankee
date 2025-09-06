@@ -6,7 +6,7 @@ import { useCallContext } from "@/contexts/CallContext";
 import * as S from "./styles";
 import { Phone, LeftArrow, ChatDuringCall, PhoneCall, SpeakerIcon, MicrophoneOff } from "@/assets/icons";
 import { Microphone } from "@/assets/icons";
-import { SafeScreen } from "@/components/elements";
+import { Layout } from "@/components/organism";
 import Video from "@/assets/icons/Video";
 
 export const VoiceCall = () => {
@@ -136,7 +136,7 @@ export const VoiceCall = () => {
   }
 
   return (
-    <SafeScreen edges={[]}>
+    <Layout titleHeader="yankee" isShowHeader={false}>
       <S.Container>
         <S.Header>
           <S.BackButton onPress={handleGoBack}>
@@ -191,6 +191,6 @@ export const VoiceCall = () => {
           )}
         </S.Content>
       </S.Container>
-    </SafeScreen>
+    </Layout>
   );
 };

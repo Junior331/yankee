@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
 import * as S from "./styles";
-import { SubHeader } from "@/components/organism";
+import { Layout } from "@/components/organism";
 import { useRouter } from "expo-router";
 import { Image, TouchableOpacity, Alert } from "react-native";
 import { useNotificationsContext } from "@/contexts/NotificationsContext";
-import { SafeScreen } from "@/components/elements";
 
 const ButtonReply = () => {
   return (
@@ -99,11 +98,10 @@ export const Notifications = () => {
   };
 
   return (
-    <SafeScreen edges={['top', 'left', 'right']}>
+    <Layout titleHeader="yankee">
       <S.Container>
         <S.HeaderContainer>
           <S.TitleContainer>
-            <SubHeader title={"Notifications"} handleOnPress={() => router.back()} />
             {unreadCount > 0 && (
               <S.UnreadBadge>
                 <S.Text style={{ fontSize: 10, color: '#fff', fontWeight: 'bold' }}>
@@ -190,6 +188,6 @@ export const Notifications = () => {
         </S.TestButtonsContainer>
       </S.ContainerList>
       </S.Container>
-    </SafeScreen>
+    </Layout>
   );
 };

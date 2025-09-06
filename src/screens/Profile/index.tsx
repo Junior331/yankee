@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { View, Image, FlatList, Dimensions, TouchableOpacity } from "react-native";
+import {
+  View,
+  Image,
+  FlatList,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 import * as S from "./styles";
 import { mocks } from "@/services/mocks";
 import { LeftArrow } from "@/assets/icons";
-import { Forms, MediaViewer } from "@/components/organism";
-import { Loading, SafeScreen } from "@/components/elements";
+import { Forms, MediaViewer, Layout } from "@/components/organism";
+import { Loading } from "@/components/elements";
 import { Edit, Location, Menu } from "@/assets/icons";
 import { useNavigationHandler } from "@/hooks/navigation";
 import { useRouter } from "expo-router";
@@ -16,15 +22,17 @@ const { width } = Dimensions.get("window");
 
 export const Profile = () => {
   const router = useRouter();
-  const { goBack } = useNavigationHandler();
   const { theme } = useTheme();
+  const { goBack } = useNavigationHandler();
   const [isEdit, setIsEdit] = useState(false);
   const [tabActive, setTabActive] = useState("photos");
   const [bannerLoading, setBannerLoading] = useState(true);
   const [avatarLoading, setAvatarLoading] = useState(true);
   const [mediaViewerVisible, setMediaViewerVisible] = useState(false);
   const [selectedMediaItem, setSelectedMediaItem] = useState<any>(null);
-  const [loadingImages, setLoadingImages] = useState<{[key: number]: boolean}>({});
+  const [loadingImages, setLoadingImages] = useState<{
+    [key: number]: boolean;
+  }>({});
 
   const handleMediaPress = (item: any) => {
     const mediaItem = {
@@ -32,7 +40,7 @@ export const Profile = () => {
       name: item.name,
       image: item.image,
       video: item.video,
-      type: (tabActive === 'videos' ? 'video' : 'image') as 'image' | 'video'
+      type: (tabActive === "videos" ? "video" : "image") as "image" | "video",
     };
     setSelectedMediaItem(mediaItem);
     setMediaViewerVisible(true);
@@ -60,17 +68,23 @@ export const Profile = () => {
             }}
           />
         </S.ContainerBanner>
-        <S.ButtonIcon onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}>
-          <LeftArrow color={isEdit ? '#FFFFFF' : (theme === 'dark' ? '#FFFFFF' : '#121212')} />
+        <S.ButtonIcon
+          onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}
+        >
+          <LeftArrow
+            color={
+              isEdit ? "#FFFFFF" : theme === "dark" ? "#FFFFFF" : "#121212"
+            }
+          />
         </S.ButtonIcon>
-        <View style={{ flexDirection: 'row', gap: 10 }}>
+        <View style={{ flexDirection: "row", gap: 10 }}>
           <S.ButtonIcon onPress={goBack}>
             {isEdit ? (
               <S.ButtonEdit>
                 <Edit />
               </S.ButtonEdit>
             ) : (
-              <Menu color={theme === 'dark' ? '#FFFFFF' : '#121212'} />
+              <Menu color={theme === "dark" ? "#FFFFFF" : "#121212"} />
             )}
           </S.ButtonIcon>
         </View>
@@ -149,7 +163,11 @@ export const Profile = () => {
                   onPress={() => setTabActive(tab.value)}
                   fontWeight={tabActive === tab.value ? 600 : 300}
                 >
-                  <S.TitleTab tabs fontSize="12px" fontWeight={tabActive === tab.value ? 600 : 300}>
+                  <S.TitleTab
+                    tabs
+                    fontSize="12px"
+                    fontWeight={tabActive === tab.value ? 600 : 300}
+                  >
                     {tab.label}
                   </S.TitleTab>
                   <S.Line isActive={tabActive === tab.value} />
@@ -162,7 +180,11 @@ export const Profile = () => {
     </>
   );
 
-  const renderGridItem = ({ item }: { item: { id: number; name: string; image: string; video?: string } }) => (
+  const renderGridItem = ({
+    item,
+  }: {
+    item: { id: number; name: string; image: string; video?: string };
+  }) => (
     <View
       style={{
         margin: 2,
@@ -179,8 +201,12 @@ export const Profile = () => {
           resizeMode="cover"
           alt={`Image ${item.name}`}
           source={{ uri: item.image }}
-          onLoadStart={() => setLoadingImages(prev => ({...prev, [item.id]: true}))}
-          onLoadEnd={() => setLoadingImages(prev => ({...prev, [item.id]: false}))}
+          onLoadStart={() =>
+            setLoadingImages((prev) => ({ ...prev, [item.id]: true }))
+          }
+          onLoadEnd={() =>
+            setLoadingImages((prev) => ({ ...prev, [item.id]: false }))
+          }
           style={{ width: "100%", height: "100%" }}
         />
       </TouchableOpacity>
@@ -188,31 +214,31 @@ export const Profile = () => {
   );
 
   return (
-    <SafeScreen edges={['top']}>
-      <S.Container>
-        <S.Content>
-          {isEdit ? (
-            <>
-              {renderHeaderComponent()}
-            </>
-          ) : (
-            <FlatList
-              numColumns={3}
-              renderItem={renderGridItem}
-              keyExtractor={(item) => String(item.id)}
-              ListHeaderComponent={renderHeaderComponent}
-              contentContainerStyle={{ paddingHorizontal: 10 }}
-              data={mocks.gallery[tabActive as keyof typeof mocks.gallery]}
-            />
-          )}
-        </S.Content>
-      </S.Container>
+    <>
+      <Layout titleHeader="yankee">
+        <S.Container>
+          <S.Content>
+            {isEdit ? (
+              <>{renderHeaderComponent()}</>
+            ) : (
+              <FlatList
+                numColumns={3}
+                renderItem={renderGridItem}
+                keyExtractor={(item) => String(item.id)}
+                ListHeaderComponent={renderHeaderComponent}
+                contentContainerStyle={{ paddingHorizontal: 10 }}
+                data={mocks.gallery[tabActive as keyof typeof mocks.gallery]}
+              />
+            )}
+          </S.Content>
+        </S.Container>
 
-      <MediaViewer
-        visible={mediaViewerVisible}
-        mediaItem={selectedMediaItem}
-        onClose={handleCloseMediaViewer}
-      />
-    </SafeScreen>
+        <MediaViewer
+          visible={mediaViewerVisible}
+          mediaItem={selectedMediaItem}
+          onClose={handleCloseMediaViewer}
+        />
+      </Layout>
+    </>
   );
 };

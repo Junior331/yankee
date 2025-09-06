@@ -343,7 +343,7 @@ export const Live = () => {
   const { width } = Dimensions.get("screen");
 
   return (
-    <Layout style={{ position: "relative" }} titleHeader="yankee">
+    <Layout style={{ position: "relative" }} titleHeader="yankee" isShowHeader={false}>
       <GestureRecognizer style={{ flex: 1 }}>
         <S.Container style={{ minWidth: width }}>
           <S.Content>

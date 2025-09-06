@@ -1,46 +1,48 @@
 import { useRouter } from "expo-router";
 import React, { useState, useMemo, useEffect } from "react";
-import { Image, TouchableOpacity, FlatList, View, Alert } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Image, TouchableOpacity, FlatList } from "react-native";
 
 import * as S from "./styles";
+import Colors from "@/constants/Colors";
 import { mocks } from "@/services/mocks";
-import { SubHeader } from "@/components/organism";
+import { Layout } from "@/components/organism";
+import { useTheme } from "@/contexts/ThemeContext";
 import { ChatConversation } from "@/services/mocks/users";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
-import { SafeScreen } from "@/components/elements";
 
 export const Messages = () => {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
+  const { theme } = useTheme();
   const [text, setText] = useState("");
   const [tabActive, setTabActive] = useState(1); // 1 = Principal, 2 = Chat Requests
-  
+
   // Unread messages management
-  const { 
-    unreadCounts, 
-    markConversationAsRead, 
-    simulateNewMessage,
-    simulateNewChatRequest 
-  } = useUnreadMessages();
+  const { unreadCounts, markConversationAsRead, simulateNewMessage } =
+    useUnreadMessages();
 
   // Demo notifications (remove in production)
   useEffect(() => {
     // Simulate random notifications for demo purposes
     const interval = setInterval(() => {
-      const randomUser = mocks.users[Math.floor(Math.random() * mocks.users.length)];
+      const randomUser =
+        mocks.users[Math.floor(Math.random() * mocks.users.length)];
       const messages = [
         "Hey! How are you doing?",
         "Check out this cool thing I found!",
         "Are you free for a call later?",
         "Thanks for the help earlier!",
-        "Did you see the latest update?"
+        "Did you see the latest update?",
       ];
-      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-      
+      const randomMessage =
+        messages[Math.floor(Math.random() * messages.length)];
+
       // 30% chance of new message notification
       if (Math.random() < 0.3) {
-        simulateNewMessage(randomUser.name, randomMessage, `conv_${randomUser.id}`);
+        simulateNewMessage(
+          randomUser.name,
+          randomMessage,
+          `conv_${randomUser.id}`
+        );
       }
     }, 30000); // Every 30 seconds
 
@@ -49,15 +51,17 @@ export const Messages = () => {
 
   // Filtrar conversas baseado na aba ativa
   const conversations = useMemo(() => {
-    const allConversations = tabActive === 1 ? mocks.mainConversations : mocks.chatRequests;
-    
+    const allConversations =
+      tabActive === 1 ? mocks.mainConversations : mocks.chatRequests;
+
     if (!text.trim()) return allConversations;
-    
+
     // Filtrar por texto de busca
-    return allConversations.filter(conv => 
-      conv.user.name.toLowerCase().includes(text.toLowerCase()) ||
-      conv.user.username.toLowerCase().includes(text.toLowerCase()) ||
-      conv.lastMessage.text.toLowerCase().includes(text.toLowerCase())
+    return allConversations.filter(
+      (conv) =>
+        conv.user.name.toLowerCase().includes(text.toLowerCase()) ||
+        conv.user.username.toLowerCase().includes(text.toLowerCase()) ||
+        conv.lastMessage.text.toLowerCase().includes(text.toLowerCase())
     );
   }, [tabActive, text]);
 
@@ -66,7 +70,7 @@ export const Messages = () => {
     if (conversation.unreadCount > 0) {
       await markConversationAsRead(conversation.id);
     }
-    
+
     // Navegar para o chat passando os dados do usuário
     router.push({
       pathname: "/chatuser",
@@ -77,37 +81,18 @@ export const Messages = () => {
         userUsername: conversation.user.username,
         isOnline: conversation.user.isOnline.toString(),
         conversationId: conversation.id,
-      }
+      },
     });
-  };
-
-  // Test notification function (for demo purposes)
-  const testNotification = () => {
-    Alert.alert(
-      "Test Notification",
-      "Choose notification type:",
-      [
-        {
-          text: "New Message",
-          onPress: () => simulateNewMessage("Sarah Chen", "Hey! This is a test message 😊", "conv_test")
-        },
-        {
-          text: "Chat Request", 
-          onPress: () => simulateNewChatRequest("Alex Johnson")
-        },
-        { text: "Cancel", style: "cancel" }
-      ]
-    );
   };
 
   const formatLastMessage = (conversation: ChatConversation) => {
     const { lastMessage } = conversation;
-    
+
     switch (lastMessage.type) {
-      case 'audio':
-        return '🎵 Audio message';
-      case 'image':
-        return '📷 Photo';
+      case "audio":
+        return "🎵 Audio message";
+      case "image":
+        return "📷 Photo";
       default:
         return lastMessage.text;
     }
@@ -119,20 +104,24 @@ export const Messages = () => {
     const diffMs = now.getTime() - messageTime.getTime();
     const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
     const diffDays = Math.floor(diffHours / 24);
-    
-    if (diffHours < 1) return 'now';
+
+    if (diffHours < 1) return "now";
     if (diffHours < 24) return `${diffHours}h`;
     if (diffDays < 7) return `${diffDays}d`;
     return messageTime.toLocaleDateString();
   };
 
-  const renderConversation = ({ item: conversation }: { item: ChatConversation }) => {
+  const renderConversation = ({
+    item: conversation,
+  }: {
+    item: ChatConversation;
+  }) => {
     const hasUnread = conversation.unreadCount > 0;
-    
+
     return (
-      <TouchableOpacity 
-        key={conversation.id} 
-        style={{ width: "100%", marginVertical: 15, height: "auto" }} 
+      <TouchableOpacity
+        key={conversation.id}
+        style={{ width: "100%", marginVertical: 15, height: "auto" }}
         onPress={() => handleConversationPress(conversation)}
       >
         <S.ContainerMessage>
@@ -168,7 +157,10 @@ export const Messages = () => {
               {hasUnread && (
                 <>
                   <S.BadgeBlue>
-                    <S.Text color="#fff" style={{ fontSize: 10, fontWeight: 'bold' }}>
+                    <S.Text
+                      color="#fff"
+                      style={{ fontSize: 10, fontWeight: "bold" }}
+                    >
                       {conversation.unreadCount}
                     </S.Text>
                   </S.BadgeBlue>
@@ -182,26 +174,23 @@ export const Messages = () => {
   };
 
   return (
-    <SafeScreen edges={['top', 'left', 'right']}>
+    <Layout titleHeader="yankee">
       <S.Container>
-        <View style={{ paddingHorizontal: 20, paddingTop: 10 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-            <SubHeader title={"Messages"} handleOnPress={() => router.push("/(tabs)/profile")} />
-          </View>
-        
         <S.ContainerTabs>
           <S.Tabs>
             {[
               { id: 1, label: "Principal" },
-              { id: 2, label: "Chat requests" }
+              { id: 2, label: "Chat requests" },
             ].map((tab) => (
               <S.Tab key={tab.id} onPress={() => setTabActive(tab.id)}>
-                <S.Text tabs color={tabActive === tab.id ? "#fff" : "#999494"}>
+                <S.Text tabs color={tabActive === tab.id ? Colors[theme].text : "#999494"}>
                   {tab.label}
                   {/* Badge com contador */}
                   {tab.id === 1 && unreadCounts.mainConversations > 0 && (
                     <S.UnreadBadge>
-                      <S.UnreadText>{unreadCounts.mainConversations}</S.UnreadText>
+                      <S.UnreadText>
+                        {unreadCounts.mainConversations}
+                      </S.UnreadText>
                     </S.UnreadBadge>
                   )}
                   {tab.id === 2 && unreadCounts.chatRequests > 0 && (
@@ -218,40 +207,43 @@ export const Messages = () => {
         {/* Search */}
         <S.ContainerInput>
           <S.SearchIcon name="search" size={20} color="#777" />
-          <S.StyledInput 
-            placeholder={`Search ${tabActive === 1 ? 'conversations' : 'requests'}...`} 
-            value={text} 
-            onChangeText={setText} 
+          <S.StyledInput
+            placeholder={`Search ${
+              tabActive === 1 ? "conversations" : "requests"
+            }...`}
+            value={text}
+            onChangeText={setText}
           />
         </S.ContainerInput>
-      </View>
 
-      {/* Lista de conversas */}
-      <FlatList
-        data={conversations}
-        keyExtractor={(item) => item.id}
-        renderItem={renderConversation}
-        showsVerticalScrollIndicator={false}
-        style={{ flex: 1 }}
-        contentContainerStyle={{ 
-          paddingHorizontal: 16, 
-          paddingBottom: 20,
-          flexGrow: 1 
-        }}
-        ListEmptyComponent={
-          <S.EmptyStateContainer>
-            <S.Text color="#999494" style={{ textAlign: 'center', marginTop: 50 }}>
-              {text.trim() 
-                ? 'No results found' 
-                : tabActive === 1 
-                  ? 'No conversations yet' 
-                  : 'No chat requests'
-              }
-            </S.Text>
-          </S.EmptyStateContainer>
-        }
-      />
+        {/* Lista de conversas */}
+        <FlatList
+          data={conversations}
+          keyExtractor={(item) => item.id}
+          renderItem={renderConversation}
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingBottom: 20,
+            flexGrow: 1,
+          }}
+          ListEmptyComponent={
+            <S.EmptyStateContainer>
+              <S.Text
+                color="#999494"
+                style={{ textAlign: "center", marginTop: 50 }}
+              >
+                {text.trim()
+                  ? "No results found"
+                  : tabActive === 1
+                  ? "No conversations yet"
+                  : "No chat requests"}
+              </S.Text>
+            </S.EmptyStateContainer>
+          }
+        />
       </S.Container>
-    </SafeScreen>
+    </Layout>
   );
 };

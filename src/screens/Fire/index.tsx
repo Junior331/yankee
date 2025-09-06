@@ -4,7 +4,7 @@ import { Layout } from "@/components/organism";
 
 export const Fire = () => {
   return (
-    <Layout>
+    <Layout titleHeader="yankee">
       <Text>Fire</Text>
     </Layout>
   );
