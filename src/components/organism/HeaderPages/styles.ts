@@ -57,8 +57,9 @@ export const ContainerAvatar = styled(View)`
   background-color: #c4c4c4;
 `;
 
-export const Text = styled(TextComponent)`
-  font-size: 7px;
+export const Text = styled(TextComponent)<StyledProps>`
+  font-size: ${({ fontSize }) => fontSize || "7px"};
+  font-weight: ${({ fontWeight }) => fontWeight || 400};
 `;
 
 export const Title = styled(Titleomponent)`
@@ -92,7 +93,7 @@ export const ContainerFilter = styled(ViewGeneric)<StyledProps>`
   width: ${({ width }) => width || "110px"};
   height: ${({ height }) => height || "auto"};
   background-color: ${({ theme }: any) => theme.colors.background};
-    z-index: 1;
+  z-index: 1;
 `;
 export const OptionFilter = styled(TouchableOpacity)`
   gap: 20px;
@@ -106,4 +107,33 @@ export const Line = styled(View)`
   height: 1px;
   width: 100%;
   background-color: #dadada;
+`;
+
+export const UserMenu = styled(View)`
+  top: 50px;
+  right: 0px;
+  width: 200px;
+  overflow: hidden;
+  position: absolute;
+  border-radius: 8px;
+  border: 1px solid #404040;
+  background-color: ${({ theme }: any) => theme.colors.background};
+  shadow-color: #000;
+  shadow-offset: 0px 4px;
+  shadow-opacity: 0.1;
+  shadow-radius: 8px;
+  elevation: 5;
+  z-index: 999;
+`;
+
+export const UserMenuOption = styled(TouchableOpacity)`
+  padding: 11px 9px;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const MenuDivider = styled(View)`
+  height: 1px;
+  width: 100%;
+  background-color: #404040;
 `;

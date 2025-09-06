@@ -13,7 +13,7 @@ import Colors from "@/constants/Colors";
 import { useTheme } from "@/contexts/ThemeContext";
 export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
   const router = useRouter();
-    const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [imageLoading, setImageLoading] = useState(true);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   
@@ -22,6 +22,8 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
 
   const [filterActive, setFilterActive] = useState("");
   const [showFilter, setShowFilter] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showThemeModal, setShowThemeModal] = useState(false);
 
   const handleSetFilter = (value: string, state?: boolean) => {
     setFilterActive(value);
@@ -34,6 +36,29 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
     } else {
       setSelectedIcon(iconName);
     }
+  };
+
+  const handleUserMenuPress = () => {
+    setShowUserMenu(!showUserMenu);
+    // Fechar outros menus quando abrir o menu do usuário
+    if (!showUserMenu) {
+      setShowFilter(false);
+    }
+  };
+
+  const handleThemePress = () => {
+    setShowUserMenu(false);
+    setShowThemeModal(true);
+  };
+
+  const handleConfigPress = () => {
+    setShowUserMenu(false);
+    router.push("/(tabs)/profile");
+  };
+
+  const handleThemeSelect = (selectedTheme: 'light' | 'dark') => {
+    setTheme(selectedTheme);
+    setShowThemeModal(false);
   };
 
   return (
@@ -63,7 +88,7 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
           )}
         </S.ContainerBadge>
 
-        <S.ContainerBadge onPress={() => router.push("/(tabs)/profile")}>
+        <S.ContainerBadge onPress={handleUserMenuPress}>
           <S.ContainerAvatar>
             {imageLoading && <Loading />}
             <Image
@@ -104,6 +129,54 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
         <S.ContainerFilter width="220px">
           <FindCity />
         </S.ContainerFilter>
+      )}
+
+      {/* Menu do usuário */}
+      {showUserMenu && (
+        <S.UserMenu>
+          <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
+            <S.Text color="#fff" fontSize="12px">Saldo na conta: ----</S.Text>
+          </S.UserMenuOption>
+          
+          <S.MenuDivider />
+          
+          <S.UserMenuOption onPress={handleConfigPress}>
+            <S.Text color="#fff" fontSize="12px">Configurações</S.Text>
+          </S.UserMenuOption>
+          
+          <S.MenuDivider />
+          
+          <S.UserMenuOption onPress={handleThemePress}>
+            <S.Text color="#fff" fontSize="12px">Temas: {theme === 'dark' ? 'Escuro' : 'Claro'}</S.Text>
+          </S.UserMenuOption>
+          
+          <S.MenuDivider />
+          
+          <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
+            <S.Text color="#fff" fontSize="12px">Ajuda</S.Text>
+          </S.UserMenuOption>
+          
+          <S.MenuDivider />
+          
+          <S.UserMenuOption onPress={() => setShowUserMenu(false)}>
+            <S.Text color="#fff" fontSize="12px">Sair</S.Text>
+          </S.UserMenuOption>
+        </S.UserMenu>
+      )}
+
+      {/* Modal de seleção de tema */}
+      {showThemeModal && (
+        <S.UserMenu>
+          <S.UserMenuOption onPress={() => handleThemeSelect('light')}>
+            <S.Text color="#fff" fontSize="12px">Claro</S.Text>
+          </S.UserMenuOption>
+          
+          <S.MenuDivider />
+          
+          <S.UserMenuOption onPress={() => handleThemeSelect('dark')}>
+            <S.Text color="#fff" fontSize="12px">Escuro</S.Text>
+          </S.UserMenuOption>
+        </S.UserMenu>
       )}
     </S.Container>
   );
