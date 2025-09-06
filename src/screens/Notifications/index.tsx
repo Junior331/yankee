@@ -5,12 +5,16 @@ import { useRouter } from "expo-router";
 import { Image, TouchableOpacity, Alert } from "react-native";
 import { useNotificationsContext } from "@/contexts/NotificationsContext";
 import { SafeScreen } from "@/components/elements";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const ButtonReply = () => {
+    const { theme } = useTheme();
+
   return (
-    <S.ButtonFollow>
+    <S.ButtonFollow bg_color={Colors[theme].text}>
       <S.Text
-        color="#171717"
+        color={Colors[theme].background}
         tabs
         style={{
           fontSize: 9,
@@ -42,6 +46,7 @@ const ButtonImagem = () => {
 
 export const Notifications = () => {
   const router = useRouter();
+    const { theme } = useTheme();
   
   // Social notifications system
   const { 
@@ -100,7 +105,7 @@ export const Notifications = () => {
 
   return (
     <SafeScreen edges={['top', 'left', 'right']}>
-      <S.Container>
+      <S.Container  bg_color={Colors[theme].background}>
         <S.HeaderContainer>
           <S.TitleContainer>
             <SubHeader title={"Notifications"} handleOnPress={() => router.back()} />
@@ -127,12 +132,12 @@ export const Notifications = () => {
                 borderRadius: 10,
                 marginVertical: 5, 
                 opacity: message.read ? 0.6 : 1,
-                backgroundColor: message.read ? 'transparent' : 'rgba(255, 255, 255, 0.02)'
+                backgroundColor: message.read ? 'transparent' : Colors[theme].mg_bubble
               }}
               onPress={() => markAsRead(message.id)}
             >
-              <S.ContainerMessage>
-                <S.ContainerUser>
+              <S.ContainerMessage >
+                <S.ContainerUser >
                   <S.ContainerAvatar>
                     <Image
                       style={{
@@ -146,13 +151,13 @@ export const Notifications = () => {
                   </S.ContainerAvatar>
 
                   <S.ContainerText>
-                    <S.Title numberOfLines={1}>{message.name}</S.Title>
-                    <S.Text numberOfLines={2} color="#f2f2f2">
+                    <S.Title numberOfLines={1} color={Colors[theme].text}>{message.name}</S.Title>
+                    <S.Text numberOfLines={2} color={Colors[theme].text}>
                       {lastMessage}
                     </S.Text>
                   </S.ContainerText>
 
-                  {message.active ? <ButtonReply /> : <ButtonImagem />}
+                  {message.active ? <ButtonReply  /> : <ButtonImagem />}
                 </S.ContainerUser>
               </S.ContainerMessage>
             </TouchableOpacity>
