@@ -19,7 +19,7 @@ export const TabVisibilityProvider = ({
 
   const value = useMemo(
     () => ({ isVisibility, setIsVisibility }),
-    [isVisibility, setIsVisibility]
+    [isVisibility]
   );
   return (
     <TabVisibilityContext.Provider value={value}>

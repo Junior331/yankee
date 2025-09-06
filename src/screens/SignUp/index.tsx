@@ -33,7 +33,6 @@ export const SignUp = () => {
       phoneNumber: "",
       confirmPassword: "",
     },
-    validationSchema: currentPage <= 5 ? stepSchemas[currentPage] : null,
     onSubmit: async (values) => {
       const data = {
         email: values.email,
@@ -76,16 +75,20 @@ export const SignUp = () => {
   );
 
   const goToNextPage = useCallback(async () => {
-    const validationErrors = await validateForm();
-    const currentKeys = Object.keys(validationErrors);
-
-    if (currentKeys.length === 0) {
-      setCurrentPage((prev) => {
-        const nextPage = prev + 1;
-        return nextPage;
-      });
+    // Valida usando o schema da página atual
+    if (currentPage <= 5 && stepSchemas[currentPage]) {
+      try {
+        await stepSchemas[currentPage].validate(values, { abortEarly: false });
+        setCurrentPage((prev) => prev + 1);
+      } catch (error) {
+        // Se há erros de validação, não avança a página
+        console.log('Validation errors:', error);
+      }
+    } else {
+      // Se não há schema para a página, avança normalmente
+      setCurrentPage((prev) => prev + 1);
     }
-  }, [validateForm]);
+  }, [currentPage, values]);
 
   useEffect(() => {
     setCurrentPage(PAGES.ONE);
