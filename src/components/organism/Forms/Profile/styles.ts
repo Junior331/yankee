@@ -44,12 +44,15 @@ export const ContentInput = styled(Container)`
 
 export const Label = styled(TextComponent)<StyledProps>`
   font-family: "Poppins-Medium";
-  color: ${({ color }) => color || Colors.dark.text};
+ color: ${({ color }) => color || "#ffffff"};
   font-size: ${({ fontSize }) => fontSize || "12px"};
   font-weight: ${({ fontWeight }) => fontWeight || 500};
 `;
 
-export const Input = styled(InputContent)`
+export const Input = styled(InputContent).attrs(({ theme }) => ({
+  placeholderTextColor: theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
+}))`
+
   padding: 0;
   height: auto;
   flex: 1 0 auto;
@@ -57,13 +60,14 @@ export const Input = styled(InputContent)`
   max-height: 80%;
 `;
 
-export const Button = styled(TouchableOpacity)`
+export const Button = styled(TouchableOpacity)<StyledProps>`
   gap: 3px;
   width: 100%;
   height: 35px;
   margin: 0 auto;
   max-width: 176px;
   background: #fff;
+   background: ${({ color }) => color || "#ffffff"};
   margin-top: 30px;
   border-radius: 15px;
   flex-direction: row;
@@ -77,10 +81,10 @@ export const InputWrapper = styled(View)`
   position: relative;
 `;
 
-export const CharacterCount = styled(TextComponent)`
+export const CharacterCount = styled(TextComponent)<StyledProps>`
   right: 0;
   top: -15px;
   font-size: 10px;
   position: absolute;
-  color: ${Colors.dark.text};
+  color: ${({ color }) => color || "#ffffff"};
 `;

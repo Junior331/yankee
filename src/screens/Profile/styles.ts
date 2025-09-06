@@ -15,11 +15,11 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   width: 100%;
   height: 100%;
   display: flex;
-  background-color: ${Colors.dark.background};
+ background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const Content = styled(View)`
@@ -49,6 +49,7 @@ export const ContainerBanner = styled(ViewGeneric)`
   overflow: hidden;
   position: absolute;
   background-color: #c4c4c4;
+  border-radius: 10px;
 `;
 
 export const ContainerAvatar = styled(ViewGeneric)`
@@ -101,7 +102,7 @@ export const ContainerButton = styled(ViewGeneric)`
   width: 100%;
 `;
 
-export const Button = styled(TouchableOpacity)`
+export const Button = styled(TouchableOpacity)<StyledProps>`
   gap: 3px;
   width: auto;
   height: 30px;
@@ -111,6 +112,7 @@ export const Button = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+   background-color: ${({ color }) => color || "#ffffff"};
 `;
 
 export const ContainerTabs = styled(View)`
@@ -143,12 +145,13 @@ export const Line = styled(View)<StyledProps>`
   height: 1px;
   border-radius: 2px;
   position: absolute;
-  background-color: ${({ isActive }) => (isActive ? Colors.dark.text : "transparent")};
+  background-color: ${({ isActive, color }) => (isActive ? color : "transparent")};
 `;
 
 export const TitleTab = styled(Title)<StyledProps>`
   font-family: "Poppins-Regular";
   font-weight: ${({ fontWeight }) => fontWeight || 600};
+  
 `;
 
 export const ButtonEdit = styled(TouchableOpacity)`

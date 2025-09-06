@@ -9,10 +9,13 @@ import { Layout } from "@/components/organism";
 import { useTheme } from "@/contexts/ThemeContext";
 import { ChatConversation } from "@/services/mocks/users";
 import { useUnreadMessages } from "@/hooks/useUnreadMessages";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const Messages = () => {
   const router = useRouter();
   const { theme } = useTheme();
+  const insets = useSafeAreaInsets();
+
   const [text, setText] = useState("");
   const [tabActive, setTabActive] = useState(1); // 1 = Principal, 2 = Chat Requests
 
@@ -175,7 +178,7 @@ export const Messages = () => {
 
   return (
     <Layout titleHeader="yankee">
-      <S.Container>
+      <S.Container bg_color={Colors[theme].background}>
         <S.ContainerTabs>
           <S.Tabs>
             {[

@@ -5,9 +5,12 @@ import { TextInput } from "react-native";
 import * as S from "./styles";
 import { Switch } from "@/components/elements";
 import { profileSchemas } from "./profileSchema";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const Profile = () => {
   const characterLimit = 150;
+  const { theme } = useTheme();
 
   const formik = useFormik({
     initialValues: {
@@ -29,8 +32,9 @@ export const Profile = () => {
     <S.ContainerForm>
       <S.ContainerInput>
         <S.ContentInput>
-          <S.Label>Name</S.Label>
+          <S.Label color={Colors[theme].text}>Name</S.Label>
           <S.Input
+            theme={theme}
             nativeID="name"
             value={values.name}
             autoComplete="name"
@@ -45,8 +49,9 @@ export const Profile = () => {
 
       <S.ContainerInput>
         <S.ContentInput>
-          <S.Label>User</S.Label>
+          <S.Label color={Colors[theme].text}>User</S.Label>
           <S.Input
+            theme={theme}
             nativeID="nickname"
             value={values.nickname}
             autoComplete="nickname"
@@ -61,11 +66,11 @@ export const Profile = () => {
 
       <S.ContainerInput>
         <S.ContentInput>
-          <S.Label>Link</S.Label>
+          <S.Label color={Colors[theme].text}>Link</S.Label>
           <S.Input
+            theme={theme}
             nativeID="link"
             value={values.link}
-            autoComplete="link"
             placeholder={"www.sophiaworld.com"}
             onChangeText={handleChange("link")}
           />
@@ -74,20 +79,20 @@ export const Profile = () => {
 
       <S.ContainerInput>
         <S.ContentInput>
-          <S.Label>Description</S.Label>
+          <S.Label color={Colors[theme].text}>Description</S.Label>
           <S.InputWrapper>
             <S.Input
               multiline
               as={TextInput}
+              theme={theme}
               nativeID="description"
               value={values.description}
-              autoComplete="description"
               maxLength={characterLimit}
               style={{ height: `auto` }}
               placeholder="Welcome to my world!"
               onChangeText={handleChange("description")}
             />
-            <S.CharacterCount>
+            <S.CharacterCount color={Colors[theme].text}>
               {values.description.length}/{characterLimit}
             </S.CharacterCount>
           </S.InputWrapper>
@@ -107,10 +112,12 @@ export const Profile = () => {
         }
       />
       <Switch
+      
         style={{
           width: "90%",
           maxWidth: 270,
           flexDirection: "row-reverse",
+          
         }}
         isActive={values.share_my_crowd_verification}
         label="Allow people to see your crowd verification badge"
@@ -118,8 +125,8 @@ export const Profile = () => {
           formik.setFieldValue("share_my_crowd_verification", value)
         }
       />
-      <S.Button onPress={handleSubmit}>
-        <S.Label fontWeight={400} color="#000000">
+      <S.Button color={Colors[theme].text} >
+        <S.Label fontWeight={400} color={Colors[theme].background}>
           Save the changes
         </S.Label>
       </S.Button>
