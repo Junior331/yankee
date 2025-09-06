@@ -68,8 +68,14 @@ export const Profile = () => {
             }}
           />
         </S.ContainerBanner>
-        <S.ButtonIcon onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}>
-          <LeftArrow color={isEdit ? '#FFFFFF' : (theme === 'dark' ? '#000000' : '#ffffff')} />
+        <S.ButtonIcon
+          onPress={() => (isEdit ? setIsEdit((prev) => !prev) : goBack())}
+        >
+          <LeftArrow
+            color={
+              isEdit ? "#FFFFFF" : theme === "dark" ? "#000000" : "#ffffff"
+            }
+          />
         </S.ButtonIcon>
         <View style={{ flexDirection: "row", gap: 10 }}>
           <S.ButtonIcon onPress={goBack}>
@@ -78,7 +84,7 @@ export const Profile = () => {
                 <Edit />
               </S.ButtonEdit>
             ) : (
-              <Menu color={theme === 'dark' ? '#000000' : '#ffffff'} />
+              <Menu color={theme === "dark" ? "#000000" : "#ffffff"} />
             )}
           </S.ButtonIcon>
         </View>
@@ -111,37 +117,59 @@ export const Profile = () => {
               <S.Text color={Colors[theme].text}>@SophiaKindVibes</S.Text>
             </View>
             <View>
-              <S.Text fontSize="12px" color={Colors[theme].text}>Welcome to my world!</S.Text>
+              <S.Text fontSize="12px" color={Colors[theme].text}>
+                Welcome to my world!
+              </S.Text>
               <S.Text color="#39A3FA" fontSize="12px">
                 www.sophiaworld.com
               </S.Text>
             </View>
             <S.ContainerLocation>
-              <Location width={22} height={22} color={Colors[theme].text}/>
-              <S.Text fontSize="11px" color={Colors[theme].text}>Boston, USA</S.Text>
+              <Location width={22} height={22} color={Colors[theme].text} />
+              <S.Text fontSize="11px" color={Colors[theme].text}>
+                Boston, USA
+              </S.Text>
             </S.ContainerLocation>
 
             <S.ContainerBigNumbers>
               <S.BigNumber>
-                <S.Title fontSize="15px" color={Colors[theme].text}>200</S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>Connections</S.Text>
+                <S.Title fontSize="15px" color={Colors[theme].text}>
+                  200
+                </S.Title>
+                <S.Text fontSize="12px" color={Colors[theme].text}>
+                  Connections
+                </S.Text>
               </S.BigNumber>
               <S.BigNumber>
-                <S.Title fontSize="15px" color={Colors[theme].text}>256k</S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>Admirers</S.Text>
+                <S.Title fontSize="15px" color={Colors[theme].text}>
+                  256k
+                </S.Title>
+                <S.Text fontSize="12px" color={Colors[theme].text}>
+                  Admirers
+                </S.Text>
               </S.BigNumber>
               <S.BigNumber>
-                <S.Title fontSize="15px" color={Colors[theme].text}>300k</S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>Hearts</S.Text>
+                <S.Title fontSize="15px" color={Colors[theme].text}>
+                  300k
+                </S.Title>
+                <S.Text fontSize="12px" color={Colors[theme].text}>
+                  Hearts
+                </S.Text>
               </S.BigNumber>
             </S.ContainerBigNumbers>
             <S.ContainerButton>
-              <S.Button onPress={() => setIsEdit((prev) => !prev)} color={Colors[theme].text}>
+              <S.Button
+                onPress={() => setIsEdit((prev) => !prev)}
+                color={Colors[theme].text}
+              >
                 <S.Title fontSize="11px" color={Colors[theme].background}>
                   Edit Profile
                 </S.Title>
               </S.Button>
-              <S.Button onPress={() => router.push("/(tabs)/messages")} color={Colors[theme].text}>
+              <S.Button
+                onPress={() => router.push("/(tabs)/messages")}
+                color={Colors[theme].text}
+              >
                 <S.Title fontSize="11px" color={Colors[theme].background}>
                   Chat
                 </S.Title>
@@ -157,10 +185,18 @@ export const Profile = () => {
                   onPress={() => setTabActive(tab.value)}
                   fontWeight={tabActive === tab.value ? 600 : 300}
                 >
-                  <S.TitleTab tabs fontSize="12px" fontWeight={tabActive === tab.value ? 600 : 300} color={Colors[theme].text}>
+                  <S.TitleTab
+                    tabs
+                    fontSize="12px"
+                    fontWeight={tabActive === tab.value ? 600 : 300}
+                    color={Colors[theme].text}
+                  >
                     {tab.label}
                   </S.TitleTab>
-                  <S.Line isActive={tabActive === tab.value} color={Colors[theme].text} />
+                  <S.Line
+                    isActive={tabActive === tab.value}
+                    color={Colors[theme].text}
+                  />
                 </S.Tab>
               ))}
             </S.Tabs>
@@ -177,11 +213,11 @@ export const Profile = () => {
   }) => (
     <View
       style={{
-        margin: 2,
+        margin: 1,
         borderRadius: 10,
         overflow: "hidden",
-        width: width / 3 - 10,
-        height: width / 3 - 3,
+        width: width / 3 - 2,
+        height: width / 3 - 2,
         backgroundColor: "#ccc",
       }}
     >
@@ -216,7 +252,7 @@ export const Profile = () => {
                 renderItem={renderGridItem}
                 keyExtractor={(item) => String(item.id)}
                 ListHeaderComponent={renderHeaderComponent}
-                contentContainerStyle={{ paddingHorizontal: 10 }}
+                contentContainerStyle={{ paddingHorizontal: 0 }}
                 data={mocks.gallery[tabActive as keyof typeof mocks.gallery]}
               />
             )}

@@ -5,11 +5,8 @@ import * as S from "./styles";
 import { ISwitch } from "./@types";
 import { Container } from "./styles";
 import Colors from "@/constants/Colors";
-import { useTheme } from "@/contexts/ThemeContext";
 
-export const Switch = ({ isActive, handleToggle, label, style }: ISwitch) => {
-    const { theme } = useTheme();
-  
+export const Switch = ({ isActive, handleToggle, label, style, theme }: ISwitch) => {
   return (
     <Container onPress={() => handleToggle(!isActive)} style={style}>
       <SwitchElement
@@ -18,7 +15,7 @@ export const Switch = ({ isActive, handleToggle, label, style }: ISwitch) => {
         thumbColor={"#f4f3f4"}
         trackColor={{ false: "#767577", true: "#1976D2" }}
       />
-      <S.Text color={Colors[theme].text}>{label}</S.Text>
+      <S.Text color={Colors[theme || 'light'].text}>{label}</S.Text>
     </Container>
   );
 };

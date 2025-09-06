@@ -53,9 +53,13 @@ export const MediaViewer = ({ visible, mediaItem, onClose }: IMediaViewer) => {
           
           {mediaItem.type === 'image' ? (
             <S.FullScreenImage
-              source={{ uri: mediaItem.image }}
+              source={{ uri: mediaItem.image || '' }}
               onLoadStart={handleLoadStart}
               onLoadEnd={handleLoadEnd}
+              onError={(error) => {
+                console.log('Image error:', error);
+                setIsLoading(false);
+              }}
             />
           ) : (
             <Video

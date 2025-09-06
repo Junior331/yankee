@@ -100,6 +100,7 @@ export const Profile = () => {
       </S.ContainerInput>
 
       <Switch
+        theme={theme}
         isActive={values.share_my_location}
         style={{
           width: "90%",
@@ -112,7 +113,7 @@ export const Profile = () => {
         }
       />
       <Switch
-      
+        theme={theme}
         style={{
           width: "90%",
           maxWidth: 270,
