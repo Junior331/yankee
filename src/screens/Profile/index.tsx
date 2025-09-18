@@ -136,7 +136,7 @@ export const Profile = () => {
                 <S.Title fontSize="15px" color={Colors[theme].text}>
                   200
                 </S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>
+                <S.Text fontSize="12px" color={Colors[theme].subtext}>
                   Connections
                 </S.Text>
               </S.BigNumber>
@@ -144,7 +144,7 @@ export const Profile = () => {
                 <S.Title fontSize="15px" color={Colors[theme].text}>
                   256k
                 </S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>
+                <S.Text fontSize="12px" color={Colors[theme].subtext}>
                   Admirers
                 </S.Text>
               </S.BigNumber>
@@ -152,7 +152,7 @@ export const Profile = () => {
                 <S.Title fontSize="15px" color={Colors[theme].text}>
                   300k
                 </S.Title>
-                <S.Text fontSize="12px" color={Colors[theme].text}>
+                <S.Text fontSize="12px" color={Colors[theme].subtext}>
                   Hearts
                 </S.Text>
               </S.BigNumber>
@@ -240,8 +240,7 @@ export const Profile = () => {
   );
 
   return (
-    <>
-      <Layout titleHeader="yankee">
+      <Layout titleHeader="yankee" padding="5px 0px 30px" paddingHeader="0px 10px 0">
         <S.Container>
           <S.Content>
             {isEdit ? (
@@ -265,6 +264,5 @@ export const Profile = () => {
           onClose={handleCloseMediaViewer}
         />
       </Layout>
-    </>
   );
 };

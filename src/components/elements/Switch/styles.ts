@@ -9,8 +9,8 @@ export const Container = styled(TouchableOpacity) `
   justify-content: space-between;
 `;
 export const Text = styled(ReactText)<StyledProps>`
-  flex: 1 0 200px;
+  flex: 1;
   font-size: 12px;
   font-weight: 300;
-  color:  ${({ color }) => color || "#ffffff"};
+  color: ${({ color }) => color || "#ffffff"};
 `;

@@ -8,18 +8,20 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 export const Layout = ({
   style,
+  padding,
   children,
   iconHeader,
   titleHeader,
+  paddingHeader,
   isShowHeader = true,
 }: LayoutAbstractProps) => {
   return (
     <SafeScreen excludeEdges={['bottom']}>
       <BottomSheetModalProvider>
         <S.Container>
-          <S.Content style={style}>
+          <S.Content style={style} padding={padding}>
             {isShowHeader && (
-              <HeaderPages title={titleHeader} icon={iconHeader} />
+              <HeaderPages paddingHeader={paddingHeader} title={titleHeader} icon={iconHeader} />
             )}
             {children}
           </S.Content>

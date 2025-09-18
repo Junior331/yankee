@@ -2,6 +2,7 @@ const Colors = {
   liked: "#D63838",
   light: {
     text: "#121212",
+    subtext: "#ffffff80",
     icon: "#121212",
     bubble: "#DADADA",
     iconHeart: "#121212",
@@ -23,6 +24,7 @@ const Colors = {
     error: "#D63838",
     comment: "#121212",
     bubble: "#FFFFFF",
+    subtext: "#121212",
     background: "#171717",
     textMessage: "#848383",
     bottomColor: "#1976D2",

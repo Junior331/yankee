@@ -84,7 +84,7 @@ export const ContainerMaps = styled(View)`
 
 export const MapContainer = styled(View)`
   position: absolute;
-  top: 50px;
+  top: 0px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -245,6 +245,7 @@ export const FilterContainer = styled(View)`
   width: 95%;
   height: auto;
   padding: 5px;
+  z-index: 100;
   min-height: 40px;
   position: absolute;
   align-items: start;

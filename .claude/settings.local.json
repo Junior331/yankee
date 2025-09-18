@@ -7,7 +7,9 @@
       "Bash(npm start)",
       "Bash(npx expo start:*)",
       "Bash(cat:*)",
-      "Bash(npx expo r:*)"
+      "Bash(npx expo r:*)",
+      "Bash(npx expo install:*)",
+      "Bash(npx expo upgrade:*)"
     ],
     "deny": [],
     "ask": []

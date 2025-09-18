@@ -13,13 +13,15 @@ export const ViewGeneric = styled(View)`
   flex-direction: row;
   justify-content: start;
 `;
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   width: 100%;
   height: auto;
+  z-index: 20;
   margin-bottom: 20px;
   flex-direction: row;
   align-items: center;
   position: relative;
+  padding: ${({ padding }) => padding || '0'};
 `;
 
 export const ContainerUser = styled(View)`

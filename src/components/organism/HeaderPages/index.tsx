@@ -11,7 +11,7 @@ import { mocks } from "@/services/mocks";
 import { useNotificationsContext } from "@/contexts/NotificationsContext";
 import Colors from "@/constants/Colors";
 import { useTheme } from "@/contexts/ThemeContext";
-export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
+export const HeaderPages = ({  title = "yankee", paddingHeader }: IHeaderPages) => {
   const router = useRouter();
   const { theme, setTheme } = useTheme();
   const [imageLoading, setImageLoading] = useState(true);
@@ -62,7 +62,7 @@ export const HeaderPages = ({  title = "yankee" }: IHeaderPages) => {
   };
 
   return (
-    <S.Container>
+    <S.Container padding={paddingHeader || ''}>
       <S.IconContainer>
         <TouchableOpacity onPress={() => handleSetFilter("", !showFilter)}>
           <Filter color={theme === 'dark' ? Colors.dark.text : Colors.light.text } />

@@ -34,6 +34,7 @@ export type StyledProps = {
   width?: string;
   tabs?: boolean;
   bottom?: string;
+  padding?: string;
   fontSize?: string;
   bg_color?: string;
   isLarge?: boolean;

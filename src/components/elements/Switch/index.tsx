@@ -15,7 +15,13 @@ export const Switch = ({ isActive, handleToggle, label, style, theme }: ISwitch)
         thumbColor={"#f4f3f4"}
         trackColor={{ false: "#767577", true: "#1976D2" }}
       />
-      <S.Text color={Colors[theme || 'light'].text}>{label}</S.Text>
+      <S.Text
+        color={Colors[theme || 'light'].text}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        {label}
+      </S.Text>
     </Container>
   );
 };

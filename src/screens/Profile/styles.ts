@@ -32,6 +32,7 @@ export const Header = styled(ViewGeneric)`
   width: 100%;
   height: auto;
   justify-content: space-between;
+
 `;
 
 export const ButtonIcon = styled(TouchableOpacity)`
@@ -48,7 +49,6 @@ export const ContainerBanner = styled(ViewGeneric)`
   overflow: hidden;
   position: absolute;
   background-color: #c4c4c4;
-  border-radius: 10px;
 `;
 
 export const ContainerAvatar = styled(ViewGeneric)`
