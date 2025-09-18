@@ -35,6 +35,9 @@ export const Profile = () => {
   }>({});
 
   const handleMediaPress = (item: any) => {
+    console.log('handleMediaPress called with item:', item);
+    console.log('Current tabActive:', tabActive);
+
     const mediaItem = {
       id: item.id,
       name: item.name,
@@ -42,6 +45,8 @@ export const Profile = () => {
       video: item.video,
       type: (tabActive === "videos" ? "video" : "image") as "image" | "video",
     };
+
+    console.log('Created mediaItem:', mediaItem);
     setSelectedMediaItem(mediaItem);
     setMediaViewerVisible(true);
   };

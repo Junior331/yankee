@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { View, ScrollView } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 import { Title as TitleComponent } from "@/components/elements";
 import { removeScrollUi } from "@/utils/utils";
@@ -12,10 +11,10 @@ export const ViewGeneric = styled(View)`
   justify-content: center;
 `;
 
-export const Container = styled(View)`
+export const Container = styled(View)<StyledProps>`
   flex: 1;
   flex-direction: column;
-  background-color: ${Colors.dark.background};
+  background-color: ${({ bg_color }) => bg_color};
 `;
 
 export const ContainerScrollView = styled(ScrollView).attrs(removeScrollUi)`

@@ -4,7 +4,10 @@ import { View } from "react-native";
 import Colors from "@/constants/Colors";
 import { Ellipse3 } from "@/assets/icons";
 import { StyledProps } from "@/utils/types";
-import { Text as TextComponent } from "@/components/elements";
+import {
+  Text as TextComponent,
+  Title as TitleComponent,
+} from "@/components/elements";
 
 export const ViewGeneric = styled(View)`
   display: flex;
@@ -60,4 +63,10 @@ export const Text = styled(TextComponent)`
   font-size: 20px;
   max-width: 185px;
   text-align: center;
+`;
+
+export const Title = styled(TitleComponent)<StyledProps>`
+  color: ${({ color }) => color || "#ffffff"};
+  font-size: ${({ fontSize }) => fontSize || "18px"};
+  font-weight: ${({ fontWeight }) => fontWeight || 700};
 `;

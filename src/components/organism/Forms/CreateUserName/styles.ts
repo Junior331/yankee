@@ -10,7 +10,6 @@ import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 
 export const Text = styled(TextComponent)<StyledProps>`
-  color: ${({ color }) => color || Colors.dark.text};
 `;
 export const MessageError = styled(TextComponent)<StyledProps>`
   width: 100%;

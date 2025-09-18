@@ -6,6 +6,8 @@ import * as S from "./styles";
 import { Text, SafeScreen } from "@/components/elements";
 import { Header } from "@/components/organism";
 import { LayoutAbstractProps } from "./@types";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const LayoutAbstract = ({
   text,
@@ -16,9 +18,11 @@ export const LayoutAbstract = ({
   isSecondary,
   handleOnPressHeader,
 }: LayoutAbstractProps) => {
+  const { theme } = useTheme();
+  
   return (
     <SafeScreen>
-      <S.Container>
+      <S.Container bg_color={Colors[theme].background}>
         <Header
           label={labelHeader}
           isSecondary={isSecondary}

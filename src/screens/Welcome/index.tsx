@@ -2,7 +2,7 @@ import * as React from "react";
 import { useRouter } from "expo-router";
 
 import * as S from "./styles";
-import { Button, Title, SafeScreen } from "@/components/elements";
+import { Button, SafeScreen } from "@/components/elements";
 
 export const Welcome = () => {
   const router = useRouter();
@@ -11,7 +11,7 @@ export const Welcome = () => {
     <SafeScreen>
       <S.Container>
       <S.Header>
-        <Title>yankee</Title>
+        <S.Title>yankee</S.Title>
       </S.Header>
       <S.Content>
         <S.Image top={"70px"} left={"-10px"} />

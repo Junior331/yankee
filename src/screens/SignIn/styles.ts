@@ -8,9 +8,7 @@ import {
 } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
 
-export const Text = styled(TextComponent)<StyledProps>`
-  color: ${({ color }) => color || Colors.dark.text};
-`;
+export const Text = styled(TextComponent)<StyledProps>``;
 export const MessageError = styled(TextComponent)<StyledProps>`
   width: 100%;
   text-align: start;

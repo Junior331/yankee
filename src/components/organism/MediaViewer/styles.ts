@@ -47,3 +47,16 @@ export const LoadingContainer = styled.View`
   width: 100%;
   height: 70%;
 `;
+
+export const ErrorContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70%;
+`;
+
+export const ErrorText = styled.Text`
+  color: ${Colors.dark.text};
+  font-size: 16px;
+  text-align: center;
+`;

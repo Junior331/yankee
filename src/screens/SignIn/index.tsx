@@ -86,7 +86,7 @@ export const SignIn = () => {
         )}
       </S.ContainerInput>
       <Button isLoading={loading} onPress={handleSubmit} title={"Sign in"} />
-      <S.Text>
+      <S.Text >
         Don’t have an account?
         <S.Text
           color={Colors.dark.bottomColor}

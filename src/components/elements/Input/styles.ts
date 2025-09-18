@@ -14,8 +14,9 @@ export const Container = styled(View)`
   border: 1.5px solid ${Colors.dark.borderColor};
 `;
 
-export const InputContent = styled(TextInput).attrs(() => ({
-  placeholderTextColor: Colors.dark.placeholder,
+export const InputContent = styled(TextInput).attrs(({ theme }) => ({
+  placeholderTextColor:
+    theme === "dark" ? Colors.dark.placeholder : Colors.light.placeholder,
 }))`
   width: 100%;
   height: 100%;
