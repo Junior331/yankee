@@ -4,12 +4,12 @@
     "slug": "YANKEE",
     "version": "1.0.12",
     "orientation": "portrait",
-    "icon": "./src/assets/images/icon.png",
+    "icon": "./src/assets/images/icon_y_solid_dark.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./src/assets/images/icon.png",
+      "image": "./src/assets/images/icon_y_solid_dark.png",
       "resizeMode": "contain",
       "backgroundColor": "#171717"
     },
@@ -30,7 +30,7 @@
         }
       },
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/icon.png",
+        "foregroundImage": "./src/assets/images/icon_y_solid_dark.png",
         "backgroundColor": "#171717"
       },
       "versionCode": 12,
@@ -41,20 +41,23 @@
         "CAMERA",
         "RECORD_AUDIO",
         "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
+        "WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./src/assets/images/favicon.png"
+      "favicon": "./src/assets/images/favicon_y_solid_dark.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./src/assets/images/icon.png",
+          "image": "./src/assets/images/icon_y_solid_dark.png",
           "imageWidth": 400,
           "resizeMode": "contain",
           "backgroundColor": "#171717"
@@ -82,6 +85,9 @@
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "517a118e-4251-4cd2-b402-0811cd48d184"
       }
     }
   }

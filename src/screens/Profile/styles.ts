@@ -5,7 +5,6 @@ import {
   Text as TextComponent,
   Title as TitleComponent,
 } from "@/components/elements";
-import Colors from "@/constants/Colors";
 import { StyledProps } from "@/utils/types";
 
 export const ViewGeneric = styled(View)`

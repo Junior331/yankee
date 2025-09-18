@@ -13,9 +13,22 @@
       "android": {
         "buildType": "apk"
       },
+      "ios": {
+        "simulator": true
+      },
       "env": {
-        "APP_NAME": "yankee",
-        "APP_ICON": "./src/assets/images/icon.png"
+        "APP_NAME": "Yankee",
+        "APP_ICON": "./src/assets/images/icon_y_solid_dark.png"
+      }
+    },
+    "testflight": {
+      "distribution": "internal",
+      "ios": {
+        "simulator": false
+      },
+      "env": {
+        "APP_NAME": "Yankee",
+        "APP_ICON": "./src/assets/images/icon_y_solid_dark.png"
       }
     },
     "production": {
