@@ -7,7 +7,9 @@ import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)<StyledProps>`
+  flex: 1;
   width: 100%;
+  height: 100%;
   flex-direction: column;
   background-color: ${({ bg_color }) => bg_color};
 `;
@@ -31,13 +33,14 @@ export const Tabs = styled(View)`
 export const Tab = styled(TouchableOpacity)``;
 
 export const Text = styled(TextComponent)<StyledProps>`
-  font-size: 10px;
+  min-width: 6px;
+  font-size: 12px;
   color: ${({ color }) => color || "#FFFFFF"};
 
   ${({ tabs }) =>
     tabs &&
     css`
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 500;
       font-family: "Poppins-Medium";
     `};
@@ -47,7 +50,7 @@ export const ContainerInput = styled(View)`
   width: 100%;
   height: 36px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 6px;
   flex-direction: row;
   align-items: center;
   border-radius: 25px;

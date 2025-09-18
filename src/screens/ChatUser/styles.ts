@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 import { TouchableOpacity, View } from "react-native";
 
-import Colors from "@/constants/Colors";
 import { Text as TextComponent } from "@/components/elements";
 import { Title as TitleComponent } from "@/components/elements";
 import { StyledProps } from "@/utils/types";
@@ -9,13 +8,13 @@ import { BottomSheetView } from "@gorhom/bottom-sheet";
 
 export const Container = styled(View)<StyledProps>`
   flex: 1;
-  background-color: ${({ bg_color }) => bg_color};
+  width: 100%;
 `;
 
 export const ContainerHeader = styled(View)`
   gap: 20px;
   width: 100%;
-  padding: 15px 15px;
+  padding: 0px 0px 15px;
   flex-direction: row;
   align-items: center;
 `;

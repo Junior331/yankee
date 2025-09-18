@@ -8,9 +8,12 @@ import { Phone, LeftArrow, ChatDuringCall, PhoneCall, SpeakerIcon, MicrophoneOff
 import { Microphone } from "@/assets/icons";
 import { Layout } from "@/components/organism";
 import Video from "@/assets/icons/Video";
+import Colors from "@/constants/Colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export const VoiceCall = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const params = useLocalSearchParams();
   const { 
     startCall, 
@@ -136,15 +139,15 @@ export const VoiceCall = () => {
   }
 
   return (
-    <Layout titleHeader="yankee" isShowHeader={false}>
+    <Layout titleHeader="yankee" padding="5px 0px 30px" paddingHeader="0px 10px 0">
       <S.Container>
         <S.Header>
           <S.BackButton onPress={handleGoBack}>
-            <LeftArrow color="#ffffff" />
+            <LeftArrow color={Colors[theme].text} />
           </S.BackButton>
-          {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
-          <TouchableOpacity onPress={handleMinimizeCall}>
-            <ChatDuringCall />
+          {getHeaderStatus() && <S.HeaderCallDuration color={Colors[theme].text}>{getHeaderStatus()}</S.HeaderCallDuration>}
+          <TouchableOpacity onPress={handleMinimizeCall} style={{ marginLeft: -30, marginRight: 20 }}>
+            <ChatDuringCall color={Colors[theme].text}/>
           </TouchableOpacity>
         </S.Header>
 
@@ -164,28 +167,28 @@ export const VoiceCall = () => {
           {isIncoming && !isConnected ? (
             <S.IncomingCallActions>
               <S.ActionButton variant="danger" onPress={handleEndCall}>
-                <Phone color="#ffffff" />
+                <Phone color={Colors[theme].text} />
               </S.ActionButton>
               <S.ActionButton variant="primary" onPress={handleAnswerCall}>
-                <Phone color="#ffffff" />
+                <Phone color={Colors[theme].text} />
               </S.ActionButton>
             </S.IncomingCallActions>
           ) : (
             <S.CallActions>
               <S.SpeakerIconButton onPress={handleSpeaker}>
-                <SpeakerIcon color={isSpeakerOn ? "#FF3B30" : "#ffffff"} />
+                <SpeakerIcon color={isSpeakerOn ? "#FF3B30" : Colors[theme].text} />
               </S.SpeakerIconButton>
 
               <TouchableOpacity onPress={handleVideoCall}>
-                <Video width={30} height={30} />
+                <Video color={Colors[theme].text} width={30} height={30} />
               </TouchableOpacity>
 
               <TouchableOpacity onPress={handleMute}>
-                {isMuted ? <Microphone width={30} height={30} /> : <MicrophoneOff width={30} height={30} />}
+                {isMuted ? <Microphone color={Colors[theme].text} width={30} height={30} /> : <MicrophoneOff color={Colors[theme].text} width={30} height={30} />}
               </TouchableOpacity>
 
               <S.ActionButton variant="danger" onPress={handleEndCall}>
-                <PhoneCall color="#ffffff" />
+                <PhoneCall />
               </S.ActionButton>
             </S.CallActions>
           )}

@@ -2,12 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Image, Vibration, StatusBar, Dimensions } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera";
-import { PanGestureHandler, PanGestureHandlerGestureEvent,  } from "react-native-gesture-handler";
-import  { 
-  useAnimatedGestureHandler, 
-  useAnimatedStyle, 
-  useSharedValue, 
-  
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import  {
+  useAnimatedStyle,
+  useSharedValue,
+  runOnJS,
 } from "react-native-reanimated";
 
 import * as S from "./styles";
@@ -25,6 +24,8 @@ export const VideoCall = () => {
   const params = useLocalSearchParams();
   const cameraRef = useRef<CameraView>(null);
   const [permission, requestPermission] = useCameraPermissions();
+
+  console.log('VideoCall component mounted with params:', params);
 
   const [callDuration, setCallDuration] = useState(0);
   const [isConnected, setIsConnected] = useState(false);
@@ -113,37 +114,34 @@ export const VideoCall = () => {
     setCameraType((current) => (current === "back" ? "front" : "back"));
   };
 
-  // Handler para o gesto de arrastar
-  type MyContext = {
-  startX: number;
-  startY: number;
-};
+  // Handler para o gesto de arrastar usando nova API
+  const startX = useSharedValue(0);
+  const startY = useSharedValue(0);
 
-const panGestureHandler = useAnimatedGestureHandler<
-  PanGestureHandlerGestureEvent, // tipo do evento
-  MyContext                      // tipo do contexto
->({
-  onStart: (_, context) => {
-    context.startX = translateX.value;
-    context.startY = translateY.value;
-  },
-  onActive: (event, context) => {
-    const newX = context.startX + event.translationX;
-    const newY = context.startY + event.translationY;
+  const panGesture = Gesture.Pan()
+    .onStart(() => {
+      startX.value = translateX.value;
+      startY.value = translateY.value;
+    })
+    .onUpdate((event) => {
+      const newX = startX.value + event.translationX;
+      const newY = startY.value + event.translationY;
 
-    // Considera o padding do container e margens do VideoBackground
-    const maxX = SCREEN_WIDTH - VIDEO_CONTAINER_WIDTH - (CONTAINER_PADDING * 2);
-    
-    translateX.value = Math.max(
-      0, 
-      Math.min(newX, maxX)
-    );
-    translateY.value = Math.max(
-      50,
-      Math.min(newY, SCREEN_HEIGHT - VIDEO_CONTAINER_HEIGHT - 120)
-    );
-  },
-});
+      // Considera o padding do container e margens do VideoBackground
+      const maxX = SCREEN_WIDTH - VIDEO_CONTAINER_WIDTH - (CONTAINER_PADDING * 2);
+
+      translateX.value = Math.max(
+        0,
+        Math.min(newX, maxX)
+      );
+      translateY.value = Math.max(
+        50,
+        Math.min(newY, SCREEN_HEIGHT - VIDEO_CONTAINER_HEIGHT - 120)
+      );
+    })
+    .onEnd(() => {
+      // Opcional: adicionar animação de "snap" para posições fixas
+    });
 
   // Estilo animado para o contêiner de vídeo
   const animatedStyle = useAnimatedStyle(() => {
@@ -230,7 +228,7 @@ const panGestureHandler = useAnimatedGestureHandler<
         {getHeaderStatus() && <S.HeaderCallDuration>{getHeaderStatus()}</S.HeaderCallDuration>}
       </S.Header>
       <S.VideoBackground source={{ uri: contactAvatar }} blurRadius={isConnected ? 0 : 10}>
-        <PanGestureHandler onGestureEvent={panGestureHandler}>
+        <GestureDetector gesture={panGesture}>
           <S.AnimatedSelfVideoContainer style={animatedStyle}>
             {isVideoOn && permission?.granted ? (
               <CameraView ref={cameraRef} style={{ width: "100%", height: "100%" }} facing={cameraType} />
@@ -240,7 +238,7 @@ const panGestureHandler = useAnimatedGestureHandler<
               </S.SelfVideo>
             )}
           </S.AnimatedSelfVideoContainer>
-        </PanGestureHandler>
+        </GestureDetector>
       </S.VideoBackground>
       <S.BottomControls>
         <S.CallActions>

@@ -32,19 +32,23 @@ export const useUnreadMessages = () => {
       };
 
       setUnreadCounts(newCounts);
-      
+
       // Update app badge
       await setBadgeCount(total);
-      
+
       // Store counts for persistence
       await AsyncStorage.setItem('unreadCounts', JSON.stringify(newCounts));
-      
+
       return newCounts;
     } catch (error) {
       console.error('Error calculating unread counts:', error);
-      return unreadCounts;
+      return {
+        mainConversations: 0,
+        chatRequests: 0,
+        total: 0,
+      };
     }
-  }, [setBadgeCount, unreadCounts]);
+  }, [setBadgeCount]);
 
   const markConversationAsRead = useCallback(async (conversationId: string) => {
     try {

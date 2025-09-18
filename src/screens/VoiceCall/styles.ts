@@ -1,53 +1,55 @@
 import styled from "styled-components";
 import { View, TouchableOpacity } from "react-native";
+
 import Colors from "@/constants/Colors";
+import { StyledProps } from "@/utils/types";
 import { Text as TextComponent, Title as TitleComponent } from "@/components/elements";
 
 export const Container = styled(View)`
   flex: 1;
-  background-color: ${Colors.dark.background};
-  justify-content: space-between;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const Header = styled(View)`
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  width: 100%;
   position: absolute;
-  top: 50px;
-  left: 10px;
-  right: 20px;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
 `;
 
 export const BackButton = styled(TouchableOpacity)`
   width: 44px;
   height: 44px;
+  align-items: start;
   border-radius: 22px;
-  background-color: transparent;
   justify-content: center;
-  align-items: center;
+  background-color: transparent;
 `;
 
-export const HeaderCallDuration = styled(TextComponent)`
+export const HeaderCallDuration = styled(TextComponent)<StyledProps>`
   font-size: 16px;
-  color: #ffffff;
   font-weight: 600;
-  background-color: transparent;
   border-radius: 16px;
+  background-color: transparent;
+  color: ${({ color }) => color || "#ffffff"};
 `;
 
 export const Content = styled(View)`
   flex: 1;
   width: 100%;
-  padding: 40px 20px;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
 `;
 
 export const ContactInfo = styled(View)`
+  margin-top: 100px;
   align-items: center;
-  margin-top: 150px;
 `;
 
 export const ContactAvatar = styled(View)`
@@ -67,14 +69,13 @@ export const ContainerVoiceCall = styled(View)`
 export const ContactName = styled(TitleComponent)`
   font-size: 32px;
   font-weight: 600;
-  color: #ffffff;
   text-align: center;
   margin-bottom: 8px;
+  
 `;
 
 export const VoiceCall = styled(TextComponent)`
   font-size: 20px;
-  color: #fff;
 `;
 
 export const CallStatus = styled(TextComponent)`
