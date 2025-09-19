@@ -47,8 +47,8 @@ export const Profile = () => {
     };
 
     console.log('Created mediaItem:', mediaItem);
-    setSelectedMediaItem(mediaItem);
-    setMediaViewerVisible(true);
+    // setSelectedMediaItem(mediaItem);
+    // setMediaViewerVisible(true);
   };
 
   const handleCloseMediaViewer = () => {
